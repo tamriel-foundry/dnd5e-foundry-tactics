@@ -63,6 +63,14 @@ FTC.ui = {
 	    v=n%100;
 	    return n+(s[(v-20)%10]||s[v]||s[0]);
 	},
+
+	padNumber:function(num, digits) {
+		/*
+		Pad a number with leading zeroes for display purposes
+		*/
+		var s = "000000000" + num;
+		return s.substr(s.length-digits);
+	},
 };
 
 // End FTCInit

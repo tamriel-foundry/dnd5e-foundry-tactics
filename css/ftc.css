@@ -161,7 +161,7 @@ img.token-image {
 }
 
 h1.charname {
-	flex: 0 0 60%;
+	flex: 0 0 70%;
 	height: 50px;
 	margin: 0;
 	font-size: 3em;
@@ -174,7 +174,7 @@ h1.charname {
 }
 
 div.charlevel {
-	flex: 0 0 40%;
+	flex: 0 0 30%;
 	height: 50px;
 	text-align: right;
 }

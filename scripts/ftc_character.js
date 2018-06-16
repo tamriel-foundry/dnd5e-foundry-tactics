@@ -22,7 +22,7 @@ FTC.character = {
         ftc = obj.data.ftc;
 
         /* Level and Experience */
-        var lvl = obj.data.counters.level.current;
+        var lvl = parseInt(obj.data.counters.level.current);
         ftc['exp'] = {
             current: obj.data.counters.exp.current.toLocaleString(),
             next: FTC.actions.get_next_level_exp(lvl).toLocaleString()
@@ -36,6 +36,7 @@ FTC.character = {
         for (var attr in stats) {
             mod = stats[attr].mod;
             ftc[attr] = {
+                'padstr': FTC.ui.padNumber(stats[attr].current, 2),
                 'modstr': (mod < 0 ? "" : "+" ) + mod
             }
         }

@@ -768,7 +768,11 @@
       },
       "alignment": {
         "name": "Alignment",
-        "current": "True Neutral"
+        "current": ""
+      },
+      "cr": {
+        "name": "Challenge Rating",
+        "current": 1
       },
       "size": {
         "name": "Size",
@@ -776,6 +780,18 @@
       },
       "source": {
         "name": "Source"
+      },
+      "traits": {
+        "name": "Personality Traits"
+      },
+      "ideals": {
+        "name": "Ideals"
+      },
+      "bonds": {
+        "name": "Bonds"
+      },
+      "flaws": {
+        "name": "Flaws"
       }
     },
     "tags": {},
@@ -942,6 +958,18 @@
         "name": "Legendary Actions",
         "current": 0,
         "max": 0
+      },
+      "class1": {
+        "name": "Primary Class Resource",
+        "label": "",
+        "current": 0,
+        "max": 0
+      },
+      "class2": {
+        "name": "Secondary Class Resource",
+        "label": "",
+        "current": 0,
+        "max": 0
       }
     },
     "skills": {
@@ -1059,9 +1087,6 @@
       "img": {
         "name": "Image"
       },
-      "special": {
-        "name": "Special Rules"
-      },
       "notes": {
         "name": "Notes"
       },
@@ -1069,17 +1094,38 @@
         "name": "Price"
       }
     },
-    "equip": {
-      "armor": {
-        "name": "Armor"
+    "armor": {
+      "ac": {
+        "name": "Armor Class",
+        "current": 10
+      },
+      "dex": {
+        "name": "Dexterity Bonus"
+      },
+      "str": {
+        "name": "Required Strength"
+      },
+      "ste": {
+        "name": "Stealth Penalty"
+      },
+      "shield": {
+        "name": "Is Shield?",
+        "current": 0
+      },
+      "equipped": {
+        "name": "Is Equipped?",
+        "current": 0
       }
     },
     "weapon": {
+      "hit": {
+        "name": "+Hit Bonus"
+      },
       "damage": {
         "name": "Damage"
       },
-      "hit": {
-        "name": "+Hit Bonus"
+      "damage2": {
+        "name": "Secondary Damage"
       },
       "range": {
         "name": "Range"
@@ -1087,16 +1133,16 @@
       "ammo": {
         "name": "Ammunition"
       },
-      "prof": {
-        "name": "Proficiency"
+      "proficient": {
+        "name": "Proficient"
       }
     },
     "spell": {
       "level": {
         "name": "Level"
       },
-      "required": {
-        "name": "Materials"
+      "school": {
+        "name": "School"
       },
       "duration": {
         "name": "Duration"
@@ -1104,8 +1150,19 @@
       "time": {
         "name": "Casting Time"
       },
-      "comps": {
+      "components": {
         "name": "Casting Components"
+      },
+      "materials": {
+        "name": "Material Components"
+      }
+    },
+    "ability": {
+      "source": {
+        "name": "Source"
+      },
+      "rollable": {
+        "name": "Is Rollable?"
       }
     }
   },
