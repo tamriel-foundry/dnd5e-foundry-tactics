@@ -102,6 +102,7 @@ FTC.events = {
 				statusbar: false,
 				resize: false,
 				min_height: 250,
+				auto_focus: sel,
 				plugins: 'lists save',
 				toolbar: 'bold italic underline bullist numlist styleselect save',
 				save_enablewhendirty: false,

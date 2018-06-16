@@ -320,7 +320,7 @@ ul.death-saves > li span {
     align-items: center;
     height: 40px;
     margin: 0.5em 0;
-    padding: 0.5em;
+    padding: 0.5em 0.25em;
     border: 1px solid #999;
     border-radius: 10px;
     font-size: 1.5em;
@@ -442,8 +442,25 @@ span.skill-mod {
 	font-size: 0.875em;
 }
 
+
+.skill .ftc-rollable {
+	position: relative;
+}
+
 .skill .ftc-rollable:hover {
 	text-shadow: 0 0 4px #ff3838;
+}
+
+.skill .ftc-rollable:hover:before {
+	display: block;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	left: -24px;
+	top: -2px;
+	content: "";
+	background-image: url(/custom/SwordCoast/Icons/d20.png) !important;
+	background-size: contain;
 }
 
 

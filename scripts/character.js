@@ -12,7 +12,9 @@ FTC.character = {
     /* ------------------------------------------- */
 
     enrichCharacter: function(obj) {
-        /* Enrich character object with additional data */
+        /*
+        Enrich character object with additional data.
+        */
 
         // Ensure we have an object to work with and that we can register custom FTC data
         obj = obj || sync.obj("ftc");
@@ -92,7 +94,9 @@ FTC.character = {
     /* ------------------------------------------- */
 
     renderCharsheetHTML: function(obj, scope) {
-        /* Render Character Sheet HTML Template */
+        /*
+        Render Character Sheet HTML Template
+        */
 
         // Toggle template based on visibility scope
         var isPrivate = (scope.viewOnly && (obj._lid !== undefined)),
@@ -107,7 +111,7 @@ FTC.character = {
         // Augment Template
         if (!scope.viewOnly) {
 
-            /* Insert Attributes */
+            // Insert Attributes
             var attrs = "",
              template = load(this.FTC_ATTRIBUTE_HTML);
             for (var s in obj.data.stats) {
@@ -115,7 +119,7 @@ FTC.character = {
             }
             main = main.replace("<!-- FTC_ATTRIBUTE_HTML -->", attrs);
 
-            /* Insert Skills */
+            // Insert Skills
             var skills = "",
               template = load(this.FTC_SKILL_HTML)
             for (var s in obj.data.skills) {
@@ -123,32 +127,34 @@ FTC.character = {
             }
             main = main.replace("<!-- FTC_SKILL_HTML -->", skills);
 
-            /* Insert Inventory */
+            // Insert Inventory
             var items = "",
              template = load(this.FTC_ITEM_HTML);
             for (var i in obj.data.inventory) {
                 item = FTC.items.enrichItem(obj.data.inventory[i], i);
                 items += parse(template, item);
             }
+            items = (items === "") ? "<li><blockquote>Add items from the compendium.</blockquote></li>" : items;
             main = main.replace("<!-- FTC_INVENTORY_HTML -->", items);
 
-            /* Insert Spell */
+            // Insert Spells
             var spells = "",
-             ltemplate = load(this.FTC_SPELL_LEVEL),
-             stemplate = load(this.FTC_SPELL_HTML);
+                ltmp = load(this.FTC_SPELL_LEVEL),
+                stmp = load(this.FTC_SPELL_HTML);
             $.each(obj.data.ftc.spellLevels, function(l, s){
-                spells += parse(ltemplate, s);
+                spells += parse(ltmp, s);
                 $.each(s.spells, function(i, p){
-                    spells += parse(stemplate, p);
+                    spells += parse(stmp, p);
                 });
             });
+            spells = (spells === "") ? "<li><blockquote>Add spells from the compendium.</blockquote></li>" : spells;
             main = main.replace("<!-- FTC_SPELLS_HTML -->", spells);
          }
 
-        /* Evaluate Object Data */
+        // Evaluate Object Data
         var html = parse(main, obj.data)
 
-        /* Assign the sheet a UID */
+        // Assign the sheet a UID
         sheet = $(html);
         sheet.attr("id", "ftc-"+obj._uid);
         return sheet;
@@ -157,7 +163,9 @@ FTC.character = {
     /* ------------------------------------------- */
 
     render_charsheet: function(obj, app, scope) {
-        /* Render Character Sheet UI Element */
+        /*
+        Render Character Sheet UI Element
+        */
 
         // Configure Object
         obj = this.enrichCharacter(obj, scope);
@@ -191,7 +199,7 @@ FTC.character = {
 
 
 /* -------------------------------------------- */
-/* Character Sheet Sync Render					*/
+/* Character Sheet Sync Render                  */
 /* -------------------------------------------- */
 
 sync.render("FTC_CHARSHEET", function(obj, app, scope) {
