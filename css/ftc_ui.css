@@ -1,0 +1,161 @@
+
+/* -------------------------------------------
+ 	MAIN STRUCTURE
+------------------------------------------- */
+
+.ftc-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+.ftc-sheet {
+	flex: 1;
+	background: #EEE;
+	font-family: "Nodesto Caps Condensed";
+}
+
+.ftc-sheet-main {
+	flex: 1;
+	padding: 1em;
+}
+
+.ftc-sheet-header {
+    height: 90px;
+}
+
+.ftc-sheet-primary {
+	height: 190px;
+}
+
+.ftc-sheet-secondary {
+	height: 450px;
+}
+
+
+/* -------------------------------------------
+ 	FORM FIELDS
+------------------------------------------- */
+
+.ftc-sheet label {
+	font-weight: normal;
+	color: #999;
+	margin: 0;
+}
+
+/* Editable Fields */
+input.ftc-edit {
+	min-width: 24px;
+	background: none;
+	border: 1px solid transparent;
+	padding: 0;
+	margin: -1px;
+	text-align: center;
+}
+
+input.ftc-edit:hover,
+input.ftc-edit:focus {
+	box-shadow: 0 0 10px #999;
+	border: 1px solid #444;
+	border-radius: 3px;
+}
+
+input.ftc-edit:focus {
+	box-shadow: 0 0 10px #ff0000;
+}
+
+
+/* -------------------------------------------
+ 	TABBED CONTAINERS
+------------------------------------------- */
+
+/* Tab Menu */
+ul.sheet-tabs {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 0;
+    padding: 0.25em 0;
+    font-size: 2em;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+}
+
+li.sheet-tab {
+	flex: 1;
+	margin: 0.25em 0;
+	padding: 0 0.25em;
+	border-right: 1px solid #999;
+	text-align: center;
+	line-height: 24px;
+}
+li.sheet-tab:last-child {
+	border-right: none;
+}
+li.sheet-tab.tab-active {
+	color: #000;
+	text-shadow: 0 0 15px #ff3838;
+}
+
+/* Tabbed Content */
+div.content-tab {
+    position: relative;
+	display: none;
+	margin: 10px 0;
+}
+div.content-tab.tab-active {
+	display: block;
+}
+
+
+/* -------------------------------------------
+ 	jQuery UI Dialog
+------------------------------------------- */
+
+.ui-dialog {
+    border: 1px solid #222;
+    box-shadow: 0 0 10px #000;
+    border-radius: 5px;
+}
+
+.ui-dialog .ui-widget-header {
+    border: none;
+    background: none;
+    border-bottom: 1px solid #999;
+    border-radius: 0;
+}
+
+.ui-dialog .ui-widget-content {
+    min-height: 1em !important;
+    border: none;
+    margin: 0.25em;
+    padding: 0.25em;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+	float: none;
+	text-align: center;
+}
+
+.ui-dialog .ui-dialog-buttonset button {
+	margin: 0 0.25em;
+}
+
+.ftc-dialog .attribute-roll > * {
+    margin: 0.25em 0;
+}
+
+
+/* -------------------------------------------
+ 	Improved Notes
+------------------------------------------- */
+
+
+blockquote {
+    font-family: "Scaly Sans";
+    font-size: 1em;
+    font-style: italic;
+    border-left: 5px solid #61584e;
+}

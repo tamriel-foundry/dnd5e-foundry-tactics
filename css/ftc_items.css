@@ -1,0 +1,84 @@
+.ftc-item header {
+    flex: 0 0 40px;
+}
+
+h1.itemname {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+}
+
+h1.itemname > .ftc-edit {
+    width: 100%;
+    text-align: left;
+}
+
+
+
+
+
+/* -------------------------------------------
+ 	ITEM SIDEBAR
+------------------------------------------- */
+
+.ftc-item .ftc-sheet-sidebar {
+    flex: 0 0 150px;
+}
+
+.ftc-item .profile-image {
+    width: 150px;
+    height: 150px;
+}
+
+
+.item-summary {
+    flex: 0;
+    list-style: none;
+    margin: 0.5em 0.25em;
+    padding: 0;
+    font-size: 1.5em;
+    color: #444;
+}
+
+.item-summary li label {
+    width: 50%;
+    float: left;
+}
+.item-summary li .ftc-edit {
+    width: 50%;
+    float: right;
+    text-align: right;
+}
+
+
+.item-tags {
+    flex: 0;
+    padding: 0.5em 0;
+    font-size: 1.5em;
+    color: #444;
+    border-top: 1px solid #999;
+}
+
+.item-tags label, .ftc-edit {
+    width: 100%;
+    text-align: center;
+}
+
+
+
+/* -------------------------------------------
+ 	ITEM CONTENT
+------------------------------------------- */
+
+.ftc-sheet-secondary {
+    flex: 1;
+}
+
+#item-notes {
+	max-height: 260px;
+    overflow-y: scroll;
+	font-size: 1em;
+	font-family: "Scaly Sans";
+	color: #222;
+}

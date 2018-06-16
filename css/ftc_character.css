@@ -1,0 +1,486 @@
+
+/* -------------------------------------------
+ 	PROFILE SIDEBAR
+------------------------------------------- */
+
+.ftc-sheet-sidebar {
+	flex: 0 0 250px;
+	padding: 1em;
+	border-right: 1px solid #000;
+}
+
+h2.section-header {
+	margin: 0.5em 0;
+	border-top: 1px solid #BBB;
+	border-bottom: 1px solid #BBB;
+	text-align: center;
+}
+
+
+.ftc-sheet-profile {
+	position: relative;
+}
+
+img.profile-image {
+	height: 250px;
+	width: 250px;
+	border: 1px solid #000;
+	box-shadow: 0 0 4px #000;
+}
+
+img.token-image {
+	background: #CCC;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	height: 40px;
+	width: 40px;
+	border: 1px solid #000;
+	box-shadow: 0 0 4px #000;
+}
+
+.profile-image:hover, .token-image:hover {
+	box-shadow: 0 0 10px #ff3838;
+}
+
+
+/* -------------------------------------------
+ 	CHARACTER SHEET HEADER
+------------------------------------------- */
+
+.ftc-sheet-header {
+	position: relative;
+}
+
+h1.charname {
+	flex: 0 0 70%;
+	height: 50px;
+	margin: 0;
+	font-size: 3em;
+	line-height: 50px;
+}
+
+.charname > input.ftc-edit {
+	width: 100%;
+	text-align: left;
+}
+
+div.charlevel {
+	flex: 0 0 30%;
+	height: 50px;
+	text-align: right;
+}
+
+.charlevel h2.level {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	margin: 0;
+}
+
+.level input.ftc-edit,
+.experience input.ftc-edit {
+    text-align: right;
+}
+
+.charlevel .experience {
+	width: 100%;
+	height: 20px;
+	line-height: 20px;
+}
+
+.experience .exp-next {
+	color: #999;
+	margin: 0;
+}
+
+
+/* Class, Race, and Background */
+ul.ftc-sheet-subtitle {
+	width: 100%;
+	float: left;
+    list-style: none;
+    margin: 0;
+    padding: 5px 0;
+    line-height: 28px;
+    font-size: 1.5em;
+    border-bottom: 1px solid #BBB;
+    border-top: 1px solid #BBB;
+}
+ul.ftc-sheet-subtitle li {
+	flex: 1;
+	padding: 0 0.5em;
+	border-right: 1px solid #999;
+}
+ul.ftc-sheet-subtitle li:first-child {
+	padding-left: 0;
+}
+ul.ftc-sheet-subtitle li:last-child {
+	padding-right: 0;
+	text-align: right;
+	border-right: none;
+}
+.ftc-sheet-subtitle .ftc-edit {
+	width: 100%;
+	text-align: left;
+}
+.ftc-sheet-subtitle li:last-child .ftc-edit {
+    text-align: right;
+}
+
+.ftc-sheet-subtitle li span {
+    display: block;
+    width: 100%;
+}
+
+/* -------------------------------------------
+ 	CHARACTER SHEET HEADER
+------------------------------------------- */
+
+
+/* Primary Showcase Attributes */
+.ftc-sheet-primary > div {
+	width: 30%;
+	height: 80px;
+	float: left;
+	margin: 7px 1.66%;
+    padding: 0.25em 0;
+	border: 1px solid #999;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	text-align: center;
+}
+
+div.health { background-image: url("../content/icons/health.png"); }
+div.armor { background-image: url("../content/icons/armor.png"); }
+div.proficiency { background-image: url("../content/icons/proficiency.png"); }
+div.speed { background-image: url("../content/icons/speed.png"); }
+div.initiative { background-image: url("../content/icons/initiative.png"); }
+div.death { background-image: url("../content/icons/death.png"); }
+
+.ftc-sheet-primary div label {
+    display: block;
+    margin: 0 1em;
+    font-size: 1.25em;
+    color: #444;
+    border-bottom: 1px solid #666;
+}
+
+
+.ftc-sheet-primary input.ftc-edit {
+	font-size: 2em;
+}
+
+
+.ftc-sheet-primary div span {
+	width: 100%;
+	font-size: 2em;
+	margin: 0.25em 0;
+}
+
+ul.death-saves {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.death-saves > li span {
+	font-size: 1em;
+	margin: 0 0.5em 0 0;
+}
+
+
+/* -------------------------------------------
+ 	Attributes
+------------------------------------------- */
+
+#content-attributes > div.attribute {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin: 0.5em 0;
+    padding: 0.5em 0.25em;
+    border: 1px solid #999;
+    border-radius: 10px;
+    font-size: 1.5em;
+	background-repeat: no-repeat;
+    background-position: 5px 2px;
+}
+
+
+div.attribute label {
+	flex: 1;
+	padding-left: 36px;
+	font-size: 1.25em;
+	color: #333;
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+}
+
+div#attribute-Str > label {background-image: url("../content/icons/strength.png");}
+div#attribute-Dex > label {background-image: url("../content/icons/dexterity.png");}
+div#attribute-Con > label {background-image: url("../content/icons/constitution.png");}
+div#attribute-Int > label {background-image: url("../content/icons/intelligence.png");}
+div#attribute-Wis > label {background-image: url("../content/icons/wisdom.png");}
+div#attribute-Cha > label {background-image: url("../content/icons/charisma.png");}
+
+
+.attribute .ftc-rollable:hover {
+    background-image: url("../content/icons/d20.png") !important;
+}
+
+.attribute .ftc-edit {
+	width: 28px;
+}
+
+.attribute .attr-mod {
+    width: 28px;
+    text-align: right;
+	font-size: 0.75em;
+	font-family: "Bookinsanity";
+	color: #888;
+}
+
+.attribute input.ftc-checkbox {
+	margin: 2px;
+}
+
+
+
+/* -------------------------------------------
+ 	Content Tabs
+------------------------------------------- */
+
+.ftc-sheet-secondary .content-tab {
+    max-height: 410px;
+}
+
+#content-biography {
+	font-size: 1em;
+	font-family: "Scaly Sans";
+	color: #222;
+}
+
+.content-tab .glyphicon-edit {
+	position: absolute;
+	top: 0px;
+    right: 18px;
+	color: #999;
+}
+
+.content-tab .glyphicon-edit:hover {
+	color: #222;
+	text-shadow: 0 0 4px #ff3838;
+}
+
+
+
+
+/* -------------------------------------------
+ 	Skills
+------------------------------------------- */
+
+#content-skills {
+	font-size: 1.25em;
+}
+
+#content-skills > div {
+	display: flex;
+	flex-direction: row;
+	line-height: 24px;
+}
+
+
+#content-skills > div label {
+	flex: 3 0 70%;
+	color: #444;
+}
+
+#content-skills > div span {
+	flex: 1 0 15%;
+	text-align: right;
+}
+#content-skills > div input[type="checkbox"] {width: 20px; }
+
+
+span.skill-mod {
+	font-family: "Bookinsanity";
+	color: #888;
+	font-size: 0.875em;
+}
+
+
+.skill .ftc-rollable {
+	position: relative;
+}
+
+.skill .ftc-rollable:hover {
+	text-shadow: 0 0 4px #ff3838;
+}
+
+.skill .ftc-rollable:hover:before {
+	display: block;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	left: -24px;
+	top: -2px;
+	content: "";
+	background-image: url('../content/icons/d20.png') !important;
+	background-size: contain;
+}
+
+
+/* -------------------------------------------
+ 	Inventory
+------------------------------------------- */
+
+.inventory-items {
+	list-style: none;
+	margin: 0.25em 0;
+	padding: 0;
+	max-height: 340px;
+    overflow-y: scroll;
+}
+
+.item {
+    margin: 0;
+    padding: 3px 0;
+    line-height: 24px;
+    border-bottom: 1px solid #DDD;
+}
+
+.inventory-header {
+    font-weight: bold;
+    margin: 0;
+    padding: 0 0 0.25em;
+    border-bottom: 1px solid #999;
+    line-height: 1em;
+}
+
+.item > * {
+	margin: 0 0.25em;
+}
+
+.item-name {
+	flex: 4;
+}
+
+.item-quantity {
+    width: 24px;
+}
+
+.item-weight {
+	width: 24px;
+	border-right: 1px solid #DDD;
+}
+
+.inventory-header .inventory-rpad {
+    width: 54px;
+    margin: 0;
+}
+
+.item .glyphicon:hover,
+.spell .glyphicon:hover {
+	text-shadow: 0 0 4px #ff3838;
+}
+
+
+.inventory-weight {
+	position: relative;
+    height: 12px;
+    background: #556575;
+    border: 1px solid #222;
+    border-radius: 3px;
+}
+
+.inventory-weight-bar {
+    display: block;
+    height: 8px;
+    background: #bfcee4;
+    margin: 1px;
+    border: 1px solid #f6faff;
+    border-radius: 2px;
+}
+
+label.inventory-weight-label {
+    position: absolute;
+    top: 0px;
+    right: 4px;
+    color: #FFF;
+    font-size: 0.75em;
+    line-height: 12px;
+    text-shadow: 1px 1px #000;
+}
+
+.heavy .inventory-weight-bar {
+    background: #c73411;
+    border: 1px solid #ff1919;
+}
+
+
+
+/* Currency Bag */
+.currency {
+    margin: 0.25em;
+    border-bottom: 1px solid #CCC;
+}
+
+.currency > * {
+    flex: 0;
+    width: 20px;
+    text-align: right;
+}
+
+.currency > input.ftc-edit {
+    border-right: 1px solid #CCC;
+    margin-right: 8px;
+}
+
+.currency > .currency-label {
+    flex: 1;
+    text-align: left;
+    font-weight: bold;
+    color: #222;
+}
+
+/* -------------------------------------------
+ 	Spellbook
+------------------------------------------- */
+
+.spellbook-spells {
+	list-style: none;
+	margin: 0.25em 0;
+	padding: 0;
+	max-height: 360px;
+    overflow-y: scroll;
+}
+
+.spell {
+    margin: 0px;
+    padding: 2px 0;
+    line-height: 24px;
+    border-bottom: 1px solid #DDD;
+}
+
+.spell.inventory-header {
+	line-height: 16px;
+	background: #DEDEDE;
+    border-bottom: 1px solid #CCC;
+}
+.inventory-header .spell-action { border-right: 1px solid #CCC; }
+
+
+.spell-name {  flex: 2; }
+.spell-school, .spell-action { flex: 1; }
+.spell-action { border-right: 1px solid #DDD; }
+.spell-uses {
+	width: 50px;
+	margin: 0;
+	text-align: center;
+}
+.spell-uses > .ftc-edit {
+    width: 20px;
+    margin: -1px;
+}
