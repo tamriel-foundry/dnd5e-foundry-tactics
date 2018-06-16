@@ -19,9 +19,12 @@ FTC.ui = {
 
 	activate_tabs: function(html, obj, app) {
 
+		// Record active tabs
+		obj.data.tabs = obj.data.tabs || {};
+
 		/* Restore Active Tabs */
-		for (var t in obj.data.ftc.tabs) {
-			var tab = html.find("#"+obj.data.ftc.tabs[t]);
+		for (var t in obj.data.tabs) {
+			var tab = html.find("#"+obj.data.tabs[t]);
 			if (tab.length > 0) FTC.ui._switch_tab(html, tab);
 		}
 
@@ -29,8 +32,8 @@ FTC.ui = {
 		html.find('.sheet-tab').click(function() {
 			var container = $(this).parent().attr("id");
 			FTC.ui._switch_tab(html, $(this));
-			obj.data.ftc.tabs = obj.data.ftc.tabs || {};
-			obj.data.ftc.tabs[container] = $(this).attr("id");
+			obj.data.tabs = obj.data.tabs || {};
+			obj.data.tabs[container] = $(this).attr("id");
 		});
 	},
 

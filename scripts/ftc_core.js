@@ -29,7 +29,16 @@ var FTC = {
 
 	/* ------------------------------------------- */
 
-	setProperty: function(object, name, value, update) {
+	setProperty: function(object, name, value, dtype) {
+
+	    // Sanitize Tags
+        if ( name === "tags" ) {
+            var tags = {};
+            $.each(value.replace(" ", "").split(','), function(_, tag) {
+               tags[tag] = true;
+            });
+            value = tags;
+        }
 
 		/* Sanitize Values */
 		if (name.startsWith("stats.")) {
@@ -52,7 +61,7 @@ var FTC = {
 		data[key] = value;
 
 		/* Save Object */
-		object.sync(update);
+		object.sync("updateAsset");
 		return object;
 	},
 };

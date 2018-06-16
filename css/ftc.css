@@ -1,3 +1,5 @@
+/* @import url("ftc_items.css"); */
+
 /* -------------------------------------------
  	MAIN STRUCTURE				
 ------------------------------------------- */
@@ -241,20 +243,9 @@ ul.ftc-sheet-subtitle li:last-child {
     width: 100%;
 }
 
-
-
 /* -------------------------------------------
  	CHARACTER SHEET HEADER		
 ------------------------------------------- */
-
-
-
-
-
-
-
-
-
 
 
 /* Primary Showcase Attributes */
@@ -271,12 +262,12 @@ ul.ftc-sheet-subtitle li:last-child {
 	text-align: center;
 }
 
-div.health { background-image: url("/custom/SwordCoast/Icons/health.png"); }
-div.armor { background-image: url("/custom/SwordCoast/Icons/armor.png"); }
-div.proficiency { background-image: url("/custom/SwordCoast/Icons/proficiency.png"); }
-div.speed { background-image: url("/custom/SwordCoast/Icons/speed.png"); }
-div.initiative { background-image: url("/custom/SwordCoast/Icons/initiative.png"); }
-div.death { background-image: url("/custom/SwordCoast/Icons/death.png"); }
+div.health { background-image: url("../content/icons/health.png"); }
+div.armor { background-image: url("../content/icons/armor.png"); }
+div.proficiency { background-image: url("../content/icons/proficiency.png"); }
+div.speed { background-image: url("../content/icons/speed.png"); }
+div.initiative { background-image: url("../content/icons/initiative.png"); }
+div.death { background-image: url("../content/icons/death.png"); }
 
 .ftc-sheet-primary div label {
     display: block;
@@ -290,9 +281,6 @@ div.death { background-image: url("/custom/SwordCoast/Icons/death.png"); }
 .ftc-sheet-primary input.ftc-edit {
 	font-size: 2em;
 }
-
-
-
 
 
 .ftc-sheet-primary div span {
@@ -311,11 +299,6 @@ ul.death-saves > li span {
 	font-size: 1em;
 	margin: 0 0.5em 0 0;
 }
-
-
-
-
-
 
 
 /* -------------------------------------------
@@ -345,16 +328,16 @@ div.attribute label {
 	background-position: 0 50%;
 }
 
-div#attribute-Str > label {background-image: url("/custom/SwordCoast/Icons/strength.png");}
-div#attribute-Dex > label {background-image: url("/custom/SwordCoast/Icons/dexterity.png");}
-div#attribute-Con > label {background-image: url("/custom/SwordCoast/Icons/constitution.png");}
-div#attribute-Int > label {background-image: url("/custom/SwordCoast/Icons/intelligence.png");}
-div#attribute-Wis > label {background-image: url("/custom/SwordCoast/Icons/wisdom.png");}
-div#attribute-Cha > label {background-image: url("/custom/SwordCoast/Icons/charisma.png");}
+div#attribute-Str > label {background-image: url("../content/icons/strength.png");}
+div#attribute-Dex > label {background-image: url("../content/icons/dexterity.png");}
+div#attribute-Con > label {background-image: url("../content/icons/constitution.png");}
+div#attribute-Int > label {background-image: url("../content/icons/intelligence.png");}
+div#attribute-Wis > label {background-image: url("../content/icons/wisdom.png");}
+div#attribute-Cha > label {background-image: url("../content/icons/charisma.png");}
 
 
 .attribute .ftc-rollable:hover {
-    background-image: url("/custom/SwordCoast/Icons/d20.png") !important;
+    background-image: url("../content/icons/d20.png") !important;
 }
 
 .attribute .ftc-edit {
@@ -375,40 +358,29 @@ div#attribute-Cha > label {background-image: url("/custom/SwordCoast/Icons/chari
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /* -------------------------------------------
  	Content Tabs				
 ------------------------------------------- */
 
 .ftc-sheet-secondary .content-tab {
     max-height: 410px;
+    position: relative;
 }
 
 #content-biography {
-	position: relative;
 	font-size: 1em;
 	font-family: "Scaly Sans";
 	color: #222;
 }
 
-#content-biography .glyphicon-edit {
+.content-tab .glyphicon-edit {
 	position: absolute;
-	top: 5px;
-	right: 5px;
+	top: 0px;
+    right: 18px;
 	color: #999;
 }
 
-#content-biography .glyphicon-edit:hover {
+.content-tab .glyphicon-edit:hover {
 	color: #222;
 	text-shadow: 0 0 4px #ff3838;
 }
@@ -466,7 +438,7 @@ span.skill-mod {
 	left: -24px;
 	top: -2px;
 	content: "";
-	background-image: url(/custom/SwordCoast/Icons/d20.png) !important;
+	background-image: url('../content/icons/d20.png') !important;
 	background-size: contain;
 }
 

@@ -6,7 +6,7 @@ FTC.template = {
 
     /* ------------------------------------------- */
 
-    loadTemplate: function(path) {
+    load: function(path) {
         /*
         Load a template from the provided path, returning the HTML as a string.
         */
@@ -19,7 +19,7 @@ FTC.template = {
 
     /* ------------------------------------------- */
 
-    populateTemplate: function(html, data) {
+    populate: function(html, data) {
         /*
         Populate an HTML template by embedding data into it from some provided object.
 

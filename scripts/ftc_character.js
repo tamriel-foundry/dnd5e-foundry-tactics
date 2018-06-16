@@ -105,8 +105,8 @@ FTC.character = {
 
         // Load primary template
         var temp = FTC.template,
-            load = temp.loadTemplate,
-            parse = temp.populateTemplate,
+            load = temp.load,
+            parse = temp.populate,
             main = load(template);
 
         // Augment Template
@@ -132,7 +132,7 @@ FTC.character = {
             var items = "",
              template = load(this.FTC_ITEM_HTML);
             for (var i in obj.data.inventory) {
-                item = FTC.items.enrichItem(obj.data.inventory[i], i);
+                item = FTC.items.enrichItem(obj.data.inventory[i], {"inventory": i});
                 items += parse(template, item);
             }
             items = (items === "") ? "<li><blockquote>Add items from the compendium.</blockquote></li>" : items;
