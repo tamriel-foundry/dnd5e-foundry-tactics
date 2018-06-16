@@ -1,8 +1,9 @@
+var FTC_PACKAGE_NAME = "dnd5e-foundry-tactics";
 var FTC = {
 
-	ROOT_DIR: 'workshop/ftc/',
-	TEMPLATE_DIR: 'workshop/ftc/html/',
-	CSS_DIR: 'workshop/ftc/css/',
+	ROOT_DIR: 'workshop/'+FTC_PACKAGE_NAME+'/',
+	TEMPLATE_DIR: 'workshop/'+FTC_PACKAGE_NAME+'/html/',
+	CSS_DIR: 'workshop/'+FTC_PACKAGE_NAME+'/css/',
 
 	/* ------------------------------------------- */
 
