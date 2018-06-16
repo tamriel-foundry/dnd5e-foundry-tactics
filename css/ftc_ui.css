@@ -35,6 +35,54 @@
 }
 
 
+.ftc-sheet-sidebar {
+	flex: 0 0 250px;
+	padding: 1em;
+	border-right: 1px solid #000;
+}
+
+h2.section-header {
+	margin: 0.5em 0;
+	border-top: 1px solid #BBB;
+	border-bottom: 1px solid #BBB;
+	text-align: center;
+}
+
+
+
+
+/* -------------------------------------------
+ 	ASSET IMAGES
+------------------------------------------- */
+
+.ftc-sheet-profile {
+	position: relative;
+    margin-bottom: 0.5em;
+}
+
+img.profile-image {
+	height: 250px;
+	width: 250px;
+	border: 1px solid #000;
+	box-shadow: 0 0 4px #000;
+}
+
+img.token-image {
+	background: #CCC;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	height: 40px;
+	width: 40px;
+	border: 1px solid #000;
+	box-shadow: 0 0 4px #000;
+}
+
+.profile-image:hover, .token-image:hover {
+	box-shadow: 0 0 10px #ff3838;
+}
+
+
 /* -------------------------------------------
  	FORM FIELDS
 ------------------------------------------- */
@@ -74,22 +122,24 @@ input.ftc-edit:focus {
 /* Tab Menu */
 ul.sheet-tabs {
     display: flex;
+    height: 40px;
     flex-direction: row;
     list-style: none;
     margin: 0;
-    padding: 0.25em 0;
+    padding: 0;
     font-size: 2em;
     border-top: 1px solid #999;
     border-bottom: 1px solid #999;
 }
 
+/* Single Tab */
 li.sheet-tab {
 	flex: 1;
-	margin: 0.25em 0;
-	padding: 0 0.25em;
+    line-height: 24px;
+    margin: 8px 0;
+    padding: 0 8px;
 	border-right: 1px solid #999;
 	text-align: center;
-	line-height: 24px;
 }
 li.sheet-tab:last-child {
 	border-right: none;
