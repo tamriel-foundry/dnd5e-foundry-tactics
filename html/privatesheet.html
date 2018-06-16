@@ -1,0 +1,33 @@
+<section id="ftc-{uid}" class="ftc-sheet flexrow">
+	<aside class="ftc-sheet-sidebar">
+		<div class="ftc-sheet-profile">
+			<img class="profile-image ftc-image" data-edit="info.img.current" src="{info.img.current}"/>
+			<img class="token-image ftc-image" data-edit="info.img.min" src="{info.img.min}"/>
+		</div>
+	</aside>
+
+	<main class="ftc-sheet-main flexcolumn">
+		<header class="ftc-sheet-header flexcolumn">
+			<h1 class="ftc-sheet-title">
+				<span class="charname">{info.name.current}</span>
+			</h1>
+			<ul class="ftc-sheet-subtitle flexrow">
+				<li>
+					<span>{info.race.current}</span>
+				</li>
+				<li>
+					<span>{info.class.current}</span>
+				</li>
+				<li>
+					<span>{info.back.current}</span>
+				</li>
+			</ul>
+		</header>
+
+		<div class="ftc-sheet-secondary">
+			<div id="content-biography">
+				{info.notes.current}
+			</div>
+		</div>
+	</main>
+</section>
