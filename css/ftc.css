@@ -228,11 +228,18 @@ ul.ftc-sheet-subtitle li:last-child {
 	text-align: right;
 	border-right: none;
 }
-.ftc-sheet-subtitle input.ftc-edit {
+.ftc-sheet-subtitle .ftc-edit {
 	width: 100%;
 	text-align: left;
 }
+.ftc-sheet-subtitle li:last-child .ftc-edit {
+    text-align: right;
+}
 
+.ftc-sheet-subtitle li span {
+    display: block;
+    width: 100%;
+}
 
 
 

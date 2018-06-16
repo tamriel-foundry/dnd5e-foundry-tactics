@@ -6,27 +6,29 @@
 		</div>
 	</aside>
 
-	<main class="ftc-sheet-main flexcolumn">
-		<header class="ftc-sheet-header flexcolumn">
-			<h1 class="ftc-sheet-title">
-				<span class="charname">{info.name.current}</span>
-			</h1>
+	<!-- MAIN SHEET CONTAINER -->
+	<main class="ftc-sheet-main">
+		<header class="ftc-sheet-header flexrow flexwrap">
+			<h1 class="charname">{info.name.current}</h1>
 			<ul class="ftc-sheet-subtitle flexrow">
 				<li>
-					<span>{info.race.current}</span>
+					<span class="charrace">{info.race.current}</span>
 				</li>
 				<li>
-					<span>{info.class.current}</span>
+					<span class="charclass">{info.class.current}</span>
 				</li>
 				<li>
-					<span>{info.back.current}</span>
+					<span class="charback">{info.back.current}</span>
 				</li>
 			</ul>
 		</header>
 
+		<!-- SECONDARY TABBED CONTAINER -->
 		<div class="ftc-sheet-secondary">
-			<div id="content-biography">
-				{info.notes.current}
+			<div id="content-biography" class="content-tab tab-active">
+				<div id="biography">
+					{info.notes.current}
+				</div>
 			</div>
 		</div>
 	</main>
