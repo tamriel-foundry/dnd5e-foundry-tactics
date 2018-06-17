@@ -1,0 +1,12 @@
+.ftc-page {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-image: url('/content/sheet2.png');
+    background-size: 100%;
+    font-family: "Scaly Sans", sans-serif;
+    font-size: 16px;
+    padding: 1em;
+    color: #38322c;
+    box-shadow: 0 0 30px #38322c inset;
+}
+

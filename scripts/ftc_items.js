@@ -25,6 +25,11 @@ FTC.items = {
         var item = obj.data;
         item.ftc = item.ftc || {};
 
+        // Enrich info
+        item.info.name.current = item.info.name.current || "";
+        item.info.img.current = item.info.img.current || "/content/icons/Pouch1000p.png";
+        item.info.notes.current = item.info.notes.current || "";
+
         // Maybe record it's inventory index
         scope = scope || {};
         if ( scope.inventory !== undefined ) {
@@ -177,8 +182,8 @@ FTC.items = {
 /* -------------------------------------------- */
 /* Override Default Item Sheet Size             */
 /* -------------------------------------------- */
-//assetTypes['i'].width = "650px";
-//assetTypes['i'].height = "500px";
+// assetTypes['i'].width = "650px";
+// assetTypes['i'].height = "500px";
 
 
 // End FTCInit

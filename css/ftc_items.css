@@ -63,6 +63,7 @@ h1.itemname > .ftc-edit {
 .item-tags label, .ftc-edit {
     width: 100%;
     text-align: center;
+    color: #222;
 }
 
 

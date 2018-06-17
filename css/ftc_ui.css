@@ -168,6 +168,7 @@ div.content-tab.tab-active {
     border: 1px solid #222;
     box-shadow: 0 0 10px #000;
     border-radius: 5px;
+	z-index: 9999;
 }
 
 .ui-dialog .ui-widget-header {
@@ -199,11 +200,32 @@ div.content-tab.tab-active {
 
 
 /* -------------------------------------------
- 	Improved Notes
+ 	General Styles
 ------------------------------------------- */
 
+/* Headers */
+h1, h2, h3, h4 {
+    font-family: "Nodesto Caps Condensed";
+    font-weight: normal !important;
+	color: #332920;
+	margin: 0;
+}
+h1 {
+	font-size: 48px;
+}
+h2 {
+	font-size: 32px;
+}
+h3 { font-size: 24px; }
+h4 { font-size: 20px; }
+
+hr {
+    margin: 0.5em 0;
+    border: 2px solid #792a19;
+}
 
 blockquote {
+    margin: 0 0 0.5em;
     font-family: "Scaly Sans";
     font-size: 1em;
     font-style: italic;
