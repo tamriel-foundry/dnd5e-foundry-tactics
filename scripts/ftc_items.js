@@ -1,7 +1,18 @@
 hook.add("FTCInit", "Items", function() {
 FTC.items = {
 
-    TEMPLATE_ITEM_EDIT: FTC.TEMPLATE_DIR + 'items/item-edit.html',
+    // Globals
+    ITEM_TEMPLATE: FTC.TEMPLATE_DIR + 'items/item-{type}.html',
+    templates: {
+        ITEM_HEADER: FTC.TEMPLATE_DIR + 'items/item-header.html',
+        ITEM_SIDEBAR: FTC.TEMPLATE_DIR + 'items/item-sidebar.html',
+        ITEM_TAB_NOTES: FTC.TEMPLATE_DIR + 'items/tab-notes.html',
+        ITEM_TAB_ARMOR: FTC.TEMPLATE_DIR + 'items/tab-armor.html',
+        ITEM_TAB_WEAPON: FTC.TEMPLATE_DIR + 'items/tab-weapon.html',
+        ITEM_TAB_SPELL: FTC.TEMPLATE_DIR + 'items/tab-spell.html',
+        ITEM_TAB_ABILITY: FTC.TEMPLATE_DIR + 'items/tab-ability.html',
+    },
+    DEFAULT_ITEM_TYPE: 'note',
 
     /* ------------------------------------------- */
 
@@ -18,37 +29,17 @@ FTC.items = {
         */
 
         // Toggle object vs. data
-        var isObject = ( '_uid' in obj ) &&  ( 'data' in obj ),
-            obj = isObject ? obj : {"data": obj};
-
-        // Create a place for temporary data
-        var item = obj.data;
+        var item = ( "data" in obj ) ? obj.data : obj;
         item.ftc = item.ftc || {};
 
-        // Enrich info
-        item.info.name.current = item.info.name.current || "";
+        // Default Image
         item.info.img.current = item.info.img.current || "/content/icons/Pouch1000p.png";
-        item.info.notes.current = item.info.notes.current || "";
-
-        // Maybe record it's inventory index
-        scope = scope || {};
-        if ( scope.inventory !== undefined ) {
-            item.ftc.itemid = parseInt(scope.inventory);
-        }
 
         // Collapse tags
         item.info.tagstr = Object.keys(item.tags || {}).join(", ");
 
         // Classify item type
-        type = "generic"
-        if (item.weapon.damage.current !== undefined) {
-            type = "weapon"
-        } else if (item.spell.level.current !== undefined) {
-            type = "spell"
-        } else if (item.tags.armor === 1) {
-            type = "armor"
-        }
-        item.itemtype = type;
+        item.info.type = this._classify_type(item);
 
         // Ensure quantity, price, and weight
         item.info.price = item.info.price || {"name": "Price", "current": 0.0};
@@ -56,9 +47,19 @@ FTC.items = {
            item.info[v].current = parseFloat(item.info[v].current || 0.0)
         });
 
-
         // Return either the full object or just the item data
-        return isObject ? obj : item;
+        return obj;
+    },
+
+    /* ------------------------------------------- */
+
+    _classify_type: function(item) {
+        if (item.info.type) return item.info.type;
+        var type = {"name": "Entry Type", "current": "note"};
+        if (item.spell.level.current) type.current = "spell";
+        else if (item.weapon.damage.current) type.current = "weapon";
+        else if (item.armor.ac.current) type.current = "armor";
+        return type;
     },
 
     /* ------------------------------------------- */
@@ -76,7 +77,11 @@ FTC.items = {
 
         // Create a working data object in game locals for later reference
         var item = obj.data.inventory[index];
+        console.log(item);
         if ( item === undefined ) return;
+        console.log(item);
+
+        // Update reference to the currently worked on item
         game.locals["editItem"] = game.locals["editItem"] || sync.obj("editItem");
         game.locals["editItem"].data = duplicate(item);
 
@@ -84,11 +89,11 @@ FTC.items = {
         var newApp = sync.newApp("ui_renderItem");
         game.locals["editItem"].addApp(newApp);
 
-        // Create an HTML frame and attach it to the app
+        // Create an HTML frame containing the app
         var frame = $('<div class="edit-item flex flexcolumn">');
         newApp.appendTo(frame);
 
-        // Create a Confirm button and listen for submission
+        // Attach a full-width confirmation button listen for submission
         var confirm = $('<button class="fit-x">Update Item</button>');
         confirm.click(function () {
             console.log(game.locals['editItem']);
@@ -162,28 +167,44 @@ FTC.items = {
 
         // Enable Edit Fields and Listeners
         FTC.events.edit_value_fields(html, obj, app);
+        FTC.events.edit_select_fields(html, obj, app);
         FTC.events.edit_image_fields(html, obj, app);
+        FTC.events.edit_checkbox_fields(html, obj, app);
         FTC.events.edit_mce_fields(html, obj, app);
 	    return html;
     },
 
+    /* -------------------------------------------- */
+
     _renderItemHTML: function(obj, scope) {
 
-        // Load templates
-        var html = FTC.template.load(this.TEMPLATE_ITEM_EDIT);
+        // Toggle Item Type
+        var type = obj.data.info.type.current || this.DEFAULT_ITEM_TYPE;
 
-        // Populate template
+        // Load templates
+        var html = FTC.template.load(this.ITEM_TEMPLATE.replace("{type}", type));
+
+        // Add Content Templates
+        $.each(this.templates, function(name, path) {
+            html = FTC.template.inject(html, name, path);
+        });
+
+        // Populate final template
         html = FTC.template.populate(html, obj.data);
+
+        // Return rendered HTML
         return $(html);
-    }
+    },
+
+    /* -------------------------------------------- */
 }
 
 
 /* -------------------------------------------- */
 /* Override Default Item Sheet Size             */
 /* -------------------------------------------- */
-// assetTypes['i'].width = "650px";
-// assetTypes['i'].height = "500px";
+assetTypes['i'].width = "650px";
+assetTypes['i'].height = "500px";
 
 
 // End FTCInit
@@ -194,8 +215,29 @@ FTC.items = {
 /* Character Sheet Sync Render                  */
 /* -------------------------------------------- */
 
-// sync.render("ui_renderItem", function(obj, app, scope) {
-//     return FTC.items.render_item(obj, app, scope);
-// });
+sync.render("ui_renderItem", function(obj, app, scope) {
+    return FTC.items.render_item(obj, app, scope);
+});
+
+
+hook.add("OnDropCharacter", "FTCOnDrop", function(obj, app, scope, dt) {
+    var item = JSON.parse(dt.getData("OBJ"));
+    if (item._t !== "i") return;
+    if (!item.info.type) return;
+
+    // Make sure spells go to the right place
+    if ((item.info.type.current === "spell") && !(dt.getData("spell") || item.tags["spell"])) {
+        obj.data.inventory.pop();
+        obj.data.spellbook.push(item);
+        obj.sync("updateAsset");
+    }
+
+    // Make sure abilities go to the right place
+    if (item.info.type.current === "ability") {
+        obj.data.inventory.pop();
+        obj.data.abilities.push(item);
+        obj.sync("updateAsset");
+    }
+});
 
 

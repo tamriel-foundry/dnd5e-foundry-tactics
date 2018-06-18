@@ -1,0 +1,78 @@
+<form class="item-form spell">
+    <div role="group" class="form-group flexrow">
+        <label>{spell.level.name}</label>
+        <input type="text" class="ftc-edit spell-level" tabindex="0" data-edit="spell.level.current"
+               value="{spell.level.current}" placeholder="Cantrip"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+    <label>{spell.school.name}</label>
+        <select class="ftc-select armor-type" data-edit="spell.school.current" data-selected="{spell.school.current}">
+            <option value=""></option>
+            <option value="abjuration">Abjuration</option>
+            <option value="conjuration">Conjuration</option>
+            <option value="divination">Divination</option>
+            <option value="enchantment">Enchantment</option>
+            <option value="evocation">Evocation</option>
+            <option value="illusion">Illusion</option>
+            <option value="necromancy">Necromancy</option>
+            <option value="transmutation">Transmutation</option>
+        </select>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{spell.time.name}</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="spell.time.current"
+               value="{spell.time.current}" placeholder="Action"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{weapon.range.name}</label>
+        <input type="text" class="ftc-edit weapon-range" tabindex="0" data-edit="weapon.range.current"
+               value="{weapon.range.current}" placeholder="5 ft."/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{weapon.damage.name}</label>
+        <input type="text" class="ftc-edit weapon-d1" tabindex="0" data-edit="weapon.damage.current"
+               value="{weapon.damage.current}" placeholder="Formula"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>Damage Type</label>
+        <select class="ftc-select weapon-d1type" data-edit="weapon.damage.type" data-selected="{weapon.damage.type}">
+            <option value=""></option>
+            <option value="acid">Acid</option>
+            <option value="bludgeoning">Bludgeoning</option>
+            <option value="cold">Cold</option>
+            <option value="fire">Fire</option>
+            <option value="force">Force</option>
+            <option value="lightning">Lightning</option>
+            <option value="necrotic">Necrotic</option>
+            <option value="piercing">Piercing</option>
+            <option value="poison">Poison</option>
+            <option value="psychic">Psychic</option>
+            <option value="radiant">Radiant</option>
+            <option value="slashing">Slashing</option>
+            <option value="thunder">Thunder</option>
+        </select>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{spell.duration.name}</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="spell.duration.current"
+               value="{spell.duration.current}" placeholder="Instantaneous"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{spell.components.name}</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="spell.components.current"
+               value="{spell.components.current}" placeholder="V,S,M"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{spell.materials.name}</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="spell.materials.current"
+               value="{spell.materials.current}" placeholder="None"/>
+    </div>
+</form>

@@ -1,11 +1,10 @@
 .ftc-item header {
-    flex: 0 0 40px;
+    flex: 0 0 50px;
 }
 
 h1.itemname {
     width: 100%;
-    height: 40px;
-    line-height: 40px;
+    line-height: 50px;
     margin: 0;
 }
 
@@ -24,6 +23,7 @@ h1.itemname > .ftc-edit {
 
 .ftc-item .ftc-sheet-sidebar {
     flex: 0 0 150px;
+    font-size: 1.5em;
 }
 
 .ftc-item .profile-image {
@@ -31,14 +31,16 @@ h1.itemname > .ftc-edit {
     height: 150px;
 }
 
+.item-type {
+    flex: 0 0 40px;
+    border-bottom: 1px solid #999;
+}
 
 .item-summary {
     flex: 0;
     list-style: none;
-    margin: 0.5em 0.25em;
+    margin: 0.25em 0;
     padding: 0;
-    font-size: 1.5em;
-    color: #444;
 }
 
 .item-summary li label {
@@ -51,12 +53,9 @@ h1.itemname > .ftc-edit {
     text-align: right;
 }
 
-
 .item-tags {
     flex: 0;
     padding: 0.5em 0;
-    font-size: 1.5em;
-    color: #444;
     border-top: 1px solid #999;
 }
 
@@ -69,12 +68,8 @@ h1.itemname > .ftc-edit {
 
 
 /* -------------------------------------------
- 	ITEM CONTENT
+ 	ITEM NOTES
 ------------------------------------------- */
-
-.ftc-sheet-secondary {
-    flex: 1;
-}
 
 #item-notes {
 	max-height: 260px;
@@ -82,4 +77,14 @@ h1.itemname > .ftc-edit {
 	font-size: 1em;
 	font-family: "Scaly Sans";
 	color: #222;
+}
+
+
+
+/* -------------------------------------------
+ 	ARMOR AND WEAPONS
+------------------------------------------- */
+
+.item-form {
+    font-size: 22px;
 }

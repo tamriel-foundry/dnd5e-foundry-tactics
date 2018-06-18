@@ -1,6 +1,6 @@
 
 /* -------------------------------------------
- 	MAIN STRUCTURE
+     MAIN STRUCTURE
 ------------------------------------------- */
 
 .ftc-wrapper {
@@ -12,14 +12,15 @@
 }
 
 .ftc-sheet {
-	flex: 1;
-	background: #EEE;
-	font-family: "Nodesto Caps Condensed";
+    flex: 1;
+    background: #EEE;
+    font-family: "Nodesto Caps Condensed";
 }
 
-.ftc-sheet-main {
-	flex: 1;
-	padding: 1em;
+.ftc-sheet .ftc-sheet-main {
+    flex: 1;
+    margin: 15px;
+    padding: 0;
 }
 
 .ftc-sheet-header {
@@ -27,96 +28,136 @@
 }
 
 .ftc-sheet-primary {
-	height: 190px;
+    height: 190px;
 }
 
 .ftc-sheet-secondary {
-	height: 450px;
+    flex: 1;
+    height: 450px;
 }
 
 
 .ftc-sheet-sidebar {
-	flex: 0 0 250px;
-	padding: 1em;
-	border-right: 1px solid #000;
+    flex: 0 0 250px;
+    padding: 15px;
+    border-right: 1px solid #000;
 }
 
 h2.section-header {
-	margin: 0.5em 0;
-	border-top: 1px solid #BBB;
-	border-bottom: 1px solid #BBB;
-	text-align: center;
+    margin: 0.5em 0;
+    border-top: 1px solid #BBB;
+    border-bottom: 1px solid #BBB;
+    text-align: center;
 }
 
 
 
 
 /* -------------------------------------------
- 	ASSET IMAGES
+     ASSET IMAGES
 ------------------------------------------- */
 
 .ftc-sheet-profile {
-	position: relative;
+    position: relative;
     margin-bottom: 0.5em;
 }
 
 img.profile-image {
-	height: 250px;
-	width: 250px;
-	border: 1px solid #000;
-	box-shadow: 0 0 4px #000;
+    height: 250px;
+    width: 250px;
+    border: 1px solid #000;
+    box-shadow: 0 0 4px #000;
 }
 
 img.token-image {
-	background: #CCC;
-	position: absolute;
-	bottom: 5px;
-	right: 5px;
-	height: 40px;
-	width: 40px;
-	border: 1px solid #000;
-	box-shadow: 0 0 4px #000;
+    background: #CCC;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    height: 40px;
+    width: 40px;
+    border: 1px solid #000;
+    box-shadow: 0 0 4px #000;
 }
 
 .profile-image:hover, .token-image:hover {
-	box-shadow: 0 0 10px #ff3838;
+    box-shadow: 0 0 10px #ff3838;
 }
 
 
 /* -------------------------------------------
- 	FORM FIELDS
+     FORM FIELDS
 ------------------------------------------- */
 
+label {
+    margin: 0;
+    font-weight: normal;
+}
+
 .ftc-sheet label {
-	font-weight: normal;
-	color: #999;
-	margin: 0;
+    color: #403e3c;
 }
 
 /* Editable Fields */
 input.ftc-edit {
-	min-width: 24px;
-	background: none;
-	border: 1px solid transparent;
-	padding: 0;
-	margin: -1px;
-	text-align: center;
+    min-width: 24px;
+    background: none;
+    border: 1px solid transparent;
+    padding: 0;
+    margin: -1px;
+    text-align: center;
 }
 
 input.ftc-edit:hover,
 input.ftc-edit:focus {
-	box-shadow: 0 0 10px #999;
-	border: 1px solid #444;
-	border-radius: 3px;
+    box-shadow: 0 0 10px #999;
+    border: 1px solid #444;
+    border-radius: 3px;
 }
 
 input.ftc-edit:focus {
-	box-shadow: 0 0 10px #ff0000;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+input.ftc-edit::placeholder {
+    color: #5f5e5d;
 }
 
 
+select {
+    font-size: 18px;
+}
+
+
+/* Form Groups */
+.form-group {
+    width: 100%;
+    height: 30px;
+    margin: 3px 0;
+}
+
+.form-group > * {
+    height: 30px;
+    line-height: 30px;
+    flex: 0 0 50%;
+}
+
+.form-group .ftc-checkbox {
+    flex: 0 0 24px;
+    height: 16px;
+    margin-top: 8px;
+}
+
+.form-group .ftc-edit {
+    padding: 0 5px;
+    text-align: left;
+}
+
+
+
+
 /* -------------------------------------------
- 	TABBED CONTAINERS
+     TABBED CONTAINERS
 ------------------------------------------- */
 
 /* Tab Menu */
@@ -134,41 +175,42 @@ ul.sheet-tabs {
 
 /* Single Tab */
 li.sheet-tab {
-	flex: 1;
+    flex: 1;
     line-height: 24px;
     margin: 8px 0;
     padding: 0 8px;
-	border-right: 1px solid #999;
-	text-align: center;
+    border-right: 1px solid #999;
+    text-align: center;
+    cursor: pointer;
 }
 li.sheet-tab:last-child {
-	border-right: none;
+    border-right: none;
 }
 li.sheet-tab.tab-active {
-	color: #000;
-	text-shadow: 0 0 15px #ff3838;
+    color: #000;
+    text-shadow: 0 0 15px #ff3838;
 }
 
 /* Tabbed Content */
 div.content-tab {
     position: relative;
-	display: none;
-	margin: 10px 0;
+    display: none;
+    margin: 10px 0;
 }
 div.content-tab.tab-active {
-	display: block;
+    display: block;
 }
 
 
 /* -------------------------------------------
- 	jQuery UI Dialog
+     jQuery UI Dialog
 ------------------------------------------- */
 
 .ui-dialog {
     border: 1px solid #222;
     box-shadow: 0 0 10px #000;
     border-radius: 5px;
-	z-index: 9999;
+    z-index: 9999;
 }
 
 .ui-dialog .ui-widget-header {
@@ -186,12 +228,12 @@ div.content-tab.tab-active {
 }
 
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
-	float: none;
-	text-align: center;
+    float: none;
+    text-align: center;
 }
 
 .ui-dialog .ui-dialog-buttonset button {
-	margin: 0 0.25em;
+    margin: 0 0.25em;
 }
 
 .ftc-dialog .attribute-roll > * {
@@ -200,21 +242,21 @@ div.content-tab.tab-active {
 
 
 /* -------------------------------------------
- 	General Styles
+     General Styles
 ------------------------------------------- */
 
 /* Headers */
 h1, h2, h3, h4 {
     font-family: "Nodesto Caps Condensed";
     font-weight: normal !important;
-	color: #332920;
-	margin: 0;
+    color: #332920;
+    margin: 0;
 }
 h1 {
-	font-size: 48px;
+    font-size: 48px;
 }
 h2 {
-	font-size: 32px;
+    font-size: 32px;
 }
 h3 { font-size: 24px; }
 h4 { font-size: 20px; }

@@ -1075,6 +1075,9 @@
       "name": {
         "name": "Name"
       },
+      "type": {
+        "name": "Entry Type"
+      },
       "weight": {
         "name": "Weight",
         "min": 0
@@ -1096,30 +1099,27 @@
     },
     "armor": {
       "ac": {
-        "name": "Armor Class",
-        "current": 10
+        "name": "Armor Class"
       },
-      "dex": {
-        "name": "Dexterity Bonus"
+      "type": {
+        "name": "Armor Type"
       },
       "str": {
         "name": "Required Strength"
       },
       "ste": {
-        "name": "Stealth Penalty"
-      },
-      "shield": {
-        "name": "Is Shield?",
-        "current": 0
+        "name": "Stealth Disadvantage"
       },
       "equipped": {
-        "name": "Is Equipped?",
-        "current": 0
+        "name": "Equipped"
       }
     },
     "weapon": {
+      "type": {
+        "name": "Weapon Type"
+      },
       "hit": {
-        "name": "+Hit Bonus"
+        "name": "Attack Bonus"
       },
       "damage": {
         "name": "Damage"
@@ -1130,8 +1130,8 @@
       "range": {
         "name": "Range"
       },
-      "ammo": {
-        "name": "Ammunition"
+      "properties": {
+        "name": "Properties"
       },
       "proficient": {
         "name": "Proficient"
@@ -1161,8 +1161,8 @@
       "source": {
         "name": "Source"
       },
-      "rollable": {
-        "name": "Is Rollable?"
+      "cost": {
+        "name": "Ability Cost"
       }
     }
   },

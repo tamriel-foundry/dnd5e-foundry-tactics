@@ -1,0 +1,37 @@
+<div class="ftc-sheet-profile">
+    <img class="profile-image ftc-image" data-edit="info.img.current" src="{info.img.current}"/>
+</div>
+
+<div class="item-type form-group flexrow">
+    <label>Type</label>
+    <select class="ftc-select" data-edit="info.type.current" data-selected="{info.type.current}">
+        <option value="note">Note</option>
+        <option value="weapon">Weapon</option>
+        <option value="armor">Armor</option>
+        <option value="spell">Spell</option>
+        <option value="ability">Ability</option>
+    </select>
+</div>
+
+<ol class="item-summary">
+    <li>
+        <label>Quantity:</label>
+        <input class="ftc-edit" type="text" tabindex="0" data-edit="info.quantity.current"
+               value="{info.quantity.current}" placeholder="1"/>
+    </li>
+    <li>
+        <label>Price:</label>
+        <input class="ftc-edit" type="text" tabindex="0" data-edit="info.price.current"
+               value="{info.price.current}" placeholder="0.0"/>
+    </li>
+    <li>
+        <label>Weight:</label>
+        <input class="ftc-edit" type="text" tabindex="0" data-edit="info.weight.current"
+               value="{info.weight.current}" placeholder="0.0"/>
+    </li>
+</ol>
+
+<div class="item-tags">
+    <label>Item Tags</label>
+    <input class="ftc-edit" type="text" tabindex="0" data-edit="tags" value="{info.tagstr}" placeholder="Tags"/>
+</div>

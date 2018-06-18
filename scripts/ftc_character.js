@@ -55,7 +55,7 @@ FTC.character = {
         // Enrich Inventory Items
         weight = []
         for (var i in obj.data.inventory) {
-            item = FTC.items.enrichItem(obj.data.inventory[i], i);
+            item = FTC.items.enrichItem(obj.data.inventory[i]);
             obj.data.inventory[i] = item;
             weight.push(item.info.weight.current);
         }
@@ -68,20 +68,26 @@ FTC.character = {
         ftc['inventory'] = {weight: wt, encumbrance: enc, encpct: pct, enccls: cls};
 
         // Spell Levels
-        spellLevels = {}
+        var spellLevels = {}
         for (i in obj.data.spellbook) {
-            var  item = obj.data.spellbook[i],
-                spell = item.spell;
-                  lvl = (spell.level.current === "Cantrip") ? 0 : parseInt(spell.level.current[0]);
+            var item = obj.data.spellbook[i],
+                spell = item.spell,
+                lvl = (spell.level.current === "Cantrip") ? 0 : parseInt(spell.level.current || 0),
+                sl = obj.data.counters["spell"+lvl] || {
+                    "name": (lvl === 0) ? "Cantrip" : FTC.ui.getOrdinalNumber(lvl) + " Level",
+                    "current": 0,
+                    "max": 0,
+                  };
+
+            // Tweak Spell-level data
             item.spellid = i;
-            spellLevel = {
-                level: lvl,
-                levelstr: (lvl === 0) ? "Cantrip" : FTC.ui.getOrdinalNumber(lvl) + " Level",
-                perday: (lvl === 0) ? "&infin;" : obj.data.counters["spell"+lvl].max || 0,
-                uses: (lvl === 0) ? "&infin;" : obj.data.counters["spell"+lvl].current || 0,
-                spells: []
-            }
-            spellLevels[lvl] = spellLevels[lvl] || spellLevel;
+            sl.spells = [];
+            sl.current = (lvl === 0) ? "&infin;" : sl.current;
+            sl.max = (lvl === 0) ? "&infin;" : sl.max;
+            sl.level = lvl;
+
+            // Associate the spell with it's spell level
+            spellLevels[lvl] = spellLevels[lvl] || sl;
             spellLevels[lvl].spells.push(item);
         }
         ftc['spellLevels'] = spellLevels;
@@ -90,7 +96,6 @@ FTC.character = {
         FTC.obj = obj;
         return obj
     },
-
 
     /* ------------------------------------------- */
 
@@ -131,10 +136,10 @@ FTC.character = {
             // Insert Inventory
             var items = "",
              template = load(this.FTC_ITEM_HTML);
-            for (var i in obj.data.inventory) {
-                item = FTC.items.enrichItem(obj.data.inventory[i], {"inventory": i});
+            $.each(obj.data.inventory, function(i, item) {
+                item.itemid = i;
                 items += parse(template, item);
-            }
+            });
             items = (items === "") ? "<li><blockquote>Add items from the compendium.</blockquote></li>" : items;
             main = main.replace("<!-- FTC_INVENTORY_HTML -->", items);
 

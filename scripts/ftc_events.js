@@ -2,29 +2,7 @@ hook.add("FTCInit", "Events", function() {
 FTC.events = {
 
     /* -------------------------------------------- */
-    /* Edit Binary Checkbox Fields                  */
-    /* -------------------------------------------- */
-
-    edit_checkbox_fields: function(html, obj, app) {
-
-        /* Check boxes which have a value of 1 */
-        var boxes = html.find('input.ftc-checkbox');
-        boxes.each(function(){
-            if ($(this).val() === "1") {
-                $(this).prop('checked', true);
-            }
-        });
-
-        /* Bind on-change listener */
-        boxes.change(function(){
-            var key = $(this).attr('data-edit'),
-                val = $(this).prop('checked') | 0;
-            FTC.setProperty(obj, key, val, "updateAsset");
-        });
-    },
-
-    /* -------------------------------------------- */
-    /* Edit Simple Text Fields                        */ 
+    /* Edit Input Fields                            */
     /* -------------------------------------------- */
 
     edit_value_fields: function(html, obj, app) {
@@ -48,9 +26,59 @@ FTC.events = {
         });
     },
 
+    /* -------------------------------------------- */
+    /* Edit Checkbox Fields                         */
+    /* -------------------------------------------- */
+
+    edit_checkbox_fields: function(html, obj, app) {
+
+        /* Check boxes which have a value of 1 */
+        var boxes = html.find('input.ftc-checkbox');
+        boxes.each(function(){
+            if ($(this).val() === "1") {
+                $(this).prop('checked', true);
+            }
+        });
+
+        /* Bind on-change listener */
+        boxes.change(function(){
+            var key = $(this).attr('data-edit'),
+                val = $(this).prop('checked') + 0 || 0;
+            FTC.setProperty(obj, key, val, "int");
+        });
+    },
 
     /* -------------------------------------------- */
-    /* Edit Sheet Image Handler                        */ 
+    /* Edit Select Fields                           */
+    /* -------------------------------------------- */
+
+    edit_select_fields: function(html, obj, app) {
+
+        // Find any select fields
+        var selects = html.find("select.ftc-select");
+
+        // Populate their initial status
+        selects.each(function(_, select) {
+            var select = $(this),
+                val = select.attr("data-selected");
+            select.children("option").each(function() {
+                var opt = $(this);
+                if (opt.val() === val) opt.attr("selected", 1);
+                else opt.removeAttr("selected");
+            });
+        });
+
+        // Bind change listener
+        selects.change(function() {
+           var key = $(this).attr('data-edit'),
+               val = $(this).find(":selected").val();
+           FTC.setProperty(obj, key, val, "str")
+        });
+    },
+
+
+    /* -------------------------------------------- */
+    /* Edit Sheet Image Handler                     */
     /* -------------------------------------------- */
 
     edit_image_fields: function(html, obj, app) {
@@ -120,6 +148,7 @@ FTC.events = {
 
         /* Edit Item */
         html.find('.item .item-edit').click(function() {
+            console.log($(this));
             var itemid = $(this).parent().attr("data-item-id");
             FTC.items.edit_item(app, obj, itemid);
         });

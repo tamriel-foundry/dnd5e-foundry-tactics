@@ -17,6 +17,7 @@ h1.charname {
 
 .charname > input.ftc-edit {
 	width: 100%;
+    margin: 5px 0;
 	text-align: left;
 }
 
@@ -117,7 +118,6 @@ div.death { background-image: url("../content/icons/death.png"); }
     display: block;
     margin: 0 1em;
     font-size: 1.25em;
-    color: #444;
     border-bottom: 1px solid #666;
 }
 
@@ -172,7 +172,6 @@ ol.attributes-list {
 .attribute label {
 	flex: 1;
 	padding-left: 36px;
-	color: #333;
 	background-repeat: no-repeat;
 	background-position: 0 50%;
 }
@@ -224,7 +223,6 @@ ol.attributes-list {
 
 .skill label {
 	flex: 3 0 70%;
-	color: #444;
 }
 
 .skill span {
@@ -381,14 +379,13 @@ label.inventory-weight-label {
     flex: 1;
     text-align: left;
     font-weight: bold;
-    color: #222;
 }
 
 /* -------------------------------------------
  	Spellbook
 ------------------------------------------- */
 
-.spellbook-spells {
+ol.spellbook-spells {
 	list-style: none;
 	margin: 0.25em 0;
 	padding: 0;
@@ -396,7 +393,7 @@ label.inventory-weight-label {
     overflow-y: scroll;
 }
 
-.spell {
+li.spell {
     margin: 0px;
     padding: 2px 0;
     line-height: 24px;

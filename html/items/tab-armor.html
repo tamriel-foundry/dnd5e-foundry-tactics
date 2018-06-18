@@ -1,0 +1,40 @@
+<form class="item-form armor">
+
+    <div role="group" class="form-group flexrow">
+        <label>{armor.ac.name}</label>
+        <input type="text" class="ftc-edit armor-ac" tabindex="0" data-edit="armor.ac.current"
+               value="{armor.ac.current}" placeholder="10"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{armor.type.name}</label>
+        <select class="ftc-select armor-type" data-edit="armor.type.current" data-selected="{armor.type.current}">
+            <option value=""></option>
+            <option value="clothing">Clothing</option>
+            <option value="light">Light</option>
+            <option value="medium">Medium</option>
+            <option value="heavy">Heavy</option>
+            <option value="natural">Natural</option>
+            <option value="shield">Shield</option>
+        </select>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{armor.str.name}</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="armor.str.current"
+               value="{armor.str.current}" placeholder="None"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{armor.ste.name}</label>
+        <input type="checkbox" class="ftc-checkbox armor-stealth" data-edit="armor.ste.current"
+               value="{armor.ste.current}" />
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{armor.equipped.name}</label>
+        <input type="checkbox" class="ftc-checkbox armor-equipped" data-edit="armor.equipped.current"
+               value="{armor.equipped.current}" />
+    </div>
+</form>
+
