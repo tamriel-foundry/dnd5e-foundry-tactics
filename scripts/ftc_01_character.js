@@ -34,11 +34,11 @@ class FTCCharacter extends FTCObject {
     static enrichData(data) {
 
         // Temporary FTC display data
-        const ftc = data.ftc;
+        data.ftc = data.ftc || {};
 
         // Level and Experience
         const lvl = parseInt(data.counters.level.current);
-        ftc['exp'] = {
+        data.ftc['exp'] = {
             current: data.counters.exp.current.toLocaleString(),
             next: FTC.actions.get_next_level_exp(lvl).toLocaleString()
         };
@@ -48,7 +48,7 @@ class FTCCharacter extends FTCObject {
 
         // Enrich Attributes
         $.each(data.stats, function(attr, stat) {
-            ftc[attr] = {
+            data.ftc[attr] = {
                 'padstr': FTC.ui.padNumber(stat.current, 2),
                 'modstr': (stat.mod < 0 ? "" : "+" ) + stat.mod
             }
@@ -58,7 +58,7 @@ class FTCCharacter extends FTCObject {
         $.each(data.skills, function(name, skill) {
             let stat = data.stats[skill.stat],
                  mod = (skill.proficient * data.counters.proficiency.current) + stat.mod;
-            ftc[name] = {
+            data.ftc[name] = {
                 'mod': mod,
                 'modstr': (mod < 0 ? "" : "+" ) + mod
             }
@@ -77,7 +77,7 @@ class FTCCharacter extends FTCObject {
            enc = data.stats.Str.current * 15,
            pct = Math.min(wt * 100 / enc, 99.5),
            cls = (pct > 90 ) ? "heavy" : "";
-        ftc['inventory'] = {weight: wt, encumbrance: enc, encpct: pct, enccls: cls};
+        data.ftc['inventory'] = {weight: wt, encumbrance: enc, encpct: pct, enccls: cls};
 
         // Spell Levels
         const spellLevels = {};
@@ -105,7 +105,7 @@ class FTCCharacter extends FTCObject {
             spellLevels[lvl] = spellLevels[lvl] || sl;
             spellLevels[lvl].spells.push(item);
         });
-        ftc['spellLevels'] = spellLevels;
+        data.ftc['spellLevels'] = spellLevels;
 
         // Return the data
         return data
