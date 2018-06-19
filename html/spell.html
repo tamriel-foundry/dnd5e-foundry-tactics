@@ -1,8 +1,13 @@
-<li id="spell-{spellid}" class="spell flexrow">
-	<span class="spell-name">{info.name.current}</span>
-	<span class="spell-school">{spell.school.current}</span>
-	<span class="spell-action">{spell.time.current}</span>
-	<span class="spell-uses">
-		<span class="glyphicon glyphicon-trash spell-perday spell-trash"></span>
-	</span>
+<li id="spell-{spellid}" class="spell flexrow" data-item-container="spellbook" data-item-id="{spellid}">
+    <div class="spell-header">
+        <img class="spell-image ftc-image" data-edit="info.img.current" src="{info.img.current}" width="24" height="24"/>
+        <span class="spell-name">{info.name.current}</span>
+    </div>
+
+    <span class="spell-school">{spell.school.current}</span>
+    <span class="spell-action">{spell.time.current}</span>
+    <span class="spell-uses">
+        <span class="glyphicon glyphicon-edit item-edit"></span>
+        <span class="glyphicon glyphicon-trash item-trash"></span>
+    </span>
 </li>

@@ -126,7 +126,7 @@ sync.render("ui_renderItem", function(obj, app, scope) {
 /* -------------------------------------------- */
 
 hook.add("OnDropCharacter", "FTCOnDrop", function(obj, app, scope, dt) {
-    var item = JSON.parse(dt.getData("OBJ"));
+    var item = JSON.parse(dt.getData("OBJ")) || {};
     if (item._t !== "i") return;
     if (!item.info.type) return;
 

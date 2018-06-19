@@ -80,6 +80,7 @@ class FTCObject {
         this.obj = this.enrichObject(obj);
         this.app = app;
         this.scope = this.refineScope(scope);
+        FTC.object = this;
     }
 
     /* ------------------------------------------- */

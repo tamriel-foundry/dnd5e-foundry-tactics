@@ -149,34 +149,33 @@ FTC.events = {
     edit_item_fields: function(html, obj, app) {
 
         /* Edit Item */
-        html.find('.item .item-edit').click(function() {
+        html.find('.item-list .item-edit').click(function() {
+
+            // Get Data
+            const li = $(this).closest("li");
+            const container = li.attr("data-item-container");
+            const itemId = li.attr("data-item-id");
 
             // Prepare item for editing
-            var itemId = $(this).parent().attr("data-item-id"),
-                itemData = duplicate(obj.data.inventory[itemId]),
+            let itemData = duplicate(obj.data[container][itemId]),
                 item = new FTCItem(itemData, app, {});
 
             // Edit the owned item
-            item.editOwnedItem(obj, obj.data.inventory, itemId);
+            item.editOwnedItem(obj, obj.data[container], itemId);
         });
 
         /* Delete Item */
-        html.find('.item .item-trash').click(function() {
-            var itemid = $(this).parent().attr("data-item-id");
-            obj.data.inventory.splice(itemid, 1);
+        html.find('.item-list .item-trash').click(function() {
+
+            // Get data
+            const li = $(this).closest("li");
+            const container = li.attr("data-item-container");
+            const itemId = li.attr("data-item-id");
+
+            // Delete item
+            obj.data[container].splice(itemId, 1)
             obj.sync("updateAsset");
         });
-    },
-
-    /* -------------------------------------------- */
-
-    /* Edit Actions for Spellbook Fields */
-    edit_spell_fields: function(html, obj, app) {
-        html.find('.spell-trash').click(function() {
-            var spellid = $(this).parents(".spell").attr("id").split("-")[1];
-            obj.data.spellbook.splice(spellid, 1);
-            obj.sync("updateAsset");
-        })
     },
 
     /* -------------------------------------------- */
@@ -188,7 +187,6 @@ FTC.events = {
         this.edit_checkbox_fields(html, obj, app);
         this.edit_mce_fields(html, obj, app);
         this.edit_item_fields(html, obj, app);
-        this.edit_spell_fields(html, obj, app);
     }
 };
 

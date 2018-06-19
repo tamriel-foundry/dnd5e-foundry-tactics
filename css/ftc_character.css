@@ -407,7 +407,7 @@ li.spell {
 .inventory-header .spell-action { border-right: 1px solid #CCC; }
 
 
-.spell-name {  flex: 2; }
+.spell-header {  flex: 2; }
 .spell-school, .spell-action { flex: 1; }
 .spell-action { border-right: 1px solid #DDD; }
 .spell-uses {
@@ -419,3 +419,5 @@ li.spell {
     width: 20px;
     margin: -1px;
 }
+
+img.spell-image { margin-top: -2px; }

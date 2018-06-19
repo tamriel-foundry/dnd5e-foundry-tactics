@@ -34,7 +34,7 @@ class FTCCharacter extends FTCObject {
     static enrichData(data) {
 
         // Temporary FTC display data
-        data.ftc = data.ftc || {};
+        data.ftc = {};
 
         // Level and Experience
         const lvl = parseInt(data.counters.level.current);
@@ -80,32 +80,29 @@ class FTCCharacter extends FTCObject {
         data.ftc['inventory'] = {weight: wt, encumbrance: enc, encpct: pct, enccls: cls};
 
         // Spell Levels
-        const spellLevels = {};
+        const sls = {};
         $.each(data.spellbook, function(spellId, item) {
-
-            // Store spell ID
-            item.spellid = spellId;
 
             // Construct spell data
             let spell = item.spell;
             let lvl = (spell.level.current === "Cantrip") ? 0 : parseInt(spell.level.current || 0);
-            let sl = data.counters["spell"+lvl] || {
-                "name": (lvl === 0) ? "Cantrip" : FTC.ui.getOrdinalNumber(lvl) + " Level",
-                "current": 0,
-                "max": 0,
-            };
+            item.spellid = spellId;
 
-            // Tweak Spell-level data
-            sl.spells = [];
-            sl.current = (lvl === 0) ? "&infin;" : sl.current;
-            sl.max = (lvl === 0) ? "&infin;" : sl.max;
-            sl.level = lvl;
+            // Record spell-level
+            sls[lvl] = sls[lvl] || {
+                "level": lvl,
+                "name": (lvl === 0) ? "Cantrip" : FTC.ui.getOrdinalNumber(lvl) + " Level",
+                "current": FTC.getProperty(data, 'counters.spell'+lvl+'.current') || 0,
+                "max": FTC.getProperty(data, 'counters.spell'+lvl+'.max') || 0,
+                "spells": [],
+            };
+            sls[lvl].current = (lvl === 0) ? "&infin;" : sls[lvl].current;
+            sls[lvl].max = (lvl === 0) ? "&infin;" : sls[lvl].max;
 
             // Associate the spell with it's spell level
-            spellLevels[lvl] = spellLevels[lvl] || sl;
-            spellLevels[lvl].spells.push(item);
+            sls[lvl].spells.push(item);
         });
-        data.ftc['spellLevels'] = spellLevels;
+        data.ftc['spellLevels'] = sls;
 
         // Return the data
         return data

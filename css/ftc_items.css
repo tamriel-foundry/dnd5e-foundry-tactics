@@ -72,7 +72,7 @@ h1.itemname > .ftc-edit {
 ------------------------------------------- */
 
 #item-notes {
-	max-height: 260px;
+	max-height: 350px;
     overflow-y: scroll;
 	font-size: 1em;
 	font-family: "Scaly Sans";
