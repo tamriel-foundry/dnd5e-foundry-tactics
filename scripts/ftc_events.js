@@ -107,7 +107,7 @@ FTC.events = {
     },
 
     /* -------------------------------------------- */
-    /* Edit Rich Text Field                            */ 
+    /* Edit Rich Text Field                            */
     /* -------------------------------------------- */
 
     edit_mce_fields: function(html, obj, app) {
@@ -143,14 +143,21 @@ FTC.events = {
         });
     },
 
+    /* -------------------------------------------- */
+
     /* Edit Actions for Inventory Fields */
     edit_item_fields: function(html, obj, app) {
 
         /* Edit Item */
         html.find('.item .item-edit').click(function() {
-            console.log($(this));
-            var itemid = $(this).parent().attr("data-item-id");
-            FTC.items.edit_item(app, obj, itemid);
+
+            // Prepare item for editing
+            var itemId = $(this).parent().attr("data-item-id"),
+                itemData = duplicate(obj.data.inventory[itemId]),
+                item = new FTCItem(itemData, app, {});
+
+            // Edit the owned item
+            item.editOwnedItem(obj, obj.data.inventory, itemId);
         });
 
         /* Delete Item */
@@ -161,6 +168,8 @@ FTC.events = {
         });
     },
 
+    /* -------------------------------------------- */
+
     /* Edit Actions for Spellbook Fields */
     edit_spell_fields: function(html, obj, app) {
         html.find('.spell-trash').click(function() {
@@ -168,6 +177,18 @@ FTC.events = {
             obj.data.spellbook.splice(spellid, 1);
             obj.sync("updateAsset");
         })
+    },
+
+    /* -------------------------------------------- */
+
+    activateFields: function(html, obj, app) {
+        this.edit_value_fields(html, obj, app);
+        this.edit_select_fields(html, obj, app);
+        this.edit_image_fields(html, obj, app);
+        this.edit_checkbox_fields(html, obj, app);
+        this.edit_mce_fields(html, obj, app);
+        this.edit_item_fields(html, obj, app);
+        this.edit_spell_fields(html, obj, app);
     }
 };
 

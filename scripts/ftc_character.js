@@ -19,7 +19,7 @@ FTC.character = {
         // Ensure we have an object to work with and that we can register custom FTC data
         obj = obj || sync.obj("ftc");
         obj.data.ftc = obj.data.ftc || {};
-        ftc = obj.data.ftc;
+        var ftc = obj.data.ftc;
 
         /* Level and Experience */
         var lvl = parseInt(obj.data.counters.level.current);
@@ -32,7 +32,7 @@ FTC.character = {
         obj.data.counters.proficiency.current = Math.floor((lvl + 7) / 4);
 
         // Enrich Attributes
-        stats = obj.data.stats;
+        var stats = obj.data.stats;
         for (var attr in stats) {
             mod = stats[attr].mod;
             ftc[attr] = {
@@ -42,7 +42,7 @@ FTC.character = {
         }
 
         // Enrich Skills
-        skills = obj.data.skills;
+        var skills = obj.data.skills;
         $.each(skills, function(name, skill) {
             var stat = obj.data.stats[skill.stat],
                  mod = (skill.proficient * obj.data.counters.proficiency.current) + stat.mod;
@@ -50,12 +50,12 @@ FTC.character = {
                 'mod': mod,
                 'modstr': (mod < 0 ? "" : "+" ) + mod
             }
-        }),
+        });
 
         // Enrich Inventory Items
-        weight = []
+        var weight = [];
         for (var i in obj.data.inventory) {
-            item = FTC.items.enrichItem(obj.data.inventory[i]);
+            item = FTCItem.enrichData(obj.data.inventory[i]);
             obj.data.inventory[i] = item;
             weight.push(item.info.weight.current);
         }
