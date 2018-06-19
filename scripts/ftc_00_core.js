@@ -63,6 +63,9 @@ var FTC = {
         if (value !== undefined && value !== "") data[key] = value;
         else delete data[key];
 
+        // Remove temporary data
+        delete object.data.ftc;
+
         // Save Object
         object.sync("updateAsset");
         return object;
@@ -74,23 +77,25 @@ var FTC = {
 class FTCObject {
 
     constructor(obj, app, scope) {
-        this.obj = this.constructor.enrichObject(obj);
+        this.obj = this.enrichObject(obj);
         this.app = app;
-        this.scope = this.constructor.refineScope(scope);
+        this.scope = this.refineScope(scope);
     }
 
     /* ------------------------------------------- */
 
-    static enrichObject(obj) {
+    enrichObject(obj) {
         if ( "sync" in obj ) {
-            obj.data = this.enrichData(obj.data);
+            obj.data = this.constructor.enrichData(obj.data);
         } else {
-            var data = this.enrichData(obj);
+            var data = this.constructor.enrichData(obj);
             obj = sync.obj();
             obj.data = data;
         }
         return obj;
     }
+
+    /* ------------------------------------------- */
 
     static enrichData(data) {
         /*
@@ -105,7 +110,9 @@ class FTCObject {
         return data;
     }
 
-    static refineScope(scope) {
+    /* ------------------------------------------- */
+
+    refineScope(scope) {
         return scope;
     }
 
@@ -118,64 +125,13 @@ class FTCObject {
     /* ------------------------------------------- */
 
     getData(name) {
-        /*
-        Get object data by name with the format "part1.part2.part3" which would evaluate as obj[part1][part2][part3].
-        If any of the requested parts are undefined, this method returns undefined.
-
-        Arguments:
-            object: The data object to traverse
-            name: The composite property name to search for
-        */
-        var parts = name.split("."),
-            value = this.data;
-        for (var i = 0; i < parts.length; i++) {
-            value = value[parts[i]];
-            if (value === undefined) {
-                break;
-            }
-        }
-        return value;
+        return FTC.getProperty(this.data, name);
     }
 
     /* ------------------------------------------- */
 
     setData(name, value, dtype) {
-
-        // Sanitize Tags
-        if ( name === "tags" ) {
-            var tags = {};
-            $.each(value.replace(" ", "").split(','), function(_, tag) {
-               tags[tag] = true;
-            });
-            value = tags;
-        }
-
-        // Sanitize Values
-        if (name.startsWith("stats.")) {
-            value = parseInt((typeof(value) === "number") ? value : value.split(',').join(''));
-            value = Math.min(Math.max(value, 0), 30);
-        } else if (name.startsWith("counters.")) {
-            value = parseInt((typeof(value) === "number") ? value : value.split(',').join(''));
-            value = Math.max(value || 0, 0);
-        }
-
-        // Record Key
-        var parts = name.split("."),
-              key = parts.pop(),
-             data = this.data;
-        for (var i = 0; i < parts.length; i++) {
-            var part = parts[i];
-            if (data[part] === undefined) data[part] = {};
-            data = data[part];
-        }
-
-        // Set the value if it is defined
-        if (value !== undefined && value !== "") data[key] = value;
-        else delete data[key];
-
-        // Save Object
-        this.obj.sync("updateAsset");
-        return this.obj
+        return FTC.setProperty(this.data, name, value, dtype);
     }
 
     /* ------------------------------------------- */
@@ -192,6 +148,15 @@ class FTCObject {
 
         // Activate Fields
         FTC.events.activateFields(this.html, this.obj, this.app);
+
+        // Enable Clickable Sheet Actions
+        FTC.actions.attribute_actions(this.html, this.obj, this.app);
+        FTC.actions.skill_actions(this.html, this.obj, this.app);
+
+        // Sechedule Cleanup Actions
+        FTC.ui.cleanup_app(this.app);
+
+        // Return final HTML
         return this.html
     }
 

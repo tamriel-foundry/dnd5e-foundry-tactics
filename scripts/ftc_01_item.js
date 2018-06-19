@@ -24,7 +24,7 @@ class FTCItem extends FTCObject {
 
     static enrichData(item) {
 
-        // Temporary FTC data
+        // Temporary FTC display data
         item.ftc = item.ftc || {};
 
         // Default Image
