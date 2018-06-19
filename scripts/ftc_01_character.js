@@ -89,7 +89,7 @@ class FTCCharacter extends FTCObject {
             // Construct spell data
             let spell = item.spell;
             let lvl = (spell.level.current === "Cantrip") ? 0 : parseInt(spell.level.current || 0);
-            let sl = obj.data.counters["spell"+lvl] || {
+            let sl = data.counters["spell"+lvl] || {
                 "name": (lvl === 0) ? "Cantrip" : FTC.ui.getOrdinalNumber(lvl) + " Level",
                 "current": 0,
                 "max": 0,
