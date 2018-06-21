@@ -1,5 +1,5 @@
 <section id="ftc-{uid}" class="ftc-sheet ftc-character flexrow">
-	<aside class="ftc-sheet-sidebar">
+	<aside class="ftc-sheet-sidebar flexcolumn">
 		<div class="ftc-sheet-profile">
 			<img class="profile-image ftc-image" data-edit="info.img.current" src="{info.img.current}"/>
 			<img class="token-image ftc-image" data-edit="info.img.min" src="{info.img.min}"/>
@@ -9,17 +9,46 @@
 		<ul class="sheet-tabs" id="sidebar-tabs">
 			<li id="tab-attributes" class="sheet-tab tab-active">Attributes</li>
 			<li id="tab-skills" class="sheet-tab">Skills</li>
+			<li id="tab-abilities" class="sheet-tab">Abilities</li>
 		</ul>
 
 		<div id="content-attributes" class="content-tab tab-active">
 			<ol class="attributes-list">
 				<!-- FTC_ATTRIBUTE_HTML -->
 			</ol>
+
+
+
+			<div class="primary-stat initiative">
+				<header>Initiative</header>
+                <div class="primary-stat-value">
+				    <span>{ftc.Dex.modstr}.{ftc.Dex.padstr}</span>
+                </div>
+			</div>
+
+			<div class="primary-stat speed">
+				<header>Movement Speed</header>
+                <div class="primary-stat-value">
+				    <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.speed.current"
+                           value="{counters.speed.current}" placeholder="10"/>
+				    <span> Ft.</span>
+                </div>
+                <footer>
+                    <input class="ftc-edit" type="text" tabindex="0" data-edit="counters.speed.extra" data-dtype="str"
+                           value="{counters.speed.extra}" placeholder="Climb / Swim"/>
+                </footer>
+			</div>
 		</div>
 
 		<div id="content-skills" class="content-tab">
 			<ol class="skills-list">
 				<!-- FTC_SKILL_HTML -->
+			</ol>
+		</div>
+
+		<div id="content-abilities" class="content-tab">
+			<ol class="abilities item-list">
+				<!-- CHARACTER_TAB_ABILITIES -->
 			</ol>
 		</div>
 	</aside>
@@ -56,8 +85,8 @@
 						   value="{info.class.current}" placeholder="Class"/>
 				</li>
 				<li>
-					<input class="ftc-edit charback" type="text" tabindex="0" data-edit="info.back.current"
-						   value="{info.back.current}" placeholder="Background"/>
+					<input class="ftc-edit charback" type="text" tabindex="0" data-edit="info.background.current"
+						   value="{info.background.current}" placeholder="Background"/>
 				</li>
 				<li>
 					<input class="ftc-edit charalign" type="text" tabindex="0" data-edit="info.alignment.current"
@@ -68,57 +97,15 @@
 
 		<!-- PRIMARY ATTRIBUTES -->
 		<div class="ftc-sheet-primary">
-			<div class="health">
-				<label>Health</label>
-				<input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.hp.current"
-					   value="{counters.hp.current}" placeholder="10"/>
-				<span> / </span>
-				<input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.hp.max"
-					   value="{counters.hp.max}" placeholder="10"/>
-			</div>
-			<div class="armor">
-				<label>Armor Class</label>
-				<input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.armor.current"
-					   value="{counters.armor.current}" placeholder="10"/>
-			</div>
-			<div class="proficiency">
-				<label>Proficiency Bonus</label>
-				<span>+{counters.proficiency.current}</span>
-			</div>
-
-			<div class="speed">
-				<label>Movement Speed</label>
-				<input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.speed.current"
-					   value="{counters.speed.current}" placeholder="10"/>
-				<span> Ft.</span>
-			</div>
-
-			<div class="initiative">
-				<label>Initiative</label>
-				<span>{ftc.Dex.modstr}.{ftc.Dex.padstr}</span>
-			</div>
-
-			<div class="death">
-				<label>Death Saves</label>
-				<ul class="death-saves">
-					<li>
-						<span>Saved</span>
-						<input type="checkbox"/><input type="checkbox"/><input type="checkbox"/>
-					</li>
-					<li>
-						<span>Failed</span>
-						<input type="checkbox"/><input type="checkbox"/><input type="checkbox"/>
-					</li>
-				</ul>
-			</div>
+            <!-- CHARACTER_PRIMARY_STATS -->
 		</div>
 
 		<!-- SECONDARY TABBED CONTAINER -->
-		<div class="ftc-sheet-secondary">
+		<div class="ftc-sheet-secondary flexcolumn">
 			<ul class="sheet-tabs" id="content-tabs">
 				<li id="tab-inventory" class="sheet-tab">Inventory</li>
 				<li id="tab-spells" class="sheet-tab">Spells</li>
-				<li id="tab-abilities" class="sheet-tab">Abilities</li>
+				<li id="tab-traits" class="sheet-tab">Traits</li>
 				<li id="tab-biography" class="sheet-tab tab-active">Biography</li>
 			</ul>
 
@@ -162,8 +149,8 @@
 
 
 
-			<div id="content-abilities" class="content-tab">
-				<blockquote>Abilities are still under construction. Thanks for your patience.</blockquote>
+			<div id="content-traits" class="content-tab">
+				<!-- CHARACTER_TAB_TRAITS -->
 			</div>
 
 			<div id="content-biography" class="content-tab tab-active">

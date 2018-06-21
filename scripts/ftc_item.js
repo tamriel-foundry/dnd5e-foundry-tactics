@@ -51,9 +51,9 @@ class FTCItem extends FTCObject {
     static classify_type(item) {
         if (item.info.type) return item.info.type;
         var type = {"name": "Entry Type", "current": "note"};
-        if (item.spell.level.current) type.current = "spell";
-        else if (item.weapon.damage.current) type.current = "weapon";
-        else if (item.armor.ac && item.armor.ac.current) type.current = "armor";
+        if (item.spell && item.spell.level.current) type.current = "spell";
+        else if (item.weapon && item.weapon.damage.current) type.current = "weapon";
+        else if (item.armor && item.armor.ac.current) type.current = "armor";
         return type;
     }
 

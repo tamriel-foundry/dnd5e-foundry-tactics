@@ -31,8 +31,13 @@ var FTC = {
 
     setProperty: function(object, name, value, dtype) {
 
+        // Strings
+        if ( dtype == "str" ) {
+            value = value;
+        }
+
         // Sanitize Tags
-        if ( name === "tags" ) {
+        else if ( name === "tags" ) {
             var tags = {};
             $.each(value.replace(" ", "").split(','), function(_, tag) {
                tags[tag] = true;
@@ -41,10 +46,11 @@ var FTC = {
         }
 
         // Sanitize Values
-        if (name.startsWith("stats.")) {
+        else if (name.startsWith("stats.")) {
             value = parseInt((typeof(value) === "number") ? value : value.split(',').join(''));
             value = Math.min(Math.max(value, 0), 30);
-        } else if (name.startsWith("counters.")) {
+        }
+        else if (name.startsWith("counters.")) {
             value = parseInt((typeof(value) === "number") ? value : value.split(',').join(''));
             value = Math.max(value || 0, 0);
         }

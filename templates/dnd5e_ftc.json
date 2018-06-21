@@ -735,15 +735,14 @@
     "story": []
   },
   "initiative": {
-    "query": "d20+M@Dex",
+    "query": "d20 + @c.stats.Dex.mod + (@c.stats.Dex / 100)",
     "compare": "(@i1.total>@i2.total)?(1):(@i1.total==@i2.total?(0):(-1))"
   },
   "character": {
     "_t": "c",
     "info": {
       "name": {
-        "name": "Name",
-        "current": ""
+        "name": "Name"
       },
       "img": {
         "name": "Character Art",
@@ -751,47 +750,47 @@
         "min": "/content/icons/blankchar.png"
       },
       "notes": {
-        "name": "Notes",
-        "current": ""
+        "name": "Notes"
       },
       "race": {
-        "name": "Race",
-        "current": ""
+        "name": "Race"
       },
       "class": {
-        "name": "Class",
-        "current": ""
+        "name": "Class"
       },
-      "back": {
-        "name": "Background",
-        "current": ""
+      "background": {
+        "name": "Background"
       },
       "alignment": {
-        "name": "Alignment",
-        "current": ""
+        "name": "Alignment"
       },
-      "cr": {
-        "name": "Challenge Rating",
-        "current": 1
+      "di": {
+        "name": "Damage Immunities"
+      },
+      "dr": {
+        "name": "Damage Resistances"
+      },
+      "ci": {
+        "name": "Condition Immunities"
+      },
+      "senses": {
+        "name": "Senses"
+      },
+      "personality": {
+        "name": "Personality Traits",
+        "traits": "",
+        "ideals": "",
+        "bonds": "",
+        "flaws": ""
+      },
+      "languages": {
+        "name": "Languages"
       },
       "size": {
-        "name": "Size",
-        "current": "Medium"
+        "name": "Size"
       },
       "source": {
         "name": "Source"
-      },
-      "traits": {
-        "name": "Personality Traits"
-      },
-      "ideals": {
-        "name": "Ideals"
-      },
-      "bonds": {
-        "name": "Bonds"
-      },
-      "flaws": {
-        "name": "Flaws"
       }
     },
     "tags": {},
@@ -839,6 +838,11 @@
         "current": 1,
         "min": 0
       },
+      "cr": {
+        "name": "Challenge Rating",
+        "current": 1,
+        "min": 0
+      },
       "exp": {
         "name": "Experience",
         "current": 0,
@@ -848,33 +852,31 @@
         "name": "Hit Points",
         "current": 10,
         "min": 0,
-        "max": 10
+        "max": 10,
+        "formula": ""
       },
-      "speed": {
-        "name": "Speed",
-        "current": 30
-      },
-      "armor": {
-        "name": "Base Armor",
-        "current": 10
-      },
-      "ac": {
-        "name": "Armor",
-        "current": 0
+      "hd": {
+        "name": "Hit Dice",
+        "current": "1d10"
       },
       "proficiency": {
         "name": "Proficiency",
         "current": 0,
         "min": 0
       },
+      "ac": {
+        "name": "Armor Class",
+        "current": 0
+      },
+      "speed": {
+        "name": "Speed",
+        "current": 30,
+        "extra": ""
+      },
       "inspiration": {
         "name": "Inspiration",
         "current": 0,
         "min": 0
-      },
-      "hit": {
-        "name": "Hit Dice",
-        "current": "1d10"
       },
       "deathSave": {
         "name": "Death Successes",
@@ -960,13 +962,13 @@
         "max": 0
       },
       "class1": {
-        "name": "Primary Class Resource",
+        "name": "Primary Resource",
         "label": "",
         "current": 0,
         "max": 0
       },
       "class2": {
-        "name": "Secondary Class Resource",
+        "name": "Secondary Resource",
         "label": "",
         "current": 0,
         "max": 0
@@ -1075,23 +1077,23 @@
       "name": {
         "name": "Name"
       },
+      "img": {
+        "name": "Image"
+      },
+      "notes": {
+        "name": "Notes"
+      },
       "type": {
         "name": "Entry Type"
-      },
-      "weight": {
-        "name": "Weight",
-        "min": 0
       },
       "quantity": {
         "name": "Quantity",
         "min": 0,
         "current" : 1
       },
-      "img": {
-        "name": "Image"
-      },
-      "notes": {
-        "name": "Notes"
+      "weight": {
+        "name": "Weight",
+        "min": 0
       },
       "price": {
         "name": "Price"
@@ -1214,15 +1216,14 @@
     }
   },
   "constants": {
-    "basearmor": 0,
-    "ac": "((@c.counters.ac>0)?(@c.counters.ac):(@c.counters.armor))+@:armor()",
+    "ac": "@c.counters.ac",
     "str": "M@Str",
     "dex": "M@Dex",
     "con": "M@Con",
     "int": "M@Int",
     "wis": "M@Wis",
     "cha": "M@Cha",
-    "prof": "@proficiency"
+    "prof": "@c.counters.proficiency"
   },
   "tables": {},
   "tags": {},
@@ -1250,16 +1251,6 @@
           "calc": [
             {
               "eq": "@hp-(@total * 2)_0",
-              "target": "counters.hp"
-            }
-          ]
-        },
-        "x3": {
-          "name": "x3",
-          "msg": "@pName : Applied (@total x3) damage",
-          "calc": [
-            {
-              "eq": "@hp-(@total * 3)_0",
               "target": "counters.hp"
             }
           ]
@@ -1531,39 +1522,35 @@
     },
     "sheet": {
       "health": "counters.hp",
-      "style": {
-        "background-image": "url('/content/sheet2.png')",
-        "background-size": "cover",
-        "box-shadow": "inset 0em 0em 0.5em 0.5em rgba(0,0,0,0.2)"
-      },
+      "style": {},
       "content": {
-        "classes": "flexcolumn flex ftc-wrapper",
+        "classes": "ftc-wrapper",
         "ui": "FTC_CHARSHEET"
       },
       "calc": [
         {
           "name": "Stat-Bonuses",
-          "target": "stats.Str.mod",
+          "target": "stats.Str.modifiers.mod",
           "eq": "((R@c.stats.Str-10)/2)f"
         },
         {
-          "target": "stats.Dex.mod",
+          "target": "stats.Dex.modifiers.mod",
           "eq": "((R@c.stats.Dex-10)/2)f"
         },
         {
-          "target": "stats.Con.mod",
+          "target": "stats.Con.modifiers.mod",
           "eq": "((R@c.stats.Con-10)/2)f"
         },
         {
-          "target": "stats.Int.mod",
+          "target": "stats.Int.modifiers.mod",
           "eq": "((R@c.stats.Int-10)/2)f"
         },
         {
-          "target": "stats.Wis.mod",
+          "target": "stats.Wis.modifiers.mod",
           "eq": "((R@c.stats.Wis-10)/2)f"
         },
         {
-          "target": "stats.Cha.mod",
+          "target": "stats.Cha.modifiers.mod",
           "eq": "((R@c.stats.Cha-10)/2)f"
         }
       ]

@@ -26,6 +26,11 @@ h1.itemname > .ftc-edit {
     font-size: 1.5em;
 }
 
+.ftc-item .ftc-sheet-profile {
+    flex: 0 0 150px;
+    margin-bottom: 10px;
+}
+
 .ftc-item .profile-image {
     width: 150px;
     height: 150px;

@@ -16,7 +16,7 @@ FTC.events = {
 
         /* Handle Input Updates */
         inputs.blur(function() {
-            FTC.setProperty(obj, $(this).attr('data-edit'), $(this).val(), "updateAsset");
+            FTC.setProperty(obj, $(this).attr('data-edit'), $(this).val(), $(this).attr('data-dtype'));
         }).keyup(function(e) {
             if (e.which === 13) {
                 $(this).blur();

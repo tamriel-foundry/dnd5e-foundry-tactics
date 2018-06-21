@@ -17,6 +17,7 @@ h1.charname {
 
 .charname > input.ftc-edit {
 	width: 100%;
+    height: 40px;
     margin: 5px 0;
 	text-align: left;
 }
@@ -32,11 +33,6 @@ div.charlevel {
 	height: 30px;
 	line-height: 30px;
 	margin: 0;
-}
-
-.level input.ftc-edit,
-.experience input.ftc-edit {
-    text-align: right;
 }
 
 .charlevel .experience {
@@ -65,7 +61,7 @@ ul.ftc-sheet-subtitle {
 }
 ul.ftc-sheet-subtitle li {
 	flex: 1;
-	padding: 0 0.5em;
+	padding: 0 0.25em;
 	border-right: 1px solid #999;
 }
 ul.ftc-sheet-subtitle li:first-child {
@@ -93,13 +89,20 @@ ul.ftc-sheet-subtitle li:last-child {
  	CHARACTER SHEET HEADER
 ------------------------------------------- */
 
+.ftc-sheet-primary {
+    height: 180px;
+}
+
 /* Primary Showcase Attributes */
-.ftc-sheet-primary > div {
+div.primary-stat {
 	width: 30%;
-	height: 80px;
+	height: 74px;
 	float: left;
-	margin: 7px 1.66%;
-    padding: 0.25em 0;
+	margin: 10px 1.66% 0;
+
+    display: flex;
+    flex-flow: column;
+
 	border: 1px solid #999;
 	border-radius: 10px;
 	background-repeat: no-repeat;
@@ -107,47 +110,87 @@ ul.ftc-sheet-subtitle li:last-child {
 	text-align: center;
 }
 
+#content-attributes > .primary-stat {
+	width: 48%;
+	margin: 10px 2% 0 0;
+}
+#content-attributes > .primary-stat:last-of-type {
+	margin: 10px 0 0 2%;
+}
+
 div.health { background-image: url("../content/icons/health.png"); }
 div.armor { background-image: url("../content/icons/armor.png"); }
 div.proficiency { background-image: url("../content/icons/proficiency.png"); }
 div.speed { background-image: url("../content/icons/speed.png"); }
 div.initiative { background-image: url("../content/icons/initiative.png"); }
+div.resource1 { background-image: url("../content/icons/gears.png"); }
+div.resource2 { background-image: url("../content/icons/bash.png"); }
 div.death { background-image: url("../content/icons/death.png"); }
 
-.ftc-sheet-primary div label {
-    display: block;
-    margin: 0 1em;
-    font-size: 1.25em;
+
+.primary-stat header {  /* Height 24px */
+    flex: 0 0 18px;
+    margin: 3px 0.5em;
+    font-size: 18px;
+    line-height: 18px;
     border-bottom: 1px solid #666;
 }
 
-
-.ftc-sheet-primary input.ftc-edit {
-	font-size: 2em;
+.primary-stat-value {
+    flex: 1;
+	font-size: 24px;
+    max-height: 30px;
 }
 
+.primary-stat footer {
+    flex: 0 0 16px;
+    line-height: 16px;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
 
-.ftc-sheet-primary div span {
-	width: 100%;
-	font-size: 2em;
-	margin: 0.25em 0;
+#r1label, #r2label {
+    width: 100%;
+    font-size: inherit;
+    line-height: inherit;
 }
 
 ul.death-saves {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+    line-height: 10px;
 }
 
 ul.death-saves > li span {
-	font-size: 1em;
+	font-size: 16px;
 	margin: 0 0.5em 0 0;
 }
 
+/* -------------------------------------------
+ 	Sidebar and Profile
+------------------------------------------- */
+
+.ftc-character .ftc-sheet-profile {
+    flex: 0 0 250px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+
+ul#sidebar-tabs {
+    flex: 0 0 40px;
+    font-size: 24px;
+}
+
+.ftc-sheet-sidebar .content-tab {
+    flex: 1;
+}
 
 /* -------------------------------------------
  	Attributes
 ------------------------------------------- */
+
 
 ol.attributes-list {
     list-style: none;
@@ -193,8 +236,7 @@ ol.attributes-list {
 .attribute .attr-mod {
     width: 28px;
     margin-left: 2px;
-	font-size: 16px;
-	font-family: "Bookinsanity";
+	font-size: 20px;
 	color: #888;
 }
 
@@ -217,7 +259,7 @@ ol.attributes-list {
 .skills-list > li.skill {
 	display: flex;
 	flex-direction: row;
-	line-height: 24px;
+	line-height: 22px;
 }
 
 .skill label {
@@ -231,19 +273,12 @@ ol.attributes-list {
 
 .skill input[type="checkbox"] {width: 20px; }
 
-.skill .skill-mod {
-	font-family: "Bookinsanity";
-	color: #888;
-	font-size: 0.875em;
-}
+.skill .skill-mod {	color: #888; }
 
-.skill .ftc-rollable {
-	position: relative;
-}
+/* Rollable Skills */
+.skill .ftc-rollable {	position: relative; }
 
-.skill .ftc-rollable:hover {
-	text-shadow: 0 0 4px #ff3838;
-}
+.skill .ftc-rollable:hover { text-shadow: 0 0 4px #ff3838; }
 
 .skill .ftc-rollable:hover:before {
 	display: block;
@@ -257,19 +292,31 @@ ol.attributes-list {
 	background-size: contain;
 }
 
+/* -------------------------------------------
+ 	Traits
+------------------------------------------- */
+
+#content-traits {
+    font-size: 20px;
+    overflow-y: scroll;
+    padding-right: 0.5em;
+}
+
 
 /* -------------------------------------------
  	Biography
 ------------------------------------------- */
 
 .ftc-sheet-secondary .content-tab {
-    max-height: 410px;
+    flex: 1;
 }
 
 #content-biography {
+    height: calc(100%);
 	font-size: 1em;
 	font-family: "Scaly Sans";
 	color: #222;
+    overflow-y: scroll;
 }
 
 .content-tab .ftc-textfield-edit {
@@ -289,18 +336,17 @@ ol.attributes-list {
  	Inventory
 ------------------------------------------- */
 
-.inventory-items {
+ol.inventory-items {
+    height: calc(100% - 75px);
+    overflow-y: scroll;
 	list-style: none;
 	margin: 0.25em 0;
 	padding: 0;
-	max-height: 340px;
-    overflow-y: scroll;
 }
 
 .item {
     margin: 0;
     padding: 3px 0;
-    line-height: 24px;
     border-bottom: 1px solid #DDD;
 }
 
@@ -312,7 +358,10 @@ ol.attributes-list {
     line-height: 1em;
 }
 
-.item > * { margin: 0 0.25em; }
+.item > * {
+    margin: 0 0.25em;
+    line-height: 24px;
+}
 .item-name { flex: 1; }
 .item-quantity.ftc-edit { width: 24px; }
 .item-weight {
@@ -320,8 +369,15 @@ ol.attributes-list {
 	border-right: 1px solid #DDD;
 }
 .inventory-header .inventory-rpad { width: 47px; }
-.item .glyphicon:hover,
-.spell .glyphicon:hover {
+
+
+/* Item Edit Icons */
+.item .glyphicon {
+    font-size: 12px;
+    top: -1px;
+}
+
+.item .glyphicon:hover {
 	text-shadow: 0 0 4px #ff3838;
 }
 
@@ -385,22 +441,16 @@ label.inventory-weight-label {
 ------------------------------------------- */
 
 ol.spellbook-spells {
+    height: calc(100%);
+    overflow-y: scroll;
 	list-style: none;
 	margin: 0.25em 0;
 	padding: 0;
-	max-height: 360px;
-    overflow-y: scroll;
-}
-
-li.spell {
-    margin: 0px;
-    padding: 2px 0;
-    line-height: 24px;
-    border-bottom: 1px solid #DDD;
 }
 
 .spell.inventory-header {
-	line-height: 16px;
+    padding: 0;
+	line-height: 20px;
 	background: #DEDEDE;
     border-bottom: 1px solid #CCC;
 }
@@ -421,3 +471,43 @@ li.spell {
 }
 
 img.spell-image { margin-top: -2px; }
+
+
+/* -------------------------------------------
+ 	Abilities
+------------------------------------------- */
+
+ol.abilities {
+    height: calc(100%);
+    overflow-y: scroll;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+li.ability {
+    font-size: 16px;
+}
+.ability-header .ability-name {
+    flex: 1 0 50%;
+}
+.ability-header .ability-source {
+    flex: 1 0 30%;
+    text-align: right;
+    color: #666;
+}
+.ability-header .ability-buttons {
+    margin: 0 0 0 0.25em;
+    font-size: 12px;
+}
+.ability-buttons .glyphicon { top: 1px; }
+
+
+.ability-description {
+    max-height: 60px;
+    overflow-y: scroll;
+    font-family: "Scaly Sans", "Helvetica Neue", "Helvetica", serif;
+    font-size: 14px;
+    line-height: 16px;
+    margin: 0.5em 0.5em 0;
+}

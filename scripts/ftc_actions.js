@@ -89,23 +89,19 @@ FTC.actions = {
 
 	/* Roll an attribute test */
 	_roll_attribute_test: function(obj, attr, adv, bonus) {
-		var stat = obj.data.stats[attr],
-		    bonus = bonus || "",
-			formula = this._roll_advantage(adv) + " + @mod " + bonus,
-			advstr = ((adv === "adv") ? " (Advantage)" : "") + ((adv === "dis") ? " (Disadvantage)" : ""),
-			message = stat.name + " Check" + advstr,
-			data = {'mod': stat.mod};
-		this._roll_dice(obj, message, formula, data)
+		let formula = this._roll_advantage(adv) + " + @mod " + (bonus || ""),
+		advstr = ((adv === "adv") ? " (Advantage)" : "") + ((adv === "dis") ? " (Disadvantage)" : ""),
+		message = obj.data.stats[attr].name + " Check" + advstr,
+		data = {'mod': obj.data.ftc[attr].mod};
+		this._roll_dice(obj, message, formula, data);
 	},
 
 	/* Roll a saving throw */
 	_roll_saving_throw:function(obj, attr, adv, bonus) {
-		var stat = obj.data.stats[attr],
-		    bonus = bonus || "",
-			formula = this._roll_advantage(adv) + " + @mod " + bonus,
-			advstr = ((adv === "adv") ? " (Advantage)" : "") + ((adv === "dis") ? " (Disadvantage)" : ""),
-			message = stat.name + " Save" + advstr,
-			data = {'mod': (stat.proficient * obj.data.counters.proficiency.current) + stat.mod};
+		let formula = this._roll_advantage(adv) + " + @mod " + (bonus || ""),
+		advstr = ((adv === "adv") ? " (Advantage)" : "") + ((adv === "dis") ? " (Disadvantage)" : ""),
+		message = obj.data.stats[attr].name + " Save" + advstr,
+		data = {'mod': obj.data.ftc[attr].svmod};
 		this._roll_dice(obj, message, formula, data);
 	},
 

@@ -16,7 +16,10 @@ class FTCCharacter extends FTCObject {
             FTC_ATTRIBUTE_HTML: FTC.TEMPLATE_DIR + 'attribute.html',
             FTC_ITEM_HTML: FTC.TEMPLATE_DIR + 'item.html',
             FTC_SPELL_LEVEL: FTC.TEMPLATE_DIR + 'spellheader.html',
-            FTC_SPELL_HTML: FTC.TEMPLATE_DIR + 'spell.html'
+            FTC_SPELL_HTML: FTC.TEMPLATE_DIR + 'spell.html',
+            CHARACTER_TAB_TRAITS: FTC.TEMPLATE_DIR + 'characters/tab-traits.html',
+            CHARACTER_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'characters/primary-stats.html',
+            CHARACTER_ABILITY: FTC.TEMPLATE_DIR + 'characters/character-ability.html'
         }
     }
 
@@ -49,14 +52,16 @@ class FTCCharacter extends FTCObject {
         // Enrich Attributes
         $.each(data.stats, function(attr, stat) {
             data.ftc[attr] = {
+                'mod': stat.modifiers.mod,
+                'svmod': (stat.proficient * data.counters.proficiency.current) + stat.modifiers.mod,
                 'padstr': FTC.ui.padNumber(stat.current, 2),
-                'modstr': (stat.mod < 0 ? "" : "+" ) + stat.mod
+                'modstr': (stat.modifiers.mod < 0 ? "" : "+" ) + stat.modifiers.mod
             }
         });
 
         // Enrich Skills
         $.each(data.skills, function(name, skill) {
-            let stat = data.stats[skill.stat],
+            let stat = data.ftc[skill.stat],
                  mod = (skill.proficient * data.counters.proficiency.current) + stat.mod;
             data.ftc[name] = {
                 'mod': mod,
@@ -120,6 +125,9 @@ class FTCCharacter extends FTCObject {
         // Augment sub-components
         if (!this.isPrivate) {
 
+            // Primary Stats
+            main = FTC.template.inject(main, "CHARACTER_PRIMARY_STATS", this.templates.CHARACTER_PRIMARY_STATS)
+
             // Attributes
             let attrs = "";
             let template = FTC.template.load(this.templates.FTC_ATTRIBUTE_HTML);
@@ -143,7 +151,7 @@ class FTCCharacter extends FTCObject {
                 item.itemid = i;
                 items += FTC.template.populate(template, item);
             });
-            items = (items === "") ? "<li><blockquote>Add items from the compendium.</blockquote></li>" : items;
+            items = items || "<li><blockquote>Add items from the compendium.</blockquote></li>";
             main = main.replace("<!-- FTC_INVENTORY_HTML -->", items);
 
             // Insert Spells
@@ -156,8 +164,21 @@ class FTCCharacter extends FTCObject {
                     spells += FTC.template.populate(stmp, p);
                 });
             });
-            spells = (spells === "") ? "<li><blockquote>Add spells from the compendium.</blockquote></li>" : spells;
+            spells = spells || "<li><blockquote>Add spells from the compendium.</blockquote></li>";
             main = main.replace("<!-- FTC_SPELLS_HTML -->", spells);
+
+            // Abilities
+            let abilities = "";
+            template = FTC.template.load(this.templates.CHARACTER_ABILITY);
+            $.each(obj.data.abilities, function(i, item) {
+                item.itemid = i;
+                abilities += FTC.template.populate(template, item);
+            });
+            abilities = abilities || "<li><blockquote>Add abilities from the compendium.</blockquote></li>";
+            main = main.replace("<!-- CHARACTER_TAB_ABILITIES -->", abilities);
+
+            // Character Traits
+            main = FTC.template.inject(main, "CHARACTER_TAB_TRAITS", this.templates.CHARACTER_TAB_TRAITS)
         }
         return main;
     }

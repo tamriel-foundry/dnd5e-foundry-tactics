@@ -27,20 +27,18 @@
     height: 90px;
 }
 
-.ftc-sheet-primary {
-    height: 190px;
-}
+
 
 .ftc-sheet-secondary {
     flex: 1;
-    height: 450px;
+    height: 460px;
 }
 
 
 .ftc-sheet-sidebar {
     flex: 0 0 250px;
     padding: 15px;
-    border-right: 1px solid #000;
+    border-right: 1px solid #999;
 }
 
 h2.section-header {
@@ -56,11 +54,6 @@ h2.section-header {
 /* -------------------------------------------
      ASSET IMAGES
 ------------------------------------------- */
-
-.ftc-sheet-profile {
-    position: relative;
-    margin-bottom: 0.5em;
-}
 
 img.profile-image {
     height: 250px;
@@ -128,6 +121,18 @@ select {
     font-size: 18px;
 }
 
+.ftc-textarea {
+    min-height: 30px;
+    height: 30px;
+    overflow: hidden;
+    font-family: "Bookinsanity";
+    font-size: 12px;
+    line-height: 16px;
+    resize: vertical;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
 
 /* Form Groups */
 .form-group {
@@ -139,8 +144,17 @@ select {
 .form-group > * {
     height: 30px;
     line-height: 30px;
-    flex: 0 0 50%;
 }
+
+.form-group > label {
+    flex: 0 0 35%;
+}
+
+.form-group > input,
+.form-group > select {
+    flex: 0 0 65%;
+}
+
 
 .form-group .ftc-checkbox {
     flex: 0 0 24px;
@@ -154,6 +168,16 @@ select {
 }
 
 
+/* Textarea */
+.textarea-group {
+    flex-wrap: wrap;
+}
+.textarea-group > label {
+    flex: 0 0 100%
+}
+.textarea-group > textarea {
+    flex: 0 0 100%;
+}
 
 
 /* -------------------------------------------
@@ -168,7 +192,7 @@ ul.sheet-tabs {
     list-style: none;
     margin: 0;
     padding: 0;
-    font-size: 2em;
+    font-size: 24px;
     border-top: 1px solid #999;
     border-bottom: 1px solid #999;
 }
@@ -195,7 +219,7 @@ li.sheet-tab.tab-active {
 div.content-tab {
     position: relative;
     display: none;
-    margin: 10px 0;
+    margin: 10px 0 0;
 }
 div.content-tab.tab-active {
     display: block;
@@ -245,6 +269,13 @@ div.content-tab.tab-active {
      General Styles
 ------------------------------------------- */
 
+/*
+body {
+    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+}
+*/
+
 /* Headers */
 h1, h2, h3, h4 {
     font-family: "Nodesto Caps Condensed";
@@ -267,9 +298,33 @@ hr {
 }
 
 blockquote {
-    margin: 0 0 0.5em;
+    margin: 0 0 10px;
+    padding: 5px 0px 5px 20px;
     font-family: "Scaly Sans";
     font-size: 1em;
     font-style: italic;
     border-left: 5px solid #61584e;
+}
+
+blockquote em {
+    font-weight: bold;
+}
+
+
+
+/* Scrollbar */
+
+
+.ftc-sheet ::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+}
+.ftc-sheet ::-webkit-scrollbar-track {
+    background: transparent;
+    box-shadow: 0 0 1px #999 inset;
+    border-radius: 3px;
+}
+.ftc-sheet ::-webkit-scrollbar-thumb {
+    outline: 1px solid #222;
+    border-radius: 3px;
 }
