@@ -59,6 +59,13 @@ class FTCCharacter extends FTCObject {
             }
         });
 
+        // Spellcasting DC
+        let spellAttr = data.info.spellcasting.current,
+            mod = spellAttr ? data.ftc[spellAttr].mod : undefined;
+        data.ftc["spellMod"] = mod;
+        data.ftc["spellDC"] = mod ? 8 + mod + data.counters.proficiency.current : undefined;
+        data.ftc["spellDCstr"] = mod ? "Spell DC " + data.ftc["spellDC"] : "";
+
         // Enrich Skills
         $.each(data.skills, function(name, skill) {
             let stat = data.ftc[skill.stat],
@@ -76,6 +83,9 @@ class FTCCharacter extends FTCObject {
             data.inventory[itemId] = item;
             weight.push(item.info.weight.current);
         });
+
+        // Base Armor Class
+        data.ftc["baseAC"] = 10 + data.ftc["Dex"].mod;
 
         // Compute Weight and Encumbrance
         var wt = (weight.length > 0) ? weight.reduce(function(total, num) { return total + (num || 0); }) : 0,
@@ -151,7 +161,7 @@ class FTCCharacter extends FTCObject {
                 item.itemid = i;
                 items += FTC.template.populate(template, item);
             });
-            items = items || "<li><blockquote>Add items from the compendium.</blockquote></li>";
+            items = items || '<li><blockquote class="compendium">Add items from the compendium.</blockquote></li>';
             main = main.replace("<!-- FTC_INVENTORY_HTML -->", items);
 
             // Insert Spells
@@ -164,7 +174,7 @@ class FTCCharacter extends FTCObject {
                     spells += FTC.template.populate(stmp, p);
                 });
             });
-            spells = spells || "<li><blockquote>Add spells from the compendium.</blockquote></li>";
+            spells = spells || '<li><blockquote class="compendium">Add spells from the compendium.</blockquote></li>';
             main = main.replace("<!-- FTC_SPELLS_HTML -->", spells);
 
             // Abilities
@@ -174,7 +184,7 @@ class FTCCharacter extends FTCObject {
                 item.itemid = i;
                 abilities += FTC.template.populate(template, item);
             });
-            abilities = abilities || "<li><blockquote>Add abilities from the compendium.</blockquote></li>";
+            abilities = abilities || '<li><blockquote class="compendium">Add abilities from the compendium.</blockquote></li>';
             main = main.replace("<!-- CHARACTER_TAB_ABILITIES -->", abilities);
 
             // Character Traits

@@ -17,19 +17,20 @@
 
 
 <div class="primary-stat armor">
-    <header>Armor Class</header>
+    <header>{counters.ac.name}</header>
     <div class="primary-stat-value">
         <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.armor.current"
                value="{counters.armor.current}" placeholder="10"/>
     </div>
-    <footer>Base: 10</footer>
+    <footer>Base AC {ftc.baseAC}</footer>
 </div>
 
 <div class="primary-stat proficiency">
-    <header>Proficiency Bonus</header>
+    <header>{counters.proficiency.name}</header>
     <div class="primary-stat-value">
         <span>+{counters.proficiency.current}</span>
     </div>
+    <footer class="spelldc">{ftc.spellDCstr}</footer>
 </div>
 
 <div class="primary-stat resource1">

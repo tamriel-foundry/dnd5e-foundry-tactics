@@ -15,6 +15,7 @@
     flex: 1;
     background: #EEE;
     font-family: "Nodesto Caps Condensed";
+    font-size: 16px;
 }
 
 .ftc-sheet .ftc-sheet-main {
@@ -31,7 +32,6 @@
 
 .ftc-sheet-secondary {
     flex: 1;
-    height: 460px;
 }
 
 
@@ -117,7 +117,8 @@ input.ftc-edit::placeholder {
 }
 
 
-select {
+select.ftc-select {
+    background: transparent;
     font-size: 18px;
 }
 
@@ -187,7 +188,7 @@ select {
 /* Tab Menu */
 ul.sheet-tabs {
     display: flex;
-    height: 40px;
+    flex: 0 0 40px;
     flex-direction: row;
     list-style: none;
     margin: 0;
@@ -217,12 +218,14 @@ li.sheet-tab.tab-active {
 
 /* Tabbed Content */
 div.content-tab {
-    position: relative;
+    flex: 1;
     display: none;
+    flex-direction: column;
+    position: relative;
     margin: 10px 0 0;
 }
 div.content-tab.tab-active {
-    display: block;
+    display: flex;
 }
 
 

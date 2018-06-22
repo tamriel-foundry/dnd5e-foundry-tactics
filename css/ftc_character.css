@@ -11,7 +11,7 @@ h1.charname {
 	flex: 0 0 70%;
 	height: 50px;
 	margin: 0;
-	font-size: 3em;
+	font-size: 40px;
 	line-height: 50px;
 }
 
@@ -47,7 +47,7 @@ div.charlevel {
 }
 
 
-/* Class, Race, and Background */
+/* Class, Race, Background, Alignment */
 ul.ftc-sheet-subtitle {
 	width: 100%;
 	float: left;
@@ -65,10 +65,10 @@ ul.ftc-sheet-subtitle li {
 	border-right: 1px solid #999;
 }
 ul.ftc-sheet-subtitle li:first-child {
-	padding-left: 0;
+	padding: 0;
 }
 ul.ftc-sheet-subtitle li:last-child {
-	padding-right: 0;
+	padding: 0;
 	text-align: right;
 	border-right: none;
 }
@@ -84,6 +84,14 @@ ul.ftc-sheet-subtitle li:last-child {
     display: block;
     width: 100%;
 }
+
+select.alignment {
+    font-size: 22px;
+    border: none;
+}
+
+
+
 
 /* -------------------------------------------
  	CHARACTER SHEET HEADER
@@ -110,11 +118,12 @@ div.primary-stat {
 	text-align: center;
 }
 
-#content-attributes > .primary-stat {
+/* Sidebar Attribute Stats */
+#content-attributes .primary-stat {
 	width: 48%;
 	margin: 10px 2% 0 0;
 }
-#content-attributes > .primary-stat:last-of-type {
+#content-attributes .primary-stat:last-of-type {
 	margin: 10px 0 0 2%;
 }
 
@@ -181,10 +190,6 @@ ul.death-saves > li span {
 ul#sidebar-tabs {
     flex: 0 0 40px;
     font-size: 24px;
-}
-
-.ftc-sheet-sidebar .content-tab {
-    flex: 1;
 }
 
 /* -------------------------------------------
@@ -296,6 +301,12 @@ ol.attributes-list {
  	Traits
 ------------------------------------------- */
 
+blockquote.compendium {
+    padding: 5px 5px 5px 10px;
+    font-size: 14px;
+    color: #999;
+}
+
 #content-traits {
     font-size: 20px;
     overflow-y: scroll;
@@ -306,10 +317,6 @@ ol.attributes-list {
 /* -------------------------------------------
  	Biography
 ------------------------------------------- */
-
-.ftc-sheet-secondary .content-tab {
-    flex: 1;
-}
 
 #content-biography {
     height: calc(100%);
@@ -350,31 +357,39 @@ ol.inventory-items {
     border-bottom: 1px solid #DDD;
 }
 
-.inventory-header {
-    font-weight: bold;
-    margin: 0;
-    padding: 0 0 0.25em;
-    border-bottom: 1px solid #999;
-    line-height: 1em;
-}
-
 .item > * {
     margin: 0 0.25em;
     line-height: 24px;
 }
 .item-name { flex: 1; }
-.item-quantity.ftc-edit { width: 24px; }
+
+
+.item-quantity.ftc-edit {
+    width: 24px;
+    font-size: 14px;
+}
 .item-weight {
 	width: 24px;
+    font-size: 14px;
 	border-right: 1px solid #DDD;
 }
-.inventory-header .inventory-rpad { width: 47px; }
+
+
+.inventory-header {
+    font-weight: bold;
+    margin: 0;
+    padding: 0.25em 0;
+    border-bottom: 1px solid #999;
+    font-size: 14px;
+}
+.inventory-header > * { line-height: 20px }
+.inventory-header .inventory-add { width: 36px; }
 
 
 /* Item Edit Icons */
 .item .glyphicon {
     font-size: 12px;
-    top: -1px;
+    line-height: 18px;
 }
 
 .item .glyphicon:hover {
@@ -414,26 +429,28 @@ label.inventory-weight-label {
 }
 
 /* Currency Bag */
-.currency {
-    margin: 0.25em;
+.inventory .currency {
+    flex: 0 0 24px;
+    line-height: 24px;
     border-bottom: 1px solid #CCC;
 }
 
-.currency > * {
-    flex: 0;
-    width: 20px;
-    text-align: right;
-}
 
-.currency > input.ftc-edit {
-    border-right: 1px solid #CCC;
-    margin-right: 8px;
+.currency > label {
+    flex: 0 0 24px;
+    padding-left: 4px;
 }
 
 .currency > .currency-label {
     flex: 1;
-    text-align: left;
+    margin: 0 0.25em;
     font-weight: bold;
+}
+
+.currency > .ftc-edit {
+    flex: 0;
+    text-align: center;
+    margin: 0 2px;
 }
 
 /* -------------------------------------------
@@ -472,6 +489,12 @@ ol.spellbook-spells {
 
 img.spell-image { margin-top: -2px; }
 
+.spellbook .spellcasting-mod > * {
+    flex: 0 0 50%;
+    line-height: 24px;
+    height: 24px;
+}
+
 
 /* -------------------------------------------
  	Abilities
@@ -488,26 +511,14 @@ ol.abilities {
 li.ability {
     font-size: 16px;
 }
-.ability-header .ability-name {
-    flex: 1 0 50%;
+.ability-name,
+.ability-source {
+    flex: 1 0 80%;
 }
-.ability-header .ability-source {
-    flex: 1 0 30%;
-    text-align: right;
-    color: #666;
+.ability-footer .ability-source {
+    color: #999;
 }
-.ability-header .ability-buttons {
-    margin: 0 0 0 0.25em;
-    font-size: 12px;
-}
-.ability-buttons .glyphicon { top: 1px; }
-
-
-.ability-description {
-    max-height: 60px;
-    overflow-y: scroll;
-    font-family: "Scaly Sans", "Helvetica Neue", "Helvetica", serif;
-    font-size: 14px;
-    line-height: 16px;
-    margin: 0.5em 0.5em 0;
+.ability .glyphicon {
+    flex: 0 0 16px;
+    top: 1px;
 }

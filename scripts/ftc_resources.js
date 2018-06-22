@@ -16,13 +16,12 @@ FTC.resources = {
     },
 }
 
-// End FTCInit
-});
-
 /* -------------------------------------------- */
-/* Page Resource Render                         */
+/* Render Page Resource                         */
 /* -------------------------------------------- */
-
 sync.render("ui_renderPage", function(obj, app, scope) {
     return FTC.resources.render_page(obj, app, scope);
+});
+
+// End FTC Init
 });

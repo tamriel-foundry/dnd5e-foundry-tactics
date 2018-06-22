@@ -1,5 +1,6 @@
-var FTC_PACKAGE_NAME = "dnd5e-foundry-tactics";
-var FTC = {
+const FTC_PACKAGE_NAME = "dnd5e-foundry-tactics";
+const FTC_SYSTEM_IDENTIFIER = 'dnd5e_ftc';
+const FTC = {
 
     ROOT_DIR: 'workshop/'+FTC_PACKAGE_NAME+'/',
     TEMPLATE_DIR: 'workshop/'+FTC_PACKAGE_NAME+'/html/',
@@ -178,12 +179,19 @@ class FTCObject {
 
 
 /* -------------------------------------------- */
-/* Document Ready                                */
+/* GM Forge Initialization Hook                 */
 /* -------------------------------------------- */
 
-$(document).ready(function(){
-    hook.call("FTCInit");
-    $('body').append('<link rel="stylesheet" href="'+ FTC.CSS_DIR + 'FTC.css" type="text/css" />')
-    console.log("FTC Loaded.");
+hook.add("Initialize", "FTCSetup", function(obj, app, scope, dt) {
+
+    // Only initialize FTC if we are using the correct system
+    if ( game.templates.identifier === FTC_SYSTEM_IDENTIFIER ) {
+        hook.call("FTCInit");
+        $('body').append('<link rel="stylesheet" href="'+ FTC.CSS_DIR + 'FTC.css" type="text/css" />')
+        console.log("D&D5e Foundry Tactics Loaded");
+    }
+    else {
+        console.log("Foundry Tactics installed but not loaded for system: " + game.templates.identifier);
+    }
 });
 

@@ -762,7 +762,8 @@
         "name": "Background"
       },
       "alignment": {
-        "name": "Alignment"
+        "name": "Alignment",
+        "current": "tn"
       },
       "di": {
         "name": "Damage Immunities"
@@ -776,15 +777,23 @@
       "senses": {
         "name": "Senses"
       },
-      "personality": {
-        "name": "Personality Traits",
-        "traits": "",
-        "ideals": "",
-        "bonds": "",
-        "flaws": ""
+      "traits": {
+        "name": "Traits"
+      },
+      "ideals": {
+        "name": "Ideals"
+      },
+      "bonds": {
+        "name": "Bonds"
+      },
+      "flaws": {
+        "name": "Flaws"
       },
       "languages": {
         "name": "Languages"
+      },
+      "spellcasting": {
+        "name": "Spellcasting Ability"
       },
       "size": {
         "name": "Size"
@@ -904,9 +913,6 @@
         "name": "GP",
         "current": 0,
         "min": 0
-      },
-      "spellAbility": {
-        "name": "Spellcasting Ability"
       },
       "spell0": {
         "name": "Cantrip"

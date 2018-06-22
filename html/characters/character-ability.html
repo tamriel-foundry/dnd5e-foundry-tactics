@@ -1,14 +1,11 @@
 <li id="item-{itemid}" class="item {info.type.current} flexcolumn" data-item-container="abilities" data-item-id="{itemid}">
 	<header class="ability-header flexrow">
 		<span class="ability-name">{info.name.current}</span>
-		<label class="ability-source">{ability.source.current}</label>
-		<div class="ability-buttons">
-			<span class="glyphicon glyphicon-edit item-edit"></span>
-			<span class="glyphicon glyphicon-trash item-trash"></span>
-		</div>
+		<span class="glyphicon glyphicon-edit item-edit"></span>
 	</header>
-	<div class="ability-description">
-		{info.notes.current}
-	</div>
+	<footer class="ability-footer flexrow">
+		<label class="ability-source">{ability.source.current}</label>
+		<span class="glyphicon glyphicon-trash item-trash"></span>
+	</footer>
 </li>
 

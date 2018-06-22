@@ -148,6 +148,14 @@ FTC.events = {
     /* Edit Actions for Inventory Fields */
     edit_item_fields: function(html, obj, app) {
 
+        /* Add Item */
+        html.find('.item .item-add').click(function() {
+           const container = $(this).parent().attr("data-item-container");
+           const data = duplicate(game.templates.item);
+           let item = new FTCItem(data, app, {});
+           item.editOwnedItem(obj, obj.data[container]);
+        });
+
         /* Edit Item */
         html.find('.item-list .item-edit').click(function() {
 

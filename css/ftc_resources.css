@@ -1,5 +1,5 @@
 .ftc-page {
-    overflow-x: hidden;
+    flex: 1;
     overflow-y: scroll;
     background-image: url('/content/sheet2.png');
     background-size: 100%;

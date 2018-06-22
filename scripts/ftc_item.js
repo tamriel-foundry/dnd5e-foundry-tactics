@@ -77,6 +77,9 @@ class FTCItem extends FTCObject {
 
     editOwnedItem(owner, collection, index) {
 
+        // If the index is undefined, add the item to the end of the collection
+        index = index || collection.length;
+
         // Create a new application window for editing an item and associate it with the working data
         var newApp = sync.newApp("ui_renderItem");
         this.obj.addApp(newApp);
@@ -107,42 +110,41 @@ class FTCItem extends FTCObject {
 }
 
 /* -------------------------------------------- */
-/* Override Default Item Sheet Size             */
+/* FTC Initialization Hook                      */
 /* -------------------------------------------- */
+
 hook.add("FTCInit", "Items", function() {
+
+    // Configure Item Asset Type Dimensions
     assetTypes['i'].width = "650px";
     assetTypes['i'].height = "500px";
-});
 
-/* -------------------------------------------- */
-/* Character Sheet Sync Render                  */
-/* -------------------------------------------- */
+    // Render Item Sheets
+    sync.render("ui_renderItem", function(obj, app, scope) {
+        var item = new FTCItem(obj, app, scope);
+        return item.renderHTML();
+    });
 
-sync.render("ui_renderItem", function(obj, app, scope) {
-    var item = new FTCItem(obj, app, scope);
-    return item.renderHTML();
-});
+    // Register Item Character Drop Hook
+    hook.add("OnDropCharacter", "FTCOnDrop", function(obj, app, scope, dt) {
+        var item = JSON.parse(dt.getData("OBJ")) || {};
+        if (item._t !== "i") return;
+        if (!item.info.type) return;
 
-/* -------------------------------------------- */
+        // Make sure spells go to the right place
+        if ((item.info.type.current === "spell") && !(dt.getData("spell") || item.tags["spell"])) {
+            obj.data.inventory.pop();
+            obj.data.spellbook.push(item);
+            obj.sync("updateAsset");
+        }
 
-hook.add("OnDropCharacter", "FTCOnDrop", function(obj, app, scope, dt) {
-    var item = JSON.parse(dt.getData("OBJ")) || {};
-    if (item._t !== "i") return;
-    if (!item.info.type) return;
-
-    // Make sure spells go to the right place
-    if ((item.info.type.current === "spell") && !(dt.getData("spell") || item.tags["spell"])) {
-        obj.data.inventory.pop();
-        obj.data.spellbook.push(item);
-        obj.sync("updateAsset");
-    }
-
-    // Make sure abilities go to the right place
-    if (item.info.type.current === "ability") {
-        obj.data.inventory.pop();
-        obj.data.abilities.push(item);
-        obj.sync("updateAsset");
-    }
+        // Make sure abilities go to the right place
+        if (item.info.type.current === "ability") {
+            obj.data.inventory.pop();
+            obj.data.abilities.push(item);
+            obj.sync("updateAsset");
+        }
+    });
 });
 
 /* -------------------------------------------- */
