@@ -8,6 +8,14 @@ const FTC = {
 
     /* ------------------------------------------- */
 
+    init: function() {
+        hook.call("FTCInit");
+        $('body').append('<link rel="stylesheet" href="'+ FTC.CSS_DIR + 'FTC.css" type="text/css" />');
+        console.log("D&D5e Foundry Tactics Loaded");
+    },
+
+    /* ------------------------------------------- */
+
     getProperty: function(object, name) {
         /*
         Get object data by name with the format "part1.part2.part3" which would evaluate as obj[part1][part2][part3].
@@ -184,11 +192,9 @@ class FTCObject {
 
 hook.add("Initialize", "FTCSetup", function(obj, app, scope, dt) {
 
-    // Only initialize FTC if we are using the correct system
+    // Only initialize FTC if we are using the correct system OR no system at all
     if ( game.templates.identifier === FTC_SYSTEM_IDENTIFIER ) {
-        hook.call("FTCInit");
-        $('body').append('<link rel="stylesheet" href="'+ FTC.CSS_DIR + 'FTC.css" type="text/css" />')
-        console.log("D&D5e Foundry Tactics Loaded");
+        FTC.init();
     }
     else {
         console.log("Foundry Tactics installed but not loaded for system: " + game.templates.identifier);

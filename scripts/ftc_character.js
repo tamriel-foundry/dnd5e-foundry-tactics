@@ -199,7 +199,11 @@ class FTCCharacter extends FTCObject {
 /* Character Sheet Sync Render                  */
 /* -------------------------------------------- */
 
-sync.render("FTC_CHARSHEET", function(obj, app, scope) {
+sync.render("FTC_CHARSHEET", function (obj, app, scope) {
+    if ( game.templates.identifier !== FTC_SYSTEM_IDENTIFIER ) {
+        return $("<div>Sorry, no preview available at the moment.</div>");
+    }
     const char = new FTCCharacter(obj, app, scope);
     return char.renderHTML();
 });
+
