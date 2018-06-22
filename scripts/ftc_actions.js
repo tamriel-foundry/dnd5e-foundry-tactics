@@ -22,6 +22,7 @@ FTC.actions = {
 			'data': sync.executeQuery(formula, data)
 		}
 		runCommand("diceCheck", eventData);
+		snd_diceRoll.play();
 	},
 
 	/* -------------------------------------------- */

@@ -69,7 +69,7 @@ class FTCCharacter extends FTCObject {
         // Enrich Skills
         $.each(data.skills, function(name, skill) {
             let stat = data.ftc[skill.stat],
-                 mod = (skill.proficient * data.counters.proficiency.current) + stat.mod;
+                 mod = ((skill.current || 0) * data.counters.proficiency.current) + stat.mod;
             data.ftc[name] = {
                 'mod': mod,
                 'modstr': (mod < 0 ? "" : "+" ) + mod

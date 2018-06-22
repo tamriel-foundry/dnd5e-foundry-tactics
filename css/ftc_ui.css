@@ -181,6 +181,10 @@ select.ftc-select {
 }
 
 
+.ftc-rollable {
+    cursor: pointer;
+}
+
 /* -------------------------------------------
      TABBED CONTAINERS
 ------------------------------------------- */
