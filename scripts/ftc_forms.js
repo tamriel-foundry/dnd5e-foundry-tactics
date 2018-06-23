@@ -97,16 +97,12 @@ FTC.forms.edit_select_fields = function(html, obj) {
         });
     });
 
-    // Set data changes to the object on change
+    // Set data and update immediately on change
     selects.change(function() {
         let select = $(this),
             value = select.find(":selected").val();
         obj.setData(select.attr('data-edit'), value, "str");
-    });
-
-    // Save changes on blur
-    selects.blur(function(){
-        FTC.forms.delayedUpdate(obj);
+        obj.save("updateAsset");
     });
 };
 

@@ -19,9 +19,9 @@ FTC.resources = {
 /* -------------------------------------------- */
 /* Render Page Resource                         */
 /* -------------------------------------------- */
-sync.render("ui_renderPage", function(obj, app, scope) {
-    return FTC.resources.render_page(obj, app, scope);
-});
+// sync.render("ui_renderPage", function(obj, app, scope) {
+//     return FTC.resources.render_page(obj, app, scope);
+// });
 
 // End FTC Init
 });

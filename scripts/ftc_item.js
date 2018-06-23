@@ -48,12 +48,18 @@ class FTCItem extends FTCObject {
 
     /* ------------------------------------------- */
 
-    static classify_type(item) {
-        if (item.info.type) return item.info.type;
-        var type = {"name": "Entry Type", "current": "note"};
-        if (item.spell && item.spell.level.current) type.current = "spell";
-        else if (item.weapon && item.weapon.damage.current) type.current = "weapon";
-        else if (item.armor && item.armor.ac.current) type.current = "armor";
+    static classify_type(i) {
+        if (i.info.type && i.info.type.current) return i.info.type;
+        const type = {"name": "Entry Type", "current": "note"};
+        if (("spell" in i.tags) || (i.spell && i.spell.level.current)) {
+            type.current = "spell";
+        } else if (("weapon" in i.tags) || (i.weapon && i.weapon.damage.current)) {
+            type.current = "weapon";
+        } else if (("armor" in i.tags) || (i.armor && i.armor.ac.current)) {
+            type.current = "armor";
+        } else if ("ability" in i.tags || "talent" in i.tags || (i.ability && i.ability.source.current)) {
+            type.current = "ability";
+        }
         return type;
     }
 
@@ -127,23 +133,30 @@ hook.add("FTCInit", "Items", function() {
 
     // Register Item Character Drop Hook
     hook.add("OnDropCharacter", "FTCOnDrop", function(obj, app, scope, dt) {
-        var item = JSON.parse(dt.getData("OBJ")) || {};
+        const item = JSON.parse(dt.getData("OBJ")) || {};
         if (item._t !== "i") return;
         if (!item.info.type) return;
+        const type = item.info.type.current;
+        console.log(type);
 
-        // Make sure spells go to the right place
-        if ((item.info.type.current === "spell") && !(dt.getData("spell") || item.tags["spell"])) {
-            obj.data.inventory.pop();
+        // Inventory Items
+        if (["weapon", "armor", "note"].includes(type)) {
+            obj.data.inventory.push(item);
+        }
+
+        // Spellbook Spells
+        else if ( "spell" === type ) {
             obj.data.spellbook.push(item);
-            obj.sync("updateAsset");
         }
 
-        // Make sure abilities go to the right place
-        if (item.info.type.current === "ability") {
-            obj.data.inventory.pop();
+        // Abilities
+        else if ( "ability" === type ) {
             obj.data.abilities.push(item);
-            obj.sync("updateAsset");
         }
+
+        // Save and return false to prevent additional actions
+        obj.sync("updateAsset");
+        return false;
     });
 });
 

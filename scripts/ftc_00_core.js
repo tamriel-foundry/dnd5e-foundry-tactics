@@ -57,9 +57,13 @@ const FTC = {
         // Integers
         else if ( util.contains(["int", "posint"], dtype) ) {
             value = parseInt((typeof(value) === "number") ? value : value.split(',').join(''));
-            if ( dtype === "posint" ) {
-                value = Math.max(value, 0);
-            }
+            if ( dtype === "posint" )  value = Math.max(value, 0);
+        }
+
+        // Floats
+        else if ( util.contains(["float", "posfloat"], dtype) ) {
+            value = parseFloat((typeof(value) === "number") ? value : value.split(',').join(''));
+            if ( dtype === "posfloat" ) value = Math.max(value, 0);
         }
 
         // Return cleaned value
@@ -71,9 +75,9 @@ const FTC = {
     setProperty: function(data, name, value, dtype) {
 
         // TODO: Temporary dtype assignment
-        if ( name === "tags" ) dtype = "tags";
-        if ( name.startsWith("stats.") ) dtype = "posint";
-        if ( name.startsWith("counter") ) dtype = "posint";
+        if ( name === "tags" ) dtype = dtype || "tags";
+        if ( name.startsWith("stats.") ) dtype = dtype || "posint";
+        if ( name.startsWith("counter") ) dtype = dtype || "posint";
 
         // Sanitize target value
         value = FTC.cleanValue(value, dtype);
