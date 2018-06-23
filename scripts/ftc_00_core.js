@@ -98,19 +98,6 @@ const FTC = {
         }
         return [data, key];
     },
-
-    /* ------------------------------------------- */
-
-    saveObject: function(obj, strategy) {
-
-        // TODO: Eventually this should just be obj.save and this gets removed
-        if (obj instanceof FTCObject) {
-            obj.save(strategy);
-        } else {
-            delete obj.data.ftc;
-            obj.sync(strategy);
-        }
-    }
 };
 
 
@@ -165,6 +152,10 @@ class FTCObject {
         return this.obj.data;
     }
 
+    get name() {
+        return this.obj.data.info.name.current;
+    }
+
     /* ------------------------------------------- */
 
     getData(name) {
@@ -187,7 +178,7 @@ class FTCObject {
         */
 
         if ( !this.changed ) return;
-        console.log("Saving object with strategy " + strategy);
+        console.log("Saving object " + this.name+ " with strategy " + strategy);
         delete this.obj.data.ftc;
         this.obj.sync(strategy);
     }

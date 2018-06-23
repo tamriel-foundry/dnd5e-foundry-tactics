@@ -81,19 +81,19 @@ class FTCItem extends FTCObject {
         index = index || collection.length;
 
         // Create a new application window for editing an item and associate it with the working data
-        var newApp = sync.newApp("ui_renderItem");
+        const newApp = sync.newApp("ui_renderItem");
         this.obj.addApp(newApp);
 
         // Create an HTML frame containing the app
-        var frame = $('<div class="edit-item flex flexcolumn">');
+        const frame = $('<div class="edit-item flex flexcolumn">');
         newApp.appendTo(frame);
 
         // Attach a full-width confirmation button listen for submission
-        var item = this.data;
-        var confirm = $('<button class="fit-x">Update Item</button>');
+        const item = this.data,
+            confirm = $('<button class="fit-x">Update Item</button>');
         confirm.click(function () {
             collection[index] = item;
-            owner.obj.sync("updateAsset");
+            owner.sync("updateAsset");
             layout.coverlay("edit-item");
         });
         frame.append(confirm);

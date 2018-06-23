@@ -10,7 +10,7 @@ FTC.forms.delayedUpdate = function(obj, ms) {
         if ( !isInput ) {
             obj.save("updateAsset");
         }
-    }, ms || 1000);
+    }, ms || 250);
 };
 
 
@@ -33,7 +33,7 @@ FTC.forms.edit_value_fields = function(html, obj) {
     // Handle Input Updates
     inputs.blur(function() {
         let input = $(this),
-            ms = input.parent().is("h1") ? 50 : 1000;
+            ms = input.parent().is("h1") ? 50 : undefined;
         if ( input.val() === input.attr("data-initial") ) return;
         obj.setData(input.attr('data-edit'), input.val(), input.attr('data-dtype'));
         FTC.forms.delayedUpdate(obj, ms);
@@ -64,10 +64,15 @@ FTC.forms.edit_checkbox_fields = function(html, obj) {
         if (box.val() === "1") box.prop("checked", true);
     });
 
-    // Bind on-change listener
+    // Set data updates on change
     boxes.change(function(){
-        let box = $(this);
-        obj.setData(box.attr("data-edit"), box.val() + 0 || 0, "int");
+        let box = $(this),
+            val = box.prop("checked") + 0 || 0;
+        obj.setData(box.attr("data-edit"), val, "int");
+    });
+
+    // Save changes on blur
+    boxes.blur(function(){
         FTC.forms.delayedUpdate(obj);
     });
 };
@@ -92,11 +97,15 @@ FTC.forms.edit_select_fields = function(html, obj) {
         });
     });
 
-    // Bind change listener
+    // Set data changes to the object on change
     selects.change(function() {
         let select = $(this),
             value = select.find(":selected").val();
         obj.setData(select.attr('data-edit'), value, "str");
+    });
+
+    // Save changes on blur
+    selects.blur(function(){
         FTC.forms.delayedUpdate(obj);
     });
 };
@@ -178,39 +187,36 @@ FTC.forms.edit_item_fields = function(html, obj, app) {
 
     // Add Item
     html.find('.item .item-add').click(function() {
-       const container = $(this).parent().attr("data-item-container");
-       const data = duplicate(game.templates.item);
-       let item = new FTCItem(data, app, {});
-       item.editOwnedItem(obj, obj.data[container]);
+       const container = $(this).parent().attr("data-item-container"),
+           data = duplicate(game.templates.item),
+           owner = obj.obj,
+           item = new FTCItem(data, app, {});
+       item.editOwnedItem(owner, obj.data[container]);
     });
 
     // Edit Item
     html.find('.item-list .item-edit').click(function() {
-
-        // Get Data
-        const li = $(this).closest("li");
-        const container = li.attr("data-item-container");
-        const itemId = li.attr("data-item-id");
-
-        // Prepare item for editing
-        let itemData = duplicate(obj.data[container][itemId]),
+        const li = $(this).closest("li"),
+            container = li.attr("data-item-container"),
+            owner = obj.obj,
+            itemId = li.attr("data-item-id"),
+            itemData = duplicate(obj.data[container][itemId]),
             item = new FTCItem(itemData, app, {});
 
         // Edit the owned item
-        item.editOwnedItem(obj, obj.data[container], itemId);
+        item.editOwnedItem(owner, obj.data[container], itemId);
     });
 
     // Delete Item
     html.find('.item-list .item-trash').click(function() {
-
-        // Get data
-        const li = $(this).closest("li");
-        const container = li.attr("data-item-container");
-        const itemId = li.attr("data-item-id");
+        const li = $(this).closest("li"),
+            owner = obj.obj,
+            container = li.attr("data-item-container"),
+            itemId = li.attr("data-item-id");
 
         // TODO: do this better Delete item
-        obj.obj.data[container].splice(itemId, 1);
-        obj.sync("updateAsset");
+        owner.data[container].splice(itemId, 1);
+        owner.sync("updateAsset");
     });
 };
 
