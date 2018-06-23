@@ -25,9 +25,9 @@ const FTC = {
             object: The data object to traverse
             name: The composite property name to search for
         */
-        var parts = name.split("."),
+        let parts = name.split("."),
             data = object;
-        for (var i = 0; i < parts.length; i++) {
+        for (let i = 0; i < parts.length; i++) {
             data = data[parts[i]];
             if (data === undefined) {
                 break;
@@ -38,53 +38,79 @@ const FTC = {
 
     /* ------------------------------------------- */
 
-    setProperty: function(object, name, value, dtype) {
+    cleanValue: function(value, dtype) {
 
         // Strings
-        if ( dtype == "str" ) {
-            value = value;
+        if ( dtype === "str" ) {
+            value = value.valid();
         }
 
-        // Sanitize Tags
-        else if ( name === "tags" ) {
-            var tags = {};
+        // Tags - comma separated list
+        else if ( dtype === "tags" ) {
+            let tags = {};
             $.each(value.replace(" ", "").split(','), function(_, tag) {
-               tags[tag] = true;
+               tags[tag] = 1;
             });
             value = tags;
         }
 
-        // Sanitize Values
-        else if (name.startsWith("stats.")) {
+        // Integers
+        else if ( util.contains(["int", "posint"], dtype) ) {
             value = parseInt((typeof(value) === "number") ? value : value.split(',').join(''));
-            value = Math.min(Math.max(value, 0), 30);
-        }
-        else if (name.startsWith("counters.")) {
-            value = parseInt((typeof(value) === "number") ? value : value.split(',').join(''));
-            value = Math.max(value || 0, 0);
+            if ( dtype === "posint" ) {
+                value = Math.max(value, 0);
+            }
         }
 
-        // Record Key
-        var parts = name.split("."),
-              key = parts.pop(-1),
-             data = object.data;
-        for (var i = 0; i < parts.length; i++) {
-            part = parts[i];
-            if (data[part] === undefined) data[part] = {};
-            data = data[part];
-        }
+        // Return cleaned value
+        return value;
+    },
+
+    /* ------------------------------------------- */
+
+    setProperty: function(data, name, value, dtype) {
+
+        // TODO: Temporary dtype assignment
+        if ( name === "tags" ) dtype = "tags";
+        if ( name.startsWith("stats.") ) dtype = "posint";
+        if ( name.startsWith("counter") ) dtype = "posint";
+
+        // Sanitize target value
+        value = FTC.cleanValue(value, dtype);
+
+        // Get the data target
+        let [target, key] = this.getTargetKey(data, name);
+        if ( !target || !key ) return;
 
         // Set the value if it is defined
-        if (value !== undefined && value !== "") data[key] = value;
-        else delete data[key];
-
-        // Remove temporary data
-        delete object.data.ftc;
-
-        // Save Object
-        object.sync("updateAsset");
-        return object;
+        if (value !== undefined && value !== "") target[key] = value;
+        else delete target[key];
     },
+
+    getTargetKey: function(data, name) {
+        let parts = name.split("."),
+              key = parts.pop(),
+             part = undefined;
+        for (let i = 0; i < parts.length; i++) {
+            part = parts[i];
+            if ( !data[part] ) return {};
+            data = data[part];
+        }
+        return [data, key];
+    },
+
+    /* ------------------------------------------- */
+
+    saveObject: function(obj, strategy) {
+
+        // TODO: Eventually this should just be obj.save and this gets removed
+        if (obj instanceof FTCObject) {
+            obj.save(strategy);
+        } else {
+            delete obj.data.ftc;
+            obj.sync(strategy);
+        }
+    }
 };
 
 
@@ -95,6 +121,7 @@ class FTCObject {
         this.obj = this.enrichObject(obj);
         this.app = app;
         this.scope = this.refineScope(scope);
+        this.changed = false;
         FTC.object = this;
     }
 
@@ -104,7 +131,7 @@ class FTCObject {
         if ( "sync" in obj ) {
             obj.data = this.constructor.enrichData(obj.data);
         } else {
-            var data = this.constructor.enrichData(obj);
+            const data = this.constructor.enrichData(obj);
             obj = sync.obj();
             obj.data = data;
         }
@@ -141,13 +168,28 @@ class FTCObject {
     /* ------------------------------------------- */
 
     getData(name) {
-        return FTC.getProperty(this.data, name);
+        FTC.getProperty(this.data, name);
     }
 
     /* ------------------------------------------- */
 
     setData(name, value, dtype) {
-        return FTC.setProperty(this.data, name, value, dtype);
+        FTC.setProperty(this.data, name, value, dtype);
+        this.changed = true;
+    }
+
+    /* ------------------------------------------- */
+
+    save(strategy) {
+        /*
+        Sync the object, saving updated data and refreshing associated UI elements.
+        Remove temporary data and save.
+        */
+
+        if ( !this.changed ) return;
+        console.log("Saving object with strategy " + strategy);
+        delete this.obj.data.ftc;
+        this.obj.sync(strategy);
     }
 
     /* ------------------------------------------- */
@@ -155,7 +197,7 @@ class FTCObject {
     renderHTML() {
 
         // Build Template and Populate Data
-        var html = this.buildHTML();
+        let html = this.buildHTML();
         html = this.populateHTML(html);
         this.html = $(html);
 
@@ -163,7 +205,7 @@ class FTCObject {
         FTC.ui.activate_tabs(this.html, this.obj, this.app);
 
         // Activate Fields
-        FTC.events.activateFields(this.html, this.obj, this.app);
+        FTC.forms.activateFields(this.html, this, this.app);
 
         // Enable Clickable Sheet Actions
         FTC.actions.attribute_actions(this.html, this.obj, this.app);
@@ -173,7 +215,7 @@ class FTCObject {
         FTC.ui.cleanup_app(this.app);
 
         // Return final HTML
-        return this.html
+        return this.html;
     }
 
     buildHTML() {
@@ -190,14 +232,10 @@ class FTCObject {
 /* GM Forge Initialization Hook                 */
 /* -------------------------------------------- */
 
-hook.add("Initialize", "FTCSetup", function(obj, app, scope, dt) {
+hook.add("Initialize", "FTCSetup", function(...args) {
+    let gameid = game.templates.identifier;
 
     // Only initialize FTC if we are using the correct system OR no system at all
-    if ( game.templates.identifier === FTC_SYSTEM_IDENTIFIER ) {
-        FTC.init();
-    }
-    else {
-        console.log("Foundry Tactics installed but not loaded for system: " + game.templates.identifier);
-    }
+    if ( gameid === FTC_SYSTEM_IDENTIFIER ) FTC.init();
+    else console.log("Foundry Tactics installed but not loaded for system: " + gameid);
 });
-

@@ -1,59 +1,5 @@
 <section id="ftc-{uid}" class="ftc-sheet ftc-character flexrow">
-	<aside class="ftc-sheet-sidebar flexcolumn">
-		<div class="ftc-sheet-profile">
-			<img class="profile-image ftc-image" data-edit="info.img.current" src="{info.img.current}"/>
-			<img class="token-image ftc-image" data-edit="info.img.min" src="{info.img.min}"/>
-		</div>
 
-		<!-- SIDEBAR TABS -->
-		<ul class="sheet-tabs" id="sidebar-tabs">
-			<li id="tab-attributes" class="sheet-tab tab-active">Attributes</li>
-			<li id="tab-skills" class="sheet-tab">Skills</li>
-			<li id="tab-abilities" class="sheet-tab">Abilities</li>
-		</ul>
-
-		<div id="content-attributes" class="content-tab tab-active">
-			<ol class="attributes-list">
-				<!-- FTC_ATTRIBUTE_HTML -->
-			</ol>
-
-			<div class="attributes-primary-stats">
-				<div class="primary-stat initiative">
-					<header>Initiative</header>
-					<div class="primary-stat-value">
-						<span>{ftc.Dex.modstr}.{ftc.Dex.padstr}</span>
-					</div>
-				</div>
-
-				<div class="primary-stat speed">
-					<header>Movement Speed</header>
-					<div class="primary-stat-value">
-						<input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.speed.current"
-							   value="{counters.speed.current}" placeholder="10"/>
-						<span> Ft.</span>
-					</div>
-					<footer>
-						<input class="ftc-edit" type="text" tabindex="0" data-edit="counters.speed.extra" data-dtype="str"
-							   value="{counters.speed.extra}" placeholder="Climb / Swim"/>
-					</footer>
-				</div>
-			</div>
-		</div>
-
-		<div id="content-skills" class="content-tab">
-			<ol class="skills-list">
-				<!-- FTC_SKILL_HTML -->
-			</ol>
-		</div>
-
-		<div id="content-abilities" class="content-tab">
-			<ol class="abilities item-list">
-				<!-- CHARACTER_TAB_ABILITIES -->
-			</ol>
-		</div>
-	</aside>
-
-	<!-- MAIN SHEET CONTAINER -->
 	<main class="ftc-sheet-main flexcolumn">
 		<header class="ftc-sheet-header flexrow flexwrap">
 			<h1 class="charname">
@@ -189,4 +135,58 @@
 		
 
 	</main>
+
+	<aside class="ftc-sheet-sidebar flexcolumn">
+		<div class="ftc-sheet-profile">
+			<img class="profile-image ftc-image" data-edit="info.img.current" src="{info.img.current}"/>
+			<img class="token-image ftc-image" data-edit="info.img.min" src="{info.img.min}"/>
+		</div>
+
+		<!-- SIDEBAR TABS -->
+		<ul class="sheet-tabs" id="sidebar-tabs">
+			<li id="tab-attributes" class="sheet-tab tab-active">Attributes</li>
+			<li id="tab-skills" class="sheet-tab">Skills</li>
+			<li id="tab-abilities" class="sheet-tab">Abilities</li>
+		</ul>
+
+		<div id="content-attributes" class="content-tab tab-active">
+			<ol class="attributes-list">
+				<!-- FTC_ATTRIBUTE_HTML -->
+			</ol>
+
+			<div class="attributes-primary-stats">
+				<div class="primary-stat initiative">
+					<header>Initiative</header>
+					<div class="primary-stat-value">
+						<span>{ftc.Dex.modstr}.{ftc.Dex.padstr}</span>
+					</div>
+				</div>
+
+				<div class="primary-stat speed">
+					<header>Movement Speed</header>
+					<div class="primary-stat-value">
+						<input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.speed.current"
+							   value="{counters.speed.current}" placeholder="10"/>
+						<span> Ft.</span>
+					</div>
+					<footer>
+						<input class="ftc-edit" type="text" tabindex="0" data-edit="counters.speed.extra" data-dtype="str"
+							   value="{counters.speed.extra}" placeholder="Climb / Swim"/>
+					</footer>
+				</div>
+			</div>
+		</div>
+
+		<div id="content-skills" class="content-tab">
+			<ol class="skills-list">
+				<!-- FTC_SKILL_HTML -->
+			</ol>
+		</div>
+
+		<div id="content-abilities" class="content-tab">
+			<ol class="abilities item-list">
+				<!-- CHARACTER_TAB_ABILITIES -->
+			</ol>
+		</div>
+	</aside>
 </section>

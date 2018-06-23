@@ -20,25 +20,26 @@
 
 .ftc-sheet .ftc-sheet-main {
     flex: 1;
+    order: 2;
     margin: 15px;
     padding: 0;
 }
 
+.ftc-sheet .ftc-sheet-sidebar {
+    flex: 0 0 250px;
+    order: 1;
+    padding: 15px;
+    border-right: 1px solid #999;
+}
+
+
+/* Main Section */
 .ftc-sheet-header {
     height: 90px;
 }
 
-
-
 .ftc-sheet-secondary {
     flex: 1;
-}
-
-
-.ftc-sheet-sidebar {
-    flex: 0 0 250px;
-    padding: 15px;
-    border-right: 1px solid #999;
 }
 
 h2.section-header {
@@ -47,8 +48,6 @@ h2.section-header {
     border-bottom: 1px solid #BBB;
     text-align: center;
 }
-
-
 
 
 /* -------------------------------------------
