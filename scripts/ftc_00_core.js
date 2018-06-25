@@ -1,5 +1,9 @@
 const FTC_PACKAGE_NAME = "dnd5e-foundry-tactics";
 const FTC_SYSTEM_IDENTIFIER = 'dnd5e_ftc';
+
+/* ------------------------------------------- */
+/* FTC GLOBALS AND UTILITY FUNCTIONS            */
+/* ------------------------------------------- */
 const FTC = {
 
     ROOT_DIR: 'workshop/'+FTC_PACKAGE_NAME+'/',
@@ -12,6 +16,53 @@ const FTC = {
         hook.call("FTCInit");
         $('body').append('<link rel="stylesheet" href="'+ FTC.CSS_DIR + 'FTC.css" type="text/css" />');
         console.log("D&D5e Foundry Tactics Loaded");
+    },
+
+    /* ------------------------------------------- */
+
+    loadTemplate: function(path) {
+        /*
+        Load a template from the provided path, returning the HTML as a string.
+        */
+        return $.get({
+          url: path,
+          dataType: 'html',
+          async: false
+        }).responseText;
+    },
+
+    /* ------------------------------------------- */
+
+    injectTemplate: function(html, target, template) {
+        /*
+        Inject a sub-template into parent HTML, given a target HTML comment and template path
+
+        Arguments:
+            html: An HTML string containing comments with the form <!-- TEMPLATE_NAME -->
+            target: The constant name to replace, in this case TEMPLATE_NAME
+            template: The path to the HTML template file to
+        */
+        var target = "<!-- "+target+" -->";
+        if (html.includes(target) === false) return html;
+        var content = this.loadTemplate(template);
+        html = html.replace(target, content)
+        return html;
+    },
+
+    /* ------------------------------------------- */
+
+    populateTemplate: function(html, data) {
+        /*
+        Populate an HTML template by embedding data into it from some provided object.
+
+        Arguments:
+            html: An HTML string
+            data: An arbitrary data object
+        */
+        return html.replace(/{([\w.]+)}/g, function(match, attr) {
+            var val = FTC.getProperty(data, attr);
+            return (val !== undefined) ? val : "";
+        });
     },
 
     /* ------------------------------------------- */
@@ -72,6 +123,20 @@ const FTC = {
 
     /* ------------------------------------------- */
 
+    getTargetKey: function(data, name) {
+        let parts = name.split("."),
+              key = parts.pop() || "",
+             part = undefined;
+        for (let i = 0; i < parts.length; i++) {
+            part = parts[i];
+            if ( !data[part] ) return [{}, key];
+            data = data[part];
+        }
+        return [data, key];
+    },
+
+    /* ------------------------------------------- */
+
     setProperty: function(data, name, value, dtype) {
 
         // TODO: Temporary dtype assignment
@@ -83,25 +148,14 @@ const FTC = {
         value = FTC.cleanValue(value, dtype);
 
         // Get the data target
-        let [target, key] = this.getTargetKey(data, name);
+        console.log(FTC);
+        let [target, key] = FTC.getTargetKey(data, name);
         if ( !target || !key ) return;
 
         // Set the value if it is defined
         if (value !== undefined && value !== "") target[key] = value;
         else delete target[key];
-    },
-
-    getTargetKey: function(data, name) {
-        let parts = name.split("."),
-              key = parts.pop(),
-             part = undefined;
-        for (let i = 0; i < parts.length; i++) {
-            part = parts[i];
-            if ( !data[part] ) return {};
-            data = data[part];
-        }
-        return [data, key];
-    },
+    }
 };
 
 
@@ -218,7 +272,7 @@ class FTCObject {
     }
 
     populateHTML(html) {
-        return FTC.template.populate(html, this.obj.data);
+        return FTC.populateTemplate(html, this.obj.data);
     }
 }
 

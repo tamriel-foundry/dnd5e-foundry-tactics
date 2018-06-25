@@ -129,18 +129,18 @@ class FTCCharacter extends FTCObject {
 
         // Load primary template
         let template = this.isPrivate ? this.templates.FTC_SHEET_PRIVATE : this.templates.FTC_SHEET_FULL,
-            main = FTC.template.load(template),
+            main = FTC.loadTemplate(template),
             obj = this.obj;
 
         // Augment sub-components
         if (!this.isPrivate) {
 
             // Primary Stats
-            main = FTC.template.inject(main, "CHARACTER_PRIMARY_STATS", this.templates.CHARACTER_PRIMARY_STATS)
+            main = FTC.injectTemplate(main, "CHARACTER_PRIMARY_STATS", this.templates.CHARACTER_PRIMARY_STATS)
 
             // Attributes
             let attrs = "";
-            let template = FTC.template.load(this.templates.FTC_ATTRIBUTE_HTML);
+            let template = FTC.loadTemplate(this.templates.FTC_ATTRIBUTE_HTML);
             for ( var s in obj.data.stats ) {
                 attrs += template.replace(/\{stat\}/g, s);
             }
@@ -148,7 +148,7 @@ class FTCCharacter extends FTCObject {
 
             // Insert Skills
             let skills = "";
-            template = FTC.template.load(this.templates.FTC_SKILL_HTML)
+            template = FTC.loadTemplate(this.templates.FTC_SKILL_HTML)
             for (var s in obj.data.skills) {
                 skills += template.replace(/\{skl\}/g, s);
             }
@@ -156,22 +156,22 @@ class FTCCharacter extends FTCObject {
 
             // Insert Inventory
             let items = "";
-            template = FTC.template.load(this.templates.FTC_ITEM_HTML);
+            template = FTC.loadTemplate(this.templates.FTC_ITEM_HTML);
             $.each(obj.data.inventory, function(i, item) {
                 item.itemid = i;
-                items += FTC.template.populate(template, item);
+                items += FTC.populateTemplate(template, item);
             });
             items = items || '<li><blockquote class="compendium">Add items from the compendium.</blockquote></li>';
             main = main.replace("<!-- FTC_INVENTORY_HTML -->", items);
 
             // Insert Spells
             let spells = "",
-                ltmp = FTC.template.load(this.templates.FTC_SPELL_LEVEL),
-                stmp = FTC.template.load(this.templates.FTC_SPELL_HTML);
+                ltmp = FTC.loadTemplate(this.templates.FTC_SPELL_LEVEL),
+                stmp = FTC.loadTemplate(this.templates.FTC_SPELL_HTML);
             $.each(obj.data.ftc.spellLevels, function(l, s){
-                spells += FTC.template.populate(ltmp, s);
+                spells += FTC.populateTemplate(ltmp, s);
                 $.each(s.spells, function(i, p){
-                    spells += FTC.template.populate(stmp, p);
+                    spells += FTC.populateTemplate(stmp, p);
                 });
             });
             spells = spells || '<li><blockquote class="compendium">Add spells from the compendium.</blockquote></li>';
@@ -179,16 +179,16 @@ class FTCCharacter extends FTCObject {
 
             // Abilities
             let abilities = "";
-            template = FTC.template.load(this.templates.CHARACTER_ABILITY);
+            template = FTC.loadTemplate(this.templates.CHARACTER_ABILITY);
             $.each(obj.data.abilities, function(i, item) {
                 item.itemid = i;
-                abilities += FTC.template.populate(template, item);
+                abilities += FTC.populateTemplate(template, item);
             });
             abilities = abilities || '<li><blockquote class="compendium">Add abilities from the compendium.</blockquote></li>';
             main = main.replace("<!-- CHARACTER_TAB_ABILITIES -->", abilities);
 
             // Character Traits
-            main = FTC.template.inject(main, "CHARACTER_TAB_TRAITS", this.templates.CHARACTER_TAB_TRAITS)
+            main = FTC.injectTemplate(main, "CHARACTER_TAB_TRAITS", this.templates.CHARACTER_TAB_TRAITS)
         }
         return main;
     }

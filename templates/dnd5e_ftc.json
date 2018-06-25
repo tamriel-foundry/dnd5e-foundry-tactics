@@ -1092,6 +1092,9 @@
       "type": {
         "name": "Entry Type"
       },
+      "variety": {
+        "name": "Item Variety"
+      },
       "quantity": {
         "name": "Quantity",
         "min": 0,
@@ -1103,14 +1106,14 @@
       },
       "price": {
         "name": "Price"
+      },
+      "source": {
+        "name": "Source"
       }
     },
     "armor": {
       "ac": {
         "name": "Armor Class"
-      },
-      "type": {
-        "name": "Armor Type"
       },
       "str": {
         "name": "Required Strength"
@@ -1123,9 +1126,6 @@
       }
     },
     "weapon": {
-      "type": {
-        "name": "Weapon Type"
-      },
       "hit": {
         "name": "Attack Bonus"
       },
@@ -1163,14 +1163,15 @@
       },
       "materials": {
         "name": "Material Components"
-      }
-    },
-    "ability": {
-      "source": {
-        "name": "Source"
       },
-      "cost": {
-        "name": "Ability Cost"
+      "ritual": {
+        "name": "Ritual Spell"
+      },
+      "concentration": {
+        "name": "Requires Concentration"
+      },
+      "classes": {
+        "name": "Classes"
       }
     }
   },
@@ -1463,6 +1464,16 @@
             "classes" : "flexcolumn",
             "ui" : "ui_rollText",
             "passContext" : true
+          }
+        }
+      },
+      "spell_action": {
+        "classes": "flexcolumn ftc-spell-action",
+        "results" : {
+          "display" : {
+            "scope": {},
+            "passContext" : true,
+            "ui" : "FTC_SPELL_CAST"
           }
         }
       }

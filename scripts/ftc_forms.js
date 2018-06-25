@@ -162,8 +162,8 @@ FTC.forms.edit_mce_fields = function(html, obj, app) {
             min_height: 250,
             height: 300,
             auto_focus: selector,
-            plugins: 'lists save',
-            toolbar: 'bold italic underline bullist numlist styleselect save',
+            plugins: 'lists save code',
+            toolbar: 'bold italic underline bullist numlist styleselect removeformat code save',
             save_enablewhendirty: false,
             save_onsavecallback: function(mce) {
                 obj.setData(target, mce.getContent(), "str");

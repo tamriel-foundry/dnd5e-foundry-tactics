@@ -165,5 +165,108 @@ FTC.actions = {
 };
 
 
+
+
+/* -------------------------------------------- */
+/* Spell Cast Chat Render			            */
+/* -------------------------------------------- */
+
+class FTCSpellAction extends FTCObject {
+
+    constructor(obj, app, scope) {
+        super(obj, app, scope);
+        this.spellAttacks();
+        this.template = FTC.TEMPLATE_DIR + 'items/action-spell.html';
+        this.flavors = [
+            "Invokes arcane energy",
+            "Focuses intently",
+            "Steels in concentration",
+            "Prepares an incantation",
+            "Summons mystical power",
+            "Unleashes inner power",
+        ];
+    }
+
+    /* -------------------------------------------- */
+
+    static enrichData(data) {
+        let spell = data.spell;
+        data.ftc = {};
+
+        // Construct spell properties HTML
+        const props = [
+            (spell.level.current === 0) ? "Cantrip" : FTC.ui.getOrdinalNumber(spell.level.current) + " Level",
+            spell.school.current.capitalize(),
+            spell.time.current.titleCase(),
+            spell.duration.current,
+            spell.components.current,
+            (spell.ritual.current) ? "Ritual" : undefined,
+            (spell.concentration.current) ? "Concentration" : undefined
+        ];
+        let propStr = "";
+        $.each(props, function(_, p) {
+            if (p) propStr += `<span class="spell-prop">${p}</span>`;
+        });
+        data.ftc["spellProps"] = propStr;
+        return data;
+    }
+
+    /* -------------------------------------------- */
+
+    renderHTML() {
+        let html = FTC.loadTemplate(this.template);
+        html = FTC.populateTemplate(html, this.data);
+        return html;
+    }
+
+    /* -------------------------------------------- */
+
+    spellAttacks() {
+        let data = this.data,
+            spell = data.spell,
+            owner = this.scope.owner;
+
+        // Spell Saves
+        if (data.info.variety.current === "save") {
+            let dc = owner.data.ftc.spellDC,
+                fml = data.weapon.damage.current,
+                atk = `<h3 class="spell-roll spell-dc" title="Roll Damage" data-formula="${fml}">Spell DC ${dc}</h3>`;
+            data.ftc.spellAttack = atk;
+        }
+    }
+
+    /* -------------------------------------------- */
+
+    diceCheck() {
+        let eqn = sync.executeQuery();
+        eqn.equations = [];
+        let owner = this.scope.owner;
+        let html = this.renderHTML();
+        console.log(html);
+
+        let eventData = {
+            "f": owner.data.info.name.current,
+            "icon": owner.data.info.img.current,
+            "msg": this.flavors[Math.floor(Math.random() * this.flavors.length)],
+            "data": eqn,
+            "ui": "spell_action",
+            "var": {"html": html}
+        };
+        runCommand("diceCheck", eventData);
+    }
+
+    /* -------------------------------------------- */
+}
+
+sync.render("FTC_SPELL_CAST", function (obj, app, scope) {
+    return $(obj.data.data.var.html);
+});
+
+
+ftc_test_spell = function(character) {
+    let spell = new FTCSpellAction(character.data.spellbook[0], undefined, {"owner": character.obj});
+    spell.diceCheck();
+};
+
 // End FTCInit
 });

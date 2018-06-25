@@ -334,3 +334,16 @@ blockquote em {
     outline: 1px solid #222;
     border-radius: 3px;
 }
+
+
+/* -------------------------------------------
+     DANGER DANGER OVERRIDES
+------------------------------------------- */
+
+.hover2:hover {
+    color: inherit;
+    border-radius: inherit;
+    background-color: inherit;
+    outline-color: inherit;
+    box-shadow: inherit;
+}

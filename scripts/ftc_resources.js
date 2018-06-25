@@ -9,8 +9,8 @@ FTC.resources = {
         scope = scope || {viewOnly: (app.attr("viewOnly") == "true"), preview : (app.attr("preview") == "true")};
 
         // Load HTML
-	    var html = FTC.template.load(this.TEMPLATE_PAGE_VIEW);
-        html = FTC.template.populate(html, obj.data);
+	    var html = FTC.loadTemplate(this.TEMPLATE_PAGE_VIEW);
+        html = FTC.populateTemplate(html, obj.data);
         return $(html);
 
     },

@@ -7,7 +7,7 @@
 
     <div role="group" class="form-group flexrow">
     <label>{spell.school.name}</label>
-        <select class="ftc-select armor-type" data-edit="spell.school.current" data-selected="{spell.school.current}">
+        <select class="ftc-select" data-edit="spell.school.current" data-selected="{spell.school.current}">
             <option value=""></option>
             <option value="abjuration">Abjuration</option>
             <option value="conjuration">Conjuration</option>
@@ -17,6 +17,16 @@
             <option value="illusion">Illusion</option>
             <option value="necromancy">Necromancy</option>
             <option value="transmutation">Transmutation</option>
+        </select>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>Spell Type</label>
+        <select class="ftc-select item-variety" data-edit="info.variety.current" data-selected="{info.variety.current}">
+            <option value=""></option>
+            <option value="attack">Spell Attack</option>
+            <option value="save">Saving Throw</option>
+            <option value="other">Other</option>
         </select>
     </div>
 

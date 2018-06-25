@@ -76,5 +76,19 @@ FTC.ui = {
 	},
 };
 
+
+/* Utility Functions */
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
+String.prototype.titleCase = function() {
+  return this.toLowerCase().split(' ').map(function(word) {
+    return word.replace(word[0], word[0].toUpperCase());
+  }).join(' ');
+};
+
+
+
 // End FTCInit
 });

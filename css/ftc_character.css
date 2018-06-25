@@ -133,7 +133,7 @@ div.proficiency { background-image: url("../content/icons/proficiency.png"); }
 div.speed { background-image: url("../content/icons/speed.png"); }
 div.initiative { background-image: url("../content/icons/initiative.png"); }
 div.resource1 { background-image: url("../content/icons/gears.png"); }
-div.resource2 { background-image: url("../content/icons/bash.png"); }
+div.resource2 { background-image: url("../content/icons/shield.png"); }
 div.death { background-image: url("../content/icons/death.png"); }
 
 
@@ -331,9 +331,11 @@ blockquote.compendium {
 }
 
 .content-tab .ftc-textfield-edit {
+    height: 20px;
 	position: absolute;
-	top: 0px;
-    right: 18px;
+    top: inherit;
+	bottom: 0px;
+    left: 0px;
 	color: #999;
 }
 

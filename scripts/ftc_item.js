@@ -70,11 +70,11 @@ class FTCItem extends FTCObject {
         // Toggle type-specific template
         var obj = this.obj;
         var type = obj.data.info.type.current || "note";
-        var html = FTC.template.load(this.template.replace("{type}", type));
+        var html = FTC.loadTemplate(this.template.replace("{type}", type));
 
         // Inject content templates
         $.each(this.parts, function(name, path) {
-            html = FTC.template.inject(html, name, path);
+            html = FTC.injectTemplate(html, name, path);
         });
         return html;
     }
@@ -161,3 +161,47 @@ hook.add("FTCInit", "Items", function() {
 });
 
 /* -------------------------------------------- */
+
+
+convert_srd_spells = function() {
+    const _convert = function(d) {
+        let item = duplicate(game.templates.item),
+            info = item.info,
+            spell = item.spell,
+            level = (d.level === "Cantrip") ? 0 : parseInt(d.level[0]);
+
+        const prices = [10, 60, 120, 200, 320, 640, 1280, 2560, 5120, 10240];
+
+        info.name.current = d.name;
+        info.notes.current = (d.higher_level) ? d.desc + "<h3>Higher Levels</h3>" + d.higher_level : d.desc;
+        info.type.current = "spell";
+        info.weight.current = 0.10;
+        info.price.current = prices[level];
+        info.source.current = d.page;
+        item.tags["Spell"] = 1;
+        item.tags[d.school] = 1;
+
+        spell.level.current = level;
+        spell.school.current = d.school.toLowerCase();
+        spell.duration.current = d.duration;
+        spell.time.current = d.casting_time;
+        spell.components.current = d.components;
+        spell.materials.current = d.material;
+        item.weapon.range.current = d.range;
+        spell.ritual.current = (d.ritual === "yes") ? 1 : 0;
+        spell.concentration.current = (d.concentration === "yes") ? 1 : 0;
+        spell.classes.current = d.class;
+        return item;
+    };
+
+    let data = $.get({
+          url: "content/srd_spells.json",
+          dataType: 'json',
+          async: false
+    }).responseText;
+    data = JSON.parse(data);
+
+    $.each(data, function(i, item) {
+        runCommand("createItem", _convert(item));
+    })
+};
