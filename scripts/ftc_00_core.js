@@ -257,8 +257,7 @@ class FTCObject {
         FTC.forms.activateFields(this.html, this, this.app);
 
         // Enable Clickable Sheet Actions
-        FTC.actions.attribute_actions(this.html, this.obj, this.app);
-        FTC.actions.skill_actions(this.html, this.obj, this.app);
+        FTC.actions.activateActions(this.html, this.obj, this.app);
 
         // Sechedule Cleanup Actions
         FTC.ui.cleanup_app(this.app);

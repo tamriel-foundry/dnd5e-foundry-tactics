@@ -13,9 +13,6 @@
 .spell-action-header > img {
     flex: 0 0 32px;
     margin-right: 10px;
-    border: 1px solid #000;
-    box-shadow: 0 0 4px #000;
-    box-sizing: content-box;
 }
 
 .spell-action-header > h2 { flex: 1; }
@@ -32,10 +29,10 @@
 
 
 .spell-action-footer > .spell-prop {
-    margin: 0 0.25em 0 0;
-    padding-right: 0.25em;
-    border-right: 1px solid #666;
-    font-weight: bold;
+    flex: 1;
+    padding: 0 5px;
+    border-right: 1px solid #999;
+    text-align: center;
 }
 .spell-action-footer > .spell-prop:last-of-type {
     border-right: none;
@@ -43,16 +40,19 @@
 }
 
 
-.spell-attack {
-    justify-content: center;
+/* Spell DC and Spell Roll */
+.spell-dc, .spell-roll {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #111;
+    border-radius: 5px;
+    box-shadow: 0 0 4px #999;
+    margin: 0.5em 0;
 }
 
 .spell-roll {
-    text-align: center;
     padding: 5px 5px 5px 35px;
-    border: 1px solid #444;
-    border-radius: 5px;
-    background: url("../content/icons/d20.png") no-repeat 0 50%;
+    background: url(../content/icons/d20.png) no-repeat 0 50%;
 }
 
 .spell-roll:hover {

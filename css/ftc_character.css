@@ -501,6 +501,9 @@ img.spell-image { margin-top: -2px; }
     height: 24px;
 }
 
+/* Rollable Spells */
+.spell .ftc-rollable:hover { text-shadow: 0 0 4px #ff3838; }
+
 
 /* -------------------------------------------
  	Abilities

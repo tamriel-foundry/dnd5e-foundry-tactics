@@ -54,11 +54,15 @@ h2.section-header {
      ASSET IMAGES
 ------------------------------------------- */
 
+img.ftc-image {
+    box-sizing: content-box;
+    border: 1px solid #000;
+    box-shadow: 0 0 4px #000;
+}
+
 img.profile-image {
     height: 250px;
     width: 250px;
-    border: 1px solid #000;
-    box-shadow: 0 0 4px #000;
 }
 
 img.token-image {
@@ -68,8 +72,6 @@ img.token-image {
     right: 5px;
     height: 40px;
     width: 40px;
-    border: 1px solid #000;
-    box-shadow: 0 0 4px #000;
 }
 
 .profile-image:hover, .token-image:hover {
@@ -319,8 +321,6 @@ blockquote em {
 
 
 /* Scrollbar */
-
-
 .ftc-sheet ::-webkit-scrollbar {
     width: 6px;
     background: transparent;
@@ -340,7 +340,7 @@ blockquote em {
      DANGER DANGER OVERRIDES
 ------------------------------------------- */
 
-.hover2:hover {
+div[ui-name="ui_textBox"] .hover2:hover {
     color: inherit;
     border-radius: inherit;
     background-color: inherit;

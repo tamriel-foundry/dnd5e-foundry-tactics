@@ -875,7 +875,7 @@
       },
       "ac": {
         "name": "Armor Class",
-        "current": 0
+        "current": 10,
       },
       "speed": {
         "name": "Speed",
