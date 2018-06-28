@@ -215,6 +215,7 @@ class FTCSpellAction extends FTCObject {
             (spell.level.current === 0) ? "Cantrip" : FTC.ui.getOrdinalNumber(spell.level.current) + " Level",
             spell.school.current.capitalize(),
             spell.time.current.titleCase(),
+            data.weapon.range.current,
             spell.duration.current,
             spell.components.current,
             (spell.ritual.current) ? "Ritual" : undefined,
