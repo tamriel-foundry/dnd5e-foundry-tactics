@@ -241,6 +241,7 @@ class FTCSpellAction extends FTCObject {
     spellAttacks() {
         let data = this.data,
             spell = data.spell;
+            //canRoll = hasSecurity(getCookie("UserID"), "Owner", this.owner.data);
 
         // Spell Attack Roll
         if (data.info.variety.current === "attack") {
@@ -335,11 +336,6 @@ sync.render("FTC_SPELL_CAST", function (obj, app, scope) {
     return html;
 
 });
-
-
-ftc_test_spell = function(owner, spellId) {
-    FTCSpellAction.diceCheck(owner.obj, spellId);
-};
 
 // End FTCInit
 });

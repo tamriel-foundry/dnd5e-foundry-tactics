@@ -148,14 +148,21 @@ const FTC = {
         value = FTC.cleanValue(value, dtype);
 
         // Get the data target
-        console.log(FTC);
         let [target, key] = FTC.getTargetKey(data, name);
         if ( !target || !key ) return;
 
         // Set the value if it is defined
         if (value !== undefined && value !== "") target[key] = value;
         else delete target[key];
+    },
+
+    /* ------------------------------------------- */
+
+    saveObject: function(object) {
+        delete object.data.ftc;
+        object.sync("updateAsset");
     }
+
 };
 
 
@@ -238,6 +245,7 @@ class FTCObject {
         if ( !this.changed ) return;
         console.log("Saving object " + this.name+ " with strategy " + strategy);
         delete this.obj.data.ftc;
+        console.log(this.obj);
         this.obj.sync(strategy);
     }
 
@@ -285,5 +293,5 @@ hook.add("Initialize", "FTCSetup", function(...args) {
 
     // Only initialize FTC if we are using the correct system OR no system at all
     if ( gameid === FTC_SYSTEM_IDENTIFIER ) FTC.init();
-    else console.log("Foundry Tactics installed but not loaded for system: " + gameid);
+    else console.log("Foundry Tactics is enabled but not active for system: " + gameid);
 });

@@ -99,7 +99,7 @@ class FTCItem extends FTCObject {
             confirm = $('<button class="fit-x">Update Item</button>');
         confirm.click(function () {
             collection[index] = item;
-            owner.sync("updateAsset");
+            FTC.saveObject(owner);
             layout.coverlay("edit-item");
         });
         frame.append(confirm);
