@@ -12,9 +12,9 @@
     </div>
 
     <div role="group" class="form-group flexrow">
-        <label>{ability.source.name}</label>
-        <input type="text" class="ftc-edit spell-level" tabindex="0" data-edit="ability.source.current"
-               value="{ability.source.current}" placeholder="Class/Feat"/>
+        <label>Ability Source</label>
+        <input type="text" class="ftc-edit spell-level" tabindex="0" data-edit="info.source.current"
+               value="{info.source.current}" placeholder="Class/Feat"/>
     </div>
 
     <div role="group" class="form-group flexrow">
@@ -24,8 +24,14 @@
     </div>
 
     <div role="group" class="form-group flexrow">
-        <label>{ability.cost.name}</label>
-        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="ability.cost.current"
-               value="{ability.cost.current}" placeholder="Resource"/>
+        <label>Ability Cost</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="spell.materials.current"
+               value="{spell.materials.current}" placeholder="Resource Cost"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>Requirements</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="weapon.properties.current"
+               value="{weapon.properties.current}" data-dtype="str" placeholder="Prerequisites"/>
     </div>
 </form>

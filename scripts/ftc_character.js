@@ -26,8 +26,6 @@ class FTCCharacter extends FTCObject {
     /* ------------------------------------------- */
 
     refineScope(scope) {
-
-        // Toggle template based on visibility scope
         this.isPrivate = (scope.viewOnly && (this.obj._lid !== undefined));
         return scope;
     }
@@ -192,6 +190,21 @@ class FTCCharacter extends FTCObject {
         }
         return main;
     }
+
+    /* ------------------------------------------- */
+
+    updateItem(container, itemId, item) {
+        this.data[container][itemId] = item;
+        this.changed = true;
+        this.save();
+    }
+
+    deleteItem(container, itemId) {
+        this.data[container].splice(itemId, 1);
+        this.changed = true;
+        this.save();
+    }
+
 }
 
 

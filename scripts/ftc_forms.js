@@ -8,7 +8,7 @@ FTC.forms.delayedUpdate = function(obj, ms) {
     setTimeout(function() {
         let isInput = $(document.activeElement).is(".ftc-edit, .ftc-checkbox, .ftc-select");
         if ( !isInput ) {
-            obj.save("updateAsset");
+            obj.save();
         }
     }, ms || 250);
 };
@@ -102,7 +102,7 @@ FTC.forms.edit_select_fields = function(html, obj) {
         let select = $(this),
             value = select.find(":selected").val();
         obj.setData(select.attr('data-edit'), value, "str");
-        obj.save("updateAsset");
+        obj.save();
     });
 };
 
@@ -120,7 +120,7 @@ FTC.forms.edit_image_fields = function(html, obj, app) {
             filter : "img",
             change : function(ev, ui, value){
                 obj.setData(key, value, "img");
-                obj.save("updateAsset");
+                obj.save();
                 layout.coverlay("icons-picker");
             }
         });
@@ -167,7 +167,7 @@ FTC.forms.edit_mce_fields = function(html, obj, app) {
             save_enablewhendirty: false,
             save_onsavecallback: function(mce) {
                 obj.setData(target, mce.getContent(), "str");
-                obj.save("updateAsset");
+                obj.save();
                 mce.remove();
                 $(this).css("display", "block");
             }
@@ -182,37 +182,28 @@ FTC.forms.edit_mce_fields = function(html, obj, app) {
 FTC.forms.edit_item_fields = function(html, obj, app) {
 
     // Add Item
-    html.find('.item .item-add').click(function() {
-       const container = $(this).parent().attr("data-item-container"),
+    html.find('.ftc-item-add').click(function() {
+       const container = $(this).attr("data-item-container"),
            data = duplicate(game.templates.item),
-           owner = obj.obj,
-           item = new FTCItem(data, app, {});
-       item.editOwnedItem(owner, obj.data[container]);
+           item = new FTCItem(data, app, {"owner": obj, "container": container});
+        item.editOwnedItem();
     });
 
     // Edit Item
     html.find('.item-list .item-edit').click(function() {
         const li = $(this).closest("li"),
             container = li.attr("data-item-container"),
-            owner = obj.obj,
             itemId = li.attr("data-item-id"),
-            itemData = duplicate(obj.data[container][itemId]),
-            item = new FTCItem(itemData, app, {});
-
-        // Edit the owned item
-        item.editOwnedItem(owner, obj.data[container], itemId);
+            item = new FTCItem(obj.data[container][itemId], app, {"owner": obj, "container": container});
+        item.editOwnedItem(itemId);
     });
 
     // Delete Item
     html.find('.item-list .item-trash').click(function() {
         const li = $(this).closest("li"),
-            owner = obj.obj,
             container = li.attr("data-item-container"),
             itemId = li.attr("data-item-id");
-
-        // TODO: do this better Delete item
-        owner.data[container].splice(itemId, 1);
-        owner.sync("updateAsset");
+        obj.deleteItem(container, itemId);
     });
 };
 

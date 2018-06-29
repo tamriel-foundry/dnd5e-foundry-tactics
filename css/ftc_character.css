@@ -390,6 +390,7 @@ ol.inventory-items {
 }
 .inventory-header > * { line-height: 20px }
 .inventory-header .inventory-add { width: 36px; }
+.ftc-item-add:hover { text-shadow: 0 0 4px #ff3838; }
 
 
 /* Item Edit Icons */
@@ -459,6 +460,9 @@ label.inventory-weight-label {
     margin: 0 2px;
 }
 
+
+
+
 /* -------------------------------------------
  	Spellbook
 ------------------------------------------- */
@@ -496,9 +500,14 @@ ol.spellbook-spells {
 img.spell-image { margin-top: -2px; }
 
 .spellbook .spellcasting-mod > * {
-    flex: 0 0 50%;
     line-height: 24px;
     height: 24px;
+}
+.spellcasting-mod > .ftc-select { flex: 0 0 52%; }
+.spellcasting-mod > .ftc-item-add {
+    width: 50px;
+    font-size: 14px;
+    text-align: center;
 }
 
 /* Rollable Spells */

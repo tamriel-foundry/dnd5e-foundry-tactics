@@ -1466,16 +1466,6 @@
             "passContext" : true
           }
         }
-      },
-      "spell_action": {
-        "classes": "flexcolumn ftc-spell-action",
-        "results" : {
-          "display" : {
-            "scope": {},
-            "passContext" : true,
-            "ui" : "FTC_SPELL_CAST"
-          }
-        }
       }
     },
     "item": {

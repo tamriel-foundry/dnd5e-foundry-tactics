@@ -172,8 +172,8 @@ class FTCObject {
     constructor(obj, app, scope) {
         this.obj = this.enrichObject(obj);
         this.app = app;
-        this.scope = this.refineScope(scope);
         this.changed = false;
+        this.scope = this.refineScope(scope);
         FTC.object = this;
     }
 
@@ -236,17 +236,16 @@ class FTCObject {
 
     /* ------------------------------------------- */
 
-    save(strategy) {
+    save() {
         /*
         Sync the object, saving updated data and refreshing associated UI elements.
         Remove temporary data and save.
         */
 
         if ( !this.changed ) return;
-        console.log("Saving object " + this.name+ " with strategy " + strategy);
+        console.log("Saving object " + this.name);
         delete this.obj.data.ftc;
-        console.log(this.obj);
-        this.obj.sync(strategy);
+        this.obj.sync("updateAsset");
     }
 
     /* ------------------------------------------- */

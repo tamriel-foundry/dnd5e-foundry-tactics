@@ -34,7 +34,9 @@ class FTCItem extends FTCObject {
         item.info.tagstr = Object.keys(item.tags || {}).join(", ");
 
         // Classify item type
-        item.info.type = this.classify_type(item);
+        let type = this.classify_type(item);
+        item.info.type = type;
+        item.ftc.typeStr = util.contains(["spell", "ability"], type.current) ? type.current.capitalize() : "Item";
 
         // Ensure quantity, price, and weight
         item.info.price = item.info.price || {"name": "Price", "current": 0.0};
@@ -44,6 +46,21 @@ class FTCItem extends FTCObject {
 
         // Return either the full object or just the item data
         return item;
+    }
+
+    /* ------------------------------------------- */
+
+    refineScope(scope) {
+
+        // Perhaps pre-seed the item with a specific type
+        if (scope.type) this.data.info.type.current = scope.type;
+
+        // Infer the default type based on an associated container
+        if (scope.container) {
+            if ( scope.container === "spellbook" ) this.data.info.type.current = "spell";
+            else if ( scope.container === "abilities" ) this.data.info.type.current = "ability";
+        }
+        return scope
     }
 
     /* ------------------------------------------- */
@@ -68,9 +85,9 @@ class FTCItem extends FTCObject {
     buildHTML() {
 
         // Toggle type-specific template
-        var obj = this.obj;
-        var type = obj.data.info.type.current || "note";
-        var html = FTC.loadTemplate(this.template.replace("{type}", type));
+        let obj = this.obj,
+            type = obj.data.info.type.current || "note",
+            html = FTC.loadTemplate(this.template.replace("{type}", type));
 
         // Inject content templates
         $.each(this.parts, function(name, path) {
@@ -81,14 +98,25 @@ class FTCItem extends FTCObject {
 
     /* ------------------------------------------- */
 
-    editOwnedItem(owner, collection, index) {
+    save(strategy) {
 
-        // If the index is undefined, add the item to the end of the collection
-        index = index || collection.length;
+        // If the item has an owner, don't bother trying to save the asset
+        if ( this.scope.owner ) return;
+        super.save(strategy);
+    }
+
+    /* ------------------------------------------- */
+
+    editOwnedItem(itemId) {
+
+        // Get the owner, container, and item position
+        const owner = this.scope.owner,
+            container = this.scope.container;
+        itemId = itemId || container.length;
 
         // Create a new application window for editing an item and associate it with the working data
-        const newApp = sync.newApp("ui_renderItem");
-        this.obj.addApp(newApp);
+        const newApp = sync.newApp("ui_renderItem", this.obj, this.scope);
+        this.obj._apps.push(newApp);
 
         // Create an HTML frame containing the app
         const frame = $('<div class="edit-item flex flexcolumn">');
@@ -98,8 +126,7 @@ class FTCItem extends FTCObject {
         const item = this.data,
             confirm = $('<button class="fit-x">Update Item</button>');
         confirm.click(function () {
-            collection[index] = item;
-            FTC.saveObject(owner);
+            owner.updateItem(container, itemId, item);
             layout.coverlay("edit-item");
         });
         frame.append(confirm);
@@ -127,12 +154,15 @@ hook.add("FTCInit", "Items", function() {
 
     // Render Item Sheets
     sync.render("ui_renderItem", function(obj, app, scope) {
-        var item = new FTCItem(obj, app, scope);
+        const item = new FTCItem(obj, app, scope);
         return item.renderHTML();
     });
 
     // Register Item Character Drop Hook
     hook.add("OnDropCharacter", "FTCOnDrop", function(obj, app, scope, dt) {
+        if ( !dt ) return;
+
+        // Parse the data transfer
         const item = JSON.parse(dt.getData("OBJ")) || {};
         if (item._t !== "i") return;
         if (!item.info.type) return;
