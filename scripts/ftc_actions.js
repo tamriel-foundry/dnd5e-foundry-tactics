@@ -208,7 +208,7 @@ class FTCSpellAction extends FTCObject {
 
     static enrichData(data) {
         let spell = data.spell;
-        data.ftc = {};
+        data.ftc = {};4
 
         // Construct spell properties HTML
         const props = [
