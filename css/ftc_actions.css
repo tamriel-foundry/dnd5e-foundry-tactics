@@ -1,45 +1,26 @@
-.ftc-spell-action {
+section.ftc-chat {
     font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
     font-weight: normal;
+    padding: 0.5em;
 }
 
+/* Spell Action Header */
 .spell-action-header {
     padding-bottom: 3px;
     margin-bottom: 6px;
     border-bottom: 2px solid #710916;
 }
-
 .spell-action-header > img {
     flex: 0 0 32px;
     margin-right: 10px;
 }
 
-.spell-action-header > h2 { flex: 1; }
-
-.spell-action-header > .spell-school {
-    flex: 0 0 50px;
+/* Spell Action Body */
+.spell-notes h3 {
+    border-bottom: 1px solid #CCC;
+    margin-bottom: 3px;
 }
-
-.spell-action-footer {
-    margin-top: 6px;
-    padding-top: 3px;
-    border-top: 1px solid #CCC;
-}
-
-
-.spell-action-footer > .spell-prop {
-    padding: 0 5px;
-    border-right: 1px solid #999;
-    text-align: center;
-}
-.spell-action-footer > .spell-prop:last-of-type {
-    border-right: none;
-    margin-right: 0;
-}
-
-
-/* Spell DC and Spell Roll */
 .spell-dc, .spell-roll {
     text-align: center;
     padding: 5px;
@@ -48,12 +29,26 @@
     box-shadow: 0 0 4px #999;
     margin: 0.5em 0;
 }
-
 .spell-roll {
     padding: 5px 5px 5px 35px;
     background: url(../content/icons/d20.png) no-repeat 0 50%;
 }
-
 .spell-roll:hover {
     box-shadow: 0 0 10px #ff3838;
+}
+
+/* Spell Action Footer */
+.spell-action-footer {
+    margin-top: 6px;
+    padding-top: 3px;
+    border-top: 1px solid #CCC;
+}
+.spell-action-footer > .spell-prop {
+    padding: 0 5px;
+    border-right: 1px solid #999;
+    text-align: center;
+}
+.spell-action-footer > .spell-prop:last-of-type {
+    border-right: none;
+    margin-right: 0;
 }

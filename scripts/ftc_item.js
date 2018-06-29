@@ -137,7 +137,6 @@ hook.add("FTCInit", "Items", function() {
         if (item._t !== "i") return;
         if (!item.info.type) return;
         const type = item.info.type.current;
-        console.log(type);
 
         // Inventory Items
         if (["weapon", "armor", "note"].includes(type)) {
