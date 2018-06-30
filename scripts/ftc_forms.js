@@ -148,12 +148,15 @@ FTC.forms.edit_mce_fields = function(html, obj, app) {
             target = div.attr('data-edit'),
             selector = app.attr("id") + "-" + div.attr("id");
 
-       // Give the edit div a unique ID
-       div.attr("id", selector);
+        // Give the edit div a unique ID
+        div.attr("id", selector);
+
+        // Make sure the editor isn't already in use
+        if ( tinymce.editors[selector] ) tinymce.editors[selector].destroy();
 
         // Create MCE Editor
         $(this).css("display", "none");
-        tinyMCE.init({
+        let mce = tinyMCE.init({
             selector: "#"+selector,
             branding: false,
             menubar: false,
@@ -165,12 +168,20 @@ FTC.forms.edit_mce_fields = function(html, obj, app) {
             plugins: 'lists save code',
             toolbar: 'bold italic underline bullist numlist styleselect removeformat code save',
             save_enablewhendirty: false,
-            save_onsavecallback: function(mce) {
-                obj.setData(target, mce.getContent(), "str");
+            save_onsavecallback: function(ed) {
+                obj.setData(target, ed.getContent(), "str");
                 obj.save();
-                mce.remove();
+                ed.remove();
+                ed.destroy();
                 $(this).css("display", "block");
             }
+        });
+    });
+
+    // Schedule Editor Cleanup
+    app.on("remove", function() {
+        $.each(tinymce.editors, function(_, ed) {
+            if (!$("#"+ed.id).length) ed.destroy();
         });
     });
 };

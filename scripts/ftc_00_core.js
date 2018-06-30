@@ -184,22 +184,24 @@ class FTCObject {
     /* ------------------------------------------- */
 
     constructor(obj, app, scope) {
+        // Core Object constructor
         this.app = app;
         this.changed = false;
         this.scope = this.refineScope(scope || {});
-        this.obj = this.registerObject(obj);
-        this.enrichData(this.data);
+        this.obj = this.createObject(obj);
     }
 
     /* ------------------------------------------- */
 
     refineScope(scope) {
+        // Process or validate any scope-specific inputs provided to the object
         return scope;
     }
 
     /* ------------------------------------------- */
 
-    registerObject(obj) {
+    createObject(obj) {
+        // Ensure that the object contains a sync.obj in case only data was provided
         if ( "sync" in obj ) {
             return obj;
         } else {
@@ -207,17 +209,6 @@ class FTCObject {
             newObj.data = obj;
             return newObj;
         }
-    }
-
-    /* ------------------------------------------- */
-
-    enrichData(data) {
-        /*
-        Enrich object data by augmenting it with additional metadata and attributes
-
-        Arguments:
-            data: Object data to augment and enrich.
-        */
     }
 
     /* ------------------------------------------- */
@@ -236,14 +227,9 @@ class FTCObject {
     /* ------------------------------------------- */
 
     save() {
-        /*
-        Sync the object, saving updated data and refreshing associated UI elements.
-        Remove temporary data and save.
-        */
-
+        // Sync the object, saving updated data and refreshing associated UI elements.
         if ( !this.changed ) return;
         console.log("Saving object " + this.name);
-        delete this.obj.data.ftc;
         this.obj.sync("updateAsset");
     }
 
@@ -251,33 +237,43 @@ class FTCObject {
 
     renderHTML() {
 
+        // Construct enriched safe data
+        let data = duplicate(this.data);
+        data = this.enrichData(data);
+
         // Build Template and Populate Data
-        let html = this.buildHTML();
-        html = this.populateHTML(html);
-        this.html = $(html);
+        let html = this.buildHTML(data);
+        html = $(this.populateHTML(html, data));
 
-        // Activate Tabs
-        FTC.ui.activate_tabs(this.html, this.obj, this.app);
+        // Activate Event Listeners
+        this.activateEventListeners(html);
 
-        // Activate Fields
-        FTC.forms.activateFields(this.html, this, this.app);
-
-        // Enable Clickable Sheet Actions
-        FTC.actions.activateActions(this.html, this.obj, this.app);
-
-        // Sechedule Cleanup Actions
-        FTC.ui.cleanup_app(this.app);
-
-        // Return final HTML
-        return this.html;
+        // Return the final HTML
+        return html;
     }
+
+   /* ------------------------------------------- */
+
+    enrichData(data) {
+        // Enrich a safe copy of object data for rendering by augmenting it with additional metadata and attributes
+        return data;
+    }
+
+    /* ------------------------------------------- */
 
     buildHTML() {
-        return "<div>{info.name.current}</div>";
+        console.log("A FTCObject subclass must implement the buildHTML method.");
     }
 
-    populateHTML(html) {
-        return FTC.populateTemplate(html, this.obj.data);
+    /* ------------------------------------------- */
+
+    populateHTML(html, data) {
+        return FTC.populateTemplate(html, data);
+    }
+
+    /* ------------------------------------------- */
+
+    activateEventListeners(html) {
     }
 }
 
@@ -286,7 +282,7 @@ class FTCObject {
 /* GM Forge Initialization Hook                 */
 /* -------------------------------------------- */
 
-hook.add("Initialize", "FTCSetup", function(...args) {
+hook.add("Initialize", "FTCSetup", function() {
     let gameid = game.templates.identifier;
 
     // Only initialize FTC if we are using the correct system OR no system at all

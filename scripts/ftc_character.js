@@ -29,7 +29,7 @@ class FTCCharacter extends FTCObject {
     /* ------------------------------------------- */
 
     refineScope(scope) {
-        this.isPrivate = (scope.viewOnly && (this.obj._lid !== undefined));
+        scope.isPrivate = (scope.viewOnly && (this.obj._lid !== undefined));
         return scope;
     }
 
@@ -85,14 +85,16 @@ class FTCCharacter extends FTCObject {
         this.setupInventory(data);
         this.setupSpellbook(data);
         this.setupAbilities(data);
+
+        // Return the enriched data
+        return data
     }
 
     /* ------------------------------------------- */
 
     setupInventory(data) {
-        /*
-        Set up inventory items by converting them to FTCItem objects
-        */
+        // Set up inventory items by converting them to FTCItem objects
+
         const ftc = data.ftc,
             weight = [];
 
@@ -107,7 +109,7 @@ class FTCCharacter extends FTCObject {
         });
 
         // Compute weight and encumbrance
-        var wt = (weight.length > 0) ? weight.reduce(function(total, num) { return total + (num || 0); }) : 0,
+        let wt = (weight.length > 0) ? weight.reduce(function(total, num) { return total + (num || 0); }) : 0,
            enc = data.stats.Str.current * 15,
            pct = Math.min(wt * 100 / enc, 99.5),
            cls = (pct > 90 ) ? "heavy" : "";
@@ -117,9 +119,7 @@ class FTCCharacter extends FTCObject {
     /* ------------------------------------------- */
 
     setupSpellbook(data) {
-        /*
-        Set up spellbook items by converting them to FTCItem objects
-        */
+        // Set up spellbook items by converting them to FTCItem objects
 
         const ftc = data.ftc,
             sls = {};
@@ -153,6 +153,8 @@ class FTCCharacter extends FTCObject {
     /* ------------------------------------------- */
 
     setupAbilities(data) {
+        // Set up ability items by converting them to FTCItem objects
+
         const ftc = data.ftc;
         ftc["abilities"] = [];
         $.each(data.abilities, function(itemId, itemData) {
@@ -163,16 +165,14 @@ class FTCCharacter extends FTCObject {
 
     /* ------------------------------------------- */
 
-    buildHTML() {
+    buildHTML(data) {
 
         // Load primary template
-        let template = this.isPrivate ? this.templates.FTC_SHEET_PRIVATE : this.templates.FTC_SHEET_FULL,
-            main = FTC.loadTemplate(template),
-            obj = this.obj,
-            data = this.data;
+        let template = this.scope.isPrivate ? this.templates.FTC_SHEET_PRIVATE : this.templates.FTC_SHEET_FULL,
+            main = FTC.loadTemplate(template);
 
         // Augment sub-components
-        if (!this.isPrivate) {
+        if (!this.scope.isPrivate) {
 
             // Primary Stats
             main = FTC.injectTemplate(main, "CHARACTER_PRIMARY_STATS", this.templates.CHARACTER_PRIMARY_STATS)
@@ -234,18 +234,28 @@ class FTCCharacter extends FTCObject {
 
     /* ------------------------------------------- */
 
+    activateEventListeners(html) {
+        FTC.ui.activate_tabs(html, this.obj, this.app);
+        FTC.forms.activateFields(html, this, this.app);
+        FTC.actions.activateActions(html, this.obj, this.app);
+    }
+
+    /* ------------------------------------------- */
+
     updateItem(container, itemId, item) {
+        console.log(item);
         this.data[container][itemId] = item;
         this.changed = true;
         this.save();
     }
+
+    /* ------------------------------------------- */
 
     deleteItem(container, itemId) {
         this.data[container].splice(itemId, 1);
         this.changed = true;
         this.save();
     }
-
 }
 
 

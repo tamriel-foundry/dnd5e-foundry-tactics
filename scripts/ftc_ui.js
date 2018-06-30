@@ -48,18 +48,6 @@ FTC.ui = {
 		content.addClass('tab-active');
 	},
 
-	cleanup_app: function(app) {
-		$(app).on("remove", function() {
-
-			/* Remove any unbound or associated MCE editors */
-			for (var e in tinymce.editors) {
-			    if (Number.isInteger(e) || e.toString().startsWith($(this).attr("id"))) {
-			    	tinymce.editors[e].destroy();
-			    }
-			};
-		});
-	},
-
 	/* Return an ordinal number from an integer, i.e. 1 => 1st, 2=> 2nd, etc... */
 	getOrdinalNumber:function(n) {
 	    var s=["th","st","nd","rd"],

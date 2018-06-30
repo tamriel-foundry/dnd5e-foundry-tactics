@@ -59,6 +59,7 @@ class FTCItem extends FTCObject {
         $.each(["weight", "quantity", "price"], function(_, v) {
            data.info[v].current = parseFloat(data.info[v].current || 0.0)
         });
+        return data;
     }
 
     /* ------------------------------------------- */
@@ -95,11 +96,10 @@ class FTCItem extends FTCObject {
 
     /* ------------------------------------------- */
 
-    buildHTML() {
+    buildHTML(data) {
 
         // Toggle type-specific template
-        let obj = this.obj,
-            type = obj.data.info.type.current || "note",
+        let type = data.info.type.current || "note",
             html = FTC.loadTemplate(this.template.replace("{type}", type));
 
         // Inject content templates
@@ -111,11 +111,17 @@ class FTCItem extends FTCObject {
 
     /* ------------------------------------------- */
 
-    save(strategy) {
+    activateEventListeners(html) {
+        FTC.ui.activate_tabs(html, this.obj, this.app);
+        FTC.forms.activateFields(html, this, this.app);
+    }
 
+    /* ------------------------------------------- */
+
+    save() {
         // If the item has an owner, don't bother trying to save the asset
         if ( this.scope.owner ) return;
-        super.save(strategy);
+        super.save();
     }
 
     /* ------------------------------------------- */

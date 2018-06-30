@@ -347,3 +347,7 @@ div[ui-name="ui_textBox"] .hover2:hover {
     outline-color: inherit;
     box-shadow: inherit;
 }
+
+a[title="minimize"], a[title="maximize"] {
+    display: none !important;
+}
