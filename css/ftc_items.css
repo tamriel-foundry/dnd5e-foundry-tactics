@@ -58,16 +58,20 @@ h1.itemname > .ftc-edit {
     text-align: right;
 }
 
+.item-source.ftc-edit {
+    font-size: 14px;
+    color: #999;
+}
+
 .item-tags {
     flex: 0;
     padding: 0.5em 0;
     border-top: 1px solid #999;
 }
-
-.item-tags label, .ftc-edit {
-    width: 100%;
-    text-align: center;
-    color: #222;
+.item-tags > * {
+    font-size: 18px;
+    color: #666;
+    line-height: 34px;
 }
 
 

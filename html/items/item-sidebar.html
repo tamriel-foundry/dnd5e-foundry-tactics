@@ -15,24 +15,29 @@
 
 <ol class="item-summary">
     <li>
-        <label>Quantity:</label>
+        <label>Quantity</label>
         <input class="ftc-edit" type="text" tabindex="0" data-edit="info.quantity.current" data-dtype="posint"
                value="{info.quantity.current}" placeholder="1"/>
     </li>
     <li>
-        <label>Price:</label>
+        <label>Price</label>
         <input class="ftc-edit" type="text" tabindex="0" data-edit="info.price.current" data-dtype="posfloat"
                value="{info.price.current}" placeholder="0.0"/>
     </li>
     <li>
-        <label>Weight:</label>
+        <label>Weight</label>
         <input class="ftc-edit" type="text" tabindex="0" data-edit="info.weight.current" data-dtype="posfloat"
                value="{info.weight.current}" placeholder="0.0"/>
+    </li>
+    <li>
+        <label>Source</label>
+        <input class="item-source ftc-edit" type="text" tabindex="0" data-edit="info.source.current" data-dtype="str"
+               value="{info.source.current}" placeholder="Book Page"/>
     </li>
 </ol>
 
 <div class="item-tags">
     <label>Item Tags</label>
     <input class="ftc-edit" type="text" tabindex="0" data-edit="tags" data-dtype="tags"
-           value="{info.tagstr}" placeholder="Tags"/>
+           value="{ftc.tagStr}" placeholder="Tags"/>
 </div>

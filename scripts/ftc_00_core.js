@@ -289,3 +289,4 @@ hook.add("Initialize", "FTCSetup", function(...args) {
     if ( gameid === FTC_SYSTEM_IDENTIFIER ) FTC.init();
     else console.log("Foundry Tactics is enabled but not active for system: " + gameid);
 });
+

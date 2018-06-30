@@ -57,7 +57,7 @@ class FTCItem extends FTCObject {
         data.info.img.current = data.info.img.current || "/content/icons/Pouch1000p.png";
 
         // Collapse tags
-        data.info.tagstr = Object.keys(data.tags || {}).join(", ");
+        data.ftc.tagStr = Object.keys(data.tags || {}).join(", ");
 
         // Ensure quantity, price, and weight
         data.info.price = data.info.price || {"name": "Price", "current": 0.0};

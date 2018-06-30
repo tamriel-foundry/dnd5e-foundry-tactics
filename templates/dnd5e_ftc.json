@@ -802,6 +802,7 @@
         "name": "Source"
       }
     },
+    "tabs": {},
     "tags": {},
     "stats": {
       "Str": {
@@ -1078,6 +1079,7 @@
   },
   "item": {
     "_t": "i",
+    "tabs": {},
     "tags": {},
     "info": {
       "name": {
@@ -1094,6 +1096,9 @@
       },
       "variety": {
         "name": "Item Variety"
+      },
+      "requirements": {
+        "name": "Requirements"
       },
       "quantity": {
         "name": "Quantity",

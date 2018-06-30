@@ -70,8 +70,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 15"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -192,8 +191,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 15"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -312,8 +310,7 @@
             "source": {
               "name": "Source",
               "current": "phb 211"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -434,8 +431,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 15"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -556,8 +552,7 @@
             "source": {
               "name": "Source",
               "current": "phb 211"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -676,8 +671,7 @@
             "source": {
               "name": "Source",
               "current": "phb 211"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -796,8 +790,7 @@
             "source": {
               "name": "Source",
               "current": "phb 211"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -915,8 +908,7 @@
             "source": {
               "name": "Source",
               "current": "phb 212"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -1035,8 +1027,7 @@
             "source": {
               "name": "Source",
               "current": "phb 212"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -1155,8 +1146,7 @@
             "source": {
               "name": "Source",
               "current": "phb 212"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -1274,8 +1264,7 @@
             "source": {
               "name": "Source",
               "current": "phb 212"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -1394,8 +1383,7 @@
             "source": {
               "name": "Source",
               "current": "phb 213"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -1513,8 +1501,7 @@
             "source": {
               "name": "Source",
               "current": "phb 213"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -1632,8 +1619,7 @@
             "source": {
               "name": "Source",
               "current": "phb 213"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -1753,8 +1739,7 @@
             "source": {
               "name": "Source",
               "current": "phb 214"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -1873,8 +1858,7 @@
             "source": {
               "name": "Source",
               "current": "phb 214"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -1993,8 +1977,7 @@
             "source": {
               "name": "Source",
               "current": "phb 214"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -2112,8 +2095,7 @@
             "source": {
               "name": "Source",
               "current": "phb 215"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -2232,8 +2214,7 @@
             "source": {
               "name": "Source",
               "current": "phb 215"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -2355,8 +2336,7 @@
             "source": {
               "name": "Source",
               "current": "phb 215"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -2476,8 +2456,7 @@
             "source": {
               "name": "Source",
               "current": "phb 215"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -2596,8 +2575,7 @@
             "source": {
               "name": "Source",
               "current": "phb 215"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -2716,8 +2694,7 @@
             "source": {
               "name": "Source",
               "current": "phb 216"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -2835,8 +2812,7 @@
             "source": {
               "name": "Source",
               "current": "phb 216"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -2955,8 +2931,7 @@
             "source": {
               "name": "Source",
               "current": "phb 216"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -3076,8 +3051,7 @@
             "source": {
               "name": "Source",
               "current": "phb 216"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -3197,8 +3171,7 @@
             "source": {
               "name": "Source",
               "current": "phb 216"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -3317,8 +3290,7 @@
             "source": {
               "name": "Source",
               "current": "phb 216"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -3439,8 +3411,7 @@
             "source": {
               "name": "Source",
               "current": "phb 217"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -3559,8 +3530,7 @@
             "source": {
               "name": "Source",
               "current": "phb 217"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -3679,8 +3649,7 @@
             "source": {
               "name": "Source",
               "current": "phb 217"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -3798,8 +3767,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 15"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -3918,8 +3886,7 @@
             "source": {
               "name": "Source",
               "current": "phb 217"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -4038,8 +4005,7 @@
             "source": {
               "name": "Source",
               "current": "phb 218"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -4157,8 +4123,7 @@
             "source": {
               "name": "Source",
               "current": "phb 218"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -4278,8 +4243,7 @@
             "source": {
               "name": "Source",
               "current": "phb 218"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -4399,8 +4363,7 @@
             "source": {
               "name": "Source",
               "current": "phb 218"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -4518,8 +4481,7 @@
             "source": {
               "name": "Source",
               "current": "phb 219"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -4639,8 +4601,7 @@
             "source": {
               "name": "Source",
               "current": "phb 219"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -4761,8 +4722,7 @@
             "source": {
               "name": "Source",
               "current": "phb 219"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -4883,8 +4843,7 @@
             "source": {
               "name": "Source",
               "current": "phb 219"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -5002,8 +4961,7 @@
             "source": {
               "name": "Source",
               "current": "phb 219"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -5121,8 +5079,7 @@
             "source": {
               "name": "Source",
               "current": "phb 219"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
@@ -5241,8 +5198,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 15"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -5362,8 +5318,7 @@
             "source": {
               "name": "Source",
               "current": "scag 142"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -5484,8 +5439,7 @@
             "source": {
               "name": "Source",
               "current": "phb 219"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -5606,8 +5560,7 @@
             "source": {
               "name": "Source",
               "current": "phb 220"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -5728,8 +5681,7 @@
             "source": {
               "name": "Source",
               "current": "phb 220"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -5850,8 +5802,7 @@
             "source": {
               "name": "Source",
               "current": "phb 221"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -5970,8 +5921,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 15"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -6092,8 +6042,7 @@
             "source": {
               "name": "Source",
               "current": "phb 221"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -6215,8 +6164,7 @@
             "source": {
               "name": "Source",
               "current": "phb 221"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -6335,8 +6283,7 @@
             "source": {
               "name": "Source",
               "current": "phb 221"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -6457,8 +6404,7 @@
             "source": {
               "name": "Source",
               "current": "phb 221"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -6579,8 +6525,7 @@
             "source": {
               "name": "Source",
               "current": "phb 221"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -6701,8 +6646,7 @@
             "source": {
               "name": "Source",
               "current": "phb 221"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -6820,8 +6764,7 @@
             "source": {
               "name": "Source",
               "current": "phb 222"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -6940,8 +6883,7 @@
             "source": {
               "name": "Source",
               "current": "phb 222"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -7060,8 +7002,7 @@
             "source": {
               "name": "Source",
               "current": "phb 222"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -7183,8 +7124,7 @@
             "source": {
               "name": "Source",
               "current": "phb 222"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -7304,8 +7244,7 @@
             "source": {
               "name": "Source",
               "current": "phb 222"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
@@ -7426,8 +7365,7 @@
             "source": {
               "name": "Source",
               "current": "phb 223"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -7545,8 +7483,7 @@
             "source": {
               "name": "Source",
               "current": "phb 223"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -7665,8 +7602,7 @@
             "source": {
               "name": "Source",
               "current": "phb 224"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -7785,8 +7721,7 @@
             "source": {
               "name": "Source",
               "current": "phb 224"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -7904,8 +7839,7 @@
             "source": {
               "name": "Source",
               "current": "phb 224"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -8025,8 +7959,7 @@
             "source": {
               "name": "Source",
               "current": "phb 224"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -8145,8 +8078,7 @@
             "source": {
               "name": "Source",
               "current": "phb 224"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -8268,8 +8200,7 @@
             "source": {
               "name": "Source",
               "current": "phb 224"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -8388,8 +8319,7 @@
             "source": {
               "name": "Source",
               "current": "phb 225"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -8508,8 +8438,7 @@
             "source": {
               "name": "Source",
               "current": "phb 225"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -8629,8 +8558,7 @@
             "source": {
               "name": "Source",
               "current": "phb 225"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -8748,8 +8676,7 @@
             "source": {
               "name": "Source",
               "current": "phb 225"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -8868,8 +8795,7 @@
             "source": {
               "name": "Source",
               "current": "phb 226"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -8987,8 +8913,7 @@
             "source": {
               "name": "Source",
               "current": "phb 226"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -9107,8 +9032,7 @@
             "source": {
               "name": "Source",
               "current": "phb 226"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -9228,8 +9152,7 @@
             "source": {
               "name": "Source",
               "current": "phb 226"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -9349,8 +9272,7 @@
             "source": {
               "name": "Source",
               "current": "phb 226"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -9471,8 +9393,7 @@
             "source": {
               "name": "Source",
               "current": "phb 227"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -9590,8 +9511,7 @@
             "source": {
               "name": "Source",
               "current": "phb 227"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -9710,8 +9630,7 @@
             "source": {
               "name": "Source",
               "current": "phb 227"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -9830,8 +9749,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 16"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -9949,8 +9867,7 @@
             "source": {
               "name": "Source",
               "current": "phb 227"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -10069,8 +9986,7 @@
             "source": {
               "name": "Source",
               "current": "phb 228"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -10189,8 +10105,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 16"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -10309,8 +10224,7 @@
             "source": {
               "name": "Source",
               "current": "phb 228"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -10431,8 +10345,7 @@
             "source": {
               "name": "Source",
               "current": "phb 228"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -10550,8 +10463,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 16"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -10671,8 +10583,7 @@
             "source": {
               "name": "Source",
               "current": "phb 229"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -10790,8 +10701,7 @@
             "source": {
               "name": "Source",
               "current": "phb 229"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -10910,8 +10820,7 @@
             "source": {
               "name": "Source",
               "current": "phb 229"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -11030,8 +10939,7 @@
             "source": {
               "name": "Source",
               "current": "phb 229"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
@@ -11151,8 +11059,7 @@
             "source": {
               "name": "Source",
               "current": "phb 229"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -11270,8 +11177,7 @@
             "source": {
               "name": "Source",
               "current": "phb 230"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -11390,8 +11296,7 @@
             "source": {
               "name": "Source",
               "current": "phb 230"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -11511,8 +11416,7 @@
             "source": {
               "name": "Source",
               "current": "phb 230"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -11631,8 +11535,7 @@
             "source": {
               "name": "Source",
               "current": "phb 230"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -11751,8 +11654,7 @@
             "source": {
               "name": "Source",
               "current": "phb 230"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -11871,8 +11773,7 @@
             "source": {
               "name": "Source",
               "current": "phb 230"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -11990,8 +11891,7 @@
             "source": {
               "name": "Source",
               "current": "phb 230"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -12110,8 +12010,7 @@
             "source": {
               "name": "Source",
               "current": "phb 230"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -12232,8 +12131,7 @@
             "source": {
               "name": "Source",
               "current": "phb 231"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -12352,8 +12250,7 @@
             "source": {
               "name": "Source",
               "current": "phb 231"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -12473,8 +12370,7 @@
             "source": {
               "name": "Source",
               "current": "phb 231"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -12592,8 +12488,7 @@
             "source": {
               "name": "Source",
               "current": "phb 231"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -12711,8 +12606,7 @@
             "source": {
               "name": "Source",
               "current": "phb 231"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -12831,8 +12725,7 @@
             "source": {
               "name": "Source",
               "current": "phb 231"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -12951,8 +12844,7 @@
             "source": {
               "name": "Source",
               "current": "phb 233"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -13070,8 +12962,7 @@
             "source": {
               "name": "Source",
               "current": "phb 233"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
@@ -13190,8 +13081,7 @@
             "source": {
               "name": "Source",
               "current": "phb 233"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -13312,8 +13202,7 @@
             "source": {
               "name": "Source",
               "current": "phb 233"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -13432,8 +13321,7 @@
             "source": {
               "name": "Source",
               "current": "phb 234"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -13552,8 +13440,7 @@
             "source": {
               "name": "Source",
               "current": "phb 234"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -13673,8 +13560,7 @@
             "source": {
               "name": "Source",
               "current": "phb 234"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -13793,8 +13679,7 @@
             "source": {
               "name": "Source",
               "current": "phb 234"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -13913,8 +13798,7 @@
             "source": {
               "name": "Source",
               "current": "phb 234"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -14033,8 +13917,7 @@
             "source": {
               "name": "Source",
               "current": "phb 234"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -14153,8 +14036,7 @@
             "source": {
               "name": "Source",
               "current": "phb 235"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -14273,8 +14155,7 @@
             "source": {
               "name": "Source",
               "current": "phb 235"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -14392,8 +14273,7 @@
             "source": {
               "name": "Source",
               "current": "phb 235"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -14513,8 +14393,7 @@
             "source": {
               "name": "Source",
               "current": "phb 236"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
@@ -14635,8 +14514,7 @@
             "source": {
               "name": "Source",
               "current": "phb 236"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -14755,8 +14633,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 17"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -14878,8 +14755,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 17"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -15000,8 +14876,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 17"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -15120,8 +14995,7 @@
             "source": {
               "name": "Source",
               "current": "phb 236"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -15241,8 +15115,7 @@
             "source": {
               "name": "Source",
               "current": "phb 237"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -15363,8 +15236,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 17"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -15482,8 +15354,7 @@
             "source": {
               "name": "Source",
               "current": "phb 237"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -15601,8 +15472,7 @@
             "source": {
               "name": "Source",
               "current": "phb 237"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -15721,8 +15591,7 @@
             "source": {
               "name": "Source",
               "current": "phb 237"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -15842,8 +15711,7 @@
             "source": {
               "name": "Source",
               "current": "phb 237"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -15964,8 +15832,7 @@
             "source": {
               "name": "Source",
               "current": "phb 238"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -16084,8 +15951,7 @@
             "source": {
               "name": "Source",
               "current": "phb 238"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -16204,8 +16070,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 17"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -16326,8 +16191,7 @@
             "source": {
               "name": "Source",
               "current": "phb 238"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -16446,8 +16310,7 @@
             "source": {
               "name": "Source",
               "current": "phb 238"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -16568,8 +16431,7 @@
             "source": {
               "name": "Source",
               "current": "phb 238"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -16687,8 +16549,7 @@
             "source": {
               "name": "Source",
               "current": "phb 238"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -16806,8 +16667,7 @@
             "source": {
               "name": "Source",
               "current": "phb 239"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -16926,8 +16786,7 @@
             "source": {
               "name": "Source",
               "current": "phb 239"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -17046,8 +16905,7 @@
             "source": {
               "name": "Source",
               "current": "phb 239"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -17169,8 +17027,7 @@
             "source": {
               "name": "Source",
               "current": "phb 239"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
@@ -17289,8 +17146,7 @@
             "source": {
               "name": "Source",
               "current": "phb 239"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -17410,8 +17266,7 @@
             "source": {
               "name": "Source",
               "current": "phb 239"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -17532,8 +17387,7 @@
             "source": {
               "name": "Source",
               "current": "phb 240"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -17652,8 +17506,7 @@
             "source": {
               "name": "Source",
               "current": "phb 240"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -17772,8 +17625,7 @@
             "source": {
               "name": "Source",
               "current": "phb 240"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -17891,8 +17743,7 @@
             "source": {
               "name": "Source",
               "current": "phb 240"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -18011,8 +17862,7 @@
             "source": {
               "name": "Source",
               "current": "phb 241"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -18131,8 +17981,7 @@
             "source": {
               "name": "Source",
               "current": "phb 241"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -18253,8 +18102,7 @@
             "source": {
               "name": "Source",
               "current": "phb 242"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -18374,8 +18222,7 @@
             "source": {
               "name": "Source",
               "current": "phb 242"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -18496,8 +18343,7 @@
             "source": {
               "name": "Source",
               "current": "phb 242"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -18618,8 +18464,7 @@
             "source": {
               "name": "Source",
               "current": "phb 241"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -18740,8 +18585,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 18"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -18859,8 +18703,7 @@
             "source": {
               "name": "Source",
               "current": "phb 242"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -18980,8 +18823,7 @@
             "source": {
               "name": "Source",
               "current": "phb 242"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -19103,8 +18945,7 @@
             "source": {
               "name": "Source",
               "current": "phb 242"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -19225,8 +19066,7 @@
             "source": {
               "name": "Source",
               "current": "phb 243"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -19345,8 +19185,7 @@
             "source": {
               "name": "Source",
               "current": "phb 243"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -19465,8 +19304,7 @@
             "source": {
               "name": "Source",
               "current": "phb 243"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -19584,8 +19422,7 @@
             "source": {
               "name": "Source",
               "current": "phb 243"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -19707,8 +19544,7 @@
             "source": {
               "name": "Source",
               "current": "phb 243"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -19827,8 +19663,7 @@
             "source": {
               "name": "Source",
               "current": "phb 244"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -19947,8 +19782,7 @@
             "source": {
               "name": "Source",
               "current": "phb 244"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -20067,8 +19901,7 @@
             "source": {
               "name": "Source",
               "current": "phb 244"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -20187,8 +20020,7 @@
             "source": {
               "name": "Source",
               "current": "phb 244"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -20307,8 +20139,7 @@
             "source": {
               "name": "Source",
               "current": "phb 244"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -20428,8 +20259,7 @@
             "source": {
               "name": "Source",
               "current": "phb 244"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -20549,8 +20379,7 @@
             "source": {
               "name": "Source",
               "current": "phb 245"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -20669,8 +20498,7 @@
             "source": {
               "name": "Source",
               "current": "phb 245"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -20788,8 +20616,7 @@
             "source": {
               "name": "Source",
               "current": "phb 245"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -20907,8 +20734,7 @@
             "source": {
               "name": "Source",
               "current": "phb 245"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -21027,8 +20853,7 @@
             "source": {
               "name": "Source",
               "current": "phb 245"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -21147,8 +20972,7 @@
             "source": {
               "name": "Source",
               "current": "phb 246"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -21268,8 +21092,7 @@
             "source": {
               "name": "Source",
               "current": "phb 246"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -21388,8 +21211,7 @@
             "source": {
               "name": "Source",
               "current": "phb 246"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -21508,8 +21330,7 @@
             "source": {
               "name": "Source",
               "current": "phb 246"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
@@ -21627,8 +21448,7 @@
             "source": {
               "name": "Source",
               "current": "phb 246"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -21747,8 +21567,7 @@
             "source": {
               "name": "Source",
               "current": "scag 143"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -21868,8 +21687,7 @@
             "source": {
               "name": "Source",
               "current": "phb 246"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -21989,8 +21807,7 @@
             "source": {
               "name": "Source",
               "current": "phb 248"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -22109,8 +21926,7 @@
             "source": {
               "name": "Source",
               "current": "phb 248"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -22229,8 +22045,7 @@
             "source": {
               "name": "Source",
               "current": "phb 248"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -22350,8 +22165,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 19"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -22469,8 +22283,7 @@
             "source": {
               "name": "Source",
               "current": "phb 248"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -22590,8 +22403,7 @@
             "source": {
               "name": "Source",
               "current": "phb 249"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -22711,8 +22523,7 @@
             "source": {
               "name": "Source",
               "current": "phb 249"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -22831,8 +22642,7 @@
             "source": {
               "name": "Source",
               "current": "phb 249"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
@@ -22952,8 +22762,7 @@
             "source": {
               "name": "Source",
               "current": "phb 249"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -23073,8 +22882,7 @@
             "source": {
               "name": "Source",
               "current": "phb 250"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -23194,8 +23002,7 @@
             "source": {
               "name": "Source",
               "current": "phb 250"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -23316,8 +23123,7 @@
             "source": {
               "name": "Source",
               "current": "phb 250"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -23437,8 +23243,7 @@
             "source": {
               "name": "Source",
               "current": "phb 250"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -23560,8 +23365,7 @@
             "source": {
               "name": "Source",
               "current": "phb 250"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -23682,8 +23486,7 @@
             "source": {
               "name": "Source",
               "current": "phb 250"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -23804,8 +23607,7 @@
             "source": {
               "name": "Source",
               "current": "phb 250"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -23923,8 +23725,7 @@
             "source": {
               "name": "Source",
               "current": "phb 251"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -24046,8 +23847,7 @@
             "source": {
               "name": "Source",
               "current": "phb 251"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -24167,8 +23967,7 @@
             "source": {
               "name": "Source",
               "current": "phb 251"
-            },
-            "tagstr": "Spell, Enchantment"
+            }
           },
           "armor": {
             "ac": {
@@ -24287,8 +24086,7 @@
             "source": {
               "name": "Source",
               "current": "phb 251"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -24408,8 +24206,7 @@
             "source": {
               "name": "Source",
               "current": "phb 251"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -24530,8 +24327,7 @@
             "source": {
               "name": "Source",
               "current": "phb 251"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -24651,8 +24447,7 @@
             "source": {
               "name": "Source",
               "current": "phb 252"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
@@ -24772,8 +24567,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 19"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -24895,8 +24689,7 @@
             "source": {
               "name": "Source",
               "current": "phb 252"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -25017,8 +24810,7 @@
             "source": {
               "name": "Source",
               "current": "phb 252"
-            },
-            "tagstr": "Spell, Divination"
+            }
           },
           "armor": {
             "ac": {
@@ -25137,8 +24929,7 @@
             "source": {
               "name": "Source",
               "current": "phb 252"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
@@ -25258,8 +25049,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 19"
-            },
-            "tagstr": "Spell, Evocation"
+            }
           },
           "armor": {
             "ac": {
@@ -25379,8 +25169,7 @@
             "source": {
               "name": "Source",
               "current": "phb 252"
-            },
-            "tagstr": "Spell, Abjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -25500,8 +25289,7 @@
             "source": {
               "name": "Source",
               "current": "phb 253"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -25622,8 +25410,7 @@
             "source": {
               "name": "Source",
               "current": "phb 253"
-            },
-            "tagstr": "Spell, Necromancy"
+            }
           },
           "armor": {
             "ac": {
@@ -25744,8 +25531,7 @@
             "source": {
               "name": "Source",
               "current": "phb 254"
-            },
-            "tagstr": "Spell, Conjuration"
+            }
           },
           "armor": {
             "ac": {
@@ -25866,8 +25652,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 19"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -25985,8 +25770,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 19"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -26104,8 +25888,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 19"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -26223,8 +26006,7 @@
             "source": {
               "name": "Source",
               "current": "ee pc 20"
-            },
-            "tagstr": "Spell, Transmutation"
+            }
           },
           "armor": {
             "ac": {
@@ -26342,8 +26124,7 @@
             "source": {
               "name": "Source",
               "current": "phb 254"
-            },
-            "tagstr": "Spell, Illusion"
+            }
           },
           "armor": {
             "ac": {
