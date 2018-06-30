@@ -354,10 +354,10 @@ class FTCAbilityAction extends FTCItemAction {
 
         // Construct spell properties HTML
         const props = [
-            data.info.variety.current.capitalize() + ": " + data.info.source.current.capitalize(),
+            data.info.variety.current.capitalize() + ": " + data.info.requirements.current.capitalize(),
             data.spell.time.current.titleCase(),
             data.spell.materials.current,
-            data.weapon.properties.current
+            data.info.source.current
         ];
         let propStr = "";
         $.each(props, function(_, p) {

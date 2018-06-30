@@ -59,8 +59,9 @@ h1.itemname > .ftc-edit {
 }
 
 .item-source.ftc-edit {
-    font-size: 14px;
+    font-size: 18px;
     color: #999;
+    line-height: 34px;
 }
 
 .item-tags {
@@ -68,9 +69,18 @@ h1.itemname > .ftc-edit {
     padding: 0.5em 0;
     border-top: 1px solid #999;
 }
-.item-tags > * {
+.item-tags > label {
+    display: block;
+    line-height: 24px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    margin: 0 1em;
+}
+
+.item-tags > .ftc-edit {
+    width: 100%;
     font-size: 18px;
-    color: #666;
+    color: #444;
     line-height: 34px;
 }
 
