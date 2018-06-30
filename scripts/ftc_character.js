@@ -42,10 +42,18 @@ class FTCCharacter extends FTCObject {
         data.ftc = ftc;
 
         // Level and Experience
-        const lvl = parseInt(data.counters.level.current);
+        data.counters.level.current = Math.min(Math.max(data.counters.level.current, 1), 20);
+        let lvl = data.counters.level.current,
+            start = FTC.actions.get_next_level_exp(lvl - 1),
+            cur = Math.max(data.counters.exp.current, start),
+            next = FTC.actions.get_next_level_exp(lvl),
+            pct = ((cur - start) * 100) / (next - start);
         ftc['exp'] = {
-            current: data.counters.exp.current.toLocaleString(),
-            next: FTC.actions.get_next_level_exp(lvl).toLocaleString()
+            "lvl": lvl,
+            "current": cur.toLocaleString(),
+            "next": next.toLocaleString(),
+            "pct": Math.min(pct, 99.5),
+            "cls": (pct >= 100) ? "leveled": ""
         };
 
         // Proficiency Bonus
@@ -113,7 +121,7 @@ class FTCCharacter extends FTCObject {
            enc = data.stats.Str.current * 15,
            pct = Math.min(wt * 100 / enc, 99.5),
            cls = (pct > 90 ) ? "heavy" : "";
-        ftc.inventory["weight"] = {"weight": wt, "encumbrance": enc, "encpct": pct, "enccls": cls};
+        ftc.inventory["weight"] = {"wt": wt, "enc": enc, "pct": pct, "cls": cls};
     }
 
     /* ------------------------------------------- */

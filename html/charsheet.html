@@ -13,12 +13,16 @@
                     <input class="ftc-edit" type="text" tabindex="0" data-autosize="12" data-edit="counters.level.current"
                            value="{counters.level.current}" placeholder="1"/>
                 </h2>
+               <div class="xpbar">
+                    <span class="bar {ftc.exp.cls}" style="width: {ftc.exp.pct}%"></span>
+                </div>
                 <div class="experience">
                     <label>XP</label>
                     <input class="ftc-edit" type="text" tabindex="0" data-autosize="6" data-edit="counters.exp.current"
                            value="{ftc.exp.current}" placeholder="0"/>
                     <label class="exp-next"> / {ftc.exp.next}</label>
                 </div>
+
             </div>
 
             <ul class="ftc-sheet-subtitle flexrow">
@@ -70,12 +74,14 @@
 
                 <div class="currency flexrow">
                     <span class="currency-label">Currency</span>
-                    <label>GP:</label>
-                    <input class="ftc-edit currency-gp" type="text" tabindex="0" data-edit="counters.gp.current" value="{counters.gp.current}" placeholder="0"/>
-                    <label>SP:</label>
-                    <input class="ftc-edit currency-sp" type="text" tabindex="0" data-edit="counters.sp.current" value="{counters.sp.current}" placeholder="0"/>
-                    <label>CP:</label>
-                    <input class="ftc-edit currency-cp" type="text" tabindex="0" data-edit="counters.cp.current" value="{counters.cp.current}" placeholder="0"/>
+                    <div class="currency-bags flexrow">
+                        <label>GP:</label>
+                        <input class="ftc-edit currency-gp" type="text" tabindex="0" data-edit="counters.gp.current" value="{counters.gp.current}" placeholder="0"/>
+                        <label>SP:</label>
+                        <input class="ftc-edit currency-sp" type="text" tabindex="0" data-edit="counters.sp.current" value="{counters.sp.current}" placeholder="0"/>
+                        <label>CP:</label>
+                        <input class="ftc-edit currency-cp" type="text" tabindex="0" data-edit="counters.cp.current" value="{counters.cp.current}" placeholder="0"/>
+                    </div>
                 </div>
 
                 <header class="item inventory-header flexrow">
@@ -91,9 +97,9 @@
                     <!-- FTC_INVENTORY_HTML -->
                 </ol>
 
-                <footer class="inventory-weight {ftc.inventory.enccls}">
-                    <span class="inventory-weight-bar" style="width: {ftc.inventory.encpct}%"></span>
-                    <label class="inventory-weight-label">{ftc.inventory.weight} / {ftc.inventory.encumbrance}</label>
+                <footer class="inventory-weight {ftc.inventory.weight.cls}">
+                    <span class="inventory-weight-bar" style="width: {ftc.inventory.weight.pct}%"></span>
+                    <label class="inventory-weight-label">{ftc.inventory.weight.wt} / {ftc.inventory.weight.enc}</label>
                 </footer>
             </div>
 

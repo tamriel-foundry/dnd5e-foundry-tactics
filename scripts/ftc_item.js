@@ -43,6 +43,13 @@ class FTCItem extends FTCObject {
 
     /* ------------------------------------------- */
 
+    constructor(obj, app, scope) {
+        super(obj, app, scope)
+        FTC.item = this;
+    }
+
+    /* ------------------------------------------- */
+
     enrichData(data) {
 
         // Temporary FTC display data
@@ -125,8 +132,8 @@ class FTCItem extends FTCObject {
 
     save() {
         // If the item has an owner, don't bother trying to save the asset
-        if ( this.scope.owner ) return;
-        super.save();
+        if ( this.scope.owner && this.changed ) this.editOwnedItem(this.scope.itemId);
+        else super.save();
     }
 
     /* ------------------------------------------- */
@@ -136,7 +143,7 @@ class FTCItem extends FTCObject {
         // Get the owner, container, and item position
         const owner = this.scope.owner,
             container = this.scope.container;
-        itemId = itemId || container.length;
+        this.scope.itemId = itemId || container.length;
 
         // Create a new application window for editing an item and associate it with the working data
         const newApp = sync.newApp("ui_renderItem", this.obj, this.scope);
@@ -150,17 +157,17 @@ class FTCItem extends FTCObject {
         const item = this.data,
             confirm = $('<button class="fit-x">Update Item</button>');
         confirm.click(function () {
-            owner.updateItem(container, itemId, item);
+            owner.updateItem(container, this.scope.itemId, item);
             layout.coverlay("edit-item");
         });
         frame.append(confirm);
 
         // Create the UI element
         ui_popOut({
-            target: this.app,
+            target: this.owner.app,
             id: "edit-item",
-            maximize: true,
-            minimize: true,
+            maximize: false,
+            minimize: false,
             style: {"width": assetTypes["i"].width, "height": assetTypes["i"].height}
         }, frame).resizable();
     }

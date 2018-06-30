@@ -30,21 +30,39 @@ div.charlevel {
 
 .charlevel h2.level {
 	width: 100%;
-	height: 30px;
-	line-height: 30px;
+    font-size: 28px;
+	height: 26px;
 	margin: 0;
+}
+
+.charlevel .xpbar {
+    width: 100%;
+    height: 4px;
+    background: #556575;
+    border: 1px solid #222;
+    border-radius: 3px;
+}
+
+.charlevel .xpbar > .bar {
+    display: block;
+    height: 2px;
+    background: #bfcee4;
+}
+
+.xpbar > .bar.leveled {
+    background: #00cf36;
 }
 
 .charlevel .experience {
 	width: 100%;
 	height: 20px;
-	line-height: 20px;
 }
-
 .experience .exp-next {
 	color: #999;
 	margin: 0;
 }
+
+
 
 
 /* Class, Race, Background, Alignment */
@@ -425,7 +443,7 @@ label.inventory-weight-label {
     top: 0px;
     right: 4px;
     color: #FFF;
-    font-size: 0.75em;
+    font-size: 14px;
     line-height: 12px;
     text-shadow: 1px 1px #000;
 }
@@ -443,18 +461,24 @@ label.inventory-weight-label {
 }
 
 
-.currency > label {
-    flex: 0 0 24px;
-    padding-left: 4px;
-}
 
 .currency > .currency-label {
-    flex: 1;
+    flex: 0;
     margin: 0 0.25em;
     font-weight: bold;
 }
 
-.currency > .ftc-edit {
+.currency > .currency-bags {
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.currenc-bags > label {
+    flex: 0;
+    padding-left: 4px;
+}
+
+.currency-bags > .ftc-edit {
     flex: 0;
     text-align: center;
     margin: 0 2px;
