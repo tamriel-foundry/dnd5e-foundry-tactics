@@ -20,12 +20,17 @@ class FTCItem extends FTCObject {
         return this.data.ability;
     }
 
-    constructor(obj, app, scope) {
-        super(obj, app, scope);
+    get owner() {
+        return this.scope.owner;
+    }
 
-        // Primary Template and Parts
-        this.template = FTC.TEMPLATE_DIR + 'items/item-{type}.html';
-        this.parts = {
+    get template() {
+        let type = this.data.info.type.current;
+        return FTC.TEMPLATE_DIR + 'items/item-{type}.html';
+    }
+
+    get parts() {
+        return {
             ITEM_HEADER: FTC.TEMPLATE_DIR + 'items/item-header.html',
             ITEM_SIDEBAR: FTC.TEMPLATE_DIR + 'items/item-sidebar.html',
             ITEM_TAB_NOTES: FTC.TEMPLATE_DIR + 'items/tab-notes.html',
@@ -78,7 +83,7 @@ class FTCItem extends FTCObject {
         else if ( this.scope.container ) {
             if ( this.scope.container === "spellbook" ) type.current = "spell";
             else if ( this.scope.container === "abilities" ) type.current = "ability";
-            return type;
+            return type;;
         }
 
         // Implied by tags

@@ -282,7 +282,7 @@ class FTCObject {
 /* GM Forge Initialization Hook                 */
 /* -------------------------------------------- */
 
-hook.add("Initialize", "FTCSetup", function() {
+hook.add("Initialize", "FTCSetup", function(...args) {
     let gameid = game.templates.identifier;
 
     // Only initialize FTC if we are using the correct system OR no system at all
