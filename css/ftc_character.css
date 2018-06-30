@@ -529,11 +529,20 @@ ol.abilities {
 li.ability {
     font-size: 16px;
 }
+
+.ability-image {
+    flex: 0 0 36px;
+    margin-right: 5px;
+}
+.ability-image > .ftc-image { margin: 6px 0; }
+
+
+.ability-body { flex: 1; }
 .ability-name,
 .ability-source {
     flex: 1 0 80%;
 }
-.ability-footer .ability-source {
+.ability-footer > .ability-source {
     color: #999;
 }
 .ability .glyphicon {

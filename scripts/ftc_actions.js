@@ -153,13 +153,21 @@ FTC.actions = {
     },
 
     /* -------------------------------------------- */
-    /* Spell Actions                                */
+    /* Item, Spell, and Ability Actions             */
     /* -------------------------------------------- */
 
-    spell_actions:function(html, obj, app) {
+    item_actions:function(html, obj, app) {
+
+        // Spells from Spellbook
         html.find('.spell .ftc-rollable').click(function() {
             let spellId = $(this).closest("li.spell").attr("data-item-id");
             FTCSpellAction.diceCheck(obj, spellId);
+        });
+
+        // Abilities
+        html.find(".ability .ftc-rollable").click(function() {
+           let itemId = $(this).closest("li.ability").attr("data-item-id");
+           FTCAbilityAction.diceCheck(obj, itemId);
         });
     },
 
@@ -177,28 +185,84 @@ FTC.actions = {
     activateActions: function(html, obj, app) {
         this.attribute_actions(html, obj, app);
         this.skill_actions(html, obj, app);
-        this.spell_actions(html, obj, app);
+        this.item_actions(html, obj, app);
     }
 };
 
 
 /* -------------------------------------------- */
-/* Spell Cast Chat Render                       */
+/* Abstract Item Action                         */
 /* -------------------------------------------- */
 
-class FTCSpellAction extends FTCObject {
 
-    constructor(obj, app, scope) {
-        super(obj, app, scope);
-        this.template = FTC.TEMPLATE_DIR + 'actions/action-spell.html';
+class FTCItemAction extends FTCObject {
+
+    get ui() {
+        /* Return the UI name that should be called with sync.render */
+        return undefined;
+    }
+
+    get template() {
+        /* Return the HTML template path that should be rendered */
+        return undefined;
     }
 
     get owner() {
         return this.scope.owner;
     }
 
+    get info() {
+        return this.data.info;
+    }
+
+    get weapon() {
+        return this.data.weapon;
+    }
+
+    get armor() {
+        return this.data.armor;
+    }
+
     get spell() {
         return this.data.spell;
+    }
+
+    get ability() {
+        return this.data.ability;
+    }
+
+    /* -------------------------------------------- */
+
+    static diceCheck(owner, itemId) {
+
+        // Generate event data
+        let eventData = {
+            "f": owner.data.info.name.current,
+            "href": owner.data.info.img.current,    // This is inconsistent, similar to "icon" for other events
+            //"p": "Flavor Text",                   // This is inconsistent, similar to "msg" for other events
+            "ui": this.ui,
+            "owner": owner,
+            "spellId": itemId
+        };
+
+        // Submit the chat event
+        runCommand("chatEvent", eventData);
+    }
+}
+
+/* -------------------------------------------- */
+/* Spell Cast Item Action                       */
+/* -------------------------------------------- */
+
+
+class FTCSpellAction extends FTCItemAction {
+
+    get ui() {
+        return "FTC_SPELL_ACTION";
+    }
+
+    get template() {
+        return FTC.TEMPLATE_DIR + 'actions/action-spell.html';
     }
 
     /* -------------------------------------------- */

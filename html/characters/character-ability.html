@@ -1,11 +1,16 @@
-<li id="item-{itemid}" class="item {info.type.current} flexcolumn" data-item-container="abilities" data-item-id="{itemid}">
-	<header class="ability-header flexrow">
-		<span class="ability-name">{info.name.current}</span>
-		<span class="glyphicon glyphicon-edit item-edit"></span>
-	</header>
-	<footer class="ability-footer flexrow">
-		<label class="ability-source">{info.source.current}</label>
-		<span class="glyphicon glyphicon-trash item-trash"></span>
-	</footer>
+<li id="item-{itemid}" class="item {info.type.current} flexrow" data-item-container="abilities" data-item-id="{itemid}">
+    <div class="ability-image">
+        <img class="ftc-image" data-edit="info.img.current" src="{info.img.current}" width="36" height="36"/>
+    </div>
+    <div class="ability-body">
+        <header class="ability-header ftc-rollable flexrow">
+            <span class="ability-name">{info.name.current}</span>
+            <span class="glyphicon glyphicon-edit item-edit"></span>
+        </header>
+        <footer class="ability-footer flexrow">
+            <label class="ability-source">{info.source.current}</label>
+            <span class="glyphicon glyphicon-trash item-trash"></span>
+        </footer>
+    </div>
 </li>
 

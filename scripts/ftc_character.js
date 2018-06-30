@@ -21,6 +21,9 @@ class FTCCharacter extends FTCObject {
             CHARACTER_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'characters/primary-stats.html',
             CHARACTER_ABILITY: FTC.TEMPLATE_DIR + 'characters/character-ability.html'
         }
+
+        // Register local for debugging
+        FTC.character = this;
     }
 
     /* ------------------------------------------- */
@@ -32,14 +35,15 @@ class FTCCharacter extends FTCObject {
 
     /* ------------------------------------------- */
 
-    static enrichData(data) {
+    enrichData(data) {
 
         // Temporary FTC display data
-        data.ftc = {};
+        const ftc = {};
+        data.ftc = ftc;
 
         // Level and Experience
         const lvl = parseInt(data.counters.level.current);
-        data.ftc['exp'] = {
+        ftc['exp'] = {
             current: data.counters.exp.current.toLocaleString(),
             next: FTC.actions.get_next_level_exp(lvl).toLocaleString()
         };
@@ -49,7 +53,7 @@ class FTCCharacter extends FTCObject {
 
         // Enrich Attributes
         $.each(data.stats, function(attr, stat) {
-            data.ftc[attr] = {
+            ftc[attr] = {
                 'mod': stat.modifiers.mod,
                 'svmod': (stat.proficient * data.counters.proficiency.current) + stat.modifiers.mod,
                 'padstr': FTC.ui.padNumber(stat.current, 2),
@@ -60,44 +64,74 @@ class FTCCharacter extends FTCObject {
         // Spellcasting DC
         let spellAttr = data.info.spellcasting.current,
             mod = spellAttr ? data.ftc[spellAttr].mod : undefined;
-        data.ftc["spellMod"] = mod;
-        data.ftc["spellDC"] = mod ? 8 + mod + data.counters.proficiency.current : undefined;
-        data.ftc["spellDCstr"] = mod ? "Spell DC " + data.ftc["spellDC"] : "";
+        ftc["spellMod"] = mod;
+        ftc["spellDC"] = mod ? 8 + mod + data.counters.proficiency.current : undefined;
+        ftc["spellDCstr"] = mod ? "Spell DC " + data.ftc["spellDC"] : "";
 
         // Enrich Skills
         $.each(data.skills, function(name, skill) {
             let stat = data.ftc[skill.stat],
                  mod = ((skill.current || 0) * data.counters.proficiency.current) + stat.mod;
-            data.ftc[name] = {
+            ftc[name] = {
                 'mod': mod,
                 'modstr': (mod < 0 ? "" : "+" ) + mod
             }
         });
 
-        // Enrich Inventory Items
-        const weight = [];
-        $.each(data.inventory, function(itemId, item) {
-            item = FTCItem.enrichData(item);
-            data.inventory[itemId] = item;
-            weight.push(item.info.weight.current);
-        });
-
         // Base Armor Class
         data.ftc["baseAC"] = 10 + data.ftc["Dex"].mod;
 
-        // Compute Weight and Encumbrance
+        // Set up owned items
+        this.setupInventory(data);
+        this.setupSpellbook(data);
+        this.setupAbilities(data);
+    }
+
+    /* ------------------------------------------- */
+
+    setupInventory(data) {
+        /*
+        Set up inventory items by converting them to FTCItem objects
+        */
+        const ftc = data.ftc,
+            weight = [];
+
+        // Create inventory object
+        ftc.inventory = {"items": []};
+
+        // Iterate over inventory items
+        $.each(data.inventory, function(itemId, itemData) {
+            let item = new FTCItem(itemData, self.app, {"owner": this.owner, "container": "inventory"});
+            ftc.inventory.items[itemId] = item;
+            weight.push(item.info.weight.current);
+        });
+
+        // Compute weight and encumbrance
         var wt = (weight.length > 0) ? weight.reduce(function(total, num) { return total + (num || 0); }) : 0,
            enc = data.stats.Str.current * 15,
            pct = Math.min(wt * 100 / enc, 99.5),
            cls = (pct > 90 ) ? "heavy" : "";
-        data.ftc['inventory'] = {weight: wt, encumbrance: enc, encpct: pct, enccls: cls};
+        ftc.inventory["weight"] = {"weight": wt, "encumbrance": enc, "encpct": pct, "enccls": cls};
+    }
 
-        // Spell Levels
-        const sls = {};
-        $.each(data.spellbook, function(spellId, item) {
+    /* ------------------------------------------- */
+
+    setupSpellbook(data) {
+        /*
+        Set up spellbook items by converting them to FTCItem objects
+        */
+
+        const ftc = data.ftc,
+            sls = {};
+
+        // Iterate over spellbook spells
+        $.each(data.spellbook, function(spellId, itemData) {
+
+            // Construct the item object
+            let item = new FTCItem(itemData, self.app, {"owner": this.owner, "container": "spellbook"}),
+                spell = item.spell;
 
             // Construct spell data
-            let spell = item.spell;
             let lvl = (spell.level.current === "Cantrip") ? 0 : parseInt(spell.level.current || 0);
             item.spellid = spellId;
 
@@ -111,14 +145,20 @@ class FTCCharacter extends FTCObject {
             };
             sls[lvl].current = (lvl === 0) ? "&infin;" : sls[lvl].current;
             sls[lvl].max = (lvl === 0) ? "&infin;" : sls[lvl].max;
-
-            // Associate the spell with it's spell level
             sls[lvl].spells.push(item);
         });
-        data.ftc['spellLevels'] = sls;
+        ftc['spellbook'] = sls;
+    }
 
-        // Return the data
-        return data
+    /* ------------------------------------------- */
+
+    setupAbilities(data) {
+        const ftc = data.ftc;
+        ftc["abilities"] = [];
+        $.each(data.abilities, function(itemId, itemData) {
+            let item = new FTCItem(itemData, self.app, {"owner": this.owner, "container": "abilities"});
+            ftc.abilities.push(item);
+        });
     }
 
     /* ------------------------------------------- */
@@ -128,7 +168,8 @@ class FTCCharacter extends FTCObject {
         // Load primary template
         let template = this.isPrivate ? this.templates.FTC_SHEET_PRIVATE : this.templates.FTC_SHEET_FULL,
             main = FTC.loadTemplate(template),
-            obj = this.obj;
+            obj = this.obj,
+            data = this.data;
 
         // Augment sub-components
         if (!this.isPrivate) {
@@ -139,7 +180,7 @@ class FTCCharacter extends FTCObject {
             // Attributes
             let attrs = "";
             let template = FTC.loadTemplate(this.templates.FTC_ATTRIBUTE_HTML);
-            for ( var s in obj.data.stats ) {
+            for ( var s in data.stats ) {
                 attrs += template.replace(/\{stat\}/g, s);
             }
             main = main.replace("<!-- FTC_ATTRIBUTE_HTML -->", attrs);
@@ -147,7 +188,7 @@ class FTCCharacter extends FTCObject {
             // Insert Skills
             let skills = "";
             template = FTC.loadTemplate(this.templates.FTC_SKILL_HTML)
-            for (var s in obj.data.skills) {
+            for (var s in data.skills) {
                 skills += template.replace(/\{skl\}/g, s);
             }
             main = main.replace("<!-- FTC_SKILL_HTML -->", skills);
@@ -155,7 +196,7 @@ class FTCCharacter extends FTCObject {
             // Insert Inventory
             let items = "";
             template = FTC.loadTemplate(this.templates.FTC_ITEM_HTML);
-            $.each(obj.data.inventory, function(i, item) {
+            $.each(data.ftc.inventory.items, function(i, item) {
                 item.itemid = i;
                 items += FTC.populateTemplate(template, item);
             });
@@ -166,7 +207,7 @@ class FTCCharacter extends FTCObject {
             let spells = "",
                 ltmp = FTC.loadTemplate(this.templates.FTC_SPELL_LEVEL),
                 stmp = FTC.loadTemplate(this.templates.FTC_SPELL_HTML);
-            $.each(obj.data.ftc.spellLevels, function(l, s){
+            $.each(data.ftc.spellbook, function(l, s){
                 spells += FTC.populateTemplate(ltmp, s);
                 $.each(s.spells, function(i, p){
                     spells += FTC.populateTemplate(stmp, p);
@@ -178,7 +219,7 @@ class FTCCharacter extends FTCObject {
             // Abilities
             let abilities = "";
             template = FTC.loadTemplate(this.templates.CHARACTER_ABILITY);
-            $.each(obj.data.abilities, function(i, item) {
+            $.each(data.ftc.abilities, function(i, item) {
                 item.itemid = i;
                 abilities += FTC.populateTemplate(template, item);
             });

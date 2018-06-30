@@ -4,6 +4,22 @@
 
 class FTCItem extends FTCObject {
 
+    get spell() {
+        return this.data.spell;
+    }
+
+    get weapon() {
+        return this.data.weapon;
+    }
+
+    get armor() {
+        return this.data.armor;
+    }
+
+    get ability() {
+        return this.data.ability;
+    }
+
     constructor(obj, app, scope) {
         super(obj, app, scope);
 
@@ -22,52 +38,49 @@ class FTCItem extends FTCObject {
 
     /* ------------------------------------------- */
 
-    static enrichData(item) {
+    enrichData(data) {
 
         // Temporary FTC display data
-        item.ftc = item.ftc || {};
+        data.ftc = data.ftc || {};
+
+        // Classify data type
+        let type = this.classify_type(data, this.scope);
+        data.info.type = type;
+        data.ftc.typeStr = util.contains(["spell", "ability"], type.current) ? type.current.capitalize() : "Item";
 
         // Default Image
-        item.info.img.current = item.info.img.current || "/content/icons/Pouch1000p.png";
+        data.info.img.current = data.info.img.current || "/content/icons/Pouch1000p.png";
 
         // Collapse tags
-        item.info.tagstr = Object.keys(item.tags || {}).join(", ");
-
-        // Classify item type
-        let type = this.classify_type(item);
-        item.info.type = type;
-        item.ftc.typeStr = util.contains(["spell", "ability"], type.current) ? type.current.capitalize() : "Item";
+        data.info.tagstr = Object.keys(data.tags || {}).join(", ");
 
         // Ensure quantity, price, and weight
-        item.info.price = item.info.price || {"name": "Price", "current": 0.0};
+        data.info.price = data.info.price || {"name": "Price", "current": 0.0};
         $.each(["weight", "quantity", "price"], function(_, v) {
-           item.info[v].current = parseFloat(item.info[v].current || 0.0)
+           data.info[v].current = parseFloat(data.info[v].current || 0.0)
         });
-
-        // Return either the full object or just the item data
-        return item;
     }
 
     /* ------------------------------------------- */
 
-    refineScope(scope) {
+    classify_type(i) {
 
-        // Perhaps pre-seed the item with a specific type
-        if (scope.type) this.data.info.type.current = scope.type;
-
-        // Infer the default type based on an associated container
-        if (scope.container) {
-            if ( scope.container === "spellbook" ) this.data.info.type.current = "spell";
-            else if ( scope.container === "abilities" ) this.data.info.type.current = "ability";
-        }
-        return scope
-    }
-
-    /* ------------------------------------------- */
-
-    static classify_type(i) {
+        // Already defined
         if (i.info.type && i.info.type.current) return i.info.type;
         const type = {"name": "Entry Type", "current": "note"};
+
+        // Provided by scope
+        if ( this.scope.type ) {
+            type.current = this.scope.type;
+            return type;
+        }
+        else if ( this.scope.container ) {
+            if ( this.scope.container === "spellbook" ) type.current = "spell";
+            else if ( this.scope.container === "abilities" ) type.current = "ability";
+            return type;
+        }
+
+        // Implied by tags
         if (("spell" in i.tags) || (i.spell && i.spell.level.current)) {
             type.current = "spell";
         } else if (("weapon" in i.tags) || (i.weapon && i.weapon.damage.current)) {

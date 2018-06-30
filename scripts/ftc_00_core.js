@@ -169,40 +169,26 @@ const FTC = {
 // An Prototypical Pattern for Rendering Rich Object Templates
 class FTCObject {
 
+    get data() {
+        return this.obj.data;
+    }
+
+    get info() {
+        return this.data.info;
+    }
+
+    get name() {
+        return this.info.name.current;
+    }
+
+    /* ------------------------------------------- */
+
     constructor(obj, app, scope) {
-        this.obj = this.enrichObject(obj);
         this.app = app;
         this.changed = false;
-        this.scope = this.refineScope(scope);
-        FTC.object = this;
-    }
-
-    /* ------------------------------------------- */
-
-    enrichObject(obj) {
-        if ( "sync" in obj ) {
-            obj.data = this.constructor.enrichData(obj.data);
-        } else {
-            const data = this.constructor.enrichData(obj);
-            obj = sync.obj();
-            obj.data = data;
-        }
-        return obj;
-    }
-
-    /* ------------------------------------------- */
-
-    static enrichData(data) {
-        /*
-        Enrich object data by augmenting it with additional metadata and attributes
-
-        Arguments:
-            data: Object data to augment and enrich.
-
-        Returns:
-            Enriched object data.
-        */
-        return data;
+        this.scope = this.refineScope(scope || {});
+        this.obj = this.registerObject(obj);
+        this.enrichData(this.data);
     }
 
     /* ------------------------------------------- */
@@ -213,12 +199,25 @@ class FTCObject {
 
     /* ------------------------------------------- */
 
-    get data() {
-        return this.obj.data;
+    registerObject(obj) {
+        if ( "sync" in obj ) {
+            return obj;
+        } else {
+            let newObj = sync.obj();
+            newObj.data = obj;
+            return newObj;
+        }
     }
 
-    get name() {
-        return this.obj.data.info.name.current;
+    /* ------------------------------------------- */
+
+    enrichData(data) {
+        /*
+        Enrich object data by augmenting it with additional metadata and attributes
+
+        Arguments:
+            data: Object data to augment and enrich.
+        */
     }
 
     /* ------------------------------------------- */
