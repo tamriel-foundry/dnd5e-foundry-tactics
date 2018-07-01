@@ -792,6 +792,9 @@
       "languages": {
         "name": "Languages"
       },
+      "offensive": {
+        "name": "Weapon Modifier"
+      },
       "spellcasting": {
         "name": "Spellcasting Ability"
       },

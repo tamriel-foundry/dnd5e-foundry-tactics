@@ -14,7 +14,8 @@ class FTCCharacter extends FTCObject {
             FTC_SHEET_PRIVATE: FTC.TEMPLATE_DIR + 'privatesheet.html',
             FTC_SKILL_HTML: FTC.TEMPLATE_DIR + 'skill.html',
             FTC_ATTRIBUTE_HTML: FTC.TEMPLATE_DIR + 'attribute.html',
-            FTC_ITEM_HTML: FTC.TEMPLATE_DIR + 'item.html',
+            INVENTORY_HEADER: FTC.TEMPLATE_DIR + 'characters/items/inventory-header.html',
+            INVENTORY_ITEM: FTC.TEMPLATE_DIR + 'characters/items/inventory-item.html',
             FTC_SPELL_LEVEL: FTC.TEMPLATE_DIR + 'spellheader.html',
             FTC_SPELL_HTML: FTC.TEMPLATE_DIR + 'spell.html',
             CHARACTER_TAB_TRAITS: FTC.TEMPLATE_DIR + 'characters/tab-traits.html',
@@ -57,7 +58,8 @@ class FTCCharacter extends FTCObject {
         };
 
         // Proficiency Bonus
-        data.counters.proficiency.current = Math.floor((lvl + 7) / 4);
+        let prof = Math.floor((lvl + 7) / 4);
+        data.counters.proficiency.current = this.data.counters.proficiency.current = prof;
 
         // Enrich Attributes
         $.each(data.stats, function(attr, stat) {
@@ -104,15 +106,32 @@ class FTCCharacter extends FTCObject {
         // Set up inventory items by converting them to FTCItem objects
 
         const ftc = data.ftc,
+            owner = this.owner,
             weight = [];
 
+
         // Create inventory object
-        ftc.inventory = {"items": []};
+        ftc.inventory = {
+            "weapons": [],
+            "equipment": [],
+            "pack": [],
+        };
 
         // Iterate over inventory items
         $.each(data.inventory, function(itemId, itemData) {
-            let item = new FTCItem(itemData, self.app, {"owner": this.owner, "container": "inventory"});
-            ftc.inventory.items[itemId] = item;
+            let item = new FTCItem(itemData, self.app, {"owner": owner, "container": "inventory"});
+
+            // Set id and class
+            item.data.itemId = itemId;
+            item.data.itemCls = ( item.type === "weapon" && item.weapon.hit.current && item.weapon.damage.current ) ?
+                "ftc-rollable" : "";
+
+            // Push into type
+            if ( item.type === "weapon" ) {
+                ftc.inventory.weapons.push(item);
+            } else if ( item.type === "armor" && item.armor.equipped.current === 1 ) {
+                ftc.inventory.equipment.push(item);
+            } else ftc.inventory.pack.push(item);
             weight.push(item.info.weight.current);
         });
 
@@ -121,7 +140,7 @@ class FTCCharacter extends FTCObject {
            enc = data.stats.Str.current * 15,
            pct = Math.min(wt * 100 / enc, 99.5),
            cls = (pct > 90 ) ? "heavy" : "";
-        ftc.inventory["weight"] = {"wt": wt, "enc": enc, "pct": pct, "cls": cls};
+        ftc["weight"] = {"wt": wt, "enc": enc, "pct": pct, "cls": cls};
     }
 
     /* ------------------------------------------- */
@@ -202,14 +221,17 @@ class FTCCharacter extends FTCObject {
             main = main.replace("<!-- FTC_SKILL_HTML -->", skills);
 
             // Insert Inventory
-            let items = "";
-            template = FTC.loadTemplate(this.templates.FTC_ITEM_HTML);
-            $.each(data.ftc.inventory.items, function(i, item) {
-                item.itemid = i;
-                items += FTC.populateTemplate(template, item);
+            let inventory = "",
+                itemHeader = FTC.loadTemplate(this.templates.INVENTORY_HEADER),
+                itemTemplate = FTC.loadTemplate(this.templates.INVENTORY_ITEM);
+            $.each(data.ftc.inventory, function(type, items) {
+                inventory += FTC.populateTemplate(itemHeader, {"type": type, "name": type.capitalize()});
+                $.each(items, function(_, item) {
+                    inventory += FTC.populateTemplate(itemTemplate, item.data);
+                });
             });
-            items = items || '<li><blockquote class="compendium">Add items from the compendium.</blockquote></li>';
-            main = main.replace("<!-- FTC_INVENTORY_HTML -->", items);
+            inventory = inventory || '<li><blockquote class="compendium">Add items from the compendium.</blockquote></li>';
+            main = main.replace("<!-- FTC_INVENTORY_HTML -->", inventory);
 
             // Insert Spells
             let spells = "",
@@ -245,14 +267,13 @@ class FTCCharacter extends FTCObject {
     activateEventListeners(html) {
         FTC.ui.activate_tabs(html, this.obj, this.app);
         FTC.forms.activateFields(html, this, this.app);
-        FTC.actions.activateActions(html, this.obj, this.app);
+        FTC.actions.activateActions(html, this, this.app);
     }
 
     /* ------------------------------------------- */
 
-    updateItem(container, itemId, item) {
-        console.log(item);
-        this.data[container][itemId] = item;
+    updateItem(container, itemId, itemData) {
+        this.data[container][itemId] = itemData;
         this.changed = true;
         this.save();
     }

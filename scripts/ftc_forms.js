@@ -112,7 +112,7 @@ FTC.forms.edit_select_fields = function(html, obj) {
 /* -------------------------------------------- */
 
 FTC.forms.edit_image_fields = function(html, obj, app) {
-    html.find('.ftc-image').click(function(){
+    html.find('.profile-image.ftc-image').click(function(){
         let key = $(this).attr('data-edit');
 
         // Create Image Picker
@@ -195,9 +195,12 @@ FTC.forms.edit_item_fields = function(html, obj, app) {
     // Add Item
     html.find('.ftc-item-add').click(function() {
        const container = $(this).attr("data-item-container"),
-           data = duplicate(game.templates.item),
-           item = new FTCItem(data, app, {"owner": obj, "container": container});
-        item.editOwnedItem();
+           data = duplicate(game.templates.item);
+       let type = $(this).attr("data-item-type");
+       if ( type === "equipment" ) type = "armor";
+       else if ( type === "weapons" ) type = "weapon";
+       let item = new FTCItem(data, app, {"owner": obj, "container": container, "type": type});
+       item.editOwnedItem();
     });
 
     // Edit Item

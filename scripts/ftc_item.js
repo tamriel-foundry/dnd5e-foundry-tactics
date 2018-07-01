@@ -4,6 +4,10 @@
 
 class FTCItem extends FTCObject {
 
+    get type() {
+        return this.data.info.type.current;
+    }
+
     get spell() {
         return this.data.spell;
     }
@@ -57,7 +61,8 @@ class FTCItem extends FTCObject {
 
         // Classify data type
         let type = this.classify_type(data, this.scope);
-        data.info.type = type;
+        data.info.type.current = type;
+        this.data.info.type.current = type;
         data.ftc.typeStr = util.contains(["spell", "ability"], type.current) ? type.current.capitalize() : "Item";
 
         // Default Image
@@ -79,31 +84,22 @@ class FTCItem extends FTCObject {
     classify_type(i) {
 
         // Already defined
-        if (i.info.type && i.info.type.current) return i.info.type;
-        const type = {"name": "Entry Type", "current": "note"};
+        if (i.info.type && i.info.type.current) return i.info.type.current;
 
         // Provided by scope
-        if ( this.scope.type ) {
-            type.current = this.scope.type;
-            return type;
-        }
+        if ( this.scope.type ) return this.scope.type;
+
+        // Implied by container
         else if ( this.scope.container ) {
-            if ( this.scope.container === "spellbook" ) type.current = "spell";
-            else if ( this.scope.container === "abilities" ) type.current = "ability";
-            return type;;
+            if ( this.scope.container === "spellbook" ) return "spell";
+            else if ( this.scope.container === "abilities" ) return "ability";
         }
 
         // Implied by tags
-        if (("spell" in i.tags) || (i.spell && i.spell.level.current)) {
-            type.current = "spell";
-        } else if (("weapon" in i.tags) || (i.weapon && i.weapon.damage.current)) {
-            type.current = "weapon";
-        } else if (("armor" in i.tags) || (i.armor && i.armor.ac.current)) {
-            type.current = "armor";
-        } else if ("ability" in i.tags || "talent" in i.tags || (i.ability && i.ability.source.current)) {
-            type.current = "ability";
-        }
-        return type;
+        if (("spell" in i.tags) || (i.spell && i.spell.level.current)) return "spell";
+        else if (("weapon" in i.tags) || (i.weapon && i.weapon.damage.current)) return "weapon";
+        else if (("armor" in i.tags) || (i.armor && i.armor.ac.current)) return "armor";
+        else if ("ability" in i.tags || "talent" in i.tags || (i.ability && i.ability.source.current)) return "ability";
     }
 
     /* ------------------------------------------- */
@@ -131,9 +127,19 @@ class FTCItem extends FTCObject {
     /* ------------------------------------------- */
 
     save() {
-        // If the item has an owner, don't bother trying to save the asset
-        if ( this.scope.owner && this.changed ) this.editOwnedItem(this.scope.itemId);
-        else super.save();
+
+        // If the item was not changed, bail out
+        if ( !this.changed ) return;
+
+        // Saving an owned item
+        if ( this.scope.owner ) {
+            if ( this.obj._uid === FTC._edit_item_uid ) this.editOwnedItem(this.scope.itemId);
+            return;
+        }
+
+        // Saving an unowned item
+        console.log("Saving item " + this.name);
+        this.obj.sync("updateAsset");
     }
 
     /* ------------------------------------------- */
@@ -141,9 +147,16 @@ class FTCItem extends FTCObject {
     editOwnedItem(itemId) {
 
         // Get the owner, container, and item position
-        const owner = this.scope.owner,
+        const item = this,
+            owner = this.scope.owner,
             container = this.scope.container;
-        this.scope.itemId = itemId || container.length;
+
+        // Flag the UID of the item being currently edited
+        FTC._edit_item_uid = this.obj._uid;
+
+        // Update the itemId
+        itemId = itemId || owner.data[container].length;
+        this.scope.itemId = itemId;
 
         // Create a new application window for editing an item and associate it with the working data
         const newApp = sync.newApp("ui_renderItem", this.obj, this.scope);
@@ -154,11 +167,11 @@ class FTCItem extends FTCObject {
         newApp.appendTo(frame);
 
         // Attach a full-width confirmation button listen for submission
-        const item = this.data,
-            confirm = $('<button class="fit-x">Update Item</button>');
+        const confirm = $('<button class="fit-x">Update Item</button>');
         confirm.click(function () {
-            owner.updateItem(container, this.scope.itemId, item);
+            FTC._edit_item_uid = undefined;
             layout.coverlay("edit-item");
+            owner.updateItem(container, itemId, item.data);
         });
         frame.append(confirm);
 

@@ -303,9 +303,6 @@ ol.attributes-list {
 
 /* Rollable Skills */
 .skill .ftc-rollable {	position: relative; }
-
-.skill .ftc-rollable:hover { text-shadow: 0 0 4px #ff3838; }
-
 .skill .ftc-rollable:hover:before {
 	display: block;
 	width: 24px;
@@ -367,11 +364,20 @@ blockquote.compendium {
  	Inventory
 ------------------------------------------- */
 
+.modifier-select > * {
+    line-height: 24px;
+    height: 24px;
+}
+.modifier-select > label { flex: 1; }
+.modifier-select > .ftc-select { flex: 0 0 50%; }
+
+
+
 ol.inventory-items {
     height: calc(100% - 75px);
     overflow-y: scroll;
 	list-style: none;
-	margin: 0.25em 0;
+	margin: 0 0 5px;
 	padding: 0;
 }
 
@@ -380,44 +386,42 @@ ol.inventory-items {
     padding: 3px 0;
     border-bottom: 1px solid #DDD;
 }
-
 .item > * {
-    margin: 0 0.25em;
     line-height: 24px;
+    margin: 0 3px;
 }
-.item-name { flex: 1; }
-
-
-.item-quantity.ftc-edit {
-    width: 24px;
-    font-size: 14px;
-}
-.item-weight {
-	width: 24px;
-    font-size: 14px;
-	border-right: 1px solid #DDD;
-}
-
 
 .inventory-header {
+    padding: 0;
+    line-height: 20px;
     font-weight: bold;
-    margin: 0;
-    padding: 0.25em 0;
-    border-bottom: 1px solid #999;
+    background: #DEDEDE;
+    border-bottom: 1px solid #CCC;
+}
+.inventory-header > * {
+    line-height: 20px;
+}
+
+.item-header { flex: 1; }
+.item-quantity, .item-weight {
+    flex: 0 0 32px;
+    text-align: center;
+}
+
+.item-controls {
+    flex: 0 0 60px;
     font-size: 14px;
+    text-align: center;
+    border-left: 1px solid #DDD;
 }
-.inventory-header > * { line-height: 20px }
-.inventory-header .inventory-add { width: 36px; }
-.ftc-item-add:hover { text-shadow: 0 0 4px #ff3838; }
-
-
-/* Item Edit Icons */
-.item .glyphicon {
+.item-controls > .glyphicon {
     font-size: 12px;
-    line-height: 18px;
+    margin: 3px;
 }
 
-.item .glyphicon:hover {
+.item-controls > .glyphicon:hover,
+.item-controls.ftc-item-add:hover {
+    cursor: pointer;
 	text-shadow: 0 0 4px #ff3838;
 }
 
@@ -453,38 +457,22 @@ label.inventory-weight-label {
     border: 1px solid #ff1919;
 }
 
-/* Currency Bag */
-.inventory .currency {
-    flex: 0 0 24px;
-    line-height: 24px;
-    border-bottom: 1px solid #CCC;
+/* Coin Pouch */
+.currency > * {
+    line-height: 28px;
 }
-
-
-
 .currency > .currency-label {
     flex: 0;
-    margin: 0 0.25em;
     font-weight: bold;
 }
-
 .currency > .currency-bags {
     flex: 1;
     justify-content: flex-end;
 }
-
-.currenc-bags > label {
+.currency-bags > label {
     flex: 0;
     padding-left: 4px;
 }
-
-.currency-bags > .ftc-edit {
-    flex: 0;
-    text-align: center;
-    margin: 0 2px;
-}
-
-
 
 
 /* -------------------------------------------
@@ -499,12 +487,7 @@ ol.spellbook-spells {
 	padding: 0;
 }
 
-.spell.inventory-header {
-    padding: 0;
-	line-height: 20px;
-	background: #DEDEDE;
-    border-bottom: 1px solid #CCC;
-}
+
 .inventory-header .spell-action { border-right: 1px solid #CCC; }
 
 
@@ -523,20 +506,12 @@ ol.spellbook-spells {
 
 img.spell-image { margin-top: -2px; }
 
-.spellbook .spellcasting-mod > * {
-    line-height: 24px;
-    height: 24px;
-}
-.spellcasting-mod > .ftc-select { flex: 0 0 52%; }
-.spellcasting-mod > .ftc-item-add {
+.spellbook .ftc-item-add {
     width: 50px;
     font-size: 14px;
     text-align: center;
 }
 
-/* Rollable Spells */
-.spell .ftc-rollable:hover,
-.ability .ftc-rollable:hover { text-shadow: 0 0 4px #ff3838; }
 
 /* -------------------------------------------
  	Abilities

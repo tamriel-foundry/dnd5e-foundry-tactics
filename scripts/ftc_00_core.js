@@ -185,8 +185,12 @@ class FTCObject {
 
     constructor(obj, app, scope) {
         // Core Object constructor
-        this.app = app;
+
+        // These properties flag whether the underlying data has been changed
         this.changed = false;
+
+        // Core attributes
+        this.app = app;
         this.scope = this.refineScope(scope || {});
         this.obj = this.createObject(obj);
     }
@@ -228,6 +232,7 @@ class FTCObject {
 
     save() {
         // Sync the object, saving updated data and refreshing associated UI elements.
+
         if ( !this.changed ) return;
         console.log("Saving object " + this.name);
         this.obj.sync("updateAsset");

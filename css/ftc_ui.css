@@ -336,6 +336,8 @@ blockquote em {
 }
 
 
+.ftc-rollable:hover { text-shadow: 0 0 4px #ff3838; }
+
 /* -------------------------------------------
      DANGER DANGER OVERRIDES
 ------------------------------------------- */

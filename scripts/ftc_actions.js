@@ -156,18 +156,24 @@ FTC.actions = {
     /* Item, Spell, and Ability Actions             */
     /* -------------------------------------------- */
 
-    item_actions:function(html, obj, app) {
+    item_actions:function(html, owner, app) {
+
+        // Weapons from Inventory
+        html.find(".weapon .ftc-rollable").click(function() {
+            let itemId = $(this).closest("li.weapon").attr("data-item-id");
+            FTCWeaponAction.diceCheck(owner, itemId, FTCWeaponAction.ui);
+        });
 
         // Spells from Spellbook
-        html.find('.spell .ftc-rollable').click(function() {
-            let spellId = $(this).closest("li.spell").attr("data-item-id");
-            FTCSpellAction.diceCheck(obj, spellId, FTCSpellAction.ui);
+        html.find(".spell .ftc-rollable").click(function() {
+            let itemId = $(this).closest("li.spell").attr("data-item-id");
+            FTCSpellAction.diceCheck(owner, itemId, FTCSpellAction.ui);
         });
 
         // Abilities
         html.find(".ability .ftc-rollable").click(function() {
            let itemId = $(this).closest("li.ability").attr("data-item-id");
-           FTCAbilityAction.diceCheck(obj, itemId, FTCAbilityAction.ui);
+           FTCAbilityAction.diceCheck(owner, itemId, FTCAbilityAction.ui);
         });
     },
 
@@ -182,10 +188,10 @@ FTC.actions = {
 
     /* -------------------------------------------- */
 
-    activateActions: function(html, obj, app) {
-        this.attribute_actions(html, obj, app);
-        this.skill_actions(html, obj, app);
-        this.item_actions(html, obj, app);
+    activateActions: function(html, character, app) {
+        this.attribute_actions(html, character.obj, app);
+        this.skill_actions(html, character.obj, app);
+        this.item_actions(html, character.obj, app);
     }
 };
 
@@ -238,6 +244,101 @@ class FTCItemAction extends FTCItem {
         return html;
     }
 }
+
+
+/* -------------------------------------------- */
+/* Weapon Attack Action                         */
+/* -------------------------------------------- */
+
+
+class FTCWeaponAction extends FTCItemAction {
+
+    static get ui() {
+        return "FTC_WEAPON_ACTION";
+    }
+
+    get template() {
+        return FTC.TEMPLATE_DIR + "actions/action-weapon.html";
+    }
+
+    /* -------------------------------------------- */
+
+    getVarietyStr(v) {
+        let vars = {
+            "simplem": "Simple Martial",
+            "simpler": "Simple Ranged",
+            "martialm": "Martial Melee",
+            "martialr": "Martial Ranged",
+            "natural": "Natural",
+            "improv": "Improvised",
+            "ammo": "Ammunition"
+        }
+        return vars[v];
+    }
+
+    /* -------------------------------------------- */
+
+    enrichData(data) {
+
+        // Temporary data
+        data.ftc = data.ftc || {};
+
+        // Construct weapon properties
+        const props = [
+            this.getVarietyStr(data.info.variety.current),
+            data.weapon.range.current,
+            data.weapon.properties.current,
+            data.weapon.proficient ? "Proficient" : "Not Proficient"
+        ];
+        let propStr = "";
+        $.each(props, function(_, p) {
+            if (p) propStr += `<span class="action-prop">${p}</span>`;
+        });
+        data.ftc["actionProps"] = propStr;
+
+        // Populate weapon attack rolls
+        data = this.weaponAttacks(data);
+        return data;
+    }
+
+    /* -------------------------------------------- */
+
+    weaponAttacks(data) {
+        // Populate additional scope-dependent context data
+
+        // Check permissions
+        let weapon = data.weapon,
+            canRoll = hasSecurity(getCookie("UserID"), "Owner", this.owner.data);
+        if ( !canRoll ) return;
+
+        // General data
+        let attr = this.owner.data.info.offensive.current || "Str",
+            prof = this.owner.data.counters.proficiency.current,
+            mod = this.owner.data.stats[attr].modifiers.mod;
+
+        // Weapon Attack Roll
+        let bonus = parseInt(weapon.hit.current) || 0,
+            fml = `d20 + ${bonus} + ${prof} + ${mod}`,
+            hit = `<h3 class="action-roll weapon-hit" title="Weapon Attack" data-formula="${fml}">Weapon Attack</h3>`;
+        data.ftc.weaponHit = hit;
+
+        // Weapon Damage Roll
+        let dam = data.weapon.damage.current,
+            d2 = data.weapon.damage2.current;
+        dam = ( d2 ) ? dam+" + "+d2 : dam;
+        fml = `${dam} + ${mod}`;
+        let damage = `<h3 class="action-roll weapon-hit" title="Weapon Damage" data-formula="${fml}">Weapon Damage</h3>`;
+        data.ftc.weaponDamage = damage;
+        return data;
+    }
+}
+
+
+sync.render(FTCWeaponAction.ui, function(obj, app, scope) {
+    let item = obj.owner.data.inventory[obj.itemId],
+        action = new FTCWeaponAction(item, app, {"owner": obj.owner});
+    return action.renderHTML();
+});
 
 
 /* -------------------------------------------- */
@@ -294,26 +395,27 @@ class FTCSpellAction extends FTCItemAction {
         let spell = data.spell,
             canRoll = hasSecurity(getCookie("UserID"), "Owner", this.owner.data);
 
+        // General data
+        let attr = this.owner.data.info.spellcasting.current || "Int",
+            prof = this.owner.data.counters.proficiency.current,
+            mod = this.owner.data.stats[attr].modifiers.mod,
+            dc = 8 + mod + prof;
+
         // Spell Attack Roll
         if (data.info.variety.current === "attack" && canRoll) {
-            let attr = this.owner.data.info.spellcasting.current,
-                prof = this.owner.data.counters.proficiency.current,
-                mod = this.owner.data.ftc[attr].mod,
-                fml = `d20 + ${prof} + ${mod}`,
+                let fml = `d20 + ${prof} + ${mod}`,
                 hit = `<h3 class="action-roll spell-hit" title="Spell Attack" data-formula="${fml}">Spell Attack</h3>`;
             data.ftc.spellHit = hit;
         }
 
         // Spell Save
         if (data.info.variety.current === "save") {
-            let dc = this.owner.data.ftc.spellDC;
             data.ftc.spellDC = `<h3 class="spell-dc" title="Spell DC">Spell DC ${dc}</h3>`;
         }
 
         // Spell Damage
         if (data.weapon.damage.current && canRoll) {
-            let dc = this.owner.data.ftc.spellDC,
-                fml = data.weapon.damage.current,
+            let fml = data.weapon.damage.current,
                 title = (data.weapon.damage.type === "healing") ? "Spell Healing" : "Spell Damage",
                 atk = `<h3 class="action-roll spell-damage" title="${title}" data-formula="${fml}">${title}</h3>`;
             data.ftc.spellDamage = atk;
