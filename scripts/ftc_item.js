@@ -48,7 +48,12 @@ class FTCItem extends FTCObject {
     /* ------------------------------------------- */
 
     constructor(obj, app, scope) {
-        super(obj, app, scope)
+        super(obj, app, scope);
+
+        // Classify the item type
+        this.data.info.type.current = this.classify_type(this.data);
+
+        // Record local reference for debugging
         FTC.item = this;
     }
 
@@ -60,10 +65,7 @@ class FTCItem extends FTCObject {
         data.ftc = data.ftc || {};
 
         // Classify data type
-        let type = this.classify_type(data, this.scope);
-        data.info.type.current = type;
-        this.data.info.type.current = type;
-        data.ftc.typeStr = util.contains(["spell", "ability"], type.current) ? type.current.capitalize() : "Item";
+        data.ftc.typeStr = util.contains(["spell", "ability"], this.type) ? this.type.capitalize() : "Item";
 
         // Default Image
         data.info.img.current = data.info.img.current || "/content/icons/Pouch1000p.png";
@@ -183,6 +185,23 @@ class FTCItem extends FTCObject {
             minimize: false,
             style: {"width": assetTypes["i"].width, "height": assetTypes["i"].height}
         }, frame).resizable();
+    }
+
+    /* -------------------------------------------- */
+    /*  Item Helpers                                */
+    /* -------------------------------------------- */
+
+    getWeaponVarietyStr(v) {
+        let vars = {
+            "simplem": "Simple Martial",
+            "simpler": "Simple Ranged",
+            "martialm": "Martial Melee",
+            "martialr": "Martial Ranged",
+            "natural": "Natural",
+            "improv": "Improvised",
+            "ammo": "Ammunition"
+        }
+        return vars[v];
     }
 }
 

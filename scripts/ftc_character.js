@@ -6,7 +6,7 @@
 class FTCCharacter extends FTCObject {
 
     constructor(obj, app, scope) {
-        super(obj, app, scope)
+        super(obj, app, scope);
 
         // Primary Templates
         this.templates = {
@@ -21,10 +21,17 @@ class FTCCharacter extends FTCObject {
             CHARACTER_TAB_TRAITS: FTC.TEMPLATE_DIR + 'characters/tab-traits.html',
             CHARACTER_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'characters/primary-stats.html',
             CHARACTER_ABILITY: FTC.TEMPLATE_DIR + 'characters/character-ability.html'
-        }
+        };
 
         // Register local for debugging
         FTC.character = this;
+    }
+
+    /* ------------------------------------------- */
+
+    get dice() {
+        this._dice = this._dice || new FTCDice(this);
+        return this._dice;
     }
 
     /* ------------------------------------------- */
