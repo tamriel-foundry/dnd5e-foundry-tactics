@@ -128,7 +128,7 @@ class FTCItemAction {
             // Weapon Damage Roll
             let dt = "Weapon Damage",
                 d1 = data.weapon.damage.current,
-                d2 = data.weapon.damage2.current;
+                d2 = data.weapon.damage2.current || "";
             data.damage = `<h3 class="action-roll weapon-damage" title="${dt}" data-d1="${d1}" data-d2="${d2}">${dt}</h3>`;
         }
         return data;

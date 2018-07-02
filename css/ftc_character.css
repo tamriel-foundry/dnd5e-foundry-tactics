@@ -11,6 +11,7 @@ h1.charname {
 	flex: 0 0 70%;
 	height: 50px;
 	margin: 0;
+    padding-right: 5px;
 	font-size: 40px;
 	line-height: 50px;
 }
@@ -338,7 +339,11 @@ blockquote.compendium {
 ------------------------------------------- */
 
 #content-biography {
-    height: calc(100%);
+    height: 100%;
+}
+
+.biography {
+    height: 100%;
 	font-size: 1em;
 	font-family: "Scaly Sans";
 	color: #222;

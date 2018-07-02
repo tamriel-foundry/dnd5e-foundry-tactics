@@ -130,7 +130,7 @@ class FTCCharacter extends FTCObject {
 
             // Set id and class
             item.data.itemId = itemId;
-            item.data.itemCls = ( item.type === "weapon" && item.weapon.hit.current && item.weapon.damage.current ) ?
+            item.data.itemCls = ( item.type === "weapon" && item.weapon.damage.current ) ?
                 "ftc-rollable" : "";
 
             // Push into type
