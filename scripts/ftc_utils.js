@@ -118,26 +118,28 @@ function ftc_clean(original, template, inplace=false) {
 
 ftc_update_entities = function() {
     $.each(game.entities.data, function(_, obj) {
-        if (obj.data._t === "i") ftc_update_entity(obj, game.templates.item);
-        else if (obj.data._t === "c") ftc_update_entity(obj, game.templates.character);
+        if (obj.data._t === "i") {
+            obj.data = ftc_update_entity_data(obj.data, game.templates.item);
+            obj.sync("updateAsset");
+        }
+        else if (obj.data._t === "c") {
+            obj.data = ftc_update_entity_data(obj.data, game.templates.character);
+            obj.sync("updateAsset");
+        }
     });
 };
 
 
 /* -------------------------------------------- */
 
-
-ftc_update_entity = function(obj, template) {
+ftc_update_entity = function(data, template) {
 
     // Step 1 - merge any new template changes into the object data model
-    let data = ftc_merge(obj.data, template, true, false, false);
+    data = ftc_merge(data, template, true, false, false);
 
     // Step 2 - delete data from the object which is no longer required by the data model
     data = ftc_clean(data, template, true);
-
-    // Step 3 - Reassociate the data and save the object
-    obj.data = data;
-    obj.sync("updateAsset");
+    return data
 };
 
 

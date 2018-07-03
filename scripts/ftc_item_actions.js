@@ -53,6 +53,9 @@ class FTCItemAction {
             Rendered chat event HTML as a jQuery object
         */
 
+        // TODO: Only hook event handlers to recent chat events
+        // const isRecent = (Date.now() - obj.timeStamp) / 1000
+
         // Instantiate actor and item
         let actor = new FTCCharacter(obj.actorData),
             item = new FTCItem(obj.itemData),

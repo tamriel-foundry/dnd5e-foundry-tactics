@@ -139,7 +139,7 @@ class FTCCharacter extends FTCObject {
             } else if ( item.type === "armor" && item.armor.equipped.current === 1 ) {
                 ftc.inventory.equipment.push(item);
             } else ftc.inventory.pack.push(item);
-            weight.push(item.info.weight.current);
+            weight.push(parseFloat(item.info.weight.current));
         });
 
         // Compute weight and encumbrance

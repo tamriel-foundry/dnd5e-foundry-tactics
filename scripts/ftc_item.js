@@ -102,6 +102,9 @@ class FTCItem extends FTCObject {
         else if (("weapon" in i.tags) || (i.weapon && i.weapon.damage.current)) return "weapon";
         else if (("armor" in i.tags) || (i.armor && i.armor.ac.current)) return "armor";
         else if ("ability" in i.tags || "talent" in i.tags || (i.ability && i.ability.source.current)) return "ability";
+
+        // Return as note
+        return "note";
     }
 
     /* ------------------------------------------- */
@@ -226,9 +229,14 @@ hook.add("FTCInit", "Items", function() {
         if ( !dt ) return;
 
         // Parse the data transfer
-        const item = JSON.parse(dt.getData("OBJ")) || {};
+        let item = JSON.parse(dt.getData("OBJ")) || {};
         if (item._t !== "i") return;
-        if (!item.info.type) return;
+
+        // Maybe clean the item if it doesn't come from me
+        if ( !item.info.type ) {
+            item = ftc_update_entity(item, game.templates.item);
+            item = new FTCItem(item).data;
+        }
         const type = item.info.type.current;
 
         // Inventory Items
