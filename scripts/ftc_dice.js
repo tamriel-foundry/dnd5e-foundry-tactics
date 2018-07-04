@@ -19,15 +19,16 @@ class FTCDice {
         const query = sync.executeQuery(formula, data);
         console.log(query);
 
-        /* Generic dice roller which hooks into the query API */
-        const eventData = {
-            'f': this.actor.info.name.current,
-            'msg': flavor,
-            'icon': this.actor.info.img.current,
-            'data': query
+        // Submit chat event
+        const chatData = {
+            "person": this.actor.name,
+            "eID": this.actor.obj.id(),
+            "icon": this.actor.data.info.img.current,
+            "flavor": flavor,
+            "audio": "sounds/dice.mp3",
+            "eventData": query
         };
-        runCommand("diceCheck", eventData);
-        snd_diceRoll.play();
+        runCommand("chatEvent", chatData);
     };
 
     /* -------------------------------------------- */
@@ -145,8 +146,8 @@ class FTCDice {
 
     /* -------------------------------------------- */
 
-    rollWeaponDamage(d1, d2, situational, flavor="Weapon Damage") {
-        let fml = this.buildFormula(d1, d2, "@mod", situational),
+    rollWeaponDamage(damage, situational, flavor="Weapon Damage") {
+        let fml = this.buildFormula(damage, "@mod", situational),
             data = {"mod": this.data.weaponMod};
         this.rollDice(flavor, fml, data);
     }

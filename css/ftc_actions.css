@@ -2,9 +2,11 @@ section.ftc-chat {
     font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
     font-weight: normal;
+    margin: 0.5em 0;
     padding: 0.5em;
+    border: 1px solid #AAA;
+    border-radius: 3px;
 }
-
 
 /* Spell Action Header */
 .action-header {

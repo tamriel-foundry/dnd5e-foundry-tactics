@@ -28,16 +28,18 @@ class FTCItemAction {
         */
 
         // Generate event data
-        let eventData = {
-            "f": actor.data.info.name.current,
-            "href": actor.data.info.img.current,    // This is inconsistent, similar to "icon" for other events
+        let chatData = {
+            "person": actor.data.info.name.current,
+            "eID": actor.obj.id(),
+            "icon": actor.data.info.img.current,
             "ui": FTCItemAction.ui,
+            "audio": "content/audio/spell_cast.mp3",
             "actorData": actor.data,
             "itemData": itemData
         };
 
         // Submit the chat event
-        runCommand("chatEvent", eventData);
+        runCommand("chatEvent", chatData);
     }
 
     /* -------------------------------------------- */
@@ -53,13 +55,10 @@ class FTCItemAction {
             Rendered chat event HTML as a jQuery object
         */
 
-        // TODO: Only hook event handlers to recent chat events
-        // const isRecent = (Date.now() - obj.timeStamp) / 1000
-
         // Instantiate actor and item
         let actor = new FTCCharacter(obj.actorData),
             item = new FTCItem(obj.itemData),
-            action = new FTCItemAction(actor, item);
+            action = new FTCItemAction(actor, item, {"timeStamp": obj.timeStamp});
 
         // Build the action html and return to the sync.render function
         return action;
@@ -67,9 +66,10 @@ class FTCItemAction {
 
     /* -------------------------------------------- */
 
-    constructor(actor, item) {
+    constructor(actor, item, scope) {
         this.actor = actor;
         this.item = item;
+        this.scope = scope;
     }
 
     /* -------------------------------------------- */
@@ -77,6 +77,7 @@ class FTCItemAction {
     get name() { return this.item.name; }
     get dice() { return this.actor.dice; }
     get canRoll() { return hasSecurity(getCookie("UserID"), "Owner", this.actor.data); }
+    get isRecent() { return (Date.now() - this.scope.timeStamp) / 1000 <= 300;  }
 
     /* -------------------------------------------- */
 
@@ -121,18 +122,24 @@ class FTCItemAction {
         data.actionProps = this.actionProperties(props);
 
         // Populate weapon attack rolls
-        if ( this.canRoll ) {
+        if ( this.canRoll && this.isRecent ) {
+            let t = "Weapon Attack"
 
             // Weapon Attack Roll
-            let at = "Weapon Attack",
-                bon = data.weapon.hit.current || "";
-            data.attack = `<h3 class="action-roll weapon-hit" title="${at}" data-bonus="${bon}">${at}</h3>`;
+            let bon = data.weapon.hit.current || "";
+            data.attack = `<h3 class="action-roll weapon-hit" title="${t}" data-bonus="${bon}">${t}</h3>`;
 
             // Weapon Damage Roll
-            let dt = "Weapon Damage",
-                d1 = data.weapon.damage.current,
-                d2 = data.weapon.damage2.current || "";
-            data.damage = `<h3 class="action-roll weapon-damage" title="${dt}" data-d1="${d1}" data-d2="${d2}">${dt}</h3>`;
+            t = "Weapon Damage";
+            let dam = data.weapon.damage.current;
+            data.damage = `<h3 class="action-roll weapon-damage" title="${t}" data-damage="${dam}">${t}</h3>`;
+
+            // Weapon Secondary Damage
+            if ( data.weapon.damage2.current ) {
+                t = "Secondary Damage";
+                dam = data.weapon.damage2.current;
+                data.damage2 = `<h3 class="action-roll weapon-damage" title="${t}" data-damage="${dam}">${t}</h3>`;
+            }
         }
         return data;
     }
@@ -163,7 +170,7 @@ class FTCItemAction {
         }
 
         // Populate spell attack rolls
-        if ( this.canRoll ) {
+        if ( this.canRoll && this.isRecent ) {
 
             // Spell Attack Roll
             if (data.info.variety.current === "attack") {
@@ -221,9 +228,8 @@ class FTCItemAction {
 
         // Weapon Damage
         html.find("h3.action-roll.weapon-damage").click(function() {
-            let d1 = $(this).attr("data-d1"),
-                d2 = $(this).attr("data-d2");
-            dice.rollWeaponDamage(d1, d2, undefined, name+" "+$(this).attr("title"));
+            let dmg = $(this).attr("data-damage");
+            dice.rollWeaponDamage(dmg, undefined, name+" "+$(this).attr("title"));
         });
         return html;
     }
