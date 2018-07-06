@@ -173,8 +173,14 @@
                 <div class="primary-stat initiative">
                     <header>Initiative</header>
                     <div class="primary-stat-value">
-                        <span>{ftc.Dex.modstr}.{ftc.Dex.padstr}</span>
+                        <span>{ftc.initiative}</span>
                     </div>
+                    <footer class="initiative-bonus">
+                        <label>Bonus:</label>
+                        <input class="ftc-edit" type="text" tabindex="0"
+                               data-edit="counters.initiative.current" data-dtype="str" data-autosize="10"
+                               value="{counters.initiative.current}"/>
+                    </footer>
                 </div>
 
                 <div class="primary-stat speed">

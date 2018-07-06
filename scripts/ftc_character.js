@@ -13,7 +13,7 @@ class FTCCharacter extends FTCObject {
             FTC_SHEET_FULL: FTC.TEMPLATE_DIR + 'charsheet.html',
             FTC_SHEET_PRIVATE: FTC.TEMPLATE_DIR + 'privatesheet.html',
             FTC_SKILL_HTML: FTC.TEMPLATE_DIR + 'skill.html',
-            FTC_ATTRIBUTE_HTML: FTC.TEMPLATE_DIR + 'attribute.html',
+            FTC_ATTRIBUTE_HTML: FTC.TEMPLATE_DIR + 'characters/attribute.html',
             INVENTORY_HEADER: FTC.TEMPLATE_DIR + 'characters/items/inventory-header.html',
             INVENTORY_ITEM: FTC.TEMPLATE_DIR + 'characters/items/inventory-item.html',
             FTC_SPELL_LEVEL: FTC.TEMPLATE_DIR + 'spellheader.html',
@@ -37,7 +37,7 @@ class FTCCharacter extends FTCObject {
     /* ------------------------------------------- */
 
     refineScope(scope) {
-        scope.isPrivate = (scope.viewOnly && (this.obj._lid !== undefined));
+        scope.isPrivate = (scope.viewOnly && (!this.obj || !this.obj.id()));
         return scope;
     }
 
@@ -77,6 +77,11 @@ class FTCCharacter extends FTCObject {
                 'modstr': (stat.modifiers.mod < 0 ? "" : "+" ) + stat.modifiers.mod
             }
         });
+
+        // Initiative Bonus
+        let initMod = parseInt(data.stats["Dex"].modifiers.mod) + parseInt(data.counters.initiative.current);
+
+        ftc["initiative"] = (initMod < 0 ? initMod : "+"+initMod) + "." + ftc["Dex"].padstr;
 
         // Spellcasting DC
         let spellAttr = data.info.spellcasting.current,
@@ -119,9 +124,21 @@ class FTCCharacter extends FTCObject {
 
         // Create inventory object
         ftc.inventory = {
-            "weapons": [],
-            "equipment": [],
-            "pack": [],
+            "weapons": {
+                "name": "Weapons",
+                "items": [],
+                "type": "weapon"
+            },
+            "equipment": {
+                "name": "Equipment",
+                "items": [],
+                "type": "armor"
+            },
+            "misc": {
+                "name": "Backpack",
+                "items": [],
+                "type": "note"
+            }
         };
 
         // Iterate over inventory items
@@ -135,11 +152,11 @@ class FTCCharacter extends FTCObject {
 
             // Push into type
             if ( item.type === "weapon" ) {
-                ftc.inventory.weapons.push(item);
+                ftc.inventory.weapons.items.push(item);
             } else if ( item.type === "armor" && item.armor.equipped.current === 1 ) {
-                ftc.inventory.equipment.push(item);
-            } else ftc.inventory.pack.push(item);
-            weight.push(parseFloat(item.info.weight.current));
+                ftc.inventory.equipment.items.push(item);
+            } else ftc.inventory.misc.items.push(item);
+            weight.push(parseFloat(item.info.weight.current) * parseFloat(item.info.quantity.current));
         });
 
         // Compute weight and encumbrance
@@ -231,9 +248,10 @@ class FTCCharacter extends FTCObject {
             let inventory = "",
                 itemHeader = FTC.loadTemplate(this.templates.INVENTORY_HEADER),
                 itemTemplate = FTC.loadTemplate(this.templates.INVENTORY_ITEM);
-            $.each(data.ftc.inventory, function(type, items) {
-                inventory += FTC.populateTemplate(itemHeader, {"type": type, "name": type.capitalize()});
-                $.each(items, function(_, item) {
+            $.each(data.ftc.inventory, function(_, type) {
+                console.log(type);
+                inventory += FTC.populateTemplate(itemHeader, type);
+                $.each(type.items, function(_, item) {
                     inventory += FTC.populateTemplate(itemTemplate, item.data);
                 });
             });

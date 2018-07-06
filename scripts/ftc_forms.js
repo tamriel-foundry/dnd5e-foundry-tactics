@@ -6,7 +6,7 @@ FTC.forms = {}
 /* -------------------------------------------- */
 FTC.forms.delayedUpdate = function(obj, ms) {
     setTimeout(function() {
-        let isInput = $(document.activeElement).is(".ftc-edit, .ftc-checkbox, .ftc-select");
+        let isInput = $(document.activeElement).is(".ftc-edit, .ftc-checkbox, .ftc-select, .ftc-textarea");
         if ( !isInput ) {
             obj.save();
         }
@@ -50,6 +50,21 @@ FTC.forms.autosize = function(field) {
 };
 
 
+
+/* -------------------------------------------- */
+/* Textarea Fields                              */
+/* -------------------------------------------- */
+
+FTC.forms.edit_textarea_fields = function(html, obj) {
+    const inputs = html.find("textarea.ftc-textarea");
+    inputs.blur(function() {
+        let input = $(this);
+        obj.setData(input.attr('data-edit'), input.val(), input.attr('data-dtype'));
+        FTC.forms.delayedUpdate(obj);
+    });
+};
+
+
 /* -------------------------------------------- */
 /* Checkbox Input Fields                        */
 /* -------------------------------------------- */
@@ -69,11 +84,7 @@ FTC.forms.edit_checkbox_fields = function(html, obj) {
         let box = $(this),
             val = box.prop("checked") + 0 || 0;
         obj.setData(box.attr("data-edit"), val, "int");
-    });
-
-    // Save changes on blur
-    boxes.blur(function(){
-        FTC.forms.delayedUpdate(obj);
+        obj.save();
     });
 };
 
@@ -227,6 +238,7 @@ FTC.forms.edit_item_fields = function(html, obj, app) {
 
 FTC.forms.activateFields = function(html, obj, app) {
     this.edit_value_fields(html, obj, app);
+    this.edit_textarea_fields(html, obj, app);
     this.edit_select_fields(html, obj, app);
     this.edit_image_fields(html, obj, app);
     this.edit_checkbox_fields(html, obj, app);

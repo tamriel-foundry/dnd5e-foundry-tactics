@@ -5,13 +5,15 @@
 /* -------------------------------------------- */
 
 String.prototype.capitalize = function() {
+    if ( !this.length ) return this;
     return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
 String.prototype.titleCase = function() {
-  return this.toLowerCase().split(' ').map(function(word) {
-    return word.replace(word[0], word[0].toUpperCase());
-  }).join(' ');
+    if ( !this.length ) return this;
+    return this.toLowerCase().split(' ').map(function(word) {
+        return word.replace(word[0], word[0].toUpperCase());
+    }).join(' ');
 };
 
 
@@ -119,11 +121,11 @@ function ftc_clean(original, template, inplace=false) {
 ftc_update_entities = function() {
     $.each(game.entities.data, function(_, obj) {
         if (obj.data._t === "i") {
-            obj.data = ftc_update_entity_data(obj.data, game.templates.item);
+            obj.data = ftc_update_entity(obj.data, game.templates.item);
             obj.sync("updateAsset");
         }
         else if (obj.data._t === "c") {
-            obj.data = ftc_update_entity_data(obj.data, game.templates.character);
+            obj.data = ftc_update_entity(obj.data, game.templates.character);
             obj.sync("updateAsset");
         }
     });

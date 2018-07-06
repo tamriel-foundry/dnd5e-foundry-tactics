@@ -84,7 +84,7 @@ class FTCItemAction {
     actionProperties(props) {
         let propStr = "";
         $.each(props, function(_, p) {
-            if (p) propStr += `<span class="action-prop">${p}</span>`;
+            if (p && p.length) propStr += `<span class="action-prop">${p}</span>`;
         });
         return propStr;
     }
@@ -191,13 +191,15 @@ class FTCItemAction {
     /* -------------------------------------------- */
 
     abilityData(data) {
+        let source = (data.info.variety.current)? [data.info.variety.current.capitalize()] : [];
+        if (data.info.requirements.current) source.push(data.info.requirements.current.capitalize());
 
         // List ability properties
         const props = [
-            data.info.variety.current.capitalize() + ": " + data.info.requirements.current.capitalize(),
-            data.spell.time.current.titleCase(),
-            data.spell.materials.current,
-            data.info.source.current
+            source.join(": "),
+            (data.spell.time.current || "").titleCase(),
+            data.spell.materials.current || "",
+            data.info.source.current || ""
         ];
         data.actionProps = this.actionProperties(props);
         return data;

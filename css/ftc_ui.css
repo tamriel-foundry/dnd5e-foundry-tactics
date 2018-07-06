@@ -127,12 +127,17 @@ select.ftc-select {
     min-height: 30px;
     height: 30px;
     overflow: hidden;
-    font-family: "Bookinsanity";
-    font-size: 12px;
-    line-height: 16px;
-    resize: vertical;
+    margin: 2px;
+    padding: 0.25em;
+    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 14px;
     border: 1px solid #999;
-    border-radius: 4px;
+    border-radius: 3px;
+    resize: vertical;
+}
+.ftc-textarea:focus {
+    border: 1px solid #111;
+    box-shadow: 0 0 5px #ff0000;
 }
 
 
@@ -308,7 +313,7 @@ hr {
 blockquote {
     margin: 0 0 10px;
     padding: 5px 0px 5px 20px;
-    font-family: "Scaly Sans";
+    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 1em;
     font-style: italic;
     border-left: 5px solid #61584e;
@@ -352,4 +357,34 @@ div[ui-name="ui_textBox"] .hover2:hover {
 
 a[title="minimize"], a[title="maximize"] {
     display: none !important;
+}
+
+
+/* Asset Menu */
+div[ui-name="ui_assetManager"] div.ui-sortable {
+    line-height: 24px;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+
+div[ui-name="ui_assetManager"] div.ent {
+    background: #EEE;
+    font-family: "Scaly Sans";
+    line-height: 24px;
+}
+
+div.ent { height: 32px; }
+div.ent > div.lrpadding { padding-left: 0; }
+div.ent div[ui-name="ui_image"] {
+    box-shadow: 0 0 4px #000;
+    border: 1px solid #444;
+    box-sizing: content-box;
+}
+div.ent div.application { outline: none; }
+
+div.ent button.subtitle {
+    margin: 4px 6px;
+    font-size: 12px;
+    box-shadow: 0 0 1px #666;
+    line-height: 22px;
 }

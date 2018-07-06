@@ -735,7 +735,7 @@
     "story": []
   },
   "initiative": {
-    "query": "d20 + @c.stats.Dex.modifiers.mod + (@c.stats.Dex.current / 100)",
+    "query": "d20 + @c.stats.Dex.modifiers.mod + @c.counters.initiative.current + (@c.stats.Dex.current / 100)",
     "compare": "(@i1.total>@i2.total)?(1):(@i1.total==@i2.total?(0):(-1))"
   },
   "character": {
@@ -885,6 +885,10 @@
         "name": "Speed",
         "current": 30,
         "extra": ""
+      },
+      "initiative": {
+        "name": "Global Initiative Modifier",
+        "current": 0
       },
       "inspiration": {
         "name": "Inspiration",

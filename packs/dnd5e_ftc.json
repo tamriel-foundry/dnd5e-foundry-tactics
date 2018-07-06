@@ -11318,7 +11318,7 @@
             },
             "damage": {
               "name": "Damage",
-              "current": "1d8",
+              "current": "1d8 + @Mod",
               "type": "healing"
             },
             "damage2": {
@@ -23145,7 +23145,7 @@
             },
             "damage": {
               "name": "Damage",
-              "current": "1d4",
+              "current": "1d4 + @Mod",
               "type": "healing"
             },
             "damage2": {
@@ -23224,7 +23224,8 @@
               "current": "spell"
             },
             "variety": {
-              "name": "Item Variety"
+              "name": "Item Variety",
+              "current": "save"
             },
             "quantity": {
               "name": "Quantity",
@@ -49297,121 +49298,6 @@
           "info": {
             "name": {
               "name": "Name",
-              "current": "Extra Attack"
-            },
-            "img": {
-              "name": "Image",
-              "current": "/content/skills/weapon_24.jpg"
-            },
-            "notes": {
-              "name": "Notes",
-              "current": "<p>You can attack twice, instead of once, whenever you take the Attack action on your turn.</p>"
-            },
-            "type": {
-              "name": "Entry Type",
-              "current": "ability"
-            },
-            "variety": {
-              "name": "Item Variety",
-              "current": "class"
-            },
-            "quantity": {
-              "name": "Quantity",
-              "min": 0,
-              "current": 1
-            },
-            "weight": {
-              "name": "Weight",
-              "min": 0,
-              "current": 0
-            },
-            "price": {
-              "name": "Price",
-              "current": 0
-            },
-            "source": {
-              "name": "Source",
-              "current": "PHB 49"
-            },
-            "tagstr": "",
-            "requirements": {
-              "name": "Requirements",
-              "current": "Barbarian 5"
-            }
-          },
-          "armor": {
-            "ac": {
-              "name": "Armor Class"
-            },
-            "str": {
-              "name": "Required Strength"
-            },
-            "ste": {
-              "name": "Stealth Disadvantage"
-            },
-            "equipped": {
-              "name": "Equipped"
-            }
-          },
-          "weapon": {
-            "hit": {
-              "name": "Attack Bonus"
-            },
-            "damage": {
-              "name": "Damage"
-            },
-            "damage2": {
-              "name": "Secondary Damage"
-            },
-            "range": {
-              "name": "Range"
-            },
-            "properties": {
-              "name": "Properties"
-            },
-            "proficient": {
-              "name": "Proficient"
-            }
-          },
-          "spell": {
-            "level": {
-              "name": "Level"
-            },
-            "school": {
-              "name": "School"
-            },
-            "duration": {
-              "name": "Duration"
-            },
-            "time": {
-              "name": "Casting Time",
-              "current": "Action"
-            },
-            "components": {
-              "name": "Casting Components"
-            },
-            "materials": {
-              "name": "Material Components"
-            },
-            "ritual": {
-              "name": "Ritual Spell"
-            },
-            "concentration": {
-              "name": "Requires Concentration"
-            },
-            "classes": {
-              "name": "Classes"
-            }
-          }
-        },
-        {
-          "_t": "i",
-          "tags": {
-            "Barbarian": 1
-          },
-          "info": {
-            "name": {
-              "name": "Name",
               "current": "Fast Movement"
             },
             "img": {
@@ -52233,6 +52119,2197 @@
               "name": "Classes"
             }
           }
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1,
+            "Vengeance": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Abjure Enemy"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/affliction_08.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>As an action, you present your holy symbol and speak a prayer of denunciation, using your Channel Divinity. Choose one creature within 60 feet of you that you can see. That creature must make a Wisdom saving throw, unless it is immune to being frightened. Fiends and undead have disadvantage on this saving throw.</p>\n<p>On a failed save, the creature is frightened for 1 minute or until it takes any damage. While frightened, the creature&rsquo;s speed is 0, and it can&rsquo;t benefit from any bonus to its speed.</p>\n<p>On a successful save, the creature&rsquo;s speed is halved for 1 minute or until the creature takes any damage.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Oath of Vengeance 3"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 88"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Channel Divinity"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530679747499
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Aura of Courage"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/light_06.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Starting at 10th level, you and friendly creatures within 10 feet of you can&rsquo;t be frightened while you are conscious.</p>\n<p><strong>Aura Improvements</strong></p>\n<p>At 18th level, the range of your auras increase to 30 feet.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Paladin 10"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 85"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530680106540
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Aura of Protection"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_16.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Starting at 6th level, whenever you or a friendly creature within 10 feet of you must make a saving throw, the creature gains a bonus to the saving throw equal to your Charisma modifier (with a minimum bonus of +1). You must be conscious to grant this bonus.</p>\n<p><strong>Aura Improvements</strong></p>\n<p>At 18th level, the range of your auras increase to 30 feet.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Paladin 6"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 85"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530680114094
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-ability"
+          },
+          "tags": {
+            "Paladin": 1,
+            "Vengeance": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Avenging Angel"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/spells/haste-sky-3.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>At 20th level, you can assume the form of an angelic avenger. Using your action, you undergo a transformation. For 1 hour, you gain the following benefits:</p>\n<ul>\n<li>Wings sprout from your back and grant you a flying speed of 60 feet.</li>\n<li>You emanate an aura of menace in a 30-foot radius. The first time any enemy creature enters the aura or starts its turn there during a battle, the creature must succeed on a Wisdom saving throw or become frightened of you for 1 minute or until it takes any damage. Attack rolls against the frightened creature have advantage.</li>\n</ul>\n<p>Once you use this feature, you can&rsquo;t use it again until you finish a long rest.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 89"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530680429298
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Cleansing Touch"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/light_08.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Beginning at 14th level, you can use your action to end one spell on yourself or on one willing creature that you touch.</p>\n<p>You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain expended uses when you finish a long rest.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Paladin 14"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 85"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Cleansing Touch Usage"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530680175691
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-ability"
+          },
+          "tags": {
+            "Paladin": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Divine Health"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/blood_03.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>By 3rd level, the divine magic flowing through you makes you immune to disease.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Paladin 3"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 85"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530679248320
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Divine Sense"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/spells/evil-eye-eerie-1.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces. Until the end of your next turn, you know the location of any celestial, fiend, or undead within 60 feet of you that is not behind total cover. You know the type (celestial, fiend, or undead) of any being whose presence you sense, but not its identity. Within the same radius, you also detect the presence of any place or object that has been consecrated or desecrated, as with the hallow spell.</p>\n<p>You can use this feature a number of times equal to 1 + your Charisma modifier. When you finish a long rest, you regain all expended uses.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Paladin 1"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 84"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530678686583
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Divine Smite"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/light_05.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Starting at 2nd level, when you hit a creature with a melee weapon attack, you can expend one spell slot to deal radiant damage to the target, in addition to the weapon&rsquo;s damage. The extra damage is 2d8 for a 1st-level spell slot, plus 1d8 for each spell level higher than 1st, to a maximum of 5d8. The damage increases by 1d8 if the target is an undead or a fiend.</p>\n<p><strong>Improved Divine Smite</strong></p>\n<p>By 11th level, you are so suffused with righteous might that all your melee weapon strikes carry divine power with them. Whenever you hit a creature with a melee weapon, the creature takes an extra 1d8 radiant damage. If you also use your Divine Smite with an attack, you add this damage to the extra damage of your Divine Smite.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Paladin 2"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 85"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Melee Weapon Attack"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Spell Slot"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530680069640
+        },
+        {
+          "_t": "i",
+          "tags": {
+            "Barbarian": 1,
+            "Paladin": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Extra Attack"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_24.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You can attack twice, instead of once, whenever you take the Attack action on your turn.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 0
+            },
+            "price": {
+              "name": "Price",
+              "current": 0
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 49"
+            },
+            "tagstr": "",
+            "requirements": {
+              "name": "Requirements",
+              "current": "Class 5"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "tabs": {
+            "content-tabs": "tab-ability"
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530679840386
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Lay on Hands"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/light_01.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to your paladin level &times; 5.</p>\n<p>As an action, you can touch a creature and draw power from the pool to restore a number of hit points to that creature, up to the maximum amount remaining in your pool.</p>\n<p>Alternatively, you can expend 5 hit points from your pool of healing to cure the target of one disease or neutralize one poison affecting it. You can cure multiple diseases and neutralize multiple poisons with a single use of Lay on Hands, expending hit points separately for each one.</p>\n<p>This feature has no effect on undead and constructs.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Paladin 1"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 84"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Lay on Hands"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530678761600
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1,
+            "Vengeance": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Oath of Vengeance"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/blood_13.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>The Oath of Vengeance is a solemn commitment to punish those who have committed a grievous sin. When evil forces slaughter helpless villagers, when an entire people turns against the w ill of the gods, when a thieves&rsquo; guild grows too violent and powerful, when a dragon rampages through the countryside&mdash;at times like these, paladins arise and swear an Oath of Vengeance to set right that which has gone wrong. To these paladins&mdash; sometimes called avengers or dark knights &mdash;their own purity is not as important as delivering justice.</p>\n<p><strong>Tenets of Vengeance</strong></p>\n<p>The tenets of the Oath of Vengeance vary by paladin, but all the tenets revolve around punishing wrongdoers by any means necessary. Paladins w ho uphold these tenets are willing to sacrifice even their own righteousness to mete out justice upon those w ho do evil, so the paladins are often neutral or lawful neutral in alignment. The core principles of the tenets are brutally simple.</p>\n<ul>\n<li><strong>Fight the Greater Evil.</strong> Faced with a choice of fighting my sworn foes or combating a lesser evil. I choose the greater evil.</li>\n<li><strong>No Mercy for the Wicked.</strong> Ordinary foes might win my mercy, but my sworn enemies do not.</li>\n<li><strong>By Any Means Necessary.</strong> My qualms can&rsquo;t get in the way of exterminating my foes.</li>\n<li><strong>Restitution.</strong> If my foes wreak ruin on the world, it is because I failed to stop them. I must help those harmed by their misdeeds.</li>\n</ul>\n<p><strong>Oath Spells</strong></p>\n<p>You gain oath spells at the paladin levels listed.</p>\n<ul>\n<li>3rd: bane, hunter&rsquo;s mark</li>\n<li>5th: hold person, misty step</li>\n<li>9th: haste, protection from energy</li>\n<li>13th: banishment, dimension door</li>\n<li>17th: hold monster, scrying</li>\n</ul>\n<p>&nbsp;</p>\n<p>&nbsp;</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Paladin 3"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 88"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530680349715
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1,
+            "Vengeance": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Relentless Avenger"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_13.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>By 7th level, your supernatural focus helps you close off a foe&rsquo;s retreat. When you hit a creature with an opportunity attack, you can move up to half your speed immediately after the attack and as part of the same reaction. This movement doesn&rsquo;t provoke opportunity attacks.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Oath of Vengeance 7"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 89"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Reaction"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530680276321
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-ability"
+          },
+          "tags": {
+            "Paladin": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Spellcasting"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/spells/beam-sky-2.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>By 2nd level, you have learned to draw on divine magic through meditation and prayer to cast spells as a cleric does. See Spells Rules for the general rules of spellcasting and the Spells Listing for the paladin spell list.</p>\n<p><strong>Preparing and Casting Spells</strong></p>\n<p>The Paladin table shows how many spell slots you have to cast your spells. To cast one of your paladin spells of 1st level or higher, you must expend a slot of the spell&rsquo;s level or higher. You regain all expended spell slots when you finish a long rest.</p>\n<p>You prepare the list of paladin spells that are available for you to cast, choosing from the paladin spell list. When you do so, choose a number of paladin spells equal to your Charisma modifier + half your paladin level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots.</p>\n<p>For example, if you are a 5th-level paladin, you have four 1st-level and two 2nd-level spell slots. With a Charisma of 14, your list of prepared spells can include four spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell cure wounds, you can cast it using a 1st-level or a 2nd-level slot. Casting the spell doesn&rsquo;t remove it from your list of prepared spells.</p>\n<p>You can change your list of prepared spells when you finish a long rest. Preparing a new list of paladin spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.</p>\n<p><strong>Spellcasting Ability</strong></p>\n<p>Charisma is your spellcasting ability for your paladin spells, since their power derives from the strength of your convictions. You use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a paladin spell you cast and when making an attack roll with one.</p>\n<p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Charisma modifier</p>\n<p><strong>Spell attack modifier</strong> = your proficiency bonus + your Charisma modifier</p>\n<p><strong>Spellcasting Focus</strong></p>\n<p>You can use a holy symbol (see the Adventuring Gear section) as a spellcasting focus for your paladin spells.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Paladin 2"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 84"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Spell Slot"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530679174802
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1,
+            "Vengeance": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Vow of Enmity"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/blood_12.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>As a bonus action, you can utter a vow of enmity against a creature you can see within 10 feet of you, using your Channel Divinity. You gain advantage on attack rolls against the creature for 1 minute or until it drops to 0 hit points or falls unconscious.</p>\n<p><strong>Soul of Vengeance</strong></p>\n<p>Starting at 15th level, the authority with which you speak your Vow of Enmity gives you greater power over your foe. When a creature under the effect of your Vow of Enmity makes an attack, you can use your reaction to make a melee weapon attack against that creature if it is within range.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Oath of Vengeance 3"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 88"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Bonus Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Channel Divinity"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530680326799
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Paladin": 1,
+            "Fighter": 1,
+            " Ranger": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Fighting Style: Defense"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_15.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You adopt a style of fighting as your specialty. Choose one of the following options. You can&rsquo;t take a Fighting Style option more than once, even if you later get to choose again.</p>\n<p>While you are wearing armor, you gain a +1 bonus to AC.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 84"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Fighter": 1,
+            "Paladin": 1,
+            " Ranger": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Fighting Style: Dueling"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_23.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You adopt a style of fighting as your specialty. Choose one of the following options. You can&rsquo;t take a Fighting Style option more than once, even if you later get to choose again.</p>\n<p>When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 84"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-ability"
+          },
+          "tags": {
+            "Fighter": 1,
+            "Paladin": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Fighting Style: Protection"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_13.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You adopt a style of fighting as your specialty. Choose one of the following options. You can&rsquo;t take a Fighting Style option more than once, even if you later get to choose again.</p>\n<p>When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 84"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Fighter": 1,
+            "Paladin": 1,
+            " Ranger": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Fighting Style: Great Weapon"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_11.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You adopt a style of fighting as your specialty. Choose one of the following options. You can&rsquo;t take a Fighting Style option more than once, even if you later get to choose again.</p>\n<p>When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll. The weapon must have the two-handed or versatile property for you to gain this benefit.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 84"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530681087429
         }
       ]
     }
