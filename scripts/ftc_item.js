@@ -29,19 +29,18 @@ class FTCItem extends FTCObject {
     }
 
     get template() {
-        let type = this.data.info.type.current;
-        return FTC.TEMPLATE_DIR + 'items/item-{type}.html';
+        return FTC.TEMPLATE_DIR + "items/item-body.html";
     }
 
     get parts() {
         return {
-            ITEM_HEADER: FTC.TEMPLATE_DIR + 'items/item-header.html',
             ITEM_SIDEBAR: FTC.TEMPLATE_DIR + 'items/item-sidebar.html',
             ITEM_TAB_NOTES: FTC.TEMPLATE_DIR + 'items/tab-notes.html',
             ITEM_TAB_ARMOR: FTC.TEMPLATE_DIR + 'items/tab-armor.html',
             ITEM_TAB_WEAPON: FTC.TEMPLATE_DIR + 'items/tab-weapon.html',
             ITEM_TAB_SPELL: FTC.TEMPLATE_DIR + 'items/tab-spell.html',
             ITEM_TAB_ABILITY: FTC.TEMPLATE_DIR + 'items/tab-ability.html',
+            ITEM_TAB_ITEM: FTC.TEMPLATE_DIR + 'items/tab-item.html'
         };
     }
 
@@ -65,7 +64,7 @@ class FTCItem extends FTCObject {
         data.ftc = data.ftc || {};
 
         // Classify data type
-        data.ftc.typeStr = this.type === "note" ? "Item" : this.type.capitalize();
+        data.ftc.typeStr = this.type.capitalize();
 
         // Default Image
         data.info.img.current = data.info.img.current || "/content/icons/Pouch1000p.png";
@@ -86,7 +85,10 @@ class FTCItem extends FTCObject {
     classify_type(i) {
 
         // Already defined
-        if (i.info.type && i.info.type.current) return i.info.type.current;
+        if (i.info.type && i.info.type.current) {
+            i.info.type.current = (this.type === "note") ? "item" : this.type;
+            return this.type;
+        }
 
         // Provided by scope
         if ( this.scope.type ) return this.scope.type;
@@ -103,19 +105,20 @@ class FTCItem extends FTCObject {
         else if (("armor" in i.tags) || (i.armor && i.armor.ac.current)) return "armor";
         else if ("ability" in i.tags || "talent" in i.tags || (i.ability && i.ability.source.current)) return "ability";
 
-        // Return as note
-        return "note";
+        // Default type is "item"
+        return "item";
     }
 
     /* ------------------------------------------- */
 
     buildHTML(data) {
 
-        // Toggle type-specific template
-        let type = data.info.type.current || "note",
-            html = FTC.loadTemplate(this.template.replace("{type}", type));
+        // Build template body
+        let details = "ITEM_TAB_"+this.type.toUpperCase(),
+            html = FTC.loadTemplate(this.template);
+        html = html.replace("ITEM_DETAILS_TEMPLATE", details);
 
-        // Inject content templates
+        // Inject template parts
         $.each(this.parts, function(name, path) {
             html = FTC.injectTemplate(html, name, path);
         });
@@ -174,6 +177,14 @@ class FTCItem extends FTCObject {
         // Attach a full-width confirmation button listen for submission
         const confirm = $('<button class="fit-x">Update Item</button>');
         confirm.click(function () {
+
+            // Maybe close any open MCE editors
+            if ( newApp._mce ) {
+                item.data.info.notes.current = newApp._mce.save();
+                newApp._mce.destroy();
+            }
+
+            // Unset the active editing item
             FTC._edit_item_uid = undefined;
             layout.coverlay("edit-item");
             owner.updateItem(container, itemId, item.data);
@@ -240,7 +251,7 @@ hook.add("FTCInit", "Items", function() {
         const type = item.info.type.current;
 
         // Inventory Items
-        if (["weapon", "armor", "note"].includes(type)) {
+        if (["weapon", "armor", "item"].includes(type)) {
             obj.data.inventory.push(item);
         }
 

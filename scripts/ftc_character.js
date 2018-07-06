@@ -119,11 +119,8 @@ class FTCCharacter extends FTCObject {
 
         const ftc = data.ftc,
             owner = this.owner,
-            weight = [];
-
-
-        // Create inventory object
-        ftc.inventory = {
+            weight = [],
+            inventory = {
             "weapons": {
                 "name": "Weapons",
                 "items": [],
@@ -134,10 +131,15 @@ class FTCCharacter extends FTCObject {
                 "items": [],
                 "type": "armor"
             },
-            "misc": {
+            "tools": {
+                "name": "Tools",
+                "items": [],
+                "type": "item",
+            },
+            "pack": {
                 "name": "Backpack",
                 "items": [],
-                "type": "note"
+                "type": "item"
             }
         };
 
@@ -152,12 +154,20 @@ class FTCCharacter extends FTCObject {
 
             // Push into type
             if ( item.type === "weapon" ) {
-                ftc.inventory.weapons.items.push(item);
+                inventory.weapons.items.push(item);
             } else if ( item.type === "armor" && item.armor.equipped.current === 1 ) {
-                ftc.inventory.equipment.items.push(item);
-            } else ftc.inventory.misc.items.push(item);
+                inventory.equipment.items.push(item);
+            } else if ( item.type === "item" && item.info.variety.current === "tool" ) {
+                inventory.tools.items.push(item);
+            } else {
+                inventory.pack.items.push(item);
+            }
+
+            // Record total entry weight
             weight.push(parseFloat(item.info.weight.current) * parseFloat(item.info.quantity.current));
         });
+        ftc.inventory = inventory;
+
 
         // Compute weight and encumbrance
         let wt = (weight.length > 0) ? weight.reduce(function(total, num) { return total + (num || 0); }) : 0,
@@ -249,7 +259,6 @@ class FTCCharacter extends FTCObject {
                 itemHeader = FTC.loadTemplate(this.templates.INVENTORY_HEADER),
                 itemTemplate = FTC.loadTemplate(this.templates.INVENTORY_ITEM);
             $.each(data.ftc.inventory, function(_, type) {
-                console.log(type);
                 inventory += FTC.populateTemplate(itemHeader, type);
                 $.each(type.items, function(_, item) {
                     inventory += FTC.populateTemplate(itemTemplate, item.data);

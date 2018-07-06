@@ -177,6 +177,7 @@ FTC.forms.edit_mce_fields = function(html, obj, app) {
             auto_focus: selector,
             plugins: 'lists save code',
             toolbar: 'bold italic underline bullist numlist styleselect removeformat code save',
+            setup: function(ed) {  app._mce = ed; },
             save_enablewhendirty: false,
             save_onsavecallback: function(ed) {
                 obj.setData(target, ed.getContent(), "str");
@@ -190,9 +191,7 @@ FTC.forms.edit_mce_fields = function(html, obj, app) {
 
     // Schedule Editor Cleanup
     app.on("remove", function() {
-        $.each(tinymce.editors, function(_, ed) {
-            if (!$("#"+ed.id).length) ed.destroy();
-        });
+        if ( app._mce ) app._mce.destroy();
     });
 };
 

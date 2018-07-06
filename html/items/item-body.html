@@ -5,20 +5,25 @@
 	</aside>
 
 	<main class="ftc-sheet-main flexcolumn">
-        <!-- ITEM_HEADER -->
+        <header class="ftc-sheet-header flexrow flexwrap">
+			<h1 class="itemname">
+				<input class="ftc-edit" type="text" tabindex="0" data-edit="info.name.current"
+					   value="{info.name.current}" placeholder="{ftc.typeStr} Name"/>
+			</h1>
+		</header>
 
 		<div class="ftc-sheet-secondary flexcolumn">
 			<ul class="sheet-tabs" id="content-tabs">
 				<li id="tab-notes" class="sheet-tab tab-active">Notes</li>
-				<li id="tab-armor" class="sheet-tab">Armor</li>
+				<li id="tab-details" class="sheet-tab">{ftc.typeStr}</li>
 			</ul>
 
             <div id="content-notes" class="content-tab tab-active">
                 <!-- ITEM_TAB_NOTES -->
             </div>
 
-			<div id="content-armor" class="content-tab">
-				<!-- ITEM_TAB_ARMOR -->
+			<div id="content-details" class="content-tab">
+				<!-- ITEM_DETAILS_TEMPLATE -->
 			</div>
 		</div>
 	</main>
