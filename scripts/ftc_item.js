@@ -2,7 +2,7 @@
 /* Item Object Type                            */
 /* ------------------------------------------- */
 
-class FTCItem extends FTCObject {
+class FTCItem extends FTCEntity {
 
     get type() {
         return this.data.info.type.current;
@@ -25,7 +25,7 @@ class FTCItem extends FTCObject {
     }
 
     get owner() {
-        return this.scope.owner;
+        return this.context.owner;
     }
 
     get template() {
@@ -44,17 +44,35 @@ class FTCItem extends FTCObject {
         };
     }
 
+    get types() {
+        return {
+            ITEM_TYPE_DEFAULT: "item",
+            ITEM_TYPE_INVENTORY: "item",
+            ITEM_TYPE_SPELL: "spell",
+            ITEM_TYPE_ABILITY: "ability"
+        }
+    }
+
     /* ------------------------------------------- */
 
-    constructor(obj, app, scope) {
-        super(obj, app, scope);
-
-        // Classify the item type
-        this.data.info.type.current = this.classify_type(this.data);
-
-        // Record local reference for debugging
+    constructor(obj, context) {
+        super(obj, context);
         FTC.item = this;
     }
+
+    convertData(data) {
+
+        // Maybe clean the item if it doesn't come from me
+        if ( !data.info.type ) {
+            data = ftc_update_entity(data, game.templates.item);
+        }
+
+        // Classify item type and variety
+        data.info.type.current = this.classify_type(data);
+        data.info.variety.current = data.info.variety.current || this.context.variety;
+        return data;
+    }
+
 
     /* ------------------------------------------- */
 
@@ -86,17 +104,16 @@ class FTCItem extends FTCObject {
 
         // Already defined
         if (i.info.type && i.info.type.current) {
-            i.info.type.current = (this.type === "note") ? "item" : this.type;
-            return this.type;
+            return (i.info.type.current === "note") ? "item" : i.info.type.current;
         }
 
-        // Provided by scope
-        if ( this.scope.type ) return this.scope.type;
+        // Provided by context
+        if ( this.context.type ) return this.context.type;
 
         // Implied by container
-        else if ( this.scope.container ) {
-            if ( this.scope.container === "spellbook" ) return "spell";
-            else if ( this.scope.container === "abilities" ) return "ability";
+        else if ( this.context.container ) {
+            if ( this.context.container === "spellbook" ) return "spell";
+            else if ( this.context.container === "abilities" ) return "ability";
         }
 
         // Implied by tags
@@ -111,7 +128,7 @@ class FTCItem extends FTCObject {
 
     /* ------------------------------------------- */
 
-    buildHTML(data) {
+    buildHTML(data, scope) {
 
         // Build template body
         let details = "ITEM_TAB_"+this.type.toUpperCase(),
@@ -127,9 +144,9 @@ class FTCItem extends FTCObject {
 
     /* ------------------------------------------- */
 
-    activateEventListeners(html) {
-        FTC.ui.activate_tabs(html, this.obj, this.app);
-        FTC.forms.activateFields(html, this, this.app);
+    activateListeners(html, app, scope) {
+        FTC.ui.activate_tabs(html, this.obj, app);
+        FTC.forms.activateFields(html, this, app);
     }
 
     /* ------------------------------------------- */
@@ -140,8 +157,8 @@ class FTCItem extends FTCObject {
         if ( !this.changed ) return;
 
         // Saving an owned item
-        if ( this.scope.owner ) {
-            if ( this.obj._uid === FTC._edit_item_uid ) this.editOwnedItem(this.scope.itemId);
+        if ( this.owner ) {
+            if ( this.ownedItemUID === FTC._edit_item_uid ) this.editOwnedItem(this.context.itemId);
             return;
         }
 
@@ -152,36 +169,42 @@ class FTCItem extends FTCObject {
 
     /* ------------------------------------------- */
 
+    get ownedItemUID() {
+        return this.owner._uid + "." + this.context.container + "." + this.context.itemId;
+    }
+
     editOwnedItem(itemId) {
 
         // Get the owner, container, and item position
         const item = this,
-            owner = this.scope.owner,
-            container = this.scope.container;
-
-        // Flag the UID of the item being currently edited
-        FTC._edit_item_uid = this.obj._uid;
+            owner = this.context.owner,
+            container = this.context.container;
 
         // Update the itemId
         itemId = itemId || owner.data[container].length;
-        this.scope.itemId = itemId;
+        this.context.itemId = itemId;
 
-        // Create a new application window for editing an item and associate it with the working data
-        const newApp = sync.newApp("ui_renderItem", this.obj, this.scope);
-        this.obj._apps.push(newApp);
+        // Flag the UID of the item being currently edited
+        FTC._edit_item_uid = this.ownedItemUID;
+
+        // Create an object and link it to an app
+        const obj = sync.obj();
+        obj.data = this.data;
+        const app = sync.newApp("ui_renderItem", obj)
+        obj.addApp(app);
 
         // Create an HTML frame containing the app
         const frame = $('<div class="edit-item flex flexcolumn">');
-        newApp.appendTo(frame);
+        app.appendTo(frame);
 
         // Attach a full-width confirmation button listen for submission
         const confirm = $('<button class="fit-x">Update Item</button>');
         confirm.click(function () {
 
             // Maybe close any open MCE editors
-            if ( newApp._mce ) {
-                item.data.info.notes.current = newApp._mce.save();
-                newApp._mce.destroy();
+            if ( app._mce ) {
+                item.data.info.notes.current = app._mce.save();
+                app._mce.destroy();
             }
 
             // Unset the active editing item
@@ -193,7 +216,7 @@ class FTCItem extends FTCObject {
 
         // Create the UI element
         ui_popOut({
-            target: this.owner.app,
+            target: $("body"),
             id: "edit-item",
             maximize: false,
             minimize: false,
@@ -231,42 +254,24 @@ hook.add("FTCInit", "Items", function() {
 
     // Render Item Sheets
     sync.render("ui_renderItem", function(obj, app, scope) {
-        const item = new FTCItem(obj, app, scope);
-        return item.renderHTML();
+        const item = new FTCItem(obj);
+        return item.renderHTML(app, scope);
     });
 
     // Register Item Character Drop Hook
     hook.add("OnDropCharacter", "FTCOnDrop", function(obj, app, scope, dt) {
-        if ( !dt ) return;
 
         // Parse the data transfer
-        let item = JSON.parse(dt.getData("OBJ")) || {};
-        if (item._t !== "i") return;
+        if ( !dt ) return;
+        let itemData = JSON.parse(dt.getData("OBJ")) || {};
+        if (itemData._t !== "i") return;
 
-        // Maybe clean the item if it doesn't come from me
-        if ( !item.info.type ) {
-            item = ftc_update_entity(item, game.templates.item);
-            item = new FTCItem(item).data;
-        }
-        const type = item.info.type.current;
+        // Construct the character
+        const char = new FTCCharacter(obj);
+        const item = new FTCItem(itemData);
 
-        // Inventory Items
-        if (["weapon", "armor", "item"].includes(type)) {
-            obj.data.inventory.push(item);
-        }
-
-        // Spellbook Spells
-        else if ( "spell" === type ) {
-            obj.data.spellbook.push(item);
-        }
-
-        // Abilities
-        else if ( "ability" === type ) {
-            obj.data.abilities.push(item);
-        }
-
-        // Save and return false to prevent additional actions
-        obj.sync("updateAsset");
+        // Add the item to the character
+        char.addItem(item);
         return false;
     });
 });

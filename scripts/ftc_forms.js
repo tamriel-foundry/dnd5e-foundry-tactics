@@ -208,7 +208,7 @@ FTC.forms.edit_item_fields = function(html, obj, app) {
        let type = $(this).attr("data-item-type");
        if ( type === "equipment" ) type = "armor";
        else if ( type === "weapons" ) type = "weapon";
-       let item = new FTCItem(data, app, {"owner": obj, "container": container, "type": type});
+       let item = new FTCItem(data, {"owner": obj, "container": container, "type": type});
        item.editOwnedItem();
     });
 
@@ -217,7 +217,7 @@ FTC.forms.edit_item_fields = function(html, obj, app) {
         const li = $(this).closest("li"),
             container = li.attr("data-item-container"),
             itemId = li.attr("data-item-id"),
-            item = new FTCItem(obj.data[container][itemId], app, {"owner": obj, "container": container});
+            item = new FTCItem(obj.data[container][itemId], {"owner": obj, "container": container});
         item.editOwnedItem(itemId);
     });
 

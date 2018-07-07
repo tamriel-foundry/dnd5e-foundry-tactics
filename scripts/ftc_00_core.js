@@ -167,11 +167,42 @@ const FTC = {
 
 
 // An Prototypical Pattern for Rendering Rich Object Templates
-class FTCObject {
+class FTCEntity {
 
-    get data() {
-        return this.obj.data;
+    constructor(object, context) {
+        /*
+         FTC Entity Constructor
+         Accepts a sync.object or just the underlying data
+         */
+
+        // Record context
+        this.context = context || {};
+
+        // Case 1: Sync Object provided
+        if ("sync" in object && "_uid" in object) {
+            this.obj = object;
+            this.data = object.data;
+        }
+
+        // Case 2: Just Data
+        else {
+            this.data = object;
+        }
+
+        // A flag to record whether the data has been changed
+        this._changed = false;
+
+        // Initial data conversion steps
+        this.data = this.convertData(this.data);
     }
+
+    /* ------------------------------------------- */
+
+    convertData(data) {
+        return data
+    }
+
+    /* ------------------------------------------- */
 
     get info() {
         return this.data.info;
@@ -181,38 +212,8 @@ class FTCObject {
         return this.info.name.current;
     }
 
-    /* ------------------------------------------- */
-
-    constructor(obj, app, scope) {
-        // Core Object constructor
-
-        // These properties flag whether the underlying data has been changed
-        this.changed = false;
-
-        // Core attributes
-        this.app = app;
-        this.scope = this.refineScope(scope || {});
-        this.obj = this.createObject(obj);
-    }
-
-    /* ------------------------------------------- */
-
-    refineScope(scope) {
-        // Process or validate any scope-specific inputs provided to the object
-        return scope;
-    }
-
-    /* ------------------------------------------- */
-
-    createObject(obj) {
-        // Ensure that the object contains a sync.obj in case only data was provided
-        if ( "sync" in obj ) {
-            return obj;
-        } else {
-            let newObj = sync.obj();
-            newObj.data = obj;
-            return newObj;
-        }
+    get img() {
+        return this.info.img.current;
     }
 
     /* ------------------------------------------- */
@@ -221,52 +222,62 @@ class FTCObject {
         FTC.getProperty(this.data, name);
     }
 
-    /* ------------------------------------------- */
-
     setData(name, value, dtype) {
         FTC.setProperty(this.data, name, value, dtype);
-        this.changed = true;
+        this._changed = true;
     }
 
-    /* ------------------------------------------- */
-
     save() {
-        // Sync the object, saving updated data and refreshing associated UI elements.
-
-        if ( !this.changed ) return;
+        if (!this.obj || !this._changed) return;
         console.log("Saving object " + this.name);
         this.obj.sync("updateAsset");
     }
 
     /* ------------------------------------------- */
+    /* Rendering                                   */
+    /* ------------------------------------------- */
 
-    renderHTML() {
+    renderHTML(app, scope) {
 
-        // Construct enriched safe data
+        // Step 1: Handle the provided scope
+        scope = this.refineScope(scope);
+
+        // Step 2: Refine and enrich the entity data for rendering
         let data = duplicate(this.data);
-        data = this.enrichData(data);
+        data = this.enrichData(data, scope)
 
-        // Build Template and Populate Data
-        let html = this.buildHTML(data);
-        html = $(this.populateHTML(html, data));
+        // Step 3: Build the raw HTML
+        let html = this.buildHTML(data, scope);
 
-        // Activate Event Listeners
-        this.activateEventListeners(html);
+        // Step 4: Populate HTML using data
+        html = this.populateHTML(html, data);
+
+        // Step 5: Convert to jQuery
+        html = $(html);
+
+        // Step 6: Activate Event Listeners
+        this.activateListeners(html, app, scope);
 
         // Return the final HTML
         return html;
     }
 
-   /* ------------------------------------------- */
+    /* ------------------------------------------- */
 
-    enrichData(data) {
+    refineScope(scope) {
+        return scope;
+    }
+
+    /* ------------------------------------------- */
+
+    enrichData(data, scope) {
         // Enrich a safe copy of object data for rendering by augmenting it with additional metadata and attributes
         return data;
     }
 
     /* ------------------------------------------- */
 
-    buildHTML() {
+    buildHTML(data, scope) {
         console.log("A FTCObject subclass must implement the buildHTML method.");
     }
 
@@ -278,7 +289,8 @@ class FTCObject {
 
     /* ------------------------------------------- */
 
-    activateEventListeners(html) {
+    activateListeners(html, app, scope) {
+        return html;
     }
 }
 

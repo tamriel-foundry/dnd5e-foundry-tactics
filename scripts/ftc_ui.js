@@ -17,7 +17,7 @@ FTC.ui = {
 		return dlg;
 	},
 
-	activate_tabs: function(html, obj, app) {
+	activate_tabs: function(html, obj) {
 
 		// Record active tabs
 		obj.data.tabs = obj.data.tabs || {};

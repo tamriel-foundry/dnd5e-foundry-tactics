@@ -3,7 +3,7 @@
 /* Character Object Type                       */
 /* ------------------------------------------- */
 
-class FTCCharacter extends FTCObject {
+class FTCCharacter extends FTCEntity {
 
     constructor(obj, app, scope) {
         super(obj, app, scope);
@@ -35,6 +35,8 @@ class FTCCharacter extends FTCObject {
     }
 
     /* ------------------------------------------- */
+    /* HTML Rendering                              */
+    /* ------------------------------------------- */
 
     refineScope(scope) {
         scope.isPrivate = (scope.viewOnly && (!this.obj || !this.obj.id()));
@@ -43,7 +45,7 @@ class FTCCharacter extends FTCObject {
 
     /* ------------------------------------------- */
 
-    enrichData(data) {
+    enrichData(data, scope) {
 
         // Temporary FTC display data
         const ftc = {};
@@ -66,7 +68,7 @@ class FTCCharacter extends FTCObject {
 
         // Proficiency Bonus
         let prof = Math.floor((lvl + 7) / 4);
-        data.counters.proficiency.current = this.data.counters.proficiency.current = prof;
+        data.counters.proficiency.current = prof;
 
         // Enrich Attributes
         $.each(data.stats, function(attr, stat) {
@@ -80,7 +82,6 @@ class FTCCharacter extends FTCObject {
 
         // Initiative Bonus
         let initMod = parseInt(data.stats["Dex"].modifiers.mod) + parseInt(data.counters.initiative.current);
-
         ftc["initiative"] = (initMod < 0 ? initMod : "+"+initMod) + "." + ftc["Dex"].padstr;
 
         // Spellcasting DC
@@ -150,7 +151,7 @@ class FTCCharacter extends FTCObject {
 
         // Iterate over inventory items
         $.each(data.inventory, function(itemId, itemData) {
-            let item = new FTCItem(itemData, self.app, {"owner": owner, "container": "inventory"});
+            let item = new FTCItem(itemData, {"owner": owner, "container": "inventory"});
 
             // Set id and class
             item.data.itemId = itemId;
@@ -196,7 +197,7 @@ class FTCCharacter extends FTCObject {
         $.each(data.spellbook, function(spellId, itemData) {
 
             // Construct the item object
-            let item = new FTCItem(itemData, self.app, {"owner": this.owner, "container": "spellbook"}),
+            let item = new FTCItem(itemData, {"owner": this.owner, "container": "spellbook"}),
                 spell = item.spell;
 
             // Construct spell data
@@ -226,21 +227,21 @@ class FTCCharacter extends FTCObject {
         const ftc = data.ftc;
         ftc["abilities"] = [];
         $.each(data.abilities, function(itemId, itemData) {
-            let item = new FTCItem(itemData, self.app, {"owner": this.owner, "container": "abilities"});
+            let item = new FTCItem(itemData, {"owner": this.owner, "container": "abilities"});
             ftc.abilities.push(item);
         });
     }
 
     /* ------------------------------------------- */
 
-    buildHTML(data) {
+    buildHTML(data, scope) {
 
         // Load primary template
-        let template = this.scope.isPrivate ? this.templates.FTC_SHEET_PRIVATE : this.templates.FTC_SHEET_FULL,
+        let template = scope.isPrivate ? this.templates.FTC_SHEET_PRIVATE : this.templates.FTC_SHEET_FULL,
             main = FTC.loadTemplate(template);
 
         // Augment sub-components
-        if (!this.scope.isPrivate) {
+        if (!scope.isPrivate) {
 
             // Primary Stats
             main = FTC.injectTemplate(main, "CHARACTER_PRIMARY_STATS", this.templates.CHARACTER_PRIMARY_STATS)
@@ -305,17 +306,44 @@ class FTCCharacter extends FTCObject {
 
     /* ------------------------------------------- */
 
-    activateEventListeners(html) {
-        FTC.ui.activate_tabs(html, this.obj, this.app);
-        FTC.forms.activateFields(html, this, this.app);
-        FTC.actions.activateActions(html, this, this.app);
+    activateListeners(html, app, scope) {
+        FTC.ui.activate_tabs(html, this.obj, app);
+        FTC.forms.activateFields(html, this, app);
+        FTC.actions.activateActions(html, this, app);
+    }
+
+    /* ------------------------------------------- */
+    /* Owned Items                                 */
+    /* ------------------------------------------- */
+
+    addItem(item, container) {
+        const type = item.type;
+        if ( !container ) {
+            if (["weapon", "armor", "item"].includes(type)) container = "inventory";
+            else if ("spell" === type) container = "spellbook";
+            else if ("ability" === type) container = "abilities";
+        }
+        if ( !container ) return;
+
+        // If we are dropping a spell on the inventory tab, it's a "Scroll of ___"
+        if ( type === "spell" && FTC.character.data.tabs["content-tabs"] === "tab-inventory" ) {
+            item.data.info.name.current = "Scroll of " + item.data.info.name.current;
+            item.data.info.type.current = item.types.ITEM_TYPE_DEFAULT;
+            item.data.info.variety.current = "consumable";
+            container = "inventory";
+        }
+
+        // Push the item in
+        this.data[container].push(item.data);
+        this._changed = true;
+        this.save();
     }
 
     /* ------------------------------------------- */
 
     updateItem(container, itemId, itemData) {
         this.data[container][itemId] = itemData;
-        this.changed = true;
+        this._changed = true;
         this.save();
     }
 
@@ -323,7 +351,7 @@ class FTCCharacter extends FTCObject {
 
     deleteItem(container, itemId) {
         this.data[container].splice(itemId, 1);
-        this.changed = true;
+        this._changed = true;
         this.save();
     }
 }
@@ -337,7 +365,7 @@ sync.render("FTC_CHARSHEET", function (obj, app, scope) {
     if ( game.templates.identifier !== FTC_SYSTEM_IDENTIFIER ) {
         return $("<div>Sorry, no preview available at the moment.</div>");
     }
-    const char = new FTCCharacter(obj, app, scope);
-    return char.renderHTML();
+    const char = new FTCCharacter(obj);
+    return char.renderHTML(app, scope);
 });
 
