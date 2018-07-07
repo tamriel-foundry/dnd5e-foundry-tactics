@@ -310,7 +310,7 @@ class FTCCharacter extends FTCEntity {
 
     activateListeners(html, app, scope) {
         const character = this;
-        FTC.ui.activate_tabs(html, this.obj, app);
+        FTC.ui.activateTabs(html, this, app);
         FTC.forms.activateFields(html, this, app);
 
         // Attribute rolls

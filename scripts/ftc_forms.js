@@ -4,11 +4,11 @@ FTC.forms = {}
 /* -------------------------------------------- */
 /* Delayed Input Updating                       */
 /* -------------------------------------------- */
-FTC.forms.delayedUpdate = function(obj, ms) {
+FTC.forms.delayedUpdate = function(entity, ms) {
     setTimeout(function() {
         let isInput = $(document.activeElement).is(".ftc-edit, .ftc-checkbox, .ftc-select, .ftc-textarea");
         if ( !isInput ) {
-            obj.save();
+            entity.save();
         }
     }, ms || 250);
 };
@@ -18,7 +18,7 @@ FTC.forms.delayedUpdate = function(obj, ms) {
 /* Text Input Fields                            */
 /* -------------------------------------------- */
 
-FTC.forms.edit_value_fields = function(html, obj) {
+FTC.forms.edit_value_fields = function(html, entity) {
     /* Handle HTML <input> fields with class ftc-edit */
 
     // Record Starting Values
@@ -35,8 +35,8 @@ FTC.forms.edit_value_fields = function(html, obj) {
         let input = $(this),
             ms = input.parent().is("h1") ? 50 : undefined;
         if ( input.val() === input.attr("data-initial") ) return;
-        obj.setData(input.attr('data-edit'), input.val(), input.attr('data-dtype'));
-        FTC.forms.delayedUpdate(obj, ms);
+        entity.setData(input.attr('data-edit'), input.val(), input.attr('data-dtype'));
+        FTC.forms.delayedUpdate(entity, ms);
     }).keyup(function(e) {
         if (e.which === 13) $(this).blur();
         FTC.forms.autosize($(this));
@@ -55,12 +55,15 @@ FTC.forms.autosize = function(field) {
 /* Textarea Fields                              */
 /* -------------------------------------------- */
 
-FTC.forms.edit_textarea_fields = function(html, obj) {
+FTC.forms.edit_textarea_fields = function(html, entity) {
+    /* Handle HTML <textarea> field updates
+    */
+
     const inputs = html.find("textarea.ftc-textarea");
     inputs.blur(function() {
         let input = $(this);
-        obj.setData(input.attr('data-edit'), input.val(), input.attr('data-dtype'));
-        FTC.forms.delayedUpdate(obj);
+        entity.setData(input.attr('data-edit'), input.val(), input.attr('data-dtype'));
+        FTC.forms.delayedUpdate(entity);
     });
 };
 
@@ -69,11 +72,12 @@ FTC.forms.edit_textarea_fields = function(html, obj) {
 /* Checkbox Input Fields                        */
 /* -------------------------------------------- */
 
-FTC.forms.edit_checkbox_fields = function(html, obj) {
-    /* Handle HTML <input> fields with class ftc-checkbox */
-    const boxes = html.find('input.ftc-checkbox');
+FTC.forms.edit_checkbox_fields = function(html, entity) {
+    /* Handle HTML <input> fields with class ftc-checkbox
+    */
 
     // Set up checkboxes
+    const boxes = html.find('input.ftc-checkbox');
     boxes.each(function(){
         let box = $(this);
         if (box.val() === "1") box.prop("checked", true);
@@ -83,8 +87,8 @@ FTC.forms.edit_checkbox_fields = function(html, obj) {
     boxes.change(function(){
         let box = $(this),
             val = box.prop("checked") + 0 || 0;
-        obj.setData(box.attr("data-edit"), val, "int");
-        obj.save();
+        entity.setData(box.attr("data-edit"), val, "int");
+        entity.save();
     });
 };
 
@@ -93,8 +97,9 @@ FTC.forms.edit_checkbox_fields = function(html, obj) {
 /* Select Input Fields                          */
 /* -------------------------------------------- */
 
-FTC.forms.edit_select_fields = function(html, obj) {
-    /* Handle HTML <select> fields with class ftc-select */
+FTC.forms.edit_select_fields = function(html, entity) {
+    /* Handle HTML <select> fields with class ftc-select
+    */
 
     // Populate their initial status
     const selects = html.find("select.ftc-select");
@@ -112,8 +117,8 @@ FTC.forms.edit_select_fields = function(html, obj) {
     selects.change(function() {
         let select = $(this),
             value = select.find(":selected").val();
-        obj.setData(select.attr('data-edit'), value, "str");
-        obj.save();
+        entity.setData(select.attr('data-edit'), value, "str");
+        entity.save();
     });
 };
 
@@ -122,16 +127,17 @@ FTC.forms.edit_select_fields = function(html, obj) {
 /* Edit Sheet Image Handler                     */
 /* -------------------------------------------- */
 
-FTC.forms.edit_image_fields = function(html, obj, app) {
+FTC.forms.edit_image_fields = function(html, entity, app) {
     html.find('.profile-image.ftc-image').click(function(){
-        let key = $(this).attr('data-edit');
+        let key = $(this).attr('data-edit'),
+            obj = entity.obj;
 
         // Create Image Picker
         let imgList = sync.render("ui_filePicker")(obj, app, {
             filter : "img",
             change : function(ev, ui, value){
-                obj.setData(key, value, "img");
-                obj.save();
+                entity.setData(key, value, "img");
+                entity.save();
                 layout.coverlay("icons-picker");
             }
         });
@@ -153,7 +159,7 @@ FTC.forms.edit_image_fields = function(html, obj, app) {
 /* Edit Rich Text Field                         */
 /* -------------------------------------------- */
 
-FTC.forms.edit_mce_fields = function(html, obj, app) {
+FTC.forms.edit_mce_fields = function(html, entity, app) {
     html.find('.ftc-textfield-edit').click(function(){
         const div = $(this).siblings('.ftc-textfield'),
             target = div.attr('data-edit'),
@@ -180,8 +186,8 @@ FTC.forms.edit_mce_fields = function(html, obj, app) {
             setup: function(ed) {  app._mce = ed; },
             save_enablewhendirty: false,
             save_onsavecallback: function(ed) {
-                obj.setData(target, ed.getContent(), "str");
-                obj.save();
+                entity.setData(target, ed.getContent(), "str");
+                entity.save();
                 ed.remove();
                 ed.destroy();
                 $(this).css("display", "block");
@@ -199,7 +205,7 @@ FTC.forms.edit_mce_fields = function(html, obj, app) {
 /* Edit Inventory and Spell Buttons             */
 /* -------------------------------------------- */
 
-FTC.forms.edit_item_fields = function(html, obj, app) {
+FTC.forms.edit_item_fields = function(html, character) {
 
     // Add Item
     html.find('.ftc-item-add').click(function() {
@@ -208,7 +214,7 @@ FTC.forms.edit_item_fields = function(html, obj, app) {
        let type = $(this).attr("data-item-type");
        if ( type === "equipment" ) type = "armor";
        else if ( type === "weapons" ) type = "weapon";
-       let item = new FTCItem(data, {"owner": obj, "container": container, "type": type});
+       let item = new FTCItem(data, {"owner": character, "container": container, "type": type});
        item.editOwnedItem();
     });
 
@@ -217,7 +223,7 @@ FTC.forms.edit_item_fields = function(html, obj, app) {
         const li = $(this).closest("li"),
             container = li.attr("data-item-container"),
             itemId = li.attr("data-item-id"),
-            item = new FTCItem(obj.data[container][itemId], {"owner": obj, "container": container});
+            item = new FTCItem(character.data[container][itemId], {"owner": character, "container": container});
         item.editOwnedItem(itemId);
     });
 
@@ -226,7 +232,7 @@ FTC.forms.edit_item_fields = function(html, obj, app) {
         const li = $(this).closest("li"),
             container = li.attr("data-item-container"),
             itemId = li.attr("data-item-id");
-        obj.deleteItem(container, itemId);
+        character.deleteItem(container, itemId);
     });
 };
 
@@ -235,14 +241,14 @@ FTC.forms.edit_item_fields = function(html, obj, app) {
 /* Activate All Form Fields                     */
 /* -------------------------------------------- */
 
-FTC.forms.activateFields = function(html, obj, app) {
-    this.edit_value_fields(html, obj, app);
-    this.edit_textarea_fields(html, obj, app);
-    this.edit_select_fields(html, obj, app);
-    this.edit_image_fields(html, obj, app);
-    this.edit_checkbox_fields(html, obj, app);
-    this.edit_mce_fields(html, obj, app);
-    this.edit_item_fields(html, obj, app);
+FTC.forms.activateFields = function(html, entity, app) {
+    this.edit_value_fields(html, entity, app);
+    this.edit_textarea_fields(html, entity, app);
+    this.edit_select_fields(html, entity, app);
+    this.edit_image_fields(html, entity, app);
+    this.edit_checkbox_fields(html, entity, app);
+    this.edit_mce_fields(html, entity, app);
+    this.edit_item_fields(html, entity, app);
 };
 
 // End FTCInit

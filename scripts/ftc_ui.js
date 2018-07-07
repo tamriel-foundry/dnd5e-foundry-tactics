@@ -18,27 +18,28 @@ FTC.ui = {
 		return html;
 	},
 
-	activate_tabs: function(html, obj) {
+    /* ------------------------------------------- */
+
+	activateTabs: function(html, character) {
 
 		// Record active tabs
-		obj.data.tabs = obj.data.tabs || {};
+		character.data.tabs = character.data.tabs || {};
 
-		/* Restore Active Tabs */
-		for (var t in obj.data.tabs) {
-			var tab = html.find("#"+obj.data.tabs[t]);
-			if (tab.length > 0) FTC.ui._switch_tab(html, tab);
-		}
+		// Restore Active Tabs
+		$.each(character.data.tabs, function(_, t) {
+			let tab = html.find("#"+t);
+			if (tab.length > 0) FTC.ui._switchTab(html, tab);
+		});
 
-		/* Assign Listener */
+		// Assign Listener
 		html.find('.sheet-tab').click(function() {
-			var container = $(this).parent().attr("id");
-			FTC.ui._switch_tab(html, $(this));
-			obj.data.tabs = obj.data.tabs || {};
-			obj.data.tabs[container] = $(this).attr("id");
+			let container = $(this).parent().attr("id");
+			FTC.ui._switchTab(html, $(this));
+			character.data.tabs[container] = $(this).attr("id");
 		});
 	},
 
-	_switch_tab: function(html, tab) {
+	_switchTab: function(html, tab) {
 		var id = tab.attr("id"),
 			content = html.find("#content-"+id.split("-")[1]);
 
@@ -48,6 +49,8 @@ FTC.ui = {
 		content.siblings('.content-tab').removeClass('tab-active');
 		content.addClass('tab-active');
 	},
+
+    /* ------------------------------------------- */
 
 	/* Return an ordinal number from an integer, i.e. 1 => 1st, 2=> 2nd, etc... */
 	getOrdinalNumber:function(n) {

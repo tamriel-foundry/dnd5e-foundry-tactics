@@ -145,7 +145,7 @@ class FTCItem extends FTCEntity {
     /* ------------------------------------------- */
 
     activateListeners(html, app, scope) {
-        FTC.ui.activate_tabs(html, this.obj, app);
+        FTC.ui.activateTabs(html, this, app);
         FTC.forms.activateFields(html, this, app);
     }
 
@@ -154,7 +154,7 @@ class FTCItem extends FTCEntity {
     save() {
 
         // If the item was not changed, bail out
-        if ( !this.changed ) return;
+        if ( !this._changed ) return;
 
         // Saving an owned item
         if ( this.owner ) {
