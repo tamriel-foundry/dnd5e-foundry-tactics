@@ -28,13 +28,6 @@ class FTCCharacter extends FTCEntity {
     }
 
     /* ------------------------------------------- */
-
-    get dice() {
-        this._dice = this._dice || new FTCDice(this);
-        return this._dice;
-    }
-
-    /* ------------------------------------------- */
     /* HTML Rendering                              */
     /* ------------------------------------------- */
 
@@ -54,9 +47,9 @@ class FTCCharacter extends FTCEntity {
         // Level and Experience
         data.counters.level.current = Math.min(Math.max(data.counters.level.current, 1), 20);
         let lvl = data.counters.level.current,
-            start = FTC.actions.get_next_level_exp(lvl - 1),
+            start = this.getLevelExp(lvl - 1),
             cur = Math.max(data.counters.exp.current, start),
-            next = FTC.actions.get_next_level_exp(lvl),
+            next = this.getLevelExp(lvl),
             pct = ((cur - start) * 100) / (next - start);
         ftc['exp'] = {
             "lvl": lvl,
@@ -111,6 +104,14 @@ class FTCCharacter extends FTCEntity {
 
         // Return the enriched data
         return data
+    }
+
+    /* ------------------------------------------- */
+
+    getLevelExp(level) {
+        const levels = [0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
+                  120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000];
+        return levels[Math.min(level, levels.length - 1)];
     }
 
     /* ------------------------------------------- */
@@ -222,7 +223,8 @@ class FTCCharacter extends FTCEntity {
     /* ------------------------------------------- */
 
     setupAbilities(data) {
-        // Set up ability items by converting them to FTCItem objects
+        /* Set up ability items by converting them to FTCItem objects
+        */
 
         const ftc = data.ftc;
         ftc["abilities"] = [];
@@ -307,9 +309,42 @@ class FTCCharacter extends FTCEntity {
     /* ------------------------------------------- */
 
     activateListeners(html, app, scope) {
+        const character = this;
         FTC.ui.activate_tabs(html, this.obj, app);
         FTC.forms.activateFields(html, this, app);
-        FTC.actions.activateActions(html, this, app);
+
+        // Attribute rolls
+        html.find('.attribute .ftc-rollable').click(function() {
+            let attr = $(this).parent().attr("data-attribute");
+            character.rollAttribute(attr);
+        });
+
+        // Skill rolls
+        html.find('.skill .ftc-rollable').click(function() {
+            let skl = $(this).parent().attr("data-skill");
+            character.rollSkillCheck(skl);
+        });
+
+        // Weapon actions
+        html.find(".weapon .ftc-rollable").click(function() {
+            const itemId = $(this).closest("li.weapon").attr("data-item-id"),
+                itemData = character.data.inventory[itemId];
+            FTCItemAction.toChat(character, itemData);
+        });
+
+        // Spell actions
+        html.find(".spell .ftc-rollable").click(function() {
+            const itemId = $(this).closest("li.spell").attr("data-item-id"),
+                itemData = character.data.spellbook[itemId];
+            FTCItemAction.toChat(character, itemData);
+        });
+
+        // Ability actions
+        html.find(".ability .ftc-rollable").click(function() {
+            const itemId = $(this).closest("li.ability").attr("data-item-id"),
+                itemData = character.data.abilities[itemId];
+            FTCItemAction.toChat(character, itemData);
+        });
     }
 
     /* ------------------------------------------- */
@@ -353,6 +388,404 @@ class FTCCharacter extends FTCEntity {
         this.data[container].splice(itemId, 1);
         this._changed = true;
         this.save();
+    }
+
+    /* ------------------------------------------- */
+    /* Character Actions                           */
+    /* ------------------------------------------- */
+
+    getCoreData() {
+        /* This function exists to prepare all the standard rules data that would be used by dice rolling in D&D5e.
+        */
+
+        // Reference actor data
+        let data = {
+            "proficiency": this.data.counters.proficiency.current,
+            "spellcasting": this.data.info.spellcasting.current || "Int",
+            "offensive": this.data.info.offensive.current || "Str"
+        };
+
+        // Attribute modifiers
+        $.each(this.data.stats, function(a, s) {
+            data[a] = {
+                "name": s.name,
+                "prof": (s.proficient || 0) * data.proficiency,
+                "value": s.current,
+                "mod": s.modifiers.mod,
+            }
+        });
+
+        // Skill modifiers
+        $.each(this.data.skills, function(n, s) {
+            data[n] = {
+                "name": s.name,
+                "prof": (s.current || 0) * data.proficiency,
+                "mod": data[s.stat].mod
+            }
+        });
+
+        // Spell DC
+        data["spellDC"] = 8 + data.proficiency + data[data.spellcasting].mod;
+
+        // Weapon Mod and Spell Mod
+        data["weaponMod"] = data[data.offensive].mod;
+        data["spellMod"] = data[data.spellcasting].mod;
+
+        // Armor Class
+        data["baseAC"] = 10 + data["Dex"].mod;
+        return data;
+    };
+
+    /* -------------------------------------------- */
+
+    rollAttribute(attr) {
+        /* Initial dialog to prompt between rolling an Attribute Test or Saving Throw
+        */
+
+        const actor = this;
+        const html = $('<div id="ftc-dialog"><p>What type of roll?</p></div>');
+
+        // Create a dialogue
+        FTC.ui.createDialogue(html, {
+            title: actor.data.stats[attr].name + " Roll",
+            buttons: {
+                "Attribute Test": function () {
+                    $(this).dialog("close");
+                    $(this).dialog("destroy");
+                    actor.rollAttributeTest(attr);
+                },
+                "Saving Throw": function () {
+                    $(this).dialog("close");
+                    $(this).dialog("destroy");
+                    actor.rollAttributeSave(attr);
+                }
+            }
+        });
+    }
+
+    /* -------------------------------------------- */
+
+    rollAttributeTest(attr) {
+        /* Roll an Attribute Test
+        */
+
+        // Prepare core data
+        let data = this.getCoreData(),
+            name = data[attr].name,
+            flavor = name + " Test",
+            adv = undefined,
+            bonus = undefined;
+
+        // Prepare HTML form
+        const html = $('<div id="ftc-dialog" class="attribute-roll"></div>');
+        html.append($('<label>Situational Modifier?</label>'));
+        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
+        html.append($('<label>Roll With advantage?</label>'));
+
+        // Create a dialogue
+        FTC.ui.createDialogue(html, {
+            title: flavor,
+            buttons: {
+                "Advantage": function () {
+                    adv = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Normal": function () {
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Disadvantage": function () {
+                    adv = false;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                html.dialog("destroy");
+                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", bonus);
+                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
+                FTC.Dice.roll(this, flavor, formula, {"mod": data[attr].mod});
+            }
+        });
+    }
+
+    /* -------------------------------------------- */
+
+    rollAttributeSave(attr) {
+        /* Roll a Saving Throw
+        */
+
+        // Prepare core data
+        let data = this.getCoreData(),
+            name = data[attr].name,
+            flavor = name + " Save",
+            adv = undefined,
+            bonus = undefined;
+
+        // Prepare HTML form
+        const html = $('<div id="ftc-dialog" class="attribute-roll"></div>');
+        html.append($('<label>Situational Modifier?</label>'));
+        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
+        html.append($('<label>Roll With advantage?</label>'));
+
+        // Create a dialogue
+        FTC.ui.createDialogue(html, {
+            title: flavor,
+            buttons: {
+                "Advantage": function () {
+                    adv = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Normal": function () {
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Disadvantage": function () {
+                    adv = false;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                html.dialog("destroy");
+                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
+                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
+                FTC.Dice.roll(this, flavor, formula, {"mod": data[attr].mod, "prof": data[attr].prof});
+            }
+        });
+    }
+
+    /* -------------------------------------------- */
+
+    rollSkillCheck(skl) {
+        /* Roll a skill check, prompting for advantage/disadvantage as well as situational modifiers
+        */
+
+        // Prepare core data
+        let data = this.getCoreData(),
+            name = data[skl].name,
+            flavor = name + " Check",
+            adv = undefined,
+            bonus = undefined;
+
+        // Prepare HTML form
+        const html = $('<div id="ftc-dialog" class="skill-roll"></div>');
+        html.append($('<label>Situational Modifier?</label>'));
+        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
+        html.append($('<label>Roll With advantage?</label>'));
+
+        // Create a dialogue
+        FTC.ui.createDialogue(html, {
+            title: flavor,
+            buttons: {
+                "Advantage": function () {
+                    adv = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Normal": function () {
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Disadvantage": function () {
+                    adv = false;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                html.dialog("destroy");
+                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
+                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
+                FTC.Dice.roll(this, flavor, formula, {"mod": data[skl].mod, "prof": data[skl].prof});
+            }
+        });
+    }
+
+    /* -------------------------------------------- */
+
+    rollWeaponAttack(flavor, hit) {
+        /* Roll a weapon attack, prompting for advantage/disadvantage as well as situational bonuses
+        */
+
+        // Prepare core data
+        let data = this.getCoreData(),
+            adv = undefined,
+            bonus = undefined;
+
+        // Prepare HTML form
+        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
+        html.append($('<label>Situational Modifier?</label>'));
+        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
+        html.append($('<label>Attack With advantage?</label>'));
+
+        // Create a dialogue
+        FTC.ui.createDialogue(html, {
+            title: flavor,
+            buttons: {
+                "Advantage": function () {
+                    adv = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Normal": function () {
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Disadvantage": function () {
+                    adv = false;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                html.dialog("destroy");
+                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), hit, "@mod", "@prof", bonus);
+                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
+                FTC.Dice.roll(this, flavor, formula, {"mod": data.weaponMod, "prof": data.proficiency});
+            }
+        });
+    }
+
+    /* -------------------------------------------- */
+
+    rollWeaponDamage(flavor, damage) {
+
+        // Prepare core data
+        let data = this.getCoreData(),
+            crit = false,
+            bonus = undefined;
+
+        // Prepare HTML form
+        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
+        html.append($('<label>Situational Modifier?</label>'));
+        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
+        html.append($('<label>Was your attack a critical hit?</label>'));
+
+        // Create a dialogue
+        FTC.ui.createDialogue(html, {
+            title: flavor,
+            buttons: {
+                "Normal": function () {
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Critical Hit!": function () {
+                    crit = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                html.dialog("destroy");
+                damage = crit ? FTC.Dice.crit(damage) : damage;
+                bonus = crit ? FTC.Dice.crit(bonus) : bonus;
+                let formula = FTC.Dice.formula(damage, "@mod", bonus);
+                flavor += crit ? " (Critical Hit)" : "";
+                FTC.Dice.roll(this, flavor, formula, {"mod": data.weaponMod});
+            }
+        });
+    }
+
+    /* -------------------------------------------- */
+
+    rollSpellAttack(flavor) {
+        /*
+        Roll a spell attack, prompting for advantage/disadvantage as well as situational bonuses
+        */
+
+        // Prepare core data
+        let data = this.getCoreData(),
+            adv = undefined,
+            bonus = undefined;
+
+        // Prepare HTML form
+        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
+        html.append($('<label>Situational Modifier?</label>'));
+        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
+        html.append($('<label>Attack With advantage?</label>'));
+
+        // Create a dialogue
+        FTC.ui.createDialogue(html, {
+            title: flavor,
+            buttons: {
+                "Advantage": function () {
+                    adv = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Normal": function () {
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Disadvantage": function () {
+                    adv = false;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                html.dialog("destroy");
+                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
+                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
+                FTC.Dice.roll(this, flavor, formula, {"mod": data.spellMod, "prof": data.proficiency});
+            }
+        });
+    }
+
+    /* -------------------------------------------- */
+
+    rollSpellDamage(flavor, damage, canCrit) {
+
+        // Prepare core data
+        let data = this.getCoreData(),
+            buttons = {},
+            crit = false,
+            bonus = undefined;
+
+        // Prepare HTML form
+        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
+        html.append($('<label>Situational Modifier?</label>'));
+        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
+
+        // Some spells cannot critically hit, so they should just roll directly
+        if ( canCrit ) {
+            buttons = {
+                "Normal": function () {
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Critical Hit!": function () {
+                    crit = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            };
+            html.append($('<label>Was your attack a critical hit?</label>'));
+        } else {
+            buttons = {
+                "Roll Damage": function () {
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            };
+        }
+
+        // Create a dialogue
+        FTC.ui.createDialogue(html, {
+            title: flavor,
+            buttons: buttons,
+            close: function () {
+                html.dialog("destroy");
+                damage = crit ? FTC.Dice.crit(damage) : damage;
+                bonus = crit ? FTC.Dice.crit(bonus) : bonus;
+                let formula = FTC.Dice.formula(damage, bonus);
+                flavor += crit ? " (Critical Hit)" : "";
+                FTC.Dice.roll(this, flavor, formula, {"mod": data.spellMod});
+            }
+        });
     }
 }
 

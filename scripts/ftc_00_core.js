@@ -154,15 +154,9 @@ const FTC = {
         // Set the value if it is defined
         if (value !== undefined && value !== "") target[key] = value;
         else delete target[key];
-    },
-
-    /* ------------------------------------------- */
-
-    saveObject: function(object) {
-        delete object.data.ftc;
-        object.sync("updateAsset");
     }
 
+    /* ------------------------------------------- */
 };
 
 
@@ -203,6 +197,10 @@ class FTCEntity {
     }
 
     /* ------------------------------------------- */
+
+    get id() {
+        return ( this.obj ) ? this.obj.id() : undefined;
+    }
 
     get info() {
         return this.data.info;

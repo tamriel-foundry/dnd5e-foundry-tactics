@@ -57,11 +57,10 @@ class FTCItemAction {
 
         // Instantiate actor and item
         let actor = new FTCCharacter(obj.actorData),
-            item = new FTCItem(obj.itemData),
-            action = new FTCItemAction(actor, item, {"timeStamp": obj.timeStamp});
+            item = new FTCItem(obj.itemData);
 
         // Build the action html and return to the sync.render function
-        return action;
+        return new FTCItemAction(actor, item, {"timeStamp": obj.timeStamp});
     }
 
     /* -------------------------------------------- */
@@ -171,9 +170,11 @@ class FTCItemAction {
 
         // Populate spell attack rolls
         if ( this.canRoll && this.isRecent ) {
+            let canCrit = 0;
 
             // Spell Attack Roll
             if (data.info.variety.current === "attack") {
+                canCrit = 1;
                 let at = "Spell Attack";
                 data.attack = `<h3 class="action-roll spell-hit" title="${at}" data-attr="">${at}</h3>`;
             }
@@ -182,7 +183,8 @@ class FTCItemAction {
             if (data.weapon.damage.current) {
                 let dt = (data.weapon.damage.type === "healing") ? "Spell Healing" : "Spell Damage",
                     dam = data.weapon.damage.current;
-                data.damage = `<h3 class="action-roll spell-damage" title="${dt}" data-damage="${dam}">${dt}</h3>`;
+                data.damage = `<h3 class="action-roll spell-damage" title="${dt}" data-damage="${dam}" 
+                                   data-cancrit="${canCrit}">${dt}</h3>`;
             }
         }
         return data;
@@ -208,30 +210,35 @@ class FTCItemAction {
     /* -------------------------------------------- */
 
     activateEventListeners(html) {
-        const dice = this.dice,
+        const character = this.actor,
             name = this.item.name;
-
-        // Spell Attack
-        html.find("h3.action-roll.spell-hit").click(function() {
-            dice.rollSpellAttack(undefined, name+" "+$(this).attr("title"));
-        });
-
-        // Spell Damage
-        html.find("h3.action-roll.spell-damage").click(function() {
-            let dam = $(this).attr("data-damage");
-            dice.rollSpellDamage(dam, undefined, name+" "+$(this).attr("title"));
-        });
 
         // Weapon Attack
         html.find("h3.action-roll.weapon-hit").click(function() {
-            let bonus = $(this).attr("data-bonus");
-            dice.rollWeaponAttack(bonus, undefined, name+" "+$(this).attr("title"));
+            let flavor = name+" "+$(this).attr("title"),
+                hit = $(this).attr("data-bonus");
+            character.rollWeaponAttack(flavor, hit);
         });
 
         // Weapon Damage
         html.find("h3.action-roll.weapon-damage").click(function() {
-            let dmg = $(this).attr("data-damage");
-            dice.rollWeaponDamage(dmg, undefined, name+" "+$(this).attr("title"));
+            let flavor = name+" "+$(this).attr("title"),
+                damage = $(this).attr("data-damage");
+            character.rollWeaponDamage(flavor, damage);
+        });
+
+        // Spell Attack
+        html.find("h3.action-roll.spell-hit").click(function() {
+            let flavor = name+" "+$(this).attr("title");
+            character.rollSpellAttack(flavor);
+        });
+
+        // Spell Damage
+        html.find("h3.action-roll.spell-damage").click(function() {
+            let flavor = name+" "+$(this).attr("title"),
+                damage = $(this).attr("data-damage"),
+                canCrit = parseInt($(this).attr("data-cancrit"));
+            character.rollSpellDamage(flavor, damage, canCrit);
         });
         return html;
     }

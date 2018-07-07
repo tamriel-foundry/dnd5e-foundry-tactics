@@ -251,12 +251,12 @@ ol.attributes-list {
 	background-position: 0 50%;
 }
 
-#attribute-Str > label {background-image: url("../content/icons/strength.png");}
-#attribute-Dex > label {background-image: url("../content/icons/dexterity.png");}
-#attribute-Con > label {background-image: url("../content/icons/constitution.png");}
-#attribute-Int > label {background-image: url("../content/icons/intelligence.png");}
-#attribute-Wis > label {background-image: url("../content/icons/wisdom.png");}
-#attribute-Cha > label {background-image: url("../content/icons/charisma.png");}
+.attribute-Str > label {background-image: url("../content/icons/strength.png");}
+.attribute-Dex > label {background-image: url("../content/icons/dexterity.png");}
+.attribute-Con > label {background-image: url("../content/icons/constitution.png");}
+.attribute-Int > label {background-image: url("../content/icons/intelligence.png");}
+.attribute-Wis > label {background-image: url("../content/icons/wisdom.png");}
+.attribute-Cha > label {background-image: url("../content/icons/charisma.png");}
 
 .attribute .ftc-rollable:hover {
     background-image: url("../content/icons/d20.png") !important;

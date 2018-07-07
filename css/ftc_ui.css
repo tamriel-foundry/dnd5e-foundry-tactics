@@ -273,21 +273,22 @@ div.content-tab.tab-active {
     margin: 0 0.25em;
 }
 
-.ftc-dialog .attribute-roll > * {
-    margin: 0.25em 0;
+#ftc-dialog {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#ftc-dialog > * {
+    flex: 0 0 100%;
+    margin: 4px 0;
+    text-align: left;
 }
 
 
 /* -------------------------------------------
      General Styles
 ------------------------------------------- */
-
-/*
-body {
-    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 16px;
-}
-*/
 
 /* Headers */
 h1, h2, h3, h4 {

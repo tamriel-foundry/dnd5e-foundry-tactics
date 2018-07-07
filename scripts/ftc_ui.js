@@ -2,19 +2,20 @@ hook.add("FTCInit", "UI", function() {
 FTC.ui = {
 
 	/* Create a dialogue window */
-	_create_dialogue: function(title, html, buttons) {
-		var dlg = $('<div class="ftc-dialog"></div>').html(html);
-		dlg.dialog({
-			title: title,
+	createDialogue: function(html, options) {
+		const defaults = {
 			resizable: false,
 			height: "auto",
 			width: 300,
 			modal: true,
 			closeText: "close",
-			buttons: buttons,
-			close: function(ev) { dlg.remove();	}
-		});
-		return dlg;
+			close: function(ev) {
+				html.dialog("destroy");
+			}
+		};
+		options = ftc_merge(defaults, options, true, true);
+		html.dialog(options);
+		return html;
 	},
 
 	activate_tabs: function(html, obj) {
