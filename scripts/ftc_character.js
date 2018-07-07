@@ -136,6 +136,11 @@ class FTCCharacter extends FTCObject {
                 "items": [],
                 "type": "item",
             },
+            "consumables": {
+                "name": "Consumables",
+                "items": [],
+                "type": "item"
+            },
             "pack": {
                 "name": "Backpack",
                 "items": [],
@@ -159,6 +164,8 @@ class FTCCharacter extends FTCObject {
                 inventory.equipment.items.push(item);
             } else if ( item.type === "item" && item.info.variety.current === "tool" ) {
                 inventory.tools.items.push(item);
+            } else if ( item.type === "item" && item.info.variety.current === "consumable" ) {
+                inventory.consumables.items.push(item);
             } else {
                 inventory.pack.items.push(item);
             }

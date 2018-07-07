@@ -115,6 +115,7 @@ class FTCDice {
         let fml = this.d20Check(adv, ["@mod"], situational),
             data = {"mod": this.data[attr].mod},
             flavor = this.data[attr].name + " Test";
+        if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
         this.rollDice(flavor, fml, data);
     }
 
@@ -124,6 +125,7 @@ class FTCDice {
         let fml = this.d20Check(adv, ["@mod", "@prof"], situational),
             data = {"mod": this.data[attr].mod, "prof": this.data[attr].prof},
             flavor = this.data[attr].name + " Save";
+        if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
         this.rollDice(flavor, fml, data);
     }
 
@@ -133,6 +135,7 @@ class FTCDice {
         let fml = this.d20Check(adv, ["@mod", "@prof"], situational),
             data = {"mod": this.data[skl].mod, "prof": this.data[skl].prof},
             flavor = this.data[skl].name + " Check";
+        if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
         this.rollDice(flavor, fml, data);
     }
 

@@ -35,7 +35,7 @@ FTC.actions = {
                 FTC.ui._create_dialogue(name + " Attribute Test", html, {
                     "Advantage": function(){
                         $(this).dialog("close");
-                        dice.rollAttributeTest(attr, true, $(this).find('#roll-bonus').val(), true);
+                        dice.rollAttributeTest(attr, $(this).find('#roll-bonus').val(), true);
                     },
                     "Normal": function(){
                         $(this).dialog("close");
