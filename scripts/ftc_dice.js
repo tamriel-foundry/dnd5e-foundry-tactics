@@ -22,7 +22,6 @@ class FTCDice {
         // Submit chat event
         const chatData = {
             "person": this.actor.name,
-            "eID": this.actor.obj.id(),
             "icon": this.actor.data.info.img.current,
             "flavor": flavor,
             "audio": "sounds/dice.mp3",

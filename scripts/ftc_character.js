@@ -5,8 +5,8 @@
 
 class FTCCharacter extends FTCEntity {
 
-    constructor(obj, app, scope) {
-        super(obj, app, scope);
+    constructor(obj, context) {
+        super(obj, context);
 
         // Primary Templates
         this.templates = {

@@ -179,7 +179,7 @@ class FTCEntity {
         this.context = context || {};
 
         // Case 1: Sync Object provided
-        if ("sync" in object && "_uid" in object) {
+        if ( "sync" in object ) {
             this.obj = object;
             this.data = object.data;
         }
