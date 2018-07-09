@@ -33,7 +33,7 @@ class FTCItemAction {
             "eID": actor.obj.id(),
             "icon": actor.data.info.img.current,
             "ui": FTCItemAction.ui,
-            "audio": "content/audio/spell_cast.mp3",
+            "audio": "sounds/spell_cast.mp3",
             "actorData": actor.data,
             "itemData": itemData
         };
@@ -122,7 +122,7 @@ class FTCItemAction {
 
         // Populate weapon attack rolls
         if ( this.canRoll && this.isRecent ) {
-            let t = "Weapon Attack"
+            let t = "Weapon Attack";
 
             // Weapon Attack Roll
             let bon = data.weapon.hit.current || "";
@@ -164,7 +164,7 @@ class FTCItemAction {
 
         // Spell DC
         if (data.info.variety.current === "save") {
-            let dc = this.dice.data.spellDC;
+            let dc = this.actor.spellDC;
             data.spellDC = `<h3 class="spell-dc" title="Spell DC">Spell DC ${dc}</h3>`
         }
 

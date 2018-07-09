@@ -10,17 +10,15 @@ class FTCCharacter extends FTCEntity {
 
         // Primary Templates
         this.templates = {
-            FTC_SHEET_FULL: FTC.TEMPLATE_DIR + 'charsheet.html',
-            FTC_SHEET_PRIVATE: FTC.TEMPLATE_DIR + 'privatesheet.html',
-            FTC_SKILL_HTML: FTC.TEMPLATE_DIR + 'skill.html',
-            FTC_ATTRIBUTE_HTML: FTC.TEMPLATE_DIR + 'characters/attribute.html',
-            INVENTORY_HEADER: FTC.TEMPLATE_DIR + 'characters/items/inventory-header.html',
-            INVENTORY_ITEM: FTC.TEMPLATE_DIR + 'characters/items/inventory-item.html',
-            FTC_SPELL_LEVEL: FTC.TEMPLATE_DIR + 'spellheader.html',
-            FTC_SPELL_HTML: FTC.TEMPLATE_DIR + 'spell.html',
-            CHARACTER_TAB_TRAITS: FTC.TEMPLATE_DIR + 'characters/tab-traits.html',
-            CHARACTER_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'characters/primary-stats.html',
-            CHARACTER_ABILITY: FTC.TEMPLATE_DIR + 'characters/character-ability.html'
+            FTC_SKILL_HTML: FTC.TEMPLATE_DIR + 'character/skill.html',
+            FTC_ATTRIBUTE_HTML: FTC.TEMPLATE_DIR + 'character/attribute.html',
+            INVENTORY_HEADER: FTC.TEMPLATE_DIR + 'character/items/inventory-header.html',
+            INVENTORY_ITEM: FTC.TEMPLATE_DIR + 'character/items/item.html',
+            FTC_SPELL_LEVEL: FTC.TEMPLATE_DIR + 'character/items/spell-header.html',
+            FTC_SPELL_HTML: FTC.TEMPLATE_DIR + 'character/items/spell.html',
+            CHARACTER_TAB_TRAITS: FTC.TEMPLATE_DIR + 'character/tab-traits.html',
+            CHARACTER_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'character/primary-stats.html',
+            CHARACTER_ABILITY: FTC.TEMPLATE_DIR + 'character/ability.html'
         };
 
         // Register local for debugging
@@ -37,6 +35,14 @@ class FTCCharacter extends FTCEntity {
     }
 
     /* ------------------------------------------- */
+
+    convertData(data) {
+
+        // Proficiency Bonus
+        data.counters.proficiency.current = Math.floor((data.counters.level.current + 7) / 4);
+        return data;
+
+    }
 
     enrichData(data, scope) {
 
@@ -56,12 +62,9 @@ class FTCCharacter extends FTCEntity {
             "current": cur.toLocaleString(),
             "next": next.toLocaleString(),
             "pct": Math.min(pct, 99.5),
-            "cls": (pct >= 100) ? "leveled": ""
+            "cls": (pct >= 100) ? "leveled": "",
+            "kill": this.getKillExp(data.counters.cr.current)
         };
-
-        // Proficiency Bonus
-        let prof = Math.floor((lvl + 7) / 4);
-        data.counters.proficiency.current = prof;
 
         // Enrich Attributes
         $.each(data.stats, function(attr, stat) {
@@ -103,7 +106,13 @@ class FTCCharacter extends FTCEntity {
         this.setupAbilities(data);
 
         // Return the enriched data
-        return data
+        return data;
+    }
+
+    get spellDC() {
+        let attr = this.data.info.spellcasting.current,
+            mod = this.data.stats[attr].modifiers.mod;
+        return 8 + mod + this.data.counters.proficiency.current;
     }
 
     /* ------------------------------------------- */
@@ -112,6 +121,15 @@ class FTCCharacter extends FTCEntity {
         const levels = [0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
                   120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000];
         return levels[Math.min(level, levels.length - 1)];
+    }
+
+    getKillExp(cr) {
+        cr = eval(cr);
+        if (cr < 1.0) return Math.max(200 * cr, 10);
+        let _ = undefined;
+        const xps = [10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 18000, 20000, 22000,
+            25000, 27500, 30000, 32500, 36500, _, _, _, _, _, 155000];
+        return xps[cr];
     }
 
     /* ------------------------------------------- */
@@ -177,13 +195,12 @@ class FTCCharacter extends FTCEntity {
         });
         ftc.inventory = inventory;
 
-
         // Compute weight and encumbrance
         let wt = (weight.length > 0) ? weight.reduce(function(total, num) { return total + (num || 0); }) : 0,
            enc = data.stats.Str.current * 15,
            pct = Math.min(wt * 100 / enc, 99.5),
            cls = (pct > 90 ) ? "heavy" : "";
-        ftc["weight"] = {"wt": wt, "enc": enc, "pct": pct, "cls": cls};
+        ftc["weight"] = {"wt": wt.toFixed(2), "enc": enc, "pct": pct.toFixed(2), "cls": cls};
     }
 
     /* ------------------------------------------- */
@@ -236,11 +253,26 @@ class FTCCharacter extends FTCEntity {
 
     /* ------------------------------------------- */
 
+    getTemplate(data, scope) {
+        /* Determine the base HTML template that should be used for the entity
+        */
+
+        // Private Preview Template
+        if ( scope.isPrivate ) return FTC.TEMPLATE_DIR + 'character/preview-character.html';
+
+        // NPC Template
+
+        // Character Sheet
+        return FTC.TEMPLATE_DIR + 'character/charsheet.html';
+    }
+
+    /* ------------------------------------------- */
+
     buildHTML(data, scope) {
 
-        // Load primary template
-        let template = scope.isPrivate ? this.templates.FTC_SHEET_PRIVATE : this.templates.FTC_SHEET_FULL,
-            main = FTC.loadTemplate(template);
+        // Determine and load primary template
+        const template = this.getTemplate(data, scope);
+        let main = FTC.loadTemplate(template);
 
         // Augment sub-components
         if (!scope.isPrivate) {
@@ -248,62 +280,86 @@ class FTCCharacter extends FTCEntity {
             // Primary Stats
             main = FTC.injectTemplate(main, "CHARACTER_PRIMARY_STATS", this.templates.CHARACTER_PRIMARY_STATS)
 
-            // Attributes
-            let attrs = "";
-            let template = FTC.loadTemplate(this.templates.FTC_ATTRIBUTE_HTML);
-            for ( var s in data.stats ) {
-                attrs += template.replace(/\{stat\}/g, s);
-            }
-            main = main.replace("<!-- FTC_ATTRIBUTE_HTML -->", attrs);
+            // Attributes and Skills
+            main = this._buildAttributes(main, data);
+            main = this._buildSkills(main, data);
 
-            // Insert Skills
-            let skills = "";
-            template = FTC.loadTemplate(this.templates.FTC_SKILL_HTML)
-            for (var s in data.skills) {
-                skills += template.replace(/\{skl\}/g, s);
-            }
-            main = main.replace("<!-- FTC_SKILL_HTML -->", skills);
-
-            // Insert Inventory
-            let inventory = "",
-                itemHeader = FTC.loadTemplate(this.templates.INVENTORY_HEADER),
-                itemTemplate = FTC.loadTemplate(this.templates.INVENTORY_ITEM);
-            $.each(data.ftc.inventory, function(_, type) {
-                inventory += FTC.populateTemplate(itemHeader, type);
-                $.each(type.items, function(_, item) {
-                    inventory += FTC.populateTemplate(itemTemplate, item.data);
-                });
-            });
-            inventory = inventory || '<li><blockquote class="compendium">Add items from the compendium.</blockquote></li>';
-            main = main.replace("<!-- FTC_INVENTORY_HTML -->", inventory);
-
-            // Insert Spells
-            let spells = "",
-                ltmp = FTC.loadTemplate(this.templates.FTC_SPELL_LEVEL),
-                stmp = FTC.loadTemplate(this.templates.FTC_SPELL_HTML);
-            $.each(data.ftc.spellbook, function(l, s){
-                spells += FTC.populateTemplate(ltmp, s);
-                $.each(s.spells, function(i, p){
-                    spells += FTC.populateTemplate(stmp, p);
-                });
-            });
-            spells = spells || '<li><blockquote class="compendium">Add spells from the compendium.</blockquote></li>';
-            main = main.replace("<!-- FTC_SPELLS_HTML -->", spells);
-
-            // Abilities
-            let abilities = "";
-            template = FTC.loadTemplate(this.templates.CHARACTER_ABILITY);
-            $.each(data.ftc.abilities, function(i, item) {
-                item.itemid = i;
-                abilities += FTC.populateTemplate(template, item);
-            });
-            abilities = abilities || '<li><blockquote class="compendium">Add abilities from the compendium.</blockquote></li>';
-            main = main.replace("<!-- CHARACTER_TAB_ABILITIES -->", abilities);
+            // Owned Items - Inventory, Spells, and Abilities
+            main = this._buildInventory(main, data);
+            main = this._buildSpellbook(main, data);
+            main = this._buildAbilities(main, data);
 
             // Character Traits
             main = FTC.injectTemplate(main, "CHARACTER_TAB_TRAITS", this.templates.CHARACTER_TAB_TRAITS)
         }
         return main;
+    }
+
+    /* ------------------------------------------- */
+
+    _buildAttributes(html, data) {
+        let attrs = "",
+            template = FTC.loadTemplate(this.templates.FTC_ATTRIBUTE_HTML);
+        for ( var s in data.stats ) {
+            attrs += template.replace(/\{stat\}/g, s);
+        }
+        return html.replace("<!-- FTC_ATTRIBUTE_HTML -->", attrs);
+    }
+
+    /* ------------------------------------------- */
+
+    _buildSkills(html, data) {
+        let skills = "",
+            template = FTC.loadTemplate(this.templates.FTC_SKILL_HTML);
+        for (var s in data.skills) {
+            skills += template.replace(/\{skl\}/g, s);
+        }
+        return html.replace("<!-- FTC_SKILL_HTML -->", skills);
+    }
+
+    /* ------------------------------------------- */
+
+    _buildInventory(html, data) {
+        let inventory = "",
+            itemHeader = FTC.loadTemplate(this.templates.INVENTORY_HEADER),
+            itemTemplate = FTC.loadTemplate(this.templates.INVENTORY_ITEM);
+        $.each(data.ftc.inventory, function(_, type) {
+            inventory += FTC.populateTemplate(itemHeader, type);
+            $.each(type.items, function(_, item) {
+                inventory += FTC.populateTemplate(itemTemplate, item.data);
+            });
+        });
+        inventory = inventory || '<li><blockquote class="compendium">Add items from the compendium.</blockquote></li>';
+        return html.replace("<!-- FTC_INVENTORY_HTML -->", inventory);
+    }
+
+    /* ------------------------------------------- */
+
+    _buildSpellbook(html, data) {
+        let spells = "",
+            ltmp = FTC.loadTemplate(this.templates.FTC_SPELL_LEVEL),
+            stmp = FTC.loadTemplate(this.templates.FTC_SPELL_HTML);
+        $.each(data.ftc.spellbook, function(l, s){
+            spells += FTC.populateTemplate(ltmp, s);
+            $.each(s.spells, function(i, p){
+                spells += FTC.populateTemplate(stmp, p);
+            });
+        });
+        spells = spells || '<li><blockquote class="compendium">Add spells from the compendium.</blockquote></li>';
+        return html.replace("<!-- FTC_SPELLS_HTML -->", spells);
+    }
+
+    /* ------------------------------------------- */
+
+    _buildAbilities(html, data) {
+        let abilities = "",
+            ab = FTC.loadTemplate(this.templates.CHARACTER_ABILITY);
+        $.each(data.ftc.abilities, function(i, item) {
+            item.itemid = i;
+            abilities += FTC.populateTemplate(ab, item);
+        });
+        abilities = abilities || '<li><blockquote class="compendium">Add abilities from the compendium.</blockquote></li>';
+        return html.replace("<!-- CHARACTER_TAB_ABILITIES -->", abilities);
     }
 
     /* ------------------------------------------- */
@@ -470,7 +526,8 @@ class FTCCharacter extends FTCEntity {
         */
 
         // Prepare core data
-        let data = this.getCoreData(),
+        let actor = this,
+            data = this.getCoreData(),
             name = data[attr].name,
             flavor = name + " Test",
             adv = undefined,
@@ -505,7 +562,7 @@ class FTCCharacter extends FTCEntity {
                 html.dialog("destroy");
                 let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", bonus);
                 if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-                FTC.Dice.roll(this, flavor, formula, {"mod": data[attr].mod});
+                FTC.Dice.roll(actor, flavor, formula, {"mod": data[attr].mod});
             }
         });
     }
@@ -517,7 +574,8 @@ class FTCCharacter extends FTCEntity {
         */
 
         // Prepare core data
-        let data = this.getCoreData(),
+        let actor = this,
+            data = this.getCoreData(),
             name = data[attr].name,
             flavor = name + " Save",
             adv = undefined,
@@ -552,7 +610,7 @@ class FTCCharacter extends FTCEntity {
                 html.dialog("destroy");
                 let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
                 if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-                FTC.Dice.roll(this, flavor, formula, {"mod": data[attr].mod, "prof": data[attr].prof});
+                FTC.Dice.roll(actor, flavor, formula, {"mod": data[attr].mod, "prof": data[attr].prof});
             }
         });
     }
@@ -564,7 +622,8 @@ class FTCCharacter extends FTCEntity {
         */
 
         // Prepare core data
-        let data = this.getCoreData(),
+        let actor = this,
+            data = this.getCoreData(),
             name = data[skl].name,
             flavor = name + " Check",
             adv = undefined,
@@ -599,7 +658,7 @@ class FTCCharacter extends FTCEntity {
                 html.dialog("destroy");
                 let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
                 if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-                FTC.Dice.roll(this, flavor, formula, {"mod": data[skl].mod, "prof": data[skl].prof});
+                FTC.Dice.roll(actor, flavor, formula, {"mod": data[skl].mod, "prof": data[skl].prof});
             }
         });
     }
@@ -611,7 +670,8 @@ class FTCCharacter extends FTCEntity {
         */
 
         // Prepare core data
-        let data = this.getCoreData(),
+        let actor = this,
+            data = this.getCoreData(),
             adv = undefined,
             bonus = undefined;
 
@@ -644,7 +704,7 @@ class FTCCharacter extends FTCEntity {
                 html.dialog("destroy");
                 let formula = FTC.Dice.formula(FTC.Dice.d20(adv), hit, "@mod", "@prof", bonus);
                 if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-                FTC.Dice.roll(this, flavor, formula, {"mod": data.weaponMod, "prof": data.proficiency});
+                FTC.Dice.roll(actor, flavor, formula, {"mod": data.weaponMod, "prof": data.proficiency});
             }
         });
     }
@@ -654,7 +714,8 @@ class FTCCharacter extends FTCEntity {
     rollWeaponDamage(flavor, damage) {
 
         // Prepare core data
-        let data = this.getCoreData(),
+        let actor = this,
+            data = this.getCoreData(),
             crit = false,
             bonus = undefined;
 
@@ -684,7 +745,7 @@ class FTCCharacter extends FTCEntity {
                 bonus = crit ? FTC.Dice.crit(bonus) : bonus;
                 let formula = FTC.Dice.formula(damage, "@mod", bonus);
                 flavor += crit ? " (Critical Hit)" : "";
-                FTC.Dice.roll(this, flavor, formula, {"mod": data.weaponMod});
+                FTC.Dice.roll(actor, flavor, formula, {"mod": data.weaponMod});
             }
         });
     }
@@ -697,7 +758,8 @@ class FTCCharacter extends FTCEntity {
         */
 
         // Prepare core data
-        let data = this.getCoreData(),
+        let actor = this,
+            data = this.getCoreData(),
             adv = undefined,
             bonus = undefined;
 
@@ -730,7 +792,7 @@ class FTCCharacter extends FTCEntity {
                 html.dialog("destroy");
                 let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
                 if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-                FTC.Dice.roll(this, flavor, formula, {"mod": data.spellMod, "prof": data.proficiency});
+                FTC.Dice.roll(actor, flavor, formula, {"mod": data.spellMod, "prof": data.proficiency});
             }
         });
     }
@@ -740,7 +802,8 @@ class FTCCharacter extends FTCEntity {
     rollSpellDamage(flavor, damage, canCrit) {
 
         // Prepare core data
-        let data = this.getCoreData(),
+        let actor = this,
+            data = this.getCoreData(),
             buttons = {},
             crit = false,
             bonus = undefined;
@@ -783,7 +846,7 @@ class FTCCharacter extends FTCEntity {
                 bonus = crit ? FTC.Dice.crit(bonus) : bonus;
                 let formula = FTC.Dice.formula(damage, bonus);
                 flavor += crit ? " (Critical Hit)" : "";
-                FTC.Dice.roll(this, flavor, formula, {"mod": data.spellMod});
+                FTC.Dice.roll(actor, flavor, formula, {"mod": data.spellMod});
             }
         });
     }

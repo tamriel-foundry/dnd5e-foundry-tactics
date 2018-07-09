@@ -303,8 +303,14 @@ h1 {
 h2 {
     font-size: 32px;
 }
-h3 { font-size: 24px; }
-h4 { font-size: 20px; }
+h3 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+h4 {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
 
 hr {
     margin: 0.5em 0;

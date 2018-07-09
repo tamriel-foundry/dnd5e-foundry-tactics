@@ -202,7 +202,8 @@ class FTCItem extends FTCEntity {
         confirm.click(function () {
 
             // Maybe close any open MCE editors
-            if ( app._mce ) {
+            console.log(app);
+            if ( tinymce.activeEditor && app._mce && !app._mce.isHidden() ) {
                 item.data.info.notes.current = app._mce.save();
                 app._mce.destroy();
             }

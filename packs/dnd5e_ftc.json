@@ -21,7 +21,2745 @@
   "content": {
     "Items": {
       "_t": "i",
-      "data": []
+      "data": [
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "Heavy": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Chainmail"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Chainmail1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath the mail to prevent chafing and to cushion the impact of blows. The suit includes gauntlets.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "armor"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "heavy"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 55
+            },
+            "price": {
+              "name": "Price",
+              "current": 75
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 145"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class",
+              "current": "16"
+            },
+            "str": {
+              "name": "Required Strength",
+              "current": "13"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage",
+              "current": 1
+            },
+            "equipped": {
+              "name": "Equipped",
+              "current": 1
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient",
+              "current": 1
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530993859494
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "Melee": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Flail"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Mace1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A flail consists of a haft about two feet long with a heavy metal ball or rod attached by chain to the end of the haft. The ball or rod is often spiked.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "martialm"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 2
+            },
+            "price": {
+              "name": "Price",
+              "current": 10
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d8",
+              "type": "bludgeoning"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "5 ft."
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530845765036
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "Heavy": 1,
+            "Two-Handed": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Greatsword"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Sword1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>The greatsword is large and heavy for a sword, and takes good training to wield effectively, therefore it is classified as a martial weapon. Greatswords with the parrying hooks may be gripped with one hand between the hooks and the guard and the other on the hilt, allowing this weapon to be used in polearm&nbsp;fashion. The greatsword is recognized by adventurers as a reliable, powerful weapon.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "martialm"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 6
+            },
+            "price": {
+              "name": "Price",
+              "current": 50
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "2d6",
+              "type": "slashing"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530994365814
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "Ranged": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Hand Crossbow"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Crossbow1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A small mounted wooden which can be held with one hand or wrist-mounted has a simple firing aparatus which unleashes light, but dangerous, steel bolts.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "simpler"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 3
+            },
+            "price": {
+              "name": "Price",
+              "current": 75
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d6",
+              "type": "piercing"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "30/120 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Ranged, Loading"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 2,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530849542247
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "Light": 1,
+            "Thrown": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Handaxe"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Axe1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>The handaxe is similar to a hatchet in size and shape. The haft is usually made of wood or sometimes metal and is about a foot and a half long. The blade is single-edged and the back side may be unadorned, spiked, or have a peen. Handaxes are heavier than&nbsp;throwing axes&nbsp;and not balanced for throwing.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "simplem"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 2
+            },
+            "price": {
+              "name": "Price",
+              "current": 5
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "type": "slashing",
+              "current": "1d6"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "5 ft., 20/60 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Light, Thrown"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530994778873
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-weapon"
+          },
+          "tags": {
+            "Ranged": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Heavy Crossbow"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Crossbow1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A heavy wooden frame with a crank-wound firing aparatus unleashes a lethal heavy metal bolt capable of puncturing straight through heavy armor.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "martialr"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 18
+            },
+            "price": {
+              "name": "Price",
+              "current": 50
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d10",
+              "type": "piercing"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "100/400 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Heavy, Loading, Two-Handed"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 3,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530843255093
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "Thrown": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Javelin"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Spear1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A javelin is a light, flexible spear designed primarily as a throwing weapon. It is usually constructed of wood and may taper to a sharp point at one or both ends. Alternatively, it may be tipped with a small metal spearhead. The shaft is much thinner than a spear intended for melee combat.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 2
+            },
+            "price": {
+              "name": "Price",
+              "current": 0.5
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d6",
+              "type": "piercing"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "30/120 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Thrown"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530847133597
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-armor"
+          },
+          "tags": {
+            "Light": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Leather Armor"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/CommonClothes1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "armor"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "light"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 10
+            },
+            "price": {
+              "name": "Price",
+              "current": 10
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 144"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class",
+              "current": "11"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped",
+              "current": 0
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 2,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530843255096
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Ranged": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Light Crossbow"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Crossbow1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A wooden frame with a crank-wound firing aparatus unleashes a medium-sized metal bolt capable of puncturing straight through&nbsp;most armor.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "simpler"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 5
+            },
+            "price": {
+              "name": "Price",
+              "current": 25
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d8",
+              "type": "piercing"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "80/320 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Loading, Two-Handed"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 3,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530849233209
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-weapon"
+          },
+          "tags": {
+            "Ranged": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Longbow"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Bow1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A&nbsp;flexible shaft of wood, horn, or bone about 4 to 6 feet long with ends connected by strong cord or a gut string. The longbow&nbsp;is a two-handed, martial ranged weapon of the bow&nbsp;family.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "martialr"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 2
+            },
+            "price": {
+              "name": "Price",
+              "current": 50
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d8",
+              "type": "piercing"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "150/600 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Ammunition, Heavy, Two-Handed"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 2,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530843255095
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Martial": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Longsword"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Sword1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A common and versatile melee weapon.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "martialm"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 3
+            },
+            "price": {
+              "name": "Price",
+              "current": 15
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d8",
+              "type": "slashing"
+            },
+            "damage2": {
+              "name": "Secondary Damage",
+              "current": "1d10",
+              "type": "slashing"
+            },
+            "range": {
+              "name": "Range",
+              "current": "5 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Versatile"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 2,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530843255092
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Simple": 1,
+            "Melee": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Mace"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/MaceRounded1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A&nbsp;mace&nbsp;is a simple bludgeoning weapon resembling a metal&nbsp;club.&nbsp;The striking head of the mace is symmetrically arrayed with flanges, knobs, or high ridges designed to inflict damage on an armored opponent.&nbsp;</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "simplem"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 4
+            },
+            "price": {
+              "name": "Price",
+              "current": 5
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d6",
+              "type": "bludgeoning"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "5 ft"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530850620844
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "Heavy": 1,
+            "Two-Handed": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Maul"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Maul1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A&nbsp;maul is a heavy, long-handled&nbsp;hammer&nbsp;used for splitting a piece of wood along its grain, or as a two-handed, martial, melee weapon.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "martialm"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 10
+            },
+            "price": {
+              "name": "Price",
+              "current": 10
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "2d6",
+              "type": "bludgeoning"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "5 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Heavy, Two-Handed"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530845529351
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "NPC": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Natural Armor"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Shield1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Tough hide, scales, bark, or other natural defenses afford protection from most attacks.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "armor"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "natural"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class",
+              "current": "13"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped",
+              "current": 1
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530854468638
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "Shield": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Shield"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Shield1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Shields are&nbsp;usually made from wood or metal and are&nbsp;used by combatants to gain extra protection. Shields are&nbsp;typically carried in one hand or&nbsp;to the arm that carries them.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "armor"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "shield"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 6
+            },
+            "price": {
+              "name": "Price",
+              "current": 10
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 144"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class",
+              "current": "2"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped",
+              "current": 1
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient",
+              "current": 1
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530851164588
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-weapon"
+          },
+          "tags": {
+            "Simple": 1,
+            "Ranged": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Shortbow"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Bow1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>The shortbow is a flexible shaft of wood, horn, or bone about 3 to 4 feet long with the ends connected by strong cord or a gut string that is a little shorter than the shaft, causing the wood to bend and keep the string under tension.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "simpler"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 2
+            },
+            "price": {
+              "name": "Price",
+              "current": 25
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d6",
+              "type": "piercing"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "80/320 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Ranged, Two-Handed, Ammunition"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 3,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530843255108
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Melee": 1,
+            "Finesse": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Shortsword"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Knife1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A smaller and more maneuverable version of the common&nbsp;long blade.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "martialm"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 2
+            },
+            "price": {
+              "name": "Price",
+              "current": 10
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "type": "slashing",
+              "current": "1d6"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "5 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Finesse, Light"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 2,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530843255093
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-armor"
+          },
+          "tags": {
+            "Heavy": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Splint Mail"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Scalemail1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>This armor is made of narrow vertical strips of metal riveted to a backing of leather that is worn over cloth padding. Flexible chain mail protects the joints.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "armor"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "heavy"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 60
+            },
+            "price": {
+              "name": "Price",
+              "current": 200
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 145"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class",
+              "current": "17"
+            },
+            "str": {
+              "name": "Required Strength",
+              "current": "15"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage",
+              "current": 1
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 2,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530843255093
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-armor"
+          },
+          "tags": {
+            "Light": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Studded Leather Armor"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/CommonClothes1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "armor"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "light"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 13
+            },
+            "price": {
+              "name": "Price",
+              "current": 45
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 144"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class",
+              "current": "12"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped",
+              "current": 0
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 3,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530843255108
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "Finesse": 1,
+            "Light": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Scimitar"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Scimitar1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>The scimitar is a curved blade, sharpened on one edge with a thicker to give it strength. Scimitar blades&nbsp;are 2 to 3 ft long. Starting at the hilt, the blade tapers to a point. Scimitars are&nbsp;one-handed weaposn with quillon hilts. Scimitars lack the damaging power of longswords but with skill can target vital areas.&nbsp;</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "martialm"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 3
+            },
+            "price": {
+              "name": "Price",
+              "current": 25
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d6",
+              "type": "slashing"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "5 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Finesse, Light"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Medium": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Chain Shirt"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Chainmail1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Made of interlocking metal rings, a chain shirt is worn between layers of clothing or leather. This armor offers modest protection to the wearer's upper body and allows the sound of the rings rubbing against one another to be muffled by outer layers.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "armor"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "medium"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 20
+            },
+            "price": {
+              "name": "Price",
+              "current": 50
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 144"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class",
+              "current": "13"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Heavy": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Plate Mail"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/PlateMail1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor. Buckles and straps distribute the weight over the body.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "armor"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "heavy"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 65
+            },
+            "price": {
+              "name": "Price",
+              "current": 1500
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 145"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class",
+              "current": "18"
+            },
+            "str": {
+              "name": "Required Strength",
+              "current": "15"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage",
+              "current": 1
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        }
+      ]
     },
     "Spells": {
       "_t": "i",
@@ -49057,6 +51795,130 @@
               "current": "Bard, Cleric, Paladin"
             }
           }
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Cantrip": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Thaumaturgy"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/spells/explosion-royal-1.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "spell"
+            },
+            "variety": {
+              "name": "Item Variety"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 282"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "30 ft."
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level",
+              "current": "0"
+            },
+            "school": {
+              "name": "School",
+              "current": "transmutation"
+            },
+            "duration": {
+              "name": "Duration",
+              "current": "Instantaneous or 1 Minute"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Action"
+            },
+            "components": {
+              "name": "Casting Components",
+              "current": "V"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "None"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
         }
       ]
     },
@@ -54310,6 +57172,2067 @@
           "_uid": null,
           "_sync": null,
           "_uTime": 1530681087429
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Fighter": 1,
+            "Paladin": 1,
+            " Ranger": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Fighting Style: Archery"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/arrow_12.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You adopt a style of fighting as your specialty. Choose one of the following options. You can&rsquo;t take a Fighting Style option more than once, even if you later get to choose again.</p>\n<p>You gain a +2 bonus to attack rolls you make with ranged weapons.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 84"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Fighter": 1,
+            "Paladin": 1,
+            " Ranger": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Fighting Style: Two-Weapon"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_28.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You adopt a style of fighting as your specialty. Choose one of the following options. You can&rsquo;t take a Fighting Style option more than once, even if you later get to choose again.</p>\n<p>When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 84"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Fighter": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Action Surge"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/fire_07.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible bonus action.</p>\n<p>Once you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Fighter 2"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 70"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Free Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Once per Short Rest"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Fighter": 1,
+            "Battle": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Battle Master"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_27.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Those who emulate the archetypal Battle Master employ martial techniques passed down through generations. To a Battle Master, combat is an academic field, sometimes including subjects beyond battle such as weapon smithing and calligraphy. Not every fighter absorbs the lessons of history, theory, and artistry that are reflected in the Battle Master archetype, but those who do are well-rounded fighters of great skill and knowledge.</p>\n<h3>Combat Superiority</h3>\n<p>When you choose this archetype at 3rd level, you learn maneuvers that are fueled by special dice called superiority dice.</p>\n<p><strong>Maneuvers.</strong>&nbsp;You learn three maneuvers o f your choice, which are detailed under &ldquo;Maneuvers&rdquo; below. Many maneuvers enhance an attack in some way. You can use only one maneuver per attack.&nbsp;You learn two additional maneuvers of your choice at 7th, 10th, and 15th level. Each time you learn new maneuvers, you can also replace one maneuver you know with a different one.</p>\n<p><strong>Superiority Dice.</strong>&nbsp;You have four superiority dice, which are d8s. A superiority die is expended when you use it. You regain all of your expended superiority dice when you finish a short or long rest.&nbsp;You gain another superiority die at 7th level and one more at 15th level.</p>\n<p><strong>Saving Throws.&nbsp;</strong>Some of your maneuvers require your target to make a saving throw to resist the maneuver&rsquo;s effects. The saving throw DC is calculated as follows:</p>\n<p>Maneuver Save&nbsp;DC&nbsp;= 8 + your proficiency bonus + your Strength or Dexterity modifier (your choice)</p>\n<h3>Student of War</h3>\n<p>At 3rd level, you gain proficiency with one type of artisan&rsquo;s tools of your choice.</p>\n<h3>Know Your Enemy</h3>\n<p>Starting at 7th level, if you spend at least 1 minute observing or interacting with another creature outside combat, you can learn certain information about its capabilities compared to your own. The DM tells you if the creature is your equal, superior, or inferior in regard to two of the following characteristics of your choice:</p>\n<ul>\n<li>Strength score</li>\n<li>Dexterity score</li>\n<li>Constitution score</li>\n<li>Armor Class</li>\n<li>Current hit points</li>\n<li>Total class levels (if any)</li>\n<li>Fighter class levels (if any)</li>\n</ul>\n<h3>Improved Combat Superiority</h3>\n<p>At 10th level, your superiority dice turn into d10s. At 18th level, they turn into d12s.</p>\n<h3>Relentless</h3>\n<p>Starting at 15th level, when you roll initiative and have no superiority dice remaining, you regain 1 superiority die.</p>\n<p>&nbsp;</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Fighter 3"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 73"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Fighter": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Indomitable"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/blood_02.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Beginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can&rsquo;t use this feature again until you finish a long rest.</p>\n<p>You can use this feature twice between long rests starting at 13th level and three times between long rests starting at 17th level.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Fighter 9"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 72"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Saving Throw"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Once per Long Rest"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Fighter": 1,
+            "Battle": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Pushing Attack"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_32.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>When you hit a creature with a weapon attack, you can expend one superiority die to attempt to drive the target back. You add the superiority die to the attack&rsquo;s damage roll, and if the target is Large or smaller, it must make a Strength saving throw. On a failed save, you push the target up to 15 feet away from you.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Battle Master"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 74"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Weapon Attack"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Superiority Die"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Fighter": 1,
+            "Battle": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Riposte"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_14.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>When a creature misses you with a melee attack, you can use your reaction and expend one superiority die to make a melee weapon attack against the creature. If you hit, you add the superiority die to the attack&rsquo;s damage roll.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Battle Master"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 74"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Missed Attack"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Superiority Die"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "Fighter": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Second Wind"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/blood_04.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Fighter 1"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 72"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Bonus Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "1 per Short Rest"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Feat": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Great Weapon Master"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_29.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You&rsquo;ve learned to put the weight of a weapon to your advantage, letting its momentum empower your strikes. You gain the following benefits:</p>\n<ul>\n<li>On your turn, when you score a critical hit with a melee weapon or reduce a creature to 0 hit points with one, you can make one melee weapon attack as a bonus action.</li>\n<li>Before you make a melee attack with a heavy weapon that you are proficient with, you can choose to take a -5 penalty to the attack roll. If the attack hits, you add +10 to the attack&rsquo;s damage.</li>\n</ul>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "feat"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Level 1"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 167"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Fighter": 1,
+            "Battle": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Trip Attack"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/speed_01.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>When you hit a creature with a weapon attack, you can expend one superiority die to attempt to knock the target down. You add the superiority die to the attack&rsquo;s damage roll, and if the target is Large or smaller, it must make a Strength saving throw. On a failed save, you knock the target prone.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Battle Master"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 74"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Weapon Attack"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Superiority Die"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530998368360
+        }
+      ]
+    },
+    "Monster Traits": {
+      "_t": "i",
+      "data": [
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "NPC": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "False Appearance"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/shadow_17.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>While remaining motionless, you are indistinguishable from the nearby surroundings.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "race"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "MM 18"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530856747391
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-details"
+          },
+          "tags": {
+            "NPC": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Keen Senses"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/light_02.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Carefully honed senses grant&nbsp;advantage on Wisdom (Perception) checks that rely on&nbsp;sight, hearing, or smell.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "race"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "MM 254"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 3,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530854984350
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "NPC": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Magic Resistance"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/water_04.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You have&nbsp;advantage on saving throws against spells and other magical effects.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "race"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "MM 16"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530857431184
+        },
+        {
+          "_t": "i",
+          "tags": {
+            "NPC": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Multiattack"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_24.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A creature that can make multiple attacks on its turn has the Multiattack ability. A creature can't use Multiattack when making an opportunity attack, which must be a single melee attack.</p>\n<p>The &lt;name&gt; makes # melee attacks or # ranged attacks during an Attack action.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "feat"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 0
+            },
+            "price": {
+              "name": "Price",
+              "current": 0
+            },
+            "source": {
+              "name": "Source",
+              "current": "MM 11"
+            },
+            "tagstr": "",
+            "requirements": {
+              "name": "Requirements",
+              "current": "NPC"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "_s": {},
+          "_lclock": 2,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530843255094
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "NPC": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Pack Tactics"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/beast_02.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You have&nbsp;advantage on an attack roll against a creature if at least one of your&nbsp;allies is within 5 feet of you and that&nbsp;ally isn&rsquo;t incapacitated.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "feat"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "NPC"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "MM 182"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530850810814
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "NPC": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Regeneration"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/blood_04.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You regenerate 10 hit points at the start of your&nbsp;turn if you have at least 1 hit point.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "race"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "MM 239"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 1,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null,
+          "_uTime": 1530857504218
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "NPC": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Spider Climb"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/spells/shielding-spirit-1.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "race"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "MM 37"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
         }
       ]
     }
