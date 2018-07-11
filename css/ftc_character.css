@@ -116,9 +116,8 @@ select.alignment {
  	CHARACTER SHEET HEADER
 ------------------------------------------- */
 
-.ftc-sheet-primary {
-    height: 180px;
-}
+.ftc-sheet-primary { height: 180px; }
+.npc-sheet .ftc-sheet-primary { height: 90px; }
 
 /* Primary Showcase Attributes */
 div.primary-stat {
@@ -208,7 +207,7 @@ footer.initiative-bonus label {
  	Sidebar and Profile
 ------------------------------------------- */
 
-.ftc-character .ftc-sheet-profile {
+.ftc-sheet-profile {
     flex: 0 0 250px;
     position: relative;
     margin-bottom: 20px;

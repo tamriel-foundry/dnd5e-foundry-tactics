@@ -9,20 +9,19 @@ class FTCCharacter extends FTCEntity {
         super(obj, context);
 
         // Primary Templates
-        this.templates = {
-            FTC_SKILL_HTML: FTC.TEMPLATE_DIR + 'character/skill.html',
-            FTC_ATTRIBUTE_HTML: FTC.TEMPLATE_DIR + 'character/attribute.html',
-            INVENTORY_HEADER: FTC.TEMPLATE_DIR + 'character/items/inventory-header.html',
-            INVENTORY_ITEM: FTC.TEMPLATE_DIR + 'character/items/item.html',
-            FTC_SPELL_LEVEL: FTC.TEMPLATE_DIR + 'character/items/spell-header.html',
-            FTC_SPELL_HTML: FTC.TEMPLATE_DIR + 'character/items/spell.html',
-            CHARACTER_TAB_TRAITS: FTC.TEMPLATE_DIR + 'character/tab-traits.html',
+        this.parts = {
             CHARACTER_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'character/primary-stats.html',
-            CHARACTER_ABILITY: FTC.TEMPLATE_DIR + 'character/ability.html'
+            CHARACTER_TAB_TRAITS: FTC.TEMPLATE_DIR + 'character/tab-traits.html',
+            NPC_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'npc/primary-stats.html',
+            NPC_TAB_TRAITS: FTC.TEMPLATE_DIR + 'npc/tab-traits.html'
         };
 
         // Register local for debugging
         FTC.character = this;
+    }
+
+    get isNPC() {
+        return (this.data.tags.npc === 1)
     }
 
     /* ------------------------------------------- */
@@ -261,6 +260,7 @@ class FTCCharacter extends FTCEntity {
         if ( scope.isPrivate ) return FTC.TEMPLATE_DIR + 'character/preview-character.html';
 
         // NPC Template
+        else if ( this.isNPC ) return FTC.TEMPLATE_DIR + "npc/npc-sheet.html";
 
         // Character Sheet
         return FTC.TEMPLATE_DIR + 'character/charsheet.html';
@@ -277,8 +277,10 @@ class FTCCharacter extends FTCEntity {
         // Augment sub-components
         if (!scope.isPrivate) {
 
-            // Primary Stats
-            main = FTC.injectTemplate(main, "CHARACTER_PRIMARY_STATS", this.templates.CHARACTER_PRIMARY_STATS)
+            // Inject Primary Template Parts
+            $.each(this.parts, function(tag, path) {
+                main = FTC.injectTemplate(main, tag, path);
+            });
 
             // Attributes and Skills
             main = this._buildAttributes(main, data);
@@ -288,9 +290,6 @@ class FTCCharacter extends FTCEntity {
             main = this._buildInventory(main, data);
             main = this._buildSpellbook(main, data);
             main = this._buildAbilities(main, data);
-
-            // Character Traits
-            main = FTC.injectTemplate(main, "CHARACTER_TAB_TRAITS", this.templates.CHARACTER_TAB_TRAITS)
         }
         return main;
     }
@@ -299,7 +298,7 @@ class FTCCharacter extends FTCEntity {
 
     _buildAttributes(html, data) {
         let attrs = "",
-            template = FTC.loadTemplate(this.templates.FTC_ATTRIBUTE_HTML);
+            template = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/attribute.html');
         for ( var s in data.stats ) {
             attrs += template.replace(/\{stat\}/g, s);
         }
@@ -310,7 +309,7 @@ class FTCCharacter extends FTCEntity {
 
     _buildSkills(html, data) {
         let skills = "",
-            template = FTC.loadTemplate(this.templates.FTC_SKILL_HTML);
+            template = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/skill.html');
         for (var s in data.skills) {
             skills += template.replace(/\{skl\}/g, s);
         }
@@ -321,8 +320,8 @@ class FTCCharacter extends FTCEntity {
 
     _buildInventory(html, data) {
         let inventory = "",
-            itemHeader = FTC.loadTemplate(this.templates.INVENTORY_HEADER),
-            itemTemplate = FTC.loadTemplate(this.templates.INVENTORY_ITEM);
+            itemHeader = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/inventory-header.html'),
+            itemTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/item.html');
         $.each(data.ftc.inventory, function(_, type) {
             inventory += FTC.populateTemplate(itemHeader, type);
             $.each(type.items, function(_, item) {
@@ -337,8 +336,8 @@ class FTCCharacter extends FTCEntity {
 
     _buildSpellbook(html, data) {
         let spells = "",
-            ltmp = FTC.loadTemplate(this.templates.FTC_SPELL_LEVEL),
-            stmp = FTC.loadTemplate(this.templates.FTC_SPELL_HTML);
+            ltmp = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/spell-header.html'),
+            stmp = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/spell.html');
         $.each(data.ftc.spellbook, function(l, s){
             spells += FTC.populateTemplate(ltmp, s);
             $.each(s.spells, function(i, p){
@@ -353,7 +352,7 @@ class FTCCharacter extends FTCEntity {
 
     _buildAbilities(html, data) {
         let abilities = "",
-            ab = FTC.loadTemplate(this.templates.CHARACTER_ABILITY);
+            ab = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/ability.html');
         $.each(data.ftc.abilities, function(i, item) {
             item.itemid = i;
             abilities += FTC.populateTemplate(ab, item);

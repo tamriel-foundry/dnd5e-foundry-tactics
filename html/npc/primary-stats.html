@@ -1,0 +1,32 @@
+
+<div class="primary-stat health">
+    <header>Health</header>
+    <div class="primary-stat-value">
+        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.hp.current"
+               value="{counters.hp.current}" placeholder="10"/>
+        <span> / </span>
+        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.hp.max"
+               value="{counters.hp.max}" placeholder="10"/>
+    </div>
+    <footer>
+        <input class="ftc-edit" type="text" tabindex="0" data-edit="counters.hp.formula"
+               value="{counters.hp.formula}" data-dtype="str" placeholder="Formula"/>
+    </footer>
+</div>
+
+<div class="primary-stat armor">
+    <header>{counters.ac.name}</header>
+    <div class="primary-stat-value">
+        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.ac.current"
+               value="{counters.ac.current}" placeholder="{ftc.baseAC}"/>
+    </div>
+    <footer>Base AC {ftc.baseAC}</footer>
+</div>
+
+<div class="primary-stat proficiency">
+    <header>{counters.proficiency.name}</header>
+    <div class="primary-stat-value">
+        <span>+{counters.proficiency.current}</span>
+    </div>
+    <footer class="spelldc">{ftc.spellDCstr}</footer>
+</div>

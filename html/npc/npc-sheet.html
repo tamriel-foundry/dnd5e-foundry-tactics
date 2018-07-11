@@ -1,4 +1,4 @@
-<section id="ftc-{uid}" class="ftc-sheet ftc-npc flexrow">
+<section id="ftc-{uid}" class="ftc-sheet npc-sheet flexrow">
 
     <main class="ftc-sheet-main flexcolumn">
 
@@ -131,7 +131,7 @@
 
 
             <div id="content-traits" class="content-tab">
-                <!-- CHARACTER_TAB_TRAITS -->
+                <!-- NPC_TAB_TRAITS -->
             </div>
 
             <div id="content-biography" class="content-tab tab-active">
@@ -163,34 +163,6 @@
             <ol class="attributes-list">
                 <!-- FTC_ATTRIBUTE_HTML -->
             </ol>
-
-            <div class="attributes-primary-stats">
-                <div class="primary-stat initiative">
-                    <header>Initiative</header>
-                    <div class="primary-stat-value">
-                        <span>{ftc.initiative}</span>
-                    </div>
-                    <footer class="initiative-bonus">
-                        <label>Bonus:</label>
-                        <input class="ftc-edit" type="text" tabindex="0"
-                               data-edit="counters.initiative.current" data-dtype="str" data-autosize="10"
-                               value="{counters.initiative.current}"/>
-                    </footer>
-                </div>
-
-                <div class="primary-stat speed">
-                    <header>Movement Speed</header>
-                    <div class="primary-stat-value">
-                        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.speed.current"
-                               value="{counters.speed.current}" placeholder="10"/>
-                        <span> Ft.</span>
-                    </div>
-                    <footer>
-                        <input class="ftc-edit" type="text" tabindex="0" data-edit="counters.speed.extra" data-dtype="str"
-                               value="{counters.speed.extra}" placeholder="Climb / Swim"/>
-                    </footer>
-                </div>
-            </div>
         </div>
 
         <div id="content-skills" class="content-tab">

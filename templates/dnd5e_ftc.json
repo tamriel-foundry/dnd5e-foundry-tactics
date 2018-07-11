@@ -774,6 +774,9 @@
       "ci": {
         "name": "Condition Immunities"
       },
+      "dv": {
+        "name": "Damage Vulnerabilities"
+      },
       "senses": {
         "name": "Senses"
       },
