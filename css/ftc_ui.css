@@ -333,16 +333,16 @@ blockquote em {
 
 
 /* Scrollbar */
-.ftc-sheet ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 6px;
     background: transparent;
 }
-.ftc-sheet ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: transparent;
     box-shadow: 0 0 1px #999 inset;
     border-radius: 3px;
 }
-.ftc-sheet ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     outline: 1px solid #222;
     border-radius: 3px;
 }

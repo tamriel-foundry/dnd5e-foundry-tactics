@@ -1,0 +1,156 @@
+
+/* TOP MENU */
+#top-navigation {
+    height: 40px;
+    padding: 3px;
+    background: rgba(0,0,0,0.6);
+    border-bottom: 1px solid #222;
+    box-shadow: 0 0 30px #444;
+    color: #DDD;
+}
+
+#top-navigation div[ui-name="ui_displayTabs"] {
+    overflow: hidden;
+}
+
+#top-navigation div[ui-name="ui_displayTabs"] div.tab {
+    margin: 0 2px;
+    background: #39454c;
+    box-shadow: 0 0 5px #333 inset;
+    border: 1px solid #4c6579;
+    border-radius: 5px !important;
+    box-sizing: content-box;
+    padding: 0 0.5em;
+    font-size: 16px;
+    color: #DDD !important;
+    text-shadow: 1px 1px 3px #000 !important;
+    line-height: 36px
+}
+
+/* Currently Active Tab */
+#top-navigation div[ui-name="ui_displayTabs"] div.tab.alttext {
+    background: #657582;
+    color: #EEE !important;
+    border: 1px solid #000;
+    box-shadow: 0 0 5px #29637f inset;
+}
+
+/* Player Visible Tab */
+#top-navigation div[ui-name="ui_displayTabs"] div.tab.button {
+    color: #DDD !important;
+}
+
+/* GM Only Tab */
+#top-navigation div[ui-name="ui_displayTabs"] div.tab.dull {
+    background: #1f2529;
+    border: 1px solid #3a454e;
+    color: #AAA !important;
+}
+
+/* Remove Map Tab */
+div.tab span.glyphicon-remove {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+
+/* Add Map Tab */
+#top-navigation span.glyphicon-plus {
+    font-size: 14px;
+    margin-left: 5px;
+    color: #999;
+    line-height: 36px;
+}
+#top-navigation span.glyphicon-plus:hover {
+    color: #EEE;
+}
+
+/* Weather Menu */
+div[ui-name="ui_setting"] {
+
+}
+div[ui-name="ui_setting"] div.white {
+    margin: 2px !important;
+    background: rgba(104,104,104, 0.5);
+    border: 1px solid #555;
+    box-sizing: content-box;
+}
+
+/* Pin Menu */
+#top-navigation > div > a.spadding {
+    background: transparent;
+    width: 30px;
+    border: 1px solid transparent;
+    text-align: center;
+    line-height: 26px;
+}
+#top-navigation > div > a.spadding.highlight {
+    background: #3f474c;
+    border: 1px solid #666;
+}
+
+
+/* Special Effects Menu */
+div#special-effects {
+    top: 50px !important;
+    left: 10px !important;
+    width: 120px;
+    background: rgba(0,0,0,0.75);
+    border: 1px solid #000;
+    border-radius: 3px;
+    box-shadow: 0 0 20px #000;
+}
+#special-effects .sfx-effects {
+    width: 100%;
+}
+#special-effects .sfx-effect {
+    padding: 2px 0;
+    font-weight: normal;
+    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+}
+#special-effects .background,
+#special-effects .white {
+    background: inherit;
+}
+
+
+.sheet1 {
+    background-image: url("/content/sheet2.png");
+}
+
+
+
+/* MAIN MENU */
+#main-menu {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid #222;
+    box-shadow: 0 0 30px #444;
+}
+
+#main-menu .highlight {
+    background: rgba(103,0,0, 0.8);
+}
+
+div[ui-name="_logs"] .foreground:first-of-type {
+    background: none;
+    color: #111;
+    text-shadow: 0 0 4px #999;
+}
+
+div[ui-name="ui_textBox"] div.fit-x .white {
+    background: rgba(0,0,0,0.05);
+    font-weight: normal;
+    font-size: 14px;
+    padding: 0.5em;
+    margin-bottom: 3px;
+}
+div[ui-name="ui_textBox"] text.fit-x > text.link {
+    -webkit-text-stroke-width: 0 !important;
+    font-size: 28px;
+    line-height: 30px;
+    font-family: "Nodesto Caps Condensed";
+}
+
+div[ui-name="ui_textBox"] div.fit-xy div.flexcolumn.white {
+    background: transparent;
+}

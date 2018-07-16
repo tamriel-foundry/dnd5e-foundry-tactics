@@ -6,6 +6,7 @@ section.ftc-chat {
     padding: 0.5em;
     border: 1px solid #AAA;
     border-radius: 3px;
+    background: rgba(0,0,0,0.05);
 }
 
 /* Spell Action Header */
@@ -28,9 +29,9 @@ section.ftc-chat {
 
 /* Spell Action Footer */
 .action-footer {
-    margin-top: 6px;
-    padding-top: 3px;
-    border-top: 1px solid #CCC;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid #444;
 }
 .action-footer > .action-prop {
     padding: 0 5px;
@@ -41,7 +42,6 @@ section.ftc-chat {
     border-right: none;
     margin-right: 0;
 }
-
 
 /* Chat Action Follow-Up Rolls */
 .action-roll, .spell-dc {

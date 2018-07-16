@@ -433,7 +433,7 @@ ol.inventory-items {
 }
 
 .item-controls > .glyphicon:hover,
-.item-controls.ftc-item-add:hover {
+.ftc-item-add:hover {
     cursor: pointer;
 	text-shadow: 0 0 4px #ff3838;
 }

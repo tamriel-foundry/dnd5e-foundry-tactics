@@ -20,8 +20,18 @@ class FTCCharacter extends FTCEntity {
         FTC.character = this;
     }
 
+    /* ------------------------------------------- */
+
     get isNPC() {
         return (this.data.tags.npc === 1)
+    }
+
+    /* ------------------------------------------- */
+
+    get spellDC() {
+        let attr = this.data.info.spellcasting.current,
+            mod = this.data.stats[attr].modifiers.mod;
+        return 8 + mod + this.data.counters.proficiency.current;
     }
 
     /* ------------------------------------------- */
@@ -40,64 +50,14 @@ class FTCCharacter extends FTCEntity {
         // Proficiency Bonus
         data.counters.proficiency.current = Math.floor((data.counters.level.current + 7) / 4);
         return data;
-
     }
+
+    /* ------------------------------------------- */
 
     enrichData(data, scope) {
 
-        // Temporary FTC display data
-        const ftc = {};
-        data.ftc = ftc;
-
-        // Level and Experience
-        data.counters.level.current = Math.min(Math.max(data.counters.level.current, 1), 20);
-        let lvl = data.counters.level.current,
-            start = this.getLevelExp(lvl - 1),
-            cur = Math.max(data.counters.exp.current, start),
-            next = this.getLevelExp(lvl),
-            pct = ((cur - start) * 100) / (next - start);
-        ftc['exp'] = {
-            "lvl": lvl,
-            "current": cur.toLocaleString(),
-            "next": next.toLocaleString(),
-            "pct": Math.min(pct, 99.5),
-            "cls": (pct >= 100) ? "leveled": "",
-            "kill": this.getKillExp(data.counters.cr.current)
-        };
-
-        // Enrich Attributes
-        $.each(data.stats, function(attr, stat) {
-            ftc[attr] = {
-                'mod': stat.modifiers.mod,
-                'svmod': (stat.proficient * data.counters.proficiency.current) + stat.modifiers.mod,
-                'padstr': FTC.ui.padNumber(stat.current, 2),
-                'modstr': (stat.modifiers.mod < 0 ? "" : "+" ) + stat.modifiers.mod
-            }
-        });
-
-        // Initiative Bonus
-        let initMod = parseInt(data.stats["Dex"].modifiers.mod) + parseInt(data.counters.initiative.current);
-        ftc["initiative"] = (initMod < 0 ? initMod : "+"+initMod) + "." + ftc["Dex"].padstr;
-
-        // Spellcasting DC
-        let spellAttr = data.info.spellcasting.current,
-            mod = spellAttr ? data.ftc[spellAttr].mod : undefined;
-        ftc["spellMod"] = mod;
-        ftc["spellDC"] = mod ? 8 + mod + data.counters.proficiency.current : undefined;
-        ftc["spellDCstr"] = mod ? "Spell DC " + data.ftc["spellDC"] : "";
-
-        // Enrich Skills
-        $.each(data.skills, function(name, skill) {
-            let stat = data.ftc[skill.stat],
-                 mod = ((skill.current || 0) * data.counters.proficiency.current) + stat.mod;
-            ftc[name] = {
-                'mod': mod,
-                'modstr': (mod < 0 ? "" : "+" ) + mod
-            }
-        });
-
-        // Base Armor Class
-        data.ftc["baseAC"] = 10 + data.ftc["Dex"].mod;
+        // Populate core character data
+        this.getCoreData(data);
 
         // Set up owned items
         this.setupInventory(data);
@@ -108,11 +68,73 @@ class FTCCharacter extends FTCEntity {
         return data;
     }
 
-    get spellDC() {
-        let attr = this.data.info.spellcasting.current,
-            mod = this.data.stats[attr].modifiers.mod;
-        return 8 + mod + this.data.counters.proficiency.current;
-    }
+    /* -------------------------------------------- */
+
+    getCoreData(data) {
+        /* This function exists to prepare all the standard rules data that would be used by dice rolling in D&D5e.
+        */
+
+        // Provided data, or create a duplicate
+        data = data || duplicate(this.data);
+
+        // Experience and level
+        let lvl = Math.min(Math.max(data.counters.level.current, 1), 20),
+            start = this.getLevelExp(lvl - 1),
+            cur = Math.max(data.counters.exp.current, start),
+            next = this.getLevelExp(lvl),
+            pct = ((cur - start) * 100) / (next - start);
+        data['exp'] = {
+            "lvl": lvl,
+            "current": cur.toLocaleString(),
+            "next": next.toLocaleString(),
+            "pct": Math.min(pct, 99.5),
+            "cls": (pct >= 100) ? "leveled": "",
+            "kill": this.getKillExp(data.counters.cr.current)
+        };
+
+        // Reference actor data
+        data["proficiency"] = data.counters.proficiency.current;
+        data["spellcasting"] = data.info.spellcasting.current || "Int";
+        data["offensive"] = data.info.offensive.current || "Str";
+
+        // Attribute modifiers
+        $.each(data.stats, function(a, s) {
+            data[a] = {
+                "name": s.name,
+                "prof": (s.proficient || 0) * data.proficiency,
+                "value": s.current,
+                "mod": s.modifiers.mod,
+                "modstr": (s.modifiers.mod < 0 ? "" : "+" ) + s.modifiers.mod,
+                "valstr": FTC.ui.padNumber(s.current, 2)
+            }
+        });
+
+        // Skill modifiers
+        $.each(data.skills, function(n, s) {
+            let mod = data[s.stat].mod;
+            data[n] = {
+                "name": s.name,
+                "prof": (s.current || 0) * data.proficiency,
+                "stat": s.stat,
+                "mod": mod,
+                "modstr": (mod < 0 ? "" : "+") + mod
+            }
+        });
+
+        // Initiative modifier
+        let initMod = parseInt(data.stats["Dex"].modifiers.mod) + parseInt(data.counters.initiative.current);
+        data["initiative"] = (initMod < 0 ? initMod : "+"+initMod) + "." + data["Dex"].valstr;
+
+        // Weapon and Spell modifiers
+        data["spellMod"] = data[data.spellcasting].mod;
+        data["spellDC"] = 8 + data.proficiency + data[data.spellcasting].mod;
+        data["spellDCstr"] = data[data.spellcasting].mod ? "Spell DC " + data["spellDC"] : "";
+        data["weaponMod"] = data[data.offensive].mod;
+
+        // Armor Class
+        data["baseAC"] = 10 + data["Dex"].mod;
+        return data;
+    };
 
     /* ------------------------------------------- */
 
@@ -136,8 +158,7 @@ class FTCCharacter extends FTCEntity {
     setupInventory(data) {
         // Set up inventory items by converting them to FTCItem objects
 
-        const ftc = data.ftc,
-            owner = this.owner,
+        const owner = this.owner,
             weight = [],
             inventory = {
             "weapons": {
@@ -190,16 +211,17 @@ class FTCCharacter extends FTCEntity {
             }
 
             // Record total entry weight
-            weight.push(parseFloat(item.info.weight.current) * parseFloat(item.info.quantity.current));
+            weight.push(parseFloat(item.info.weight.current || 0) * parseFloat(item.info.quantity.current));
         });
-        ftc.inventory = inventory;
+        data.inventory = inventory;
 
         // Compute weight and encumbrance
         let wt = (weight.length > 0) ? weight.reduce(function(total, num) { return total + (num || 0); }) : 0,
            enc = data.stats.Str.current * 15,
            pct = Math.min(wt * 100 / enc, 99.5),
            cls = (pct > 90 ) ? "heavy" : "";
-        ftc["weight"] = {"wt": wt.toFixed(2), "enc": enc, "pct": pct.toFixed(2), "cls": cls};
+        data["weight"] = {"wt": wt.toFixed(2), "enc": enc, "pct": pct.toFixed(2), "cls": cls};
+        return data;
     }
 
     /* ------------------------------------------- */
@@ -207,8 +229,7 @@ class FTCCharacter extends FTCEntity {
     setupSpellbook(data) {
         // Set up spellbook items by converting them to FTCItem objects
 
-        const ftc = data.ftc,
-            sls = {};
+        const sls = {};
 
         // Iterate over spellbook spells
         $.each(data.spellbook, function(spellId, itemData) {
@@ -233,7 +254,8 @@ class FTCCharacter extends FTCEntity {
             sls[lvl].max = (lvl === 0) ? "&infin;" : sls[lvl].max;
             sls[lvl].spells.push(item);
         });
-        ftc['spellbook'] = sls;
+        data['spellbook'] = sls;
+        return data;
     }
 
     /* ------------------------------------------- */
@@ -242,14 +264,18 @@ class FTCCharacter extends FTCEntity {
         /* Set up ability items by converting them to FTCItem objects
         */
 
-        const ftc = data.ftc;
-        ftc["abilities"] = [];
+
+        const abilities = [];
         $.each(data.abilities, function(itemId, itemData) {
             let item = new FTCItem(itemData, {"owner": this.owner, "container": "abilities"});
-            ftc.abilities.push(item);
+            abilities.push(item);
         });
+        data.abilities = abilities;
+        return data;
     }
 
+    /* ------------------------------------------- */
+    /* Templates and Rendering                     */
     /* ------------------------------------------- */
 
     getTemplate(data, scope) {
@@ -322,7 +348,7 @@ class FTCCharacter extends FTCEntity {
         let inventory = "",
             itemHeader = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/inventory-header.html'),
             itemTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/item.html');
-        $.each(data.ftc.inventory, function(_, type) {
+        $.each(data.inventory, function(_, type) {
             inventory += FTC.populateTemplate(itemHeader, type);
             $.each(type.items, function(_, item) {
                 inventory += FTC.populateTemplate(itemTemplate, item.data);
@@ -338,7 +364,7 @@ class FTCCharacter extends FTCEntity {
         let spells = "",
             ltmp = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/spell-header.html'),
             stmp = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/spell.html');
-        $.each(data.ftc.spellbook, function(l, s){
+        $.each(data.spellbook, function(l, s){
             spells += FTC.populateTemplate(ltmp, s);
             $.each(s.spells, function(i, p){
                 spells += FTC.populateTemplate(stmp, p);
@@ -353,7 +379,7 @@ class FTCCharacter extends FTCEntity {
     _buildAbilities(html, data) {
         let abilities = "",
             ab = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/ability.html');
-        $.each(data.ftc.abilities, function(i, item) {
+        $.each(data.abilities, function(i, item) {
             item.itemid = i;
             abilities += FTC.populateTemplate(ab, item);
         });
@@ -365,41 +391,47 @@ class FTCCharacter extends FTCEntity {
 
     activateListeners(html, app, scope) {
         const character = this;
+
+        // Activate Tabs and Editable Fields
         FTC.ui.activateTabs(html, this, app);
         FTC.forms.activateFields(html, this, app);
 
-        // Attribute rolls
-        html.find('.attribute .ftc-rollable').click(function() {
-            let attr = $(this).parent().attr("data-attribute");
-            character.rollAttribute(attr);
-        });
+        // Activate rollable actions on a timeout to prevent accidentally clicking immediately when the sheet opens
+        setTimeout(function() {
 
-        // Skill rolls
-        html.find('.skill .ftc-rollable').click(function() {
-            let skl = $(this).parent().attr("data-skill");
-            character.rollSkillCheck(skl);
-        });
+            // Attribute rolls
+            html.find('.attribute .ftc-rollable').click(function() {
+                let attr = $(this).parent().attr("data-attribute");
+                character.rollAttribute(attr);
+            });
 
-        // Weapon actions
-        html.find(".weapon .ftc-rollable").click(function() {
-            const itemId = $(this).closest("li.weapon").attr("data-item-id"),
-                itemData = character.data.inventory[itemId];
-            FTCItemAction.toChat(character, itemData);
-        });
+            // Skill rolls
+            html.find('.skill .ftc-rollable').click(function() {
+                let skl = $(this).parent().attr("data-skill");
+                character.rollSkillCheck(skl);
+            });
 
-        // Spell actions
-        html.find(".spell .ftc-rollable").click(function() {
-            const itemId = $(this).closest("li.spell").attr("data-item-id"),
-                itemData = character.data.spellbook[itemId];
-            FTCItemAction.toChat(character, itemData);
-        });
+            // Weapon actions
+            html.find(".weapon .ftc-rollable").click(function() {
+                const itemId = $(this).closest("li.weapon").attr("data-item-id"),
+                    itemData = character.data.inventory[itemId];
+                FTCItemAction.toChat(character, itemData);
+            });
 
-        // Ability actions
-        html.find(".ability .ftc-rollable").click(function() {
-            const itemId = $(this).closest("li.ability").attr("data-item-id"),
-                itemData = character.data.abilities[itemId];
-            FTCItemAction.toChat(character, itemData);
-        });
+            // Spell actions
+            html.find(".spell .ftc-rollable").click(function() {
+                const itemId = $(this).closest("li.spell").attr("data-item-id"),
+                    itemData = character.data.spellbook[itemId];
+                FTCItemAction.toChat(character, itemData);
+            });
+
+            // Ability actions
+            html.find(".ability .ftc-rollable").click(function() {
+                const itemId = $(this).closest("li.ability").attr("data-item-id"),
+                    itemData = character.data.abilities[itemId];
+                FTCItemAction.toChat(character, itemData);
+            });
+        }, 500);
     }
 
     /* ------------------------------------------- */
@@ -449,50 +481,6 @@ class FTCCharacter extends FTCEntity {
     /* Character Actions                           */
     /* ------------------------------------------- */
 
-    getCoreData() {
-        /* This function exists to prepare all the standard rules data that would be used by dice rolling in D&D5e.
-        */
-
-        // Reference actor data
-        let data = {
-            "proficiency": this.data.counters.proficiency.current,
-            "spellcasting": this.data.info.spellcasting.current || "Int",
-            "offensive": this.data.info.offensive.current || "Str"
-        };
-
-        // Attribute modifiers
-        $.each(this.data.stats, function(a, s) {
-            data[a] = {
-                "name": s.name,
-                "prof": (s.proficient || 0) * data.proficiency,
-                "value": s.current,
-                "mod": s.modifiers.mod,
-            }
-        });
-
-        // Skill modifiers
-        $.each(this.data.skills, function(n, s) {
-            data[n] = {
-                "name": s.name,
-                "prof": (s.current || 0) * data.proficiency,
-                "mod": data[s.stat].mod
-            }
-        });
-
-        // Spell DC
-        data["spellDC"] = 8 + data.proficiency + data[data.spellcasting].mod;
-
-        // Weapon Mod and Spell Mod
-        data["weaponMod"] = data[data.offensive].mod;
-        data["spellMod"] = data[data.spellcasting].mod;
-
-        // Armor Class
-        data["baseAC"] = 10 + data["Dex"].mod;
-        return data;
-    };
-
-    /* -------------------------------------------- */
-
     rollAttribute(attr) {
         /* Initial dialog to prompt between rolling an Attribute Test or Saving Throw
         */
@@ -529,6 +517,7 @@ class FTCCharacter extends FTCEntity {
             data = this.getCoreData(),
             name = data[attr].name,
             flavor = name + " Test",
+            rolled = false,
             adv = undefined,
             bonus = undefined;
 
@@ -543,15 +532,18 @@ class FTCCharacter extends FTCEntity {
             title: flavor,
             buttons: {
                 "Advantage": function () {
+                    rolled = true;
                     adv = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Normal": function () {
+                    rolled = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Disadvantage": function () {
+                    rolled = true;
                     adv = false;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
@@ -559,6 +551,7 @@ class FTCCharacter extends FTCEntity {
             },
             close: function () {
                 html.dialog("destroy");
+                if ( !rolled ) return;
                 let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", bonus);
                 if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
                 FTC.Dice.roll(actor, flavor, formula, {"mod": data[attr].mod});
@@ -577,6 +570,7 @@ class FTCCharacter extends FTCEntity {
             data = this.getCoreData(),
             name = data[attr].name,
             flavor = name + " Save",
+            rolled = false,
             adv = undefined,
             bonus = undefined;
 
@@ -591,15 +585,18 @@ class FTCCharacter extends FTCEntity {
             title: flavor,
             buttons: {
                 "Advantage": function () {
+                    rolled = true;
                     adv = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Normal": function () {
+                    rolled = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Disadvantage": function () {
+                    rolled = true;
                     adv = false;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
@@ -607,6 +604,7 @@ class FTCCharacter extends FTCEntity {
             },
             close: function () {
                 html.dialog("destroy");
+                if ( !rolled ) return;
                 let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
                 if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
                 FTC.Dice.roll(actor, flavor, formula, {"mod": data[attr].mod, "prof": data[attr].prof});
@@ -625,6 +623,7 @@ class FTCCharacter extends FTCEntity {
             data = this.getCoreData(),
             name = data[skl].name,
             flavor = name + " Check",
+            rolled = false,
             adv = undefined,
             bonus = undefined;
 
@@ -639,15 +638,18 @@ class FTCCharacter extends FTCEntity {
             title: flavor,
             buttons: {
                 "Advantage": function () {
+                    rolled = true;
                     adv = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Normal": function () {
+                    rolled = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Disadvantage": function () {
+                    rolled = true;
                     adv = false;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
@@ -655,6 +657,7 @@ class FTCCharacter extends FTCEntity {
             },
             close: function () {
                 html.dialog("destroy");
+                if ( !rolled ) return;
                 let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
                 if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
                 FTC.Dice.roll(actor, flavor, formula, {"mod": data[skl].mod, "prof": data[skl].prof});
@@ -671,6 +674,7 @@ class FTCCharacter extends FTCEntity {
         // Prepare core data
         let actor = this,
             data = this.getCoreData(),
+            rolled = false,
             adv = undefined,
             bonus = undefined;
 
@@ -685,15 +689,18 @@ class FTCCharacter extends FTCEntity {
             title: flavor,
             buttons: {
                 "Advantage": function () {
+                    rolled = true;
                     adv = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Normal": function () {
+                    rolled = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Disadvantage": function () {
+                    rolled = true;
                     adv = false;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
@@ -701,6 +708,7 @@ class FTCCharacter extends FTCEntity {
             },
             close: function () {
                 html.dialog("destroy");
+                if ( !rolled ) return;
                 let formula = FTC.Dice.formula(FTC.Dice.d20(adv), hit, "@mod", "@prof", bonus);
                 if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
                 FTC.Dice.roll(actor, flavor, formula, {"mod": data.weaponMod, "prof": data.proficiency});
@@ -715,6 +723,7 @@ class FTCCharacter extends FTCEntity {
         // Prepare core data
         let actor = this,
             data = this.getCoreData(),
+            rolled = false,
             crit = false,
             bonus = undefined;
 
@@ -729,10 +738,12 @@ class FTCCharacter extends FTCEntity {
             title: flavor,
             buttons: {
                 "Normal": function () {
+                    rolled = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Critical Hit!": function () {
+                    rolled = true;
                     crit = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
@@ -740,6 +751,7 @@ class FTCCharacter extends FTCEntity {
             },
             close: function () {
                 html.dialog("destroy");
+                if ( !rolled ) return;
                 damage = crit ? FTC.Dice.crit(damage) : damage;
                 bonus = crit ? FTC.Dice.crit(bonus) : bonus;
                 let formula = FTC.Dice.formula(damage, "@mod", bonus);
@@ -759,6 +771,7 @@ class FTCCharacter extends FTCEntity {
         // Prepare core data
         let actor = this,
             data = this.getCoreData(),
+            rolled = false,
             adv = undefined,
             bonus = undefined;
 
@@ -773,15 +786,18 @@ class FTCCharacter extends FTCEntity {
             title: flavor,
             buttons: {
                 "Advantage": function () {
+                    rolled = true;
                     adv = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Normal": function () {
+                    rolled = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Disadvantage": function () {
+                    rolled = true;
                     adv = false;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
@@ -789,6 +805,7 @@ class FTCCharacter extends FTCEntity {
             },
             close: function () {
                 html.dialog("destroy");
+                if ( !rolled ) return;
                 let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
                 if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
                 FTC.Dice.roll(actor, flavor, formula, {"mod": data.spellMod, "prof": data.proficiency});
@@ -804,6 +821,7 @@ class FTCCharacter extends FTCEntity {
         let actor = this,
             data = this.getCoreData(),
             buttons = {},
+            rolled = false,
             crit = false,
             bonus = undefined;
 
@@ -816,10 +834,12 @@ class FTCCharacter extends FTCEntity {
         if ( canCrit ) {
             buttons = {
                 "Normal": function () {
+                    rolled = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 },
                 "Critical Hit!": function () {
+                    rolled = true;
                     crit = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
@@ -829,6 +849,7 @@ class FTCCharacter extends FTCEntity {
         } else {
             buttons = {
                 "Roll Damage": function () {
+                    rolled = true;
                     bonus = $(this).find('#roll-bonus').val();
                     $(this).dialog("close");
                 }
@@ -841,6 +862,7 @@ class FTCCharacter extends FTCEntity {
             buttons: buttons,
             close: function () {
                 html.dialog("destroy");
+                if ( !rolled ) return;
                 damage = crit ? FTC.Dice.crit(damage) : damage;
                 bonus = crit ? FTC.Dice.crit(bonus) : bonus;
                 let formula = FTC.Dice.formula(damage, bonus);

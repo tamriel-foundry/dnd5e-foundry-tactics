@@ -17,7 +17,7 @@
                            value="{counters.cr.current}" placeholder="1"/>
                 </h2>
                 <div class="experience">
-                    <label>{ftc.exp.kill} XP</label>
+                    <label>{exp.kill} XP</label>
                 </div>
             </div>
 
@@ -61,7 +61,7 @@
                 <li id="tab-inventory" class="sheet-tab">Inventory</li>
                 <li id="tab-spells" class="sheet-tab">Spells</li>
                 <li id="tab-traits" class="sheet-tab">Traits</li>
-                <li id="tab-biography" class="sheet-tab tab-active">Biography</li>
+                <li id="tab-biography" class="sheet-tab tab-active">Description</li>
             </ul>
 
             <!-- Character Inventory -->
@@ -98,9 +98,9 @@
                     <!-- FTC_INVENTORY_HTML -->
                 </ol>
 
-                <footer class="inventory-weight {ftc.weight.cls}">
-                    <span class="inventory-weight-bar" style="width: {ftc.weight.pct}%"></span>
-                    <label class="inventory-weight-label">{ftc.weight.wt} / {ftc.weight.enc}</label>
+                <footer class="inventory-weight {weight.cls}">
+                    <span class="inventory-weight-bar" style="width: {weight.pct}%"></span>
+                    <label class="inventory-weight-label">{weight.wt} / {weight.enc}</label>
                 </footer>
             </div>
 
@@ -163,6 +163,34 @@
             <ol class="attributes-list">
                 <!-- FTC_ATTRIBUTE_HTML -->
             </ol>
+
+            <div class="attributes-primary-stats">
+                <div class="primary-stat initiative">
+                    <header>Initiative</header>
+                    <div class="primary-stat-value">
+                        <span>{initiative}</span>
+                    </div>
+                    <footer class="initiative-bonus">
+                        <label>Bonus:</label>
+                        <input class="ftc-edit" type="text" tabindex="0"
+                               data-edit="counters.initiative.current" data-dtype="str" data-autosize="10"
+                               value="{counters.initiative.current}"/>
+                    </footer>
+                </div>
+
+                <div class="primary-stat speed">
+                    <header>Movement Speed</header>
+                    <div class="primary-stat-value">
+                        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.speed.current"
+                               value="{counters.speed.current}" placeholder="10"/>
+                        <span> Ft.</span>
+                    </div>
+                    <footer>
+                        <input class="ftc-edit" type="text" tabindex="0" data-edit="counters.speed.extra" data-dtype="str"
+                               value="{counters.speed.extra}" placeholder="Climb / Swim"/>
+                    </footer>
+                </div>
+            </div>
         </div>
 
         <div id="content-skills" class="content-tab">

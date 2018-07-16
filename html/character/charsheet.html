@@ -11,16 +11,16 @@
                 <h2 class="level">
                     <label>Level</label>
                     <input class="ftc-edit" type="text" tabindex="0" data-autosize="12" data-edit="counters.level.current"
-                           value="{counters.level.current}" placeholder="1"/>
+                           value="{exp.lvl}" placeholder="1"/>
                 </h2>
                <div class="xpbar">
-                    <span class="bar {ftc.exp.cls}" style="width: {ftc.exp.pct}%"></span>
+                    <span class="bar {exp.cls}" style="width: {exp.pct}%"></span>
                 </div>
                 <div class="experience">
                     <label>XP</label>
                     <input class="ftc-edit" type="text" tabindex="0" data-autosize="6" data-edit="counters.exp.current"
-                           value="{ftc.exp.current}" placeholder="0"/>
-                    <label class="exp-next"> / {ftc.exp.next}</label>
+                           value="{exp.current}" placeholder="0"/>
+                    <label class="exp-next"> / {exp.next}</label>
                 </div>
 
             </div>
@@ -103,9 +103,9 @@
                     <!-- FTC_INVENTORY_HTML -->
                 </ol>
 
-                <footer class="inventory-weight {ftc.weight.cls}">
-                    <span class="inventory-weight-bar" style="width: {ftc.weight.pct}%"></span>
-                    <label class="inventory-weight-label">{ftc.weight.wt} / {ftc.weight.enc}</label>
+                <footer class="inventory-weight {weight.cls}">
+                    <span class="inventory-weight-bar" style="width: {weight.pct}%"></span>
+                    <label class="inventory-weight-label">{weight.wt} / {weight.enc}</label>
                 </footer>
             </div>
 
@@ -173,7 +173,7 @@
                 <div class="primary-stat initiative">
                     <header>Initiative</header>
                     <div class="primary-stat-value">
-                        <span>{ftc.initiative}</span>
+                        <span>{initiative}</span>
                     </div>
                     <footer class="initiative-bonus">
                         <label>Bonus:</label>
