@@ -58864,6 +58864,125 @@
           "_c": "localhost",
           "_uid": null,
           "_sync": null
+        },
+        {
+          "_t": "i",
+          "tabs": {
+            "content-tabs": "tab-notes"
+          },
+          "tags": {
+            "Feat": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Shield Master"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/weapon_14.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>You use shields not just for protection but also for offense. You gain the following benefits while you are wielding a shield:</p>\n<ul>\n<li>If you take the Attack action on your turn, you can use a bonus action to try to shove a creature within 5 feet of you with your shield.</li>\n<li>If you aren't incapacitated, you can add your shield's AC bonus to any Dexterity saving throw you make against a spell or other harmful effect that targets only you.</li>\n<li>If you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you can use your reaction to take no damage if you succeed on the saving throw, interposing your shield between yourself and the source of the effect.</li>\n</ul>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "feat"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "feat"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 170"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          },
+          "_s": {},
+          "_lclock": 0,
+          "_c": "localhost",
+          "_uid": null,
+          "_sync": null
         }
       ]
     },
