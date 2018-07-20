@@ -137,11 +137,11 @@ div.primary-stat {
 }
 
 /* Sidebar Attribute Stats */
-#content-attributes .primary-stat {
+#content-abilities .primary-stat {
 	width: 48%;
 	margin: 10px 2% 0 0;
 }
-#content-attributes .primary-stat:last-of-type {
+#content-abilities .primary-stat:last-of-type {
 	margin: 10px 0 0 2%;
 }
 
@@ -220,18 +220,17 @@ ul#sidebar-tabs {
 }
 
 /* -------------------------------------------
- 	Attributes
+ 	Abilities
 ------------------------------------------- */
 
-
-ol.attributes-list {
+ol.abilities-list {
     list-style: none;
     margin: 0;
     padding: 0;
 	font-size: 24px;
 }
 
-.attributes-list > li.attribute {
+.abilities-list > li.ability {
     display: flex;
     align-items: center;
     height: 50px;
@@ -243,36 +242,36 @@ ol.attributes-list {
     background-position: 5px 2px;
 }
 
-.attribute label {
+.ability label {
 	flex: 1;
 	padding-left: 36px;
 	background-repeat: no-repeat;
 	background-position: 0 50%;
 }
 
-.attribute-Str > label {background-image: url("../content/icons/strength.png");}
-.attribute-Dex > label {background-image: url("../content/icons/dexterity.png");}
-.attribute-Con > label {background-image: url("../content/icons/constitution.png");}
-.attribute-Int > label {background-image: url("../content/icons/intelligence.png");}
-.attribute-Wis > label {background-image: url("../content/icons/wisdom.png");}
-.attribute-Cha > label {background-image: url("../content/icons/charisma.png");}
+.ability-Str > label {background-image: url("../content/icons/strength.png");}
+.ability-Dex > label {background-image: url("../content/icons/dexterity.png");}
+.ability-Con > label {background-image: url("../content/icons/constitution.png");}
+.ability-Int > label {background-image: url("../content/icons/intelligence.png");}
+.ability-Wis > label {background-image: url("../content/icons/wisdom.png");}
+.ability-Cha > label {background-image: url("../content/icons/charisma.png");}
 
-.attribute .ftc-rollable:hover {
+.ability .ftc-rollable:hover {
     background-image: url("../content/icons/d20.png") !important;
 }
 
-.attribute .ftc-edit {
+.ability .ftc-edit {
 	width: 28px;
 }
 
-.attribute .attr-mod {
+.ability .ability-mod {
     width: 28px;
     margin-left: 2px;
 	font-size: 20px;
 	color: #888;
 }
 
-.attribute input.ftc-checkbox {
+.ability input.ftc-checkbox {
 	margin: 2px;
 }
 
@@ -283,7 +282,7 @@ ol.attributes-list {
 
 .skills-list {
     list-style: none;
-    margin: 0;
+    margin: 5px 0;
     padding: 0;
 	font-size: 1.25em;
 }
@@ -418,11 +417,11 @@ ol.item-list {
     text-align: center;
     border-left: 1px solid #DDD;
 }
-.item-controls > .glyphicon {
+.item .glyphicon {
     font-size: 12px;
     margin: 3px;
 }
-.item-controls > .glyphicon:hover,
+.item .glyphicon:hover,
 .ftc-item-add:hover {
     cursor: pointer;
 	text-shadow: 0 0 4px #ff3838;
@@ -513,10 +512,10 @@ section.spellbook-spells {
 
 
 /* -------------------------------------------
- 	Abilities
+ 	Feats
 ------------------------------------------- */
 
-ol.abilities {
+ol.feats {
     height: calc(100%);
     overflow-y: scroll;
 	list-style: none;
@@ -524,31 +523,31 @@ ol.abilities {
 	padding: 0;
 }
 
-li.ability {
+li.feat {
     font-size: 16px;
 }
 
-.ability-image {
+.feat-image {
     flex: 0 0 36px;
     margin-right: 5px;
 }
-.ability-image > .ftc-image { margin: 6px 0; }
+.feat-image > .ftc-image { margin: 6px 0; }
 
 
-.ability-body { flex: 1; }
-.ability-name,
-.ability-source {
+.feat-body { flex: 1; }
+.feat-name,
+.feat-source {
     flex: 1 0 80%;
 }
-.ability-footer > .ability-source {
+.feat-footer > .feat-source {
     color: #999;
 }
-.ability .glyphicon {
+.feat .glyphicon {
     flex: 0 0 16px;
     top: 1px;
 }
 
-.ability-controls {
+.feat-controls {
     background: none;
     text-align: center;
     border: none;

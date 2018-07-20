@@ -873,7 +873,8 @@
       },
       "hd": {
         "name": "Hit Dice",
-        "current": "1d10"
+        "current": 1,
+        "max": 1
       },
       "proficiency": {
         "name": "Proficiency",

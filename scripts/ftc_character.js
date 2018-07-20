@@ -24,7 +24,7 @@ class FTCCharacter extends FTCEntity {
         this._sorting = {
             "inventory": [],
             "spellbook": [],
-            "abilities": [],
+            "feats": [],
         };
     }
 
@@ -78,6 +78,12 @@ class FTCCharacter extends FTCEntity {
 
         // Proficiency Bonus
         data.counters.proficiency.current = Math.floor((data.counters.level.current + 7) / 4);
+
+        // Abilities -> Feats
+        if ( data.abilities && !data.feats ) {
+            data.feats = data.abilities;
+            delete data.abilities;
+        }
         return data;
     }
 
@@ -91,7 +97,7 @@ class FTCCharacter extends FTCEntity {
         // Set up owned items
         this.setupInventory(data);
         this.setupSpellbook(data);
-        this.setupAbilities(data);
+        this.setupFeats(data);
 
         // Return the enriched data
         return data;
@@ -121,12 +127,15 @@ class FTCCharacter extends FTCEntity {
             "kill": this.getKillExp(data.counters.cr.current)
         };
 
+        // Maximum hit dice
+        data.counters.hd.max = lvl;
+
         // Reference actor data
         data["proficiency"] = data.counters.proficiency.current;
         data["spellcasting"] = data.info.spellcasting.current || "Int";
         data["offensive"] = data.info.offensive.current || "Str";
 
-        // Attribute modifiers
+        // Ability modifiers
         $.each(data.stats, function(a, s) {
             data[a] = {
                 "name": s.name,
@@ -290,17 +299,17 @@ class FTCCharacter extends FTCEntity {
 
     /* ------------------------------------------- */
 
-    setupAbilities(data) {
-        /* Set up ability items by converting them to FTCItem objects
+    setupFeats(data) {
+        /* Set up feat items by converting them to FTCItem objects
          */
-        const abilities = [];
+        const feats = [];
 
-        // Iterate over abilities
-        $.each(data.abilities, function(itemId, itemData) {
-            let item = new FTCItem(itemData, {"owner": this.owner, "container": "abilities"});
-            abilities.push(item);
+        // Iterate over feats
+        $.each(data.feats, function(itemId, itemData) {
+            let item = new FTCItem(itemData, {"owner": this.owner, "container": "feats"});
+            feats.push(item);
         });
-        data.abilities = abilities;
+        data.feats = feats;
         return data;
     }
 
@@ -338,27 +347,27 @@ class FTCCharacter extends FTCEntity {
                 main = FTC.injectTemplate(main, tag, path);
             });
 
-            // Attributes and Skills
-            main = this._buildAttributes(main, data);
+            // Abilities and Skills
+            main = this._buildAbilities(main, data);
             main = this._buildSkills(main, data);
 
-            // Owned Items - Inventory, Spells, and Abilities
+            // Owned Items - Inventory, Spells, and Feats
             main = this._buildInventory(main, data);
             main = this._buildSpellbook(main, data);
-            main = this._buildAbilities(main, data);
+            main = this._buildFeats(main, data);
         }
         return main;
     }
 
     /* ------------------------------------------- */
 
-    _buildAttributes(html, data) {
-        let attrs = "",
-            template = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/attribute.html');
+    _buildAbilities(html, data) {
+        let abilities = "",
+            template = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/ability.html');
         for ( var s in data.stats ) {
-            attrs += template.replace(/\{stat\}/g, s);
+            abilities += template.replace(/\{stat\}/g, s);
         }
-        return html.replace("<!-- FTC_ATTRIBUTE_HTML -->", attrs);
+        return html.replace("<!-- ABILITIES_LIST -->", abilities);
     }
 
     /* ------------------------------------------- */
@@ -410,15 +419,15 @@ class FTCCharacter extends FTCEntity {
 
     /* ------------------------------------------- */
 
-    _buildAbilities(html, data) {
-        let abilities = "",
-            abilityTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/ability.html');
-        $.each(data.abilities, function(i, item) {
+    _buildFeats(html, data) {
+        let feats = "",
+            featTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/feat.html');
+        $.each(data.feats, function(i, item) {
             item.data.itemid = i;
-            abilities += FTC.populateTemplate(abilityTemplate, item.data);
+            feats += FTC.populateTemplate(featTemplate, item.data);
         });
-        abilities = abilities || '<li><blockquote class="compendium">Add abilities from the compendium.</blockquote></li>';
-        return html.replace("<!-- ABILITY_LIST -->", abilities);
+        feats = feats || '<li><blockquote class="compendium">Add feats from the compendium.</blockquote></li>';
+        return html.replace("<!-- FEATS_LIST -->", feats);
     }
 
     /* ------------------------------------------- */
@@ -434,9 +443,9 @@ class FTCCharacter extends FTCEntity {
         setTimeout(function() {
 
             // Attribute rolls
-            html.find('.attribute .ftc-rollable').click(function() {
-                let attr = $(this).parent().attr("data-attribute");
-                self.rollAttribute(attr);
+            html.find('.ability .ftc-rollable').click(function() {
+                let attr = $(this).parent().attr("data-ability");
+                self.rollAbility(attr);
             });
 
             // Skill rolls
@@ -459,10 +468,10 @@ class FTCCharacter extends FTCEntity {
                 FTCItemAction.toChat(self, itemData);
             });
 
-            // Ability actions
-            html.find(".ability .ftc-rollable").click(function() {
-                const itemId = $(this).closest("li.ability").attr("data-item-id"),
-                    itemData = self.data.abilities[itemId];
+            // Feat actions
+            html.find(".feat .ftc-rollable").click(function() {
+                const itemId = $(this).closest("li.feat").attr("data-item-id"),
+                    itemData = self.data.feats[itemId];
                 FTCItemAction.toChat(self, itemData);
             });
 
@@ -514,7 +523,7 @@ class FTCCharacter extends FTCEntity {
         if ( !container ) {
             if (["weapon", "armor", "item"].includes(type)) container = "inventory";
             else if ("spell" === type) container = "spellbook";
-            else if ("ability" === type) container = "abilities";
+            else if ("feat" === type) container = "feats";
         }
         if ( !container ) return;
 
@@ -557,8 +566,8 @@ class FTCCharacter extends FTCEntity {
     /* Character Actions                           */
     /* ------------------------------------------- */
 
-    rollAttribute(attr) {
-        /* Initial dialog to prompt between rolling an Attribute Test or Saving Throw
+    rollAbility(attr) {
+        /* Initial dialog to prompt between rolling an Ability Test or Saving Throw
         */
 
         const actor = this;
@@ -568,15 +577,15 @@ class FTCCharacter extends FTCEntity {
         FTC.ui.createDialogue(html, {
             title: actor.data.stats[attr].name + " Roll",
             buttons: {
-                "Attribute Test": function () {
+                "Ability Test": function () {
                     $(this).dialog("close");
                     $(this).dialog("destroy");
-                    actor.rollAttributeTest(attr);
+                    actor.rollAbilityTest(attr);
                 },
                 "Saving Throw": function () {
                     $(this).dialog("close");
                     $(this).dialog("destroy");
-                    actor.rollAttributeSave(attr);
+                    actor.rollAbilitySave(attr);
                 }
             }
         });
@@ -584,7 +593,7 @@ class FTCCharacter extends FTCEntity {
 
     /* -------------------------------------------- */
 
-    rollAttributeTest(attr) {
+    rollAbilityTest(attr) {
         /* Roll an Attribute Test
         */
 
@@ -598,7 +607,7 @@ class FTCCharacter extends FTCEntity {
             bonus = undefined;
 
         // Prepare HTML form
-        const html = $('<div id="ftc-dialog" class="attribute-roll"></div>');
+        const html = $('<div id="ftc-dialog" class="ability-roll"></div>');
         html.append($('<label>Situational Modifier?</label>'));
         html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
         html.append($('<label>Roll With advantage?</label>'));
@@ -637,7 +646,7 @@ class FTCCharacter extends FTCEntity {
 
     /* -------------------------------------------- */
 
-    rollAttributeSave(attr) {
+    rollAbilitySave(attr) {
         /* Roll a Saving Throw
         */
 
@@ -651,7 +660,7 @@ class FTCCharacter extends FTCEntity {
             bonus = undefined;
 
         // Prepare HTML form
-        const html = $('<div id="ftc-dialog" class="attribute-roll"></div>');
+        const html = $('<div id="ftc-dialog" class="ability-roll"></div>');
         html.append($('<label>Situational Modifier?</label>'));
         html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
         html.append($('<label>Roll With advantage?</label>'));

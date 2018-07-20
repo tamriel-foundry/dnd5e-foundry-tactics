@@ -364,6 +364,11 @@ div[ui-name="ui_textBox"] .hover2:hover {
 a[title="minimize"], a[title="maximize"] {
     display: none !important;
 }
+a[title="Close Window"] {
+    font-size: 18px;
+    line-height: 18px;
+    padding: 0 0 0 10px;
+}
 
 
 /* Asset Menu */

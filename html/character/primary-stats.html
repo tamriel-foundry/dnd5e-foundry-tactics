@@ -9,8 +9,10 @@
                value="{counters.hp.max}" placeholder="10"/>
     </div>
     <footer>
-        <input class="ftc-edit" type="text" tabindex="0" data-edit="counters.hp.formula"
-               value="{counters.hp.formula}" data-dtype="str" placeholder="Formula"/>
+        <label>Hit Dice</label>
+        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.hd.current"
+               data-dtype="int" value="{counters.hd.current}" placeholder="0"/>
+        <span> / {counters.hd.max}</span>
     </footer>
 </div>
 

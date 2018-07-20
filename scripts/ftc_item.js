@@ -26,10 +26,6 @@ class FTCItem extends FTCEntity {
         return this.data.armor;
     }
 
-    get ability() {
-        return this.data.ability;
-    }
-
     get owner() {
         return this.context.owner;
     }
@@ -45,7 +41,7 @@ class FTCItem extends FTCEntity {
             ITEM_TAB_ARMOR: FTC.TEMPLATE_DIR + 'items/tab-armor.html',
             ITEM_TAB_WEAPON: FTC.TEMPLATE_DIR + 'items/tab-weapon.html',
             ITEM_TAB_SPELL: FTC.TEMPLATE_DIR + 'items/tab-spell.html',
-            ITEM_TAB_ABILITY: FTC.TEMPLATE_DIR + 'items/tab-ability.html',
+            ITEM_TAB_FEAT: FTC.TEMPLATE_DIR + 'items/tab-feat.html',
             ITEM_TAB_ITEM: FTC.TEMPLATE_DIR + 'items/tab-item.html'
         };
     }
@@ -55,7 +51,7 @@ class FTCItem extends FTCEntity {
             ITEM_TYPE_DEFAULT: "item",
             ITEM_TYPE_INVENTORY: "item",
             ITEM_TYPE_SPELL: "spell",
-            ITEM_TYPE_ABILITY: "ability"
+            ITEM_TYPE_FEAT: "feat"
         }
     }
 
@@ -111,20 +107,22 @@ class FTCItem extends FTCEntity {
 
         // Already defined
         if (i.info.type && i.info.type.current) {
-            return (i.info.type.current === "note") ? "item" : i.info.type.current;
+            if ( i.info.type.current === "note" ) return "item";
+            else if ( i.info.type.current === "ability" ) return "feat";
+            else return i.info.type.current;
         }
 
         // Implied by container
         else if ( this.context.container ) {
             if ( this.context.container === "spellbook" ) return "spell";
-            else if ( this.context.container === "abilities" ) return "ability";
+            else if ( this.context.container === "feats" ) return "feat";
         }
 
         // Implied by tags
         if (("spell" in i.tags) || (i.spell && i.spell.level.current)) return "spell";
         else if (("weapon" in i.tags) || (i.weapon && i.weapon.damage.current)) return "weapon";
         else if (("armor" in i.tags) || (i.armor && i.armor.ac.current)) return "armor";
-        else if ("ability" in i.tags || "talent" in i.tags || (i.ability && i.ability.source.current)) return "ability";
+        else if ("ability" in i.tags || "talent" in i.tags || "feat" in i.tags) return "feat";
 
         // Default type is "item"
         return "item";

@@ -192,11 +192,11 @@ class FTCItemAction {
 
     /* -------------------------------------------- */
 
-    abilityData(data) {
+    featData(data) {
         let source = (data.info.variety.current)? [data.info.variety.current.capitalize()] : [];
         if (data.info.requirements.current) source.push(data.info.requirements.current.capitalize());
 
-        // List ability properties
+        // List feat properties
         const props = [
             source.join(": "),
             (data.spell.time.current || "").titleCase(),
