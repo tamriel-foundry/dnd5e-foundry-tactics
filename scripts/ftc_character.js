@@ -196,7 +196,7 @@ class FTCCharacter extends FTCEntity {
     setupInventory(data) {
         // Set up inventory items by converting them to FTCItem objects
 
-        const owner = this.owner,
+        const owner = this,
             weight = [],
             inventory = {
             "weapons": {
@@ -268,13 +268,14 @@ class FTCCharacter extends FTCEntity {
     setupSpellbook(data) {
         /* Set up spellbook items by converting them to FTCItem objects
          */
-        const sls = {};
+        const owner = this,
+            sls = {};
 
         // Iterate over spellbook spells
         $.each(data.spellbook, function(spellId, itemData) {
 
             // Construct the item object
-            let item = new FTCItem(itemData, {"owner": this.owner, "container": "spellbook"}),
+            let item = new FTCItem(itemData, {"owner": owner, "container": "spellbook"}),
                 spell = item.spell;
 
             // Construct spell data
@@ -302,11 +303,12 @@ class FTCCharacter extends FTCEntity {
     setupFeats(data) {
         /* Set up feat items by converting them to FTCItem objects
          */
-        const feats = [];
+        const owner = this,
+            feats = [];
 
         // Iterate over feats
         $.each(data.feats, function(itemId, itemData) {
-            let item = new FTCItem(itemData, {"owner": this.owner, "container": "feats"});
+            let item = new FTCItem(itemData, {"owner": owner, "container": "feats"});
             feats.push(item);
         });
         data.feats = feats;
