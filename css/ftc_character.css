@@ -351,8 +351,9 @@ blockquote.compendium {
 
 .biography {
     height: 100%;
+    padding: 10px 5px 10px 0;
 	font-size: 1em;
-	font-family: "Scaly Sans";
+    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
 	color: #222;
     overflow-y: scroll;
 }

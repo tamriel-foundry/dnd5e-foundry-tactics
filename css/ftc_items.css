@@ -82,21 +82,6 @@ h1.itemname > .ftc-edit {
 }
 
 
-
-/* -------------------------------------------
- 	ITEM NOTES
-------------------------------------------- */
-
-#item-notes {
-	max-height: 350px;
-    overflow-y: scroll;
-	font-size: 1em;
-	font-family: "Scaly Sans";
-	color: #222;
-}
-
-
-
 /* -------------------------------------------
  	ARMOR AND WEAPONS
 ------------------------------------------- */

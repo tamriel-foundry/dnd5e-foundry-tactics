@@ -24,9 +24,6 @@
       "data": [
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "Heavy": 1
           },
@@ -140,19 +137,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530993859494
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "Melee": 1
           },
@@ -264,19 +252,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530845765036
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "Heavy": 1,
             "Two-Handed": 1
@@ -388,19 +367,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530994365814
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "Ranged": 1
           },
@@ -513,19 +483,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 2,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530849542247
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "Light": 1,
             "Thrown": 1
@@ -639,19 +600,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530994778873
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-weapon"
-          },
           "tags": {
             "Ranged": 1
           },
@@ -764,19 +716,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 3,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530843255093
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "Thrown": 1
           },
@@ -888,19 +831,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530847133597
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-armor"
-          },
           "tags": {
             "Light": 1
           },
@@ -1011,19 +945,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 2,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530843255096
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Ranged": 1
           },
@@ -1136,19 +1061,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 3,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530849233209
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-weapon"
-          },
           "tags": {
             "Ranged": 1
           },
@@ -1261,19 +1177,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 2,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530843255095
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Martial": 1
           },
@@ -1388,19 +1295,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 2,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530843255092
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Simple": 1,
             "Melee": 1
@@ -1513,19 +1411,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530850620844
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "Heavy": 1,
             "Two-Handed": 1
@@ -1639,19 +1528,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530845529351
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "NPC": 1
           },
@@ -1759,19 +1639,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530854468638
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "Shield": 1
           },
@@ -1883,19 +1754,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530851164588
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-weapon"
-          },
           "tags": {
             "Simple": 1,
             "Ranged": 1
@@ -2009,19 +1871,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 3,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530843255108
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Melee": 1,
             "Finesse": 1
@@ -2135,19 +1988,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 2,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530843255093
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-armor"
-          },
           "tags": {
             "Heavy": 1
           },
@@ -2259,19 +2103,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 2,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530843255093
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-armor"
-          },
           "tags": {
             "Light": 1
           },
@@ -2382,19 +2217,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 3,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530843255108
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "Finesse": 1,
             "Light": 1
@@ -2508,18 +2334,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Medium": 1
           },
@@ -2629,18 +2447,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Heavy": 1
           },
@@ -2752,12 +2562,125 @@
             "classes": {
               "name": "Classes"
             }
+          }
+        },
+        {
+          "_t": "i",
+          "tags": {
+            "Finesse": 1,
+            "Light": 1,
+            " Thrown": 1
           },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Dagger"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/icons/Knife1000p.png"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>A dagger is a short, two-sided blade used for stabbing and thrusting. They are not as long as a short sword, but are larger than a common knife. Daggers are also easily thrown as improvised ranged weapons and are excellent for use in an off-hand for those who prefer dual-wielding melee weapons.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "weapon"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "simplem"
+            },
+            "requirements": {
+              "name": "Requirements"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0,
+              "current": 1
+            },
+            "price": {
+              "name": "Price",
+              "current": 2
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 149"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage",
+              "current": "1d4",
+              "type": "piercing"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range",
+              "current": "5 ft., 20/60 ft."
+            },
+            "properties": {
+              "name": "Properties",
+              "current": "Light, Finesse, Thrown"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          }
         }
       ]
     },
@@ -51798,9 +51721,6 @@
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Cantrip": 1
           },
@@ -51913,12 +51833,7 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         }
       ]
     },
@@ -54984,9 +54899,6 @@
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1,
             "Vengeance": 1
@@ -55097,19 +55009,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530679747499
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1
           },
@@ -55218,19 +55121,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530680106540
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1
           },
@@ -55339,19 +55233,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530680114094
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-ability"
-          },
           "tags": {
             "Paladin": 1,
             "Vengeance": 1
@@ -55459,19 +55344,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530680429298
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1
           },
@@ -55581,19 +55457,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530680175691
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-ability"
-          },
           "tags": {
             "Paladin": 1
           },
@@ -55702,19 +55569,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530679248320
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1
           },
@@ -55823,19 +55681,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530678686583
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1
           },
@@ -55945,13 +55794,7 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530680069640
+          }
         },
         {
           "_t": "i",
@@ -56067,22 +55910,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "tabs": {
-            "content-tabs": "tab-ability"
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530679840386
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1
           },
@@ -56192,19 +56023,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530678761600
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1,
             "Vengeance": 1
@@ -56314,19 +56136,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530680349715
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1,
             "Vengeance": 1
@@ -56436,19 +56249,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530680276321
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-ability"
-          },
           "tags": {
             "Paladin": 1
           },
@@ -56558,19 +56362,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530679174802
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1,
             "Vengeance": 1
@@ -56681,19 +56476,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530680326799
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Paladin": 1,
             "Fighter": 1,
@@ -56803,18 +56589,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Fighter": 1,
             "Paladin": 1,
@@ -56924,18 +56702,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-ability"
-          },
           "tags": {
             "Fighter": 1,
             "Paladin": 1
@@ -57044,18 +56814,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Fighter": 1,
             "Paladin": 1,
@@ -57165,19 +56927,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530681087429
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Fighter": 1,
             "Paladin": 1,
@@ -57287,18 +57040,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Fighter": 1,
             "Paladin": 1,
@@ -57408,18 +57153,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Fighter": 1
           },
@@ -57529,18 +57266,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Fighter": 1,
             "Battle": 1
@@ -57650,18 +57379,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Fighter": 1
           },
@@ -57771,18 +57492,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Fighter": 1,
             "Battle": 1
@@ -57893,18 +57606,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Fighter": 1,
             "Battle": 1
@@ -58015,18 +57720,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "Fighter": 1
           },
@@ -58136,18 +57833,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Feat": 1
           },
@@ -58255,18 +57944,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "Fighter": 1,
             "Battle": 1
@@ -58377,13 +58058,569 @@
             "classes": {
               "name": "Classes"
             }
+          }
+        },
+        {
+          "_t": "i",
+          "tags": {
+            "Sorcerer": 1
           },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530998368360
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Sorcerous Restoration"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/water_04.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>At 20th level, you regain 4 expended sorcery points whenever you finish&nbsp;a short rest.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Sorcerer 20"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 102"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          }
+        },
+        {
+          "_t": "i",
+          "tags": {
+            "Sorcerer": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Draconic Bloodline"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/fire_05.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>Your innate magic comes from draconic magic that was mingled with your blood or that of your ancestors. Most often, sorcerers with this origin trace their descent back to a mighty sorcerer of ancient times who made a bargain with a dragon or who might even have claimed a dragon parent. Some of these bloodlines are well established in the world, but most are obscure. Any given sorcerer could be the first of a new bloodline, as a result of a pact or some other exceptional&nbsp;circumstance.</p>\n<h4>Dragon Ancestor</h4>\n<p>At 1st level, you choose one type of dragon as your ancestor. The damage type associated with each dragon is used by features you gain later.</p>\n<ul>\n<li>Black - Acid</li>\n<li>Blue - Lightning</li>\n<li>Brass - Fire</li>\n<li>Bronze - Lightning</li>\n<li>Copper - Acid</li>\n<li>Gold - Fire</li>\n<li>Green - Poison</li>\n<li>Red - Fire</li>\n<li>Silver - Cold</li>\n<li>White - Cold</li>\n</ul>\n<p>You can speak, read, and write Draconic. Additionally, whenever you make a Charisma check when interacting with dragons, your proficiency bonus is doubled if it applies&nbsp;to the check.&nbsp;</p>\n<h4>Draconic Resilience</h4>\n<p>As magic flows through your body, it causes physical traits of your dragon ancestors to emerge. At 1st level, your hit point maximum increases by 1 and increases by 1 again whenever you gain a level in this class.</p>\n<p>Additionally, parts of your skin are covered by a thin sheen of dragon-like scales. When you aren&rsquo;t wearing armor, your AC equals 13 + your Dexterity modifier.</p>\n<h4>Elemental Affinity</h4>\n<p>Starting at 6th level, when you cast a spell that deals damage of the type associated with your draconic ancestry, you can add your Charisma modifier to one damage roll of that spell. At the same time, you can spend 1 sorcery point to gain resistance to that damage type for 1 hour.</p>\n<h4>Dragon Wings</h4>\n<p>At 14th level, you gain the ability to sprout a pair of dragon wings from your back, gaining a flying speed equal to your current speed. You can create these wings as a bonus action on your turn. They last until you dismiss them as a bonus action&nbsp;on your turn.</p>\n<p>You can&rsquo;t manifest your wings while wearing armor unless the armor is made to accommodate them, and clothing not made to accommodate your wings might be destroyed when you manifest them.</p>\n<h4>Draconic Presence</h4>\n<p>Beginning at 18th level, you can channel the dread presence of your dragon ancestor, causing those around you to become awestruck or frightened. As an action, you can spend 5 sorcery points to draw on this power and exude an aura of awe or fear (your choice) to a distance of 60 feet. For 1 minute or until you lose your concentration (as if you were casting a concentration spell), each hostile creature that starts its turn in this aura must succeed on a Wisdom saving throw or be&nbsp;Charmed&nbsp;(if you chose awe) or Frightened&nbsp;(if you chose fear) until the aura ends. A creature that succeeds on this saving throw is immune to your aura&nbsp;for 24 hours.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Sorcerer 1"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 102"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          }
+        },
+        {
+          "_t": "i",
+          "tags": {
+            "Sorcerer": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Font of Magic"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/ice_13.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>At 2nd level, you tap into a deep wellspring of magic within yourself. This wellspring is represented by sorcery points, which allow you to create a variety of magical effects.</p>\n<h3>Sorcery Points</h3>\n<p>You have 2 sorcery points, and you gain more as you reach higher levels, as shown in the Sorcery Points column of the Sorcerer table. You can never have more sorcery points than shown on the table for your level. You regain all spent sorcery points when you finish&nbsp;a long rest.</p>\n<h3>Flexible Casting</h3>\n<p>You can use your sorcery points to gain additional spell slots, or sacrifice spell slots to gain additional sorcery points. You learn other ways to use your sorcery points as you reach higher levels.</p>\n<p>Creating Spell Slots.&nbsp;You can transform unexpended sorcery points into one spell slot as a bonus action on your turn. The Creating Spell Slots table shows the cost of creating a spell slot of a given level. You can create spell slots no higher in level than 5th.</p>\n<p>Any spell slot you create with this feature vanishes when you finish&nbsp;a long rest.</p>\n<h3>Creating Spell Slots</h3>\n<ul>\n<li>1st - 2</li>\n<li>2nd - 3</li>\n<li>3rd - 5</li>\n<li>4th - 6</li>\n<li>5th - 7</li>\n</ul>\n<p>Converting a Spell Slot to Sorcery Points.&nbsp;As a bonus action on your turn, you can expend one spell slot and gain a number of sorcery points equal to the&nbsp;slot&rsquo;s level.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Sorcerer 2"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 101"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Sorcery Points"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          }
+        },
+        {
+          "_t": "i",
+          "tags": {
+            "Sorcerer": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Metamagic"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/skills/shadow_02.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice. You gain another one at 10th and 17th level.</p>\n<p>You can use only one Metamagic option on a spell when you cast it, unless otherwise noted.</p>\n<h3>Careful Spell</h3>\n<p>When you cast a spell that forces other creatures to make a saving throw, you can protect some of those creatures from the spell&rsquo;s full force. To do so, you spend 1 sorcery point and choose a number of those creatures up to your Charisma modifier (minimum of one creature). A chosen creature automatically succeeds on its saving throw against the spell.</p>\n<h3>Distant Spell</h3>\n<p>When you cast a spell that has a range of 5 feet or greater, you can spend 1 sorcery point to double the range&nbsp;of the spell.</p>\n<p>When you cast a spell that has a range of touch, you can spend 1 sorcery point to make the range of the spell 30 feet.</p>\n<h3>Empowered Spell</h3>\n<p>When you roll damage for a spell, you can spend 1 sorcery point to reroll a number of the damage dice up to your Charisma modifier (minimum of one). You must use the new rolls.</p>\n<p>You can use Empowered Spell even if you have already used a different Metamagic option during the casting&nbsp;of the spell.</p>\n<h3>Extended Spell</h3>\n<p>When you cast a spell that has a duration of 1 minute or longer, you can spend 1 sorcery point to double its duration, to a maximum duration&nbsp;of 24 hours.</p>\n<h3>Heightened Spell</h3>\n<p>When you cast a spell that forces a creature to make a saving throw to resist its effects, you can spend 3 sorcery points to give one target of the spell disadvantage on its first saving throw made against the spell.</p>\n<h3>Quickened Spell</h3>\n<p>When you cast a spell that has a casting time of 1 action, you can spend 2 sorcery points to change the casting time to 1 bonus action for&nbsp;this casting.</p>\n<h3>Subtle Spell</h3>\n<p>When you cast a spell, you can spend 1 sorcery point to cast it without any somatic or verbal components.</p>\n<h3>Twinned Spell</h3>\n<p>When you cast a spell that targets only one creature and doesn&rsquo;t have a range of self, you can spend a number of sorcery points equal to the spell&rsquo;s level to target a second creature in range with the same spell (1 sorcery point if the spell is a cantrip).</p>\n<p>To be eligible, a spell must be incapable of targeting more than one creature at the spell&rsquo;s current level. For example,&nbsp;Magic Missile&nbsp;and&nbsp;Scorching Ray aren&rsquo;t eligible, but&nbsp;Ray of Frost&nbsp;and&nbsp;Chromatic Orb&nbsp;are.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Sorcerer 3"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 101"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Action"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components",
+              "current": "Sorcery Point"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          }
+        },
+        {
+          "_t": "i",
+          "tags": {
+            "Sorcerer": 1
+          },
+          "info": {
+            "name": {
+              "name": "Name",
+              "current": "Sorcerous Spellcasting"
+            },
+            "img": {
+              "name": "Image",
+              "current": "/content/spells/beam-orange-1.jpg"
+            },
+            "notes": {
+              "name": "Notes",
+              "current": "<p>An event in your past, or in the life of a parent or ancestor, left an indelible mark on you, infusing you with arcane magic. This font of magic, whatever its origin, fuels your spells. See&nbsp;<a href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/spellcasting\" rel=\"nofollow\">Spells Rules</a>&nbsp;for the general rules of spellcasting and the&nbsp;<a href=\"https://www.dndbeyond.com/spells?filter-class=6&amp;filter-search=&amp;filter-sub-class=&amp;filter-concentration=&amp;filter-ritual=&amp;filter-unlocked-content=\" rel=\"nofollow\">Spells Listing</a>&nbsp;for the sorcerer&nbsp;spell list.</p>\n<h5>Cantrips</h5>\n<p>At 1st level, you know four cantrips of your choice from the sorcerer spell list. You learn additional sorcerer cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Sorcerer table.</p>\n<h5>Spell Slots</h5>\n<p>The Sorcerer table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these sorcerer spells, you must expend a slot of the spell&rsquo;s level or higher. You regain all expended spell slots when you finisha long rest.</p>\n<p>For example, if you know the 1st-level spell&nbsp;Burning Hands&nbsp;and have a 1st-level and a 2nd-level spell slot available, you can cast&nbsp;Burning Hands&nbsp;using&nbsp;either slot.</p>\n<h5>Spells Known of 1st Level and Higher</h5>\n<p>You know two 1st-level spells of your choice from the sorcerer spell list.</p>\n<p>The Spells Known column of the Sorcerer table shows when you learn more sorcerer spells of your choice. Each of these spells must be of a level for which you have spell slots. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st&nbsp;or 2nd level.</p>\n<p>Additionally, when you gain a level in this class, you can choose one of the sorcerer spells you know and replace it with another spell from the sorcerer spell list, which also must be of a level for which you have&nbsp;spell slots.</p>\n<h5>Spellcasting Ability</h5>\n<p>Charisma is your spellcasting ability for your sorcerer spells, since the power of your magic relies on your ability to project your will into the world. You use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a sorcerer spell you cast and when making an attack roll with one.</p>\n<p>Spell save DC&nbsp;= 8 + your proficiency bonus + your Charisma modifier</p>\n<p>Spell attack modifier&nbsp;= your proficiency bonus + your Charisma modifier</p>\n<h5>Spellcasting Focus</h5>\n<p>You can use an arcane focus as a spellcasting focus for your sorcerer spells.</p>"
+            },
+            "type": {
+              "name": "Entry Type",
+              "current": "ability"
+            },
+            "variety": {
+              "name": "Item Variety",
+              "current": "class"
+            },
+            "requirements": {
+              "name": "Requirements",
+              "current": "Sorcerer 1"
+            },
+            "quantity": {
+              "name": "Quantity",
+              "min": 0,
+              "current": 1
+            },
+            "weight": {
+              "name": "Weight",
+              "min": 0
+            },
+            "price": {
+              "name": "Price"
+            },
+            "source": {
+              "name": "Source",
+              "current": "PHB 101"
+            }
+          },
+          "armor": {
+            "ac": {
+              "name": "Armor Class"
+            },
+            "str": {
+              "name": "Required Strength"
+            },
+            "ste": {
+              "name": "Stealth Disadvantage"
+            },
+            "equipped": {
+              "name": "Equipped"
+            }
+          },
+          "weapon": {
+            "hit": {
+              "name": "Attack Bonus"
+            },
+            "damage": {
+              "name": "Damage"
+            },
+            "damage2": {
+              "name": "Secondary Damage"
+            },
+            "range": {
+              "name": "Range"
+            },
+            "properties": {
+              "name": "Properties"
+            },
+            "proficient": {
+              "name": "Proficient"
+            }
+          },
+          "spell": {
+            "level": {
+              "name": "Level"
+            },
+            "school": {
+              "name": "School"
+            },
+            "duration": {
+              "name": "Duration"
+            },
+            "time": {
+              "name": "Casting Time",
+              "current": "Passive"
+            },
+            "components": {
+              "name": "Casting Components"
+            },
+            "materials": {
+              "name": "Material Components"
+            },
+            "ritual": {
+              "name": "Ritual Spell"
+            },
+            "concentration": {
+              "name": "Requires Concentration"
+            },
+            "classes": {
+              "name": "Classes"
+            }
+          }
         }
       ]
     },
@@ -58392,9 +58629,6 @@
       "data": [
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "NPC": 1
           },
@@ -58502,19 +58736,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530856747391
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-details"
-          },
           "tags": {
             "NPC": 1
           },
@@ -58622,19 +58847,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 3,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530854984350
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "NPC": 1
           },
@@ -58742,13 +58958,7 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530857431184
+          }
         },
         {
           "_t": "i",
@@ -58863,22 +59073,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
-          "_s": {},
-          "_lclock": 2,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530843255094
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "NPC": 1
           },
@@ -58987,19 +59185,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530850810814
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "NPC": 1
           },
@@ -59107,19 +59296,10 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 1,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null,
-          "_uTime": 1530857504218
+          }
         },
         {
           "_t": "i",
-          "tabs": {
-            "content-tabs": "tab-notes"
-          },
           "tags": {
             "NPC": 1
           },
@@ -59227,12 +59407,7 @@
             "classes": {
               "name": "Classes"
             }
-          },
-          "_s": {},
-          "_lclock": 0,
-          "_c": "localhost",
-          "_uid": null,
-          "_sync": null
+          }
         }
       ]
     }
