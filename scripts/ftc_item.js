@@ -5,7 +5,13 @@
 class FTCItem extends FTCEntity {
 
     get type() {
+        // An item's primary type
         return this.data.info.type.current;
+    }
+
+    get variety() {
+        // An item's secondary type
+        return this.data.info.variety.current;
     }
 
     get spell() {
@@ -60,6 +66,8 @@ class FTCItem extends FTCEntity {
         FTC.item = this;
     }
 
+    /* ------------------------------------------- */
+
     convertData(data) {
 
         // Maybe clean the item if it doesn't come from me
@@ -72,7 +80,6 @@ class FTCItem extends FTCEntity {
         data.info.variety.current = data.info.variety.current || this.context.variety;
         return data;
     }
-
 
     /* ------------------------------------------- */
 
@@ -106,9 +113,6 @@ class FTCItem extends FTCEntity {
         if (i.info.type && i.info.type.current) {
             return (i.info.type.current === "note") ? "item" : i.info.type.current;
         }
-
-        // Provided by context
-        if ( this.context.type ) return this.context.type;
 
         // Implied by container
         else if ( this.context.container ) {
@@ -170,7 +174,7 @@ class FTCItem extends FTCEntity {
     /* ------------------------------------------- */
 
     get ownedItemUID() {
-        return this.owner._uid + "." + this.context.container + "." + this.context.itemId;
+        return this.owner.id + "." + this.context.container + "." + this.context.itemId;
     }
 
     editOwnedItem(itemId) {

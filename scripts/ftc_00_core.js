@@ -172,8 +172,12 @@ class FTCEntity {
         // Record context
         this.context = context || {};
 
+        // Record app and scope (once rendered)
+        this.app = undefined;
+        this.scope = undefined;
+
         // Case 1: Sync Object provided
-        if ( "sync" in object ) {
+        if ( object.sync ) {
             this.obj = object;
             this.data = object.data;
         }
@@ -236,6 +240,9 @@ class FTCEntity {
     /* ------------------------------------------- */
 
     renderHTML(app, scope) {
+        let self = this;
+        this.app = app;
+        this.scope = scope;
 
         // Step 1: Handle the provided scope
         scope = this.refineScope(scope);
@@ -255,6 +262,9 @@ class FTCEntity {
 
         // Step 6: Activate Event Listeners
         this.activateListeners(html, app, scope);
+
+        // Step 7: Sechedule Cleanup Actions
+        app.on("remove", function() { self.cleanup(scope); });
 
         // Return the final HTML
         return html;
@@ -289,6 +299,12 @@ class FTCEntity {
 
     activateListeners(html, app, scope) {
         return html;
+    }
+
+    /* ------------------------------------------- */
+
+    cleanup(scope) {
+        if ( this._changed ) this.save();
     }
 }
 

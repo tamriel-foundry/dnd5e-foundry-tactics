@@ -71,7 +71,7 @@
 
             <!-- Character Inventory -->
             <div id="content-inventory" class="inventory content-tab">
-                <div role="group" class="modifier-select form-group flexrow">
+                <header role="group" class="modifier-select form-group flexrow">
                     <label>Weapon Attack Modifier</label>
                     <select class="ftc-select" data-edit="info.offensive.current"
                             data-selected="{info.offensive.current}">
@@ -83,25 +83,12 @@
                         <option value="Wis">Wisdom</option>
                         <option value="Cha">Charisma</option>
                     </select>
-                </div>
+                </header>
 
-                <ol class="inventory-items item-list">
-                    <li class="item inventory-header currency flexrow">
-                        <span class="currency-label">Currency</span>
-                        <div class="currency-bags flexrow">
-                            <label>Gold:</label>
-                            <input class="ftc-edit currency-gp" type="text" tabindex="0" data-autosize="8"
-                                   data-edit="counters.gp.current" value="{counters.gp.current}" placeholder="0"/>
-                            <label>Silver:</label>
-                            <input class="ftc-edit currency-sp" type="text" tabindex="0" data-autosize="8"
-                                   data-edit="counters.sp.current" value="{counters.sp.current}" placeholder="0"/>
-                            <label>Copper:</label>
-                            <input class="ftc-edit currency-cp" type="text" tabindex="0" data-autosize="8"
-                                   data-edit="counters.cp.current" value="{counters.cp.current}" placeholder="0"/>
-                        </div>
-                    </li>
-                    <!-- FTC_INVENTORY_HTML -->
-                </ol>
+                <section class="inventory-items">
+                    <!-- INVENTORY_CURRENCY -->
+                    <!-- INVENTORY_ITEMS -->
+                </section>
 
                 <footer class="inventory-weight {weight.cls}">
                     <span class="inventory-weight-bar" style="width: {weight.pct}%"></span>
@@ -111,7 +98,7 @@
 
             <!-- Spellbook -->
             <div id="content-spells" class="spellbook content-tab">
-                <div role="group" class="modifier-select form-group flexrow">
+                <header role="group" class="modifier-select form-group flexrow">
                     <label>Spellcasting Attribute</label>
                     <select class="ftc-select" data-edit="info.spellcasting.current"
                             data-selected="{info.spellcasting.current}">
@@ -123,17 +110,18 @@
                         <option value="Wis">Wisdom</option>
                         <option value="Cha">Charisma</option>
                     </select>
-                    <span class="ftc-item-add" data-item-container="spellbook">
-                        <span class="glyphicon glyphicon-plus"></span> Add
-                    </span>
-                </div>
+                </header>
 
-                <ol class="spellbook-spells item-list">
-                    <!-- FTC_SPELLS_HTML -->
-                </ol>
+                <section class="spellbook-spells">
+                    <!-- SPELLBOOK_SPELLS -->
+
+                    <footer class="ability-controls item-header">
+                        <div class="ftc-item-add">
+                            <span class="glyphicon glyphicon-plus"></span> Add Spell
+                        </div>
+                    </footer>
+                </section>
             </div>
-
-
 
             <div id="content-traits" class="content-tab">
                 <!-- CHARACTER_TAB_TRAITS -->
@@ -147,8 +135,6 @@
             </div>
 
         </div>
-        
-
     </main>
 
     <aside class="ftc-sheet-sidebar flexcolumn">
@@ -205,12 +191,14 @@
         </div>
 
         <div id="content-abilities" class="content-tab">
-            <ol class="abilities item-list">
-                <!-- CHARACTER_TAB_ABILITIES -->
-                <li class="ability-add ftc-item-add" data-item-container="abilities">
-                    <span class="glyphicon glyphicon-plus"></span> Add Ability
-                </li>
+            <ol class="abilities item-list" data-item-type="ability" data-item-container="abilities">
+                <!-- ABILITY_LIST -->
             </ol>
+            <footer class="ability-controls item-header">
+                <div class="ftc-item-add">
+                    <span class="glyphicon glyphicon-plus"></span> Add Ability
+                </div>
+            </footer>
         </div>
     </aside>
 </section>

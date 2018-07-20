@@ -209,20 +209,25 @@ FTC.forms.edit_item_fields = function(html, character) {
 
     // Add Item
     html.find('.ftc-item-add').click(function() {
-       const container = $(this).attr("data-item-container"),
-           data = duplicate(game.templates.item);
-       let type = $(this).attr("data-item-type");
-       if ( type === "equipment" ) type = "armor";
-       else if ( type === "weapons" ) type = "weapon";
-       let item = new FTCItem(data, {"owner": character, "container": container, "type": type});
-       item.editOwnedItem();
+        let controls = $(this).closest(".item-header"),
+            list = controls.next(".item-list").length ? controls.next(".item-list") : controls.prev(".item-list"),
+            container = list.attr("data-item-container"),
+            data = duplicate(game.templates.item);
+
+        // Initial data
+        data.info.type.current = list.attr("data-item-type");
+        data.info.variety.current = list.attr("data-item-variety");
+
+        // Create owned item
+        let item = new FTCItem(data, {"owner": character, "container": container});
+        item.editOwnedItem();
     });
 
     // Edit Item
     html.find('.item-list .item-edit').click(function() {
         const li = $(this).closest("li"),
-            container = li.attr("data-item-container"),
             itemId = li.attr("data-item-id"),
+            container = li.parent().attr("data-item-container"),
             item = new FTCItem(character.data[container][itemId], {"owner": character, "container": container});
         item.editOwnedItem(itemId);
     });
@@ -230,8 +235,9 @@ FTC.forms.edit_item_fields = function(html, character) {
     // Delete Item
     html.find('.item-list .item-trash').click(function() {
         const li = $(this).closest("li"),
-            container = li.attr("data-item-container"),
-            itemId = li.attr("data-item-id");
+            itemId = li.attr("data-item-id"),
+            container = li.parent().attr("data-item-container");
+        li.slideUp(200, function() { $(this).remove(); });
         character.deleteItem(container, itemId);
     });
 };

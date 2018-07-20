@@ -21,14 +21,14 @@
 .ftc-sheet .ftc-sheet-main {
     flex: 1;
     order: 2;
-    margin: 15px;
+    margin: 10px;
     padding: 0;
 }
 
 .ftc-sheet .ftc-sheet-sidebar {
     flex: 0 0 250px;
     order: 1;
-    padding: 15px;
+    padding: 10px;
     border-right: 1px solid #999;
 }
 
@@ -232,7 +232,6 @@ div.content-tab {
     display: none;
     flex-direction: column;
     position: relative;
-    margin: 10px 0 0;
 }
 div.content-tab.tab-active {
     display: flex;

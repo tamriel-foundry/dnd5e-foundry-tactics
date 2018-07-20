@@ -1,8 +1,12 @@
-<li class="item inventory-header {type} flexrow">
-	<span class="item-header">{name}</span>
+<header class="item item-header flexrow">
+    <span class="item-name">{name}</span>
     <span class="item-quantity">Qty.</span>
     <span class="item-weight">Wgt.</span>
-    <div class="item-controls ftc-item-add" data-item-type="{type}" data-item-container="inventory">
+    <div class="item-controls ftc-item-add">
         <span class="glyphicon glyphicon-plus"></span> Add
     </div>
-</li>
+</header>
+
+<ol class="inventory-{type} item-list" data-item-type="{type}" data-item-variety="{variety}" data-item-container="inventory">
+    <!-- ITEMS -->
+</ol>

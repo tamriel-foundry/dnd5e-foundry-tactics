@@ -12,12 +12,20 @@ class FTCCharacter extends FTCEntity {
         this.parts = {
             CHARACTER_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'character/primary-stats.html',
             CHARACTER_TAB_TRAITS: FTC.TEMPLATE_DIR + 'character/tab-traits.html',
+            INVENTORY_CURRENCY: FTC.TEMPLATE_DIR + 'character/items/inventory-currency.html',
             NPC_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'npc/primary-stats.html',
             NPC_TAB_TRAITS: FTC.TEMPLATE_DIR + 'npc/tab-traits.html'
         };
 
         // Register local for debugging
         FTC.character = this;
+
+        // Store container sorting order
+        this._sorting = {
+            "inventory": [],
+            "spellbook": [],
+            "abilities": [],
+        };
     }
 
     /* ------------------------------------------- */
@@ -32,6 +40,27 @@ class FTCCharacter extends FTCEntity {
         let attr = this.data.info.spellcasting.current,
             mod = this.data.stats[attr].modifiers.mod;
         return 8 + mod + this.data.counters.proficiency.current;
+    }
+
+    /* ------------------------------------------- */
+
+    save() {
+        if (!this.obj || !this._changed) return;
+        const self = this;
+        console.log("Saving object " + this.name);
+
+        // Update item sorting order
+        $.each(this._sorting, function(container, order) {
+            if ( !order.length ) return;
+            let items = [];
+            $.each(order, function(n, o) {
+                items[n] = self.data[container][o];
+            });
+            self.obj.data[container] = items;
+        });
+
+        // Save the object
+        this.obj.sync("updateAsset");
     }
 
     /* ------------------------------------------- */
@@ -164,7 +193,7 @@ class FTCCharacter extends FTCEntity {
             "weapons": {
                 "name": "Weapons",
                 "items": [],
-                "type": "weapon"
+                "type": "weapon",
             },
             "equipment": {
                 "name": "Equipment",
@@ -175,11 +204,13 @@ class FTCCharacter extends FTCEntity {
                 "name": "Tools",
                 "items": [],
                 "type": "item",
+                "variety": "tool"
             },
             "consumables": {
                 "name": "Consumables",
                 "items": [],
-                "type": "item"
+                "type": "item",
+                "variety": "consumable"
             },
             "pack": {
                 "name": "Backpack",
@@ -194,8 +225,7 @@ class FTCCharacter extends FTCEntity {
 
             // Set id and class
             item.data.itemId = itemId;
-            item.data.itemCls = ( item.type === "weapon" && item.weapon.damage.current ) ?
-                "ftc-rollable" : "";
+            item.data.itemCls = ( item.type === "weapon" && item.weapon.damage.current ) ? "ftc-rollable" : "";
 
             // Push into type
             if ( item.type === "weapon" ) {
@@ -227,8 +257,8 @@ class FTCCharacter extends FTCEntity {
     /* ------------------------------------------- */
 
     setupSpellbook(data) {
-        // Set up spellbook items by converting them to FTCItem objects
-
+        /* Set up spellbook items by converting them to FTCItem objects
+         */
         const sls = {};
 
         // Iterate over spellbook spells
@@ -240,7 +270,7 @@ class FTCCharacter extends FTCEntity {
 
             // Construct spell data
             let lvl = (spell.level.current === "Cantrip") ? 0 : parseInt(spell.level.current || 0);
-            item.spellid = spellId;
+            item.data.spellid = spellId;
 
             // Record spell-level
             sls[lvl] = sls[lvl] || {
@@ -262,10 +292,10 @@ class FTCCharacter extends FTCEntity {
 
     setupAbilities(data) {
         /* Set up ability items by converting them to FTCItem objects
-        */
-
-
+         */
         const abilities = [];
+
+        // Iterate over abilities
         $.each(data.abilities, function(itemId, itemData) {
             let item = new FTCItem(itemData, {"owner": this.owner, "container": "abilities"});
             abilities.push(item);
@@ -280,7 +310,7 @@ class FTCCharacter extends FTCEntity {
 
     getTemplate(data, scope) {
         /* Determine the base HTML template that should be used for the entity
-        */
+         */
 
         // Private Preview Template
         if ( scope.isPrivate ) return FTC.TEMPLATE_DIR + 'character/preview-character.html';
@@ -349,48 +379,52 @@ class FTCCharacter extends FTCEntity {
             itemHeader = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/inventory-header.html'),
             itemTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/item.html');
         $.each(data.inventory, function(_, type) {
-            inventory += FTC.populateTemplate(itemHeader, type);
+            let collection = FTC.populateTemplate(itemHeader, type),
+                items = "";
             $.each(type.items, function(_, item) {
-                inventory += FTC.populateTemplate(itemTemplate, item.data);
+                items += FTC.populateTemplate(itemTemplate, item.data);
             });
+            inventory += collection.replace("<!-- ITEMS -->", items);
         });
         inventory = inventory || '<li><blockquote class="compendium">Add items from the compendium.</blockquote></li>';
-        return html.replace("<!-- FTC_INVENTORY_HTML -->", inventory);
+        return html.replace("<!-- INVENTORY_ITEMS -->", inventory);
     }
 
     /* ------------------------------------------- */
 
     _buildSpellbook(html, data) {
-        let spells = "",
-            ltmp = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/spell-header.html'),
-            stmp = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/spell.html');
-        $.each(data.spellbook, function(l, s){
-            spells += FTC.populateTemplate(ltmp, s);
-            $.each(s.spells, function(i, p){
-                spells += FTC.populateTemplate(stmp, p);
+        let spellbook = "",
+            spellHeader = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/spell-header.html'),
+            spellTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/spell.html');
+        $.each(data.spellbook, function(l, level){
+            let page = FTC.populateTemplate(spellHeader, level),
+                spells = "";
+            $.each(level.spells, function(_, spell){
+                spells += FTC.populateTemplate(spellTemplate, spell.data);
             });
+            spellbook += page.replace("<!-- SPELLS -->", spells);
         });
-        spells = spells || '<li><blockquote class="compendium">Add spells from the compendium.</blockquote></li>';
-        return html.replace("<!-- FTC_SPELLS_HTML -->", spells);
+        spellbook = spellbook || '<li><blockquote class="compendium">Add spells from the compendium.</blockquote></li>';
+        return html.replace("<!-- SPELLBOOK_SPELLS -->", spellbook);
     }
 
     /* ------------------------------------------- */
 
     _buildAbilities(html, data) {
         let abilities = "",
-            ab = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/ability.html');
+            abilityTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/ability.html');
         $.each(data.abilities, function(i, item) {
-            item.itemid = i;
-            abilities += FTC.populateTemplate(ab, item);
+            item.data.itemid = i;
+            abilities += FTC.populateTemplate(abilityTemplate, item.data);
         });
         abilities = abilities || '<li><blockquote class="compendium">Add abilities from the compendium.</blockquote></li>';
-        return html.replace("<!-- CHARACTER_TAB_ABILITIES -->", abilities);
+        return html.replace("<!-- ABILITY_LIST -->", abilities);
     }
 
     /* ------------------------------------------- */
 
     activateListeners(html, app, scope) {
-        const character = this;
+        const self = this;
 
         // Activate Tabs and Editable Fields
         FTC.ui.activateTabs(html, this, app);
@@ -402,36 +436,73 @@ class FTCCharacter extends FTCEntity {
             // Attribute rolls
             html.find('.attribute .ftc-rollable').click(function() {
                 let attr = $(this).parent().attr("data-attribute");
-                character.rollAttribute(attr);
+                self.rollAttribute(attr);
             });
 
             // Skill rolls
             html.find('.skill .ftc-rollable').click(function() {
                 let skl = $(this).parent().attr("data-skill");
-                character.rollSkillCheck(skl);
+                self.rollSkillCheck(skl);
             });
 
             // Weapon actions
             html.find(".weapon .ftc-rollable").click(function() {
                 const itemId = $(this).closest("li.weapon").attr("data-item-id"),
-                    itemData = character.data.inventory[itemId];
-                FTCItemAction.toChat(character, itemData);
+                    itemData = self.data.inventory[itemId];
+                FTCItemAction.toChat(self, itemData);
             });
 
             // Spell actions
             html.find(".spell .ftc-rollable").click(function() {
                 const itemId = $(this).closest("li.spell").attr("data-item-id"),
-                    itemData = character.data.spellbook[itemId];
-                FTCItemAction.toChat(character, itemData);
+                    itemData = self.data.spellbook[itemId];
+                FTCItemAction.toChat(self, itemData);
             });
 
             // Ability actions
             html.find(".ability .ftc-rollable").click(function() {
                 const itemId = $(this).closest("li.ability").attr("data-item-id"),
-                    itemData = character.data.abilities[itemId];
-                FTCItemAction.toChat(character, itemData);
+                    itemData = self.data.abilities[itemId];
+                FTCItemAction.toChat(self, itemData);
+            });
+
+            // Dragable items
+            html.find(".item-list").sortable({
+                "items": " > li",
+                "cancel": ".inventory-header",
+                "containment": "parent",
+                "axis": "y",
+                "opacity": 0.75,
+                "delay": 200,
+                "scope": $(this).attr("data-item-container"),
+                "update": function( event, ui ) {
+                    let container = ui.item.parent().attr("data-item-container");
+                    self.getSortOrder(container, ui.item);
+                }
             });
         }, 500);
+    }
+
+    /* ------------------------------------------- */
+
+    getSortOrder(container, li) {
+        let parent = undefined;
+        if ( li ) {
+            parent = li.parents("." + container);
+        } else if ( this.app ) {
+            parent = this.app.find("." + container);
+        }
+
+        // Check the current sort order
+        let sorted = [];
+        parent.find("li.item").each(function() {
+            sorted.push($(this).attr("data-item-id"));
+        });
+
+        // Update sorting
+        this._sorting[container] = sorted;
+        this._changed = true;
+        return sorted;
     }
 
     /* ------------------------------------------- */
@@ -456,7 +527,11 @@ class FTCCharacter extends FTCEntity {
         }
 
         // Push the item in
+        let newId = this.data[container].length;
         this.data[container].push(item.data);
+
+        // Add the item to pending sort
+        if ( this._sorting[container].length ) this._sorting[container].push(newId);
         this._changed = true;
         this.save();
     }
@@ -473,8 +548,9 @@ class FTCCharacter extends FTCEntity {
 
     deleteItem(container, itemId) {
         this.data[container].splice(itemId, 1);
+        let sortIndex = this.data[container].indexOf(itemId + "");
+        this._sorting[container].splice(sortIndex, 1);
         this._changed = true;
-        this.save();
     }
 
     /* ------------------------------------------- */
