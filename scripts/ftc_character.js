@@ -77,7 +77,8 @@ class FTCCharacter extends FTCEntity {
     convertData(data) {
 
         // Proficiency Bonus
-        data.counters.proficiency.current = Math.floor((data.counters.level.current + 7) / 4);
+        let lvl = ( this.isNPC ) ? data.counters.cr.current : data.counters.level.current;
+        data.counters.proficiency.current = Math.floor((lvl + 7) / 4);
 
         // Abilities -> Feats
         if ( data.abilities && !data.feats ) {
@@ -397,7 +398,7 @@ class FTCCharacter extends FTCEntity {
             });
             inventory += collection.replace("<!-- ITEMS -->", items);
         });
-        inventory = inventory || '<li><blockquote class="compendium">Add items from the compendium.</blockquote></li>';
+        inventory = inventory || '<blockquote class="compendium">Add items from the compendium.</blockquote>';
         return html.replace("<!-- INVENTORY_ITEMS -->", inventory);
     }
 
@@ -415,7 +416,7 @@ class FTCCharacter extends FTCEntity {
             });
             spellbook += page.replace("<!-- SPELLS -->", spells);
         });
-        spellbook = spellbook || '<li><blockquote class="compendium">Add spells from the compendium.</blockquote></li>';
+        spellbook = spellbook || '<blockquote class="compendium">Add spells from the compendium.</blockquote>';
         return html.replace("<!-- SPELLBOOK_SPELLS -->", spellbook);
     }
 
@@ -428,7 +429,7 @@ class FTCCharacter extends FTCEntity {
             item.data.itemid = i;
             feats += FTC.populateTemplate(featTemplate, item.data);
         });
-        feats = feats || '<li><blockquote class="compendium">Add feats from the compendium.</blockquote></li>';
+        feats = feats || '<blockquote class="compendium">Add feats from the compendium.</blockquote>';
         return html.replace("<!-- FEATS_LIST -->", feats);
     }
 
