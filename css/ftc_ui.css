@@ -83,11 +83,6 @@ img.token-image {
      FORM FIELDS
 ------------------------------------------- */
 
-label {
-    margin: 0;
-    font-weight: normal;
-}
-
 .ftc-sheet label {
     color: #403e3c;
 }
@@ -120,7 +115,12 @@ input.ftc-edit::placeholder {
 
 select.ftc-select {
     background: transparent;
-    font-size: 18px;
+}
+select.ftc-select:focus {
+    outline: #444 auto 1px;
+}
+.ftc-select option {
+    background: #DDD;
 }
 
 .ftc-textarea {
@@ -146,6 +146,8 @@ select.ftc-select {
     width: 100%;
     height: 30px;
     margin: 3px 0;
+    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
 }
 
 .form-group > * {
@@ -154,6 +156,8 @@ select.ftc-select {
 }
 
 .form-group > label {
+    font-family: "Nodesto Caps Condensed";
+    font-size: 20px;
     flex: 0 0 35%;
 }
 
@@ -186,6 +190,15 @@ select.ftc-select {
     flex: 0 0 100%;
 }
 
+
+/* TinyMCE */
+.ftc-sheet .mce-tinymce {
+    border: none !important;
+}
+.ftc-sheet div.mce-edit-area {
+    background: transparent;
+    box-shadow: 0 0 4px #ff3838;
+}
 
 .ftc-rollable {
     cursor: pointer;
@@ -284,74 +297,53 @@ div.content-tab.tab-active {
     text-align: left;
 }
 
-
-/* -------------------------------------------
-     General Styles
-------------------------------------------- */
-
-/* Headers */
-h1, h2, h3, h4 {
-    font-family: "Nodesto Caps Condensed";
-    font-weight: normal !important;
-    color: #332920;
-    margin: 0;
-}
-h1 {
-    font-size: 48px;
-}
-h2 {
-    font-size: 32px;
-}
-h3 {
-    font-size: 24px;
-    margin-bottom: 6px;
-}
-h4 {
-    font-size: 20px;
-    margin-bottom: 4px;
-}
-
-hr {
-    margin: 0.5em 0;
-    border: 2px solid #792a19;
-}
-
-blockquote {
-    margin: 0 0 10px;
-    padding: 5px 0px 5px 20px;
-    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 1em;
-    font-style: italic;
-    border-left: 5px solid #61584e;
-}
-
-blockquote em {
-    font-weight: bold;
-}
-
-
-
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 6px;
-    background: transparent;
-}
-::-webkit-scrollbar-track {
-    background: transparent;
-    box-shadow: 0 0 1px #999 inset;
-    border-radius: 3px;
-}
-::-webkit-scrollbar-thumb {
-    outline: 1px solid #222;
-    border-radius: 3px;
-}
-
-
 .ftc-rollable:hover { text-shadow: 0 0 4px #ff3838; }
 
 /* -------------------------------------------
      DANGER DANGER OVERRIDES
 ------------------------------------------- */
+
+/* UI Popout Hacks */
+div.ui-popout {
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+.ui-popout .dragcontrol.background {
+    background: rgba(0, 0, 0, 0.5);
+    height: 30px;
+}
+
+.ui-popout text.flexrow.alttext {
+    background: transparent;
+    font-size: 1em !important;
+    line-height: 30px;
+    padding: 0 10px;
+}
+.ui-popout text.flexrow.alttext:hover {
+    background: rgba(0, 0, 51, 0.25);
+    border: none;
+    color: #FFF;
+}
+.ui-popout text.flexrow.alttext > b {
+    font-family: "Scaly Sans";
+    font-weight: normal !important;
+    text-shadow: 1px 1px #000 !important;
+    font-size: 16px;
+}
+a[title="minimize"], a[title="maximize"] {
+    display: none !important;
+}
+a[title="Close Window"] {
+    text-shadow: 1px 1px #000 !important;
+}
+
+
+
+/* Hack hide the control bar on V2 item sheets */
+div[ui-name="ui_renderItemv2"] > .flexcolumn .flexrow.background.outline {
+    display: none;
+}
+
 
 div[ui-name="ui_textBox"] .hover2:hover {
     color: inherit;
@@ -361,14 +353,7 @@ div[ui-name="ui_textBox"] .hover2:hover {
     box-shadow: inherit;
 }
 
-a[title="minimize"], a[title="maximize"] {
-    display: none !important;
-}
-a[title="Close Window"] {
-    font-size: 18px;
-    line-height: 18px;
-    padding: 0 0 0 10px;
-}
+
 
 
 /* Asset Menu */

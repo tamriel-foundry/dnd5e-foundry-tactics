@@ -154,9 +154,11 @@ const FTC = {
         // Set the value if it is defined
         if (value !== undefined && value !== "") target[key] = value;
         else delete target[key];
-    }
+    },
 
     /* ------------------------------------------- */
+
+    debug: {}
 };
 
 
@@ -192,6 +194,9 @@ class FTCEntity {
 
         // Initial data conversion steps
         this.data = this.convertData(this.data);
+
+        // Save a reference to the active entity for debugging purposes
+        FTC.debug[this.type] = this;
     }
 
     /* ------------------------------------------- */
@@ -206,16 +211,12 @@ class FTCEntity {
         return ( this.obj ) ? this.obj.id() : undefined;
     }
 
-    get info() {
-        return this.data.info;
-    }
-
     get name() {
-        return this.info.name.current;
+        return this.data.info.name.current;
     }
 
-    get img() {
-        return this.info.img.current;
+    get type() {
+        return this.data._type;
     }
 
     /* ------------------------------------------- */
@@ -239,7 +240,7 @@ class FTCEntity {
     /* Rendering                                   */
     /* ------------------------------------------- */
 
-    renderHTML(app, scope) {
+    render(app, scope) {
         let self = this;
         this.app = app;
         this.scope = scope;
@@ -298,7 +299,6 @@ class FTCEntity {
     /* ------------------------------------------- */
 
     activateListeners(html, app, scope) {
-        return html;
     }
 
     /* ------------------------------------------- */

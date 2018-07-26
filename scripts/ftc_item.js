@@ -1,144 +1,149 @@
+
 /* ------------------------------------------- */
-/* Item Object Type                            */
+/*  Element Data Model                         */
 /* ------------------------------------------- */
 
-class FTCItem extends FTCEntity {
-
-    get type() {
-        // An item's primary type
-        return this.data.info.type.current;
+FTC.elements = {
+    "core": {
+        "_t": "i",
+        "info": {
+            "name": { "name": "Name" },
+            "img": { "name": "Artwork" },
+            "notes": { "name": "Description" },
+        },
+        "source": { "name": "Source" },
+        "tags": {},
+    },
+    "inventory": {
+        "quantity": { "name": "Quantity" },
+        "price": { "name": "Price" },
+        "weight": { "name": "Weight" }
+    },
+    "Weapon": {
+        "type": { "name": "Weapon Type" },
+        "hit": { "name": "Attack Bonus" },
+        "damage": { "name": "Damage" },
+        "damage2": { "name": "Alternate Damage" },
+        "range": { "name": "Range" },
+        "properties": { "name": "Properties" },
+        "proficient": { "name": "Proficient" },
+        "modifier": { "name": "Offensive Ability" }
+    },
+    "Spell": {
+        "level": { "name": "Spell Level" },
+        "type": { "name": "Spell Type" },
+        "school": { "name": "Spell School" },
+        "duration": { "name": "Spell Duration" },
+        "time": { "name": "Casting Time" },
+        "range": { "name": "Spell Range" },
+        "damage": { "name": "Spell Damage" },
+        "components": { "name": "Spell Components" },
+        "materials": { "name": "Material Components" },
+        "ritual": { "name": "Ritual Spell" },
+        "concentration": { "name": "Requires Concentration" },
+        "modifier": { "name": "Spellcasting Ability" }
+    },
+    "Tool": {
+        "proficient": { "name": "Proficient" }
+    },
+    "Armor": {
+        "type": { "name": "Armor Type" },
+        "ac": { "name": "Armor Class" },
+        "strength": { "name": "Required Strength" },
+        "stealth": { "name": "Stealth Disadvantage" },
+        "proficient": { "name": "Proficient" },
+        "equipped": { "name": "Equipped" }
+    },
+    "Consumable": {
+        "type": { "name": "Consumable Type" },
+        "charges": { "name": "Uses Remaining" }
+    },
+    "Feat": {
+        "type": { "name": "Feat Type" },
+        "requirements": { "name": "Requirements" },
+        "time": { "name": "Feat Usage" },
+        "cost": { "name": "Ability Cost" }
     }
+};
 
-    get variety() {
-        // An item's secondary type
-        return this.data.info.variety.current;
-    }
 
-    get spell() {
-        return this.data.spell;
-    }
+/* ------------------------------------------- */
+/*  Base Element Entity Type                   */
+/* ------------------------------------------- */
 
-    get weapon() {
-        return this.data.weapon;
-    }
 
-    get armor() {
-        return this.data.armor;
-    }
+class FTCElement extends FTCEntity {
 
+    /* Ownership */
     get owner() {
         return this.context.owner;
     }
 
-    get template() {
-        return FTC.TEMPLATE_DIR + "items/item-body.html";
-    }
-
-    get parts() {
+    /* Templates */
+    get templates() {
+        const td = FTC.TEMPLATE_DIR + "elements/";
         return {
-            ITEM_SIDEBAR: FTC.TEMPLATE_DIR + 'items/item-sidebar.html',
-            ITEM_TAB_NOTES: FTC.TEMPLATE_DIR + 'items/tab-notes.html',
-            ITEM_TAB_ARMOR: FTC.TEMPLATE_DIR + 'items/tab-armor.html',
-            ITEM_TAB_WEAPON: FTC.TEMPLATE_DIR + 'items/tab-weapon.html',
-            ITEM_TAB_SPELL: FTC.TEMPLATE_DIR + 'items/tab-spell.html',
-            ITEM_TAB_FEAT: FTC.TEMPLATE_DIR + 'items/tab-feat.html',
-            ITEM_TAB_ITEM: FTC.TEMPLATE_DIR + 'items/tab-item.html'
-        };
-    }
-
-    get types() {
-        return {
-            ITEM_TYPE_DEFAULT: "item",
-            ITEM_TYPE_INVENTORY: "item",
-            ITEM_TYPE_SPELL: "spell",
-            ITEM_TYPE_FEAT: "feat"
+            "BODY": td + "body.html",
+            "ELEMENT_SIDEBAR": td + "sidebar.html",
+            "ELEMENT_NOTES": td + "notes.html",
+            "ELEMENT_ARMOR": td + "armor.html",
+            "ELEMENT_CONSUMABLE": td + "item.html",
+            "ELEMENT_SPELL": td + "spell.html",
+            "ELEMENT_TOOL": td + "item.html",
+            "ELEMENT_WEAPON": td + "weapon.html"
         }
     }
 
     /* ------------------------------------------- */
 
-    constructor(obj, context) {
-        super(obj, context);
-        FTC.item = this;
+    static applyDataModel() {
+
+        // Update Element Templates
+        $.each(game.templates.elements, function(type, definition) {
+
+            // Add core attributes to all elements
+            ftc_merge(definition, FTC.elements.core, true, true, true);
+            definition["_type"] = type;
+
+            // Add inventory attributes to items, weapons, armor, tools, and consumables
+            const isInventory = ["Item", "Weapon", "Armor", "Tool", "Consumable", "Spell"];
+            if ( isInventory.includes(type) ) ftc_merge(definition, FTC.elements.inventory, true, false, true);
+
+            // Add type-specific data
+            ftc_merge(definition, FTC.elements[type], true, false, true);
+        });
+        console.log("Foundry Tactics - Element Templates Updated");
     }
 
     /* ------------------------------------------- */
 
     convertData(data) {
-
-        // Maybe clean the item if it doesn't come from me
-        if ( !data.info.type ) {
-            data = ftc_update_entity(data, game.templates.item);
-        }
-
-        // Classify item type and variety
-        data.info.type.current = this.classify_type(data);
-        data.info.variety.current = data.info.variety.current || this.context.variety;
-        return data;
+        return data
     }
 
     /* ------------------------------------------- */
 
     enrichData(data) {
 
-        // Temporary FTC display data
-        data.ftc = data.ftc || {};
-
-        // Classify data type
-        data.ftc.typeStr = this.type.capitalize();
-
-        // Default Image
-        data.info.img.current = data.info.img.current || "/content/icons/Pouch1000p.png";
-
         // Collapse tags
-        data.ftc.tagStr = Object.keys(data.tags || {}).join(", ");
+        data.tagStr = Object.keys(data.tags || {}).join(", ");
 
-        // Ensure quantity, price, and weight
-        data.info.price = data.info.price || {"name": "Price", "current": 0.0};
-        $.each(["weight", "quantity", "price"], function(_, v) {
-           data.info[v].current = parseFloat(data.info[v].current || 0.0)
+        // Quantity, Price, and Weight
+        $.each(["quantity", "price", "weight"], function(_, v) {
+            if ( v in data ) data[v].current = parseFloat(data[v].current || 0.0);
         });
         return data;
     }
 
     /* ------------------------------------------- */
 
-    classify_type(i) {
-
-        // Already defined
-        if (i.info.type && i.info.type.current) {
-            if ( i.info.type.current === "note" ) return "item";
-            else if ( i.info.type.current === "ability" ) return "feat";
-            else return i.info.type.current;
-        }
-
-        // Implied by container
-        else if ( this.context.container ) {
-            if ( this.context.container === "spellbook" ) return "spell";
-            else if ( this.context.container === "feats" ) return "feat";
-        }
-
-        // Implied by tags
-        if (("spell" in i.tags) || (i.spell && i.spell.level.current)) return "spell";
-        else if (("weapon" in i.tags) || (i.weapon && i.weapon.damage.current)) return "weapon";
-        else if (("armor" in i.tags) || (i.armor && i.armor.ac.current)) return "armor";
-        else if ("ability" in i.tags || "talent" in i.tags || "feat" in i.tags) return "feat";
-
-        // Default type is "item"
-        return "item";
-    }
-
-    /* ------------------------------------------- */
-
     buildHTML(data, scope) {
-
-        // Build template body
-        let details = "ITEM_TAB_"+this.type.toUpperCase(),
-            html = FTC.loadTemplate(this.template);
-        html = html.replace("ITEM_DETAILS_TEMPLATE", details);
+        const templates = this.templates;
+        let html = FTC.loadTemplate(templates['BODY']);
 
         // Inject template parts
-        $.each(this.parts, function(name, path) {
+        templates["ELEMENT_DETAILS"] = templates["ELEMENT_" + this.type.toUpperCase()];
+        $.each(templates, function(name, path) {
             html = FTC.injectTemplate(html, name, path);
         });
         return html;
@@ -150,89 +155,17 @@ class FTCItem extends FTCEntity {
         FTC.ui.activateTabs(html, this, app);
         FTC.forms.activateFields(html, this, app);
     }
+}
 
-    /* ------------------------------------------- */
 
-    save() {
+/* ------------------------------------------- */
+/*  Weapons                                    */
+/* ------------------------------------------- */
 
-        // If the item was not changed, bail out
-        if ( !this._changed ) return;
+class FTCWeapon extends FTCElement {
 
-        // Saving an owned item
-        if ( this.owner ) {
-            if ( this.ownedItemUID === FTC._edit_item_uid ) this.editOwnedItem(this.context.itemId);
-            return;
-        }
-
-        // Saving an unowned item
-        console.log("Saving item " + this.name);
-        this.obj.sync("updateAsset");
-    }
-
-    /* ------------------------------------------- */
-
-    get ownedItemUID() {
-        return this.owner.id + "." + this.context.container + "." + this.context.itemId;
-    }
-
-    editOwnedItem(itemId) {
-
-        // Get the owner, container, and item position
-        const item = this,
-            owner = this.context.owner,
-            container = this.context.container;
-
-        // Update the itemId
-        itemId = itemId || owner.data[container].length;
-        this.context.itemId = itemId;
-
-        // Flag the UID of the item being currently edited
-        FTC._edit_item_uid = this.ownedItemUID;
-
-        // Create an object and link it to an app
-        const obj = sync.obj();
-        obj.data = this.data;
-        const app = sync.newApp("ui_renderItem", obj)
-        obj.addApp(app);
-
-        // Create an HTML frame containing the app
-        const frame = $('<div class="edit-item flex flexcolumn">');
-        app.appendTo(frame);
-
-        // Attach a full-width confirmation button listen for submission
-        const confirm = $('<button class="fit-x">Update Item</button>');
-        confirm.click(function () {
-
-            // Maybe close any open MCE editors
-            console.log(app);
-            if ( tinymce.activeEditor && app._mce && !app._mce.isHidden() ) {
-                item.data.info.notes.current = app._mce.save();
-                app._mce.destroy();
-            }
-
-            // Unset the active editing item
-            FTC._edit_item_uid = undefined;
-            layout.coverlay("edit-item");
-            owner.updateItem(container, itemId, item.data);
-        });
-        frame.append(confirm);
-
-        // Create the UI element
-        ui_popOut({
-            target: $("body"),
-            id: "edit-item",
-            maximize: false,
-            minimize: false,
-            style: {"width": assetTypes["i"].width, "height": assetTypes["i"].height}
-        }, frame).resizable();
-    }
-
-    /* -------------------------------------------- */
-    /*  Item Helpers                                */
-    /* -------------------------------------------- */
-
-    getWeaponVarietyStr(v) {
-        let vars = {
+    getWeaponTypeStr(v) {
+        let types = {
             "simplem": "Simple Martial",
             "simpler": "Simple Ranged",
             "martialm": "Martial Melee",
@@ -240,25 +173,39 @@ class FTCItem extends FTCEntity {
             "natural": "Natural",
             "improv": "Improvised",
             "ammo": "Ammunition"
-        }
-        return vars[v];
+        };
+        return types[v];
     }
 }
 
-/* -------------------------------------------- */
-/* FTC Initialization Hook                      */
-/* -------------------------------------------- */
 
-hook.add("FTCInit", "Items", function() {
 
-    // Configure Item Asset Type Dimensions
+/* ------------------------------------------- */
+/*  Base Element Entity Type                   */
+/* ------------------------------------------- */
+
+
+
+
+
+/* ------------------------------------------- */
+/*  Elements Initialization Hook               */
+/* ------------------------------------------- */
+
+
+hook.add("FTCInit", "Elements", function() {
+
+    // Apply the Item Data Model
+    FTCElement.applyDataModel()
+
+    // Override Item Asset Type Dimensions
     assetTypes['i'].width = "650px";
     assetTypes['i'].height = "500px";
 
     // Render Item Sheets
-    sync.render("ui_renderItem", function(obj, app, scope) {
-        const item = new FTCItem(obj);
-        return item.renderHTML(app, scope);
+    sync.render("FTC_RENDER_ELEMENT", function(obj, app, scope) {
+        const element = new FTCElement(obj);
+        return element.render(app, scope);
     });
 
     // Register Item Character Drop Hook
@@ -270,13 +217,46 @@ hook.add("FTCInit", "Items", function() {
         if (itemData._t !== "i") return;
 
         // Construct the character
-        const char = new FTCCharacter(obj);
-        const item = new FTCItem(itemData);
+        const owner = new FTCCharacter(obj);
+        const item = new FTCElement(itemData);
 
         // Add the item to the character
-        char.addItem(item);
+        owner.addItem(item);
         return false;
     });
 });
 
-/* -------------------------------------------- */
+
+/* ------------------------------------------- */
+/*  V2 Converter                               */
+/* ------------------------------------------- */
+
+function ftc_migrateElement(i) {
+
+    // Assign type
+    i._type = i.info.type.current.capitalize();
+    i._type = (i._type === "Ability") ? "Feat": i._type;
+
+    // Move attributes to root
+    let sections = ["info", "armor", "weapon", "spell"];
+    $.each(sections, function(_, section) {
+        mergeObject(i, i[section], true, false, true);
+    });
+
+    // Rename attributes
+    i.type = i.variety;
+    i.strength = i.str;
+    i.stealth = i.ste;
+    if (i._type === "Feat") i.cost = i.materials;
+
+    // Start by merging against the new data template
+    let template = game.templates.elements[i._type],
+        data = mergeObject(template, i, true, false, false);
+
+    // Clean any residual data
+    cleanObject(data, template, true, true);
+    $.each(data, function(name, _) {
+        if ( name.startsWith("_") && !["_t", "_type"].includes(name)) delete data[name];
+    });
+    return data
+}

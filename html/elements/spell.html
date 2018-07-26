@@ -1,13 +1,13 @@
 <form class="item-form spell">
     <div role="group" class="form-group flexrow">
-        <label>{spell.level.name}</label>
-        <input type="text" class="ftc-edit spell-level" tabindex="0" data-edit="spell.level.current"
-               value="{spell.level.current}" placeholder="Cantrip"/>
+        <label>{level.name}</label>
+        <input type="text" class="ftc-edit spell-level" tabindex="0" data-edit="level.current"
+               value="{level.current}" placeholder="Cantrip"/>
     </div>
 
     <div role="group" class="form-group flexrow">
-    <label>{spell.school.name}</label>
-        <select class="ftc-select" data-edit="spell.school.current" data-selected="{spell.school.current}">
+    <label>{school.name}</label>
+        <select class="ftc-select" data-edit="school.current" data-selected="{school.current}">
             <option value=""></option>
             <option value="abjuration">Abjuration</option>
             <option value="conjuration">Conjuration</option>
@@ -22,7 +22,7 @@
 
     <div role="group" class="form-group flexrow">
         <label>Spell Type</label>
-        <select class="ftc-select item-variety" data-edit="info.variety.current" data-selected="{info.variety.current}">
+        <select class="ftc-select" data-edit="type.current" data-selected="{type.current}">
             <option value=""></option>
             <option value="attack">Spell Attack</option>
             <option value="save">Saving Throw</option>
@@ -32,26 +32,26 @@
     </div>
 
     <div role="group" class="form-group flexrow">
-        <label>{spell.time.name}</label>
-        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="spell.time.current"
-               value="{spell.time.current}" placeholder="Action"/>
+        <label>{time.name}</label>
+        <input type="text" class="ftc-edit" tabindex="0" data-edit="time.current"
+               value="{time.current}" placeholder="Action"/>
     </div>
 
     <div role="group" class="form-group flexrow">
-        <label>{weapon.range.name}</label>
-        <input type="text" class="ftc-edit weapon-range" tabindex="0" data-edit="weapon.range.current"
-               value="{weapon.range.current}" placeholder="5 ft."/>
+        <label>{range.name}</label>
+        <input type="text" class="ftc-edit" tabindex="0" data-edit="range.current"
+               value="{range.current}" placeholder="5 ft."/>
     </div>
 
     <div role="group" class="form-group flexrow">
-        <label>{weapon.damage.name}</label>
-        <input type="text" class="ftc-edit weapon-d1" tabindex="0" data-edit="weapon.damage.current"
-               value="{weapon.damage.current}" placeholder="Formula"/>
+        <label>{damage.name}</label>
+        <input type="text" class="ftc-edit" tabindex="0" data-edit="damage.current"
+               value="{damage.current}" placeholder="Formula"/>
     </div>
 
     <div role="group" class="form-group flexrow">
         <label>Damage Type</label>
-        <select class="ftc-select weapon-d1type" data-edit="weapon.damage.type" data-selected="{weapon.damage.type}">
+        <select class="ftc-select weapon-d1type" data-edit="damage.type" data-selected="{damage.type}">
             <option value=""></option>
             <option value="acid">Acid</option>
             <option value="bludgeoning">Bludgeoning</option>
@@ -71,20 +71,20 @@
     </div>
 
     <div role="group" class="form-group flexrow">
-        <label>{spell.duration.name}</label>
-        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="spell.duration.current"
-               value="{spell.duration.current}" placeholder="Instantaneous"/>
+        <label>{duration.name}</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="duration.current"
+               value="{duration.current}" placeholder="Instantaneous"/>
     </div>
 
     <div role="group" class="form-group flexrow">
-        <label>{spell.components.name}</label>
-        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="spell.components.current"
-               value="{spell.components.current}" placeholder="V,S,M"/>
+        <label>{components.name}</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="components.current"
+               value="{components.current}" placeholder="V,S,M"/>
     </div>
 
     <div role="group" class="form-group flexrow">
-        <label>{spell.materials.name}</label>
-        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="spell.materials.current"
-               value="{spell.materials.current}" placeholder="None"/>
+        <label>{materials.name}</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="materials.current"
+               value="{materials.current}" placeholder="None"/>
     </div>
 </form>

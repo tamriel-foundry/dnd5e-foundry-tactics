@@ -1,0 +1,32 @@
+<form class="item-form feat">
+
+    <div role="group" class="form-group flexrow">
+        <label>Feat Type</label>
+        <select class="ftc-select item-variety" data-edit="type.current" data-selected="{type.current}">
+            <option value=""></option>
+            <option value="class">Class</option>
+            <option value="race">Racial</option>
+            <option value="feat">Feat</option>
+            <option value="background">Background</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{requirements.name}</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="requirements.current"
+               value="{requirements.current}" data-dtype="str" placeholder="Prerequisites"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>Ability Usage</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="time.current"
+               value="{time.current}" placeholder="Action"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>Ability Cost</label>
+        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="materials.current"
+               value="{cost.current}" placeholder="Resource Cost"/>
+    </div>
+</form>

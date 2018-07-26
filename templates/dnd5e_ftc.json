@@ -8,14 +8,88 @@
     }
   },
   "identifier": "dnd5e_ftc",
+  "build": "v2",
+  "version": 1,
+  "initiative": {
+    "query": "d20 + @c.stats.Dex.modifiers.mod + @c.counters.initiative.current + (@c.stats.Dex.current / 100)",
+    "compare": "(@i1.total>@i2.total)?(1):(@i1.total==@i2.total?(0):(-1))"
+  },
+  "actors": {
+    "Character": {
+      "_t": "c",
+      "_type": "Character",
+      "info": {
+        "name": {
+          "name": "Name",
+          "current": "Default Character"
+        },
+        "img": {
+          "name": "Artwork"
+        },
+        "notes": {
+          "name": "Notes"
+        }
+      }
+    }
+  },
+  "elements": {
+    "Item": {},
+    "Spell": {},
+    "Weapon": {},
+    "Armor": {},
+    "Feat": {},
+    "Tool": {},
+    "Consumable": {}
+  },
+  "page": {
+    "_t": "p",
+    "info": {
+      "name": {
+        "name": "Name",
+        "current": "Default Page"
+      },
+      "img": {
+        "name": "Art"
+      },
+      "notes": {
+        "name": "Notes"
+      },
+      "mode": {
+        "name": "Mode"
+      }
+    }
+  },
+  "security": {
+    "player": {
+      "Game Master": 1,
+      "Assistant Master": 2,
+      "Trusted Player": 3,
+      "Player": 4,
+      "Spectator": 5
+    },
+    "object": {
+      "Default Access": 0,
+      "Owner": 1,
+      "Rights": 2,
+      "Visible": 3,
+      "Deny": 4
+    }
+  },
+  "constants": {
+    "ac": "@c.counters.ac",
+    "str": "M@Str",
+    "dex": "M@Dex",
+    "con": "M@Con",
+    "int": "M@Int",
+    "wis": "M@Wis",
+    "cha": "M@Cha",
+    "prof": "@c.counters.proficiency"
+  },
+  "tables": {},
+  "tags": {},
   "dice": {
     "defaults": [
-      "d20",
-      "d12",
-      "d10",
-      "d8",
-      "d6",
-      "d4"
+      "d20"
     ],
     "modifiers": [
       0,
@@ -30,7 +104,6 @@
       9,
       10
     ],
-    "ui": "ui_diceResults",
     "keys": {
       "a": {
         "name": "Advantage",
@@ -100,1208 +173,35 @@
       },
       "d100": {
         "value": "d100"
-      },
-      "proficiency": {
-        "static": true,
-        "value": "d12",
-        "display": {
-          "background-color": "rgb(255,230,0)",
-          "border": "1px solid black",
-          "color": "black"
-        },
-        "results": {
-          "1": {
-            "a": 2
-          },
-          "2": {
-            "a": 1
-          },
-          "3": {
-            "a": 2
-          },
-          "4": {
-            "tri": 1,
-            "s": 1
-          },
-          "5": {
-            "s": 1
-          },
-          "6": {
-            "s": 1,
-            "a": 1
-          },
-          "7": {
-            "s": 1
-          },
-          "8": {
-            "s": 1,
-            "a": 1
-          },
-          "9": {
-            "s": 2
-          },
-          "10": {
-            "s": 1,
-            "a": 1
-          },
-          "11": {
-            "s": 2
-          }
-        },
-        "translations": {
-          "1": {
-            "imgs": [
-              "/content/dice/advantage.png",
-              "/content/dice/advantage.png"
-            ]
-          },
-          "2": {
-            "imgs": [
-              "/content/dice/advantage.png"
-            ]
-          },
-          "3": {
-            "imgs": [
-              "/content/dice/advantage.png",
-              "/content/dice/advantage.png"
-            ]
-          },
-          "4": {
-            "imgs": [
-              "/content/dice/triumph.png"
-            ]
-          },
-          "5": {
-            "imgs": [
-              "/content/dice/success.png"
-            ]
-          },
-          "6": {
-            "imgs": [
-              "/content/dice/success.png",
-              "/content/dice/advantage.png"
-            ]
-          },
-          "7": {
-            "imgs": [
-              "/content/dice/success.png"
-            ]
-          },
-          "8": {
-            "imgs": [
-              "/content/dice/success.png",
-              "/content/dice/advantage.png"
-            ]
-          },
-          "9": {
-            "imgs": [
-              "/content/dice/success.png",
-              "/content/dice/success.png"
-            ]
-          },
-          "10": {
-            "imgs": [
-              "/content/dice/success.png",
-              "/content/dice/advantage.png"
-            ]
-          },
-          "11": {
-            "imgs": [
-              "/content/dice/success.png",
-              "/content/dice/success.png"
-            ]
-          },
-          "12": {
-            "imgs": []
-          }
-        }
-      },
-      "ability": {
-        "static": true,
-        "value": "d8",
-        "display": {
-          "background-color": "rgb(80,185,75)",
-          "border": "1px solid black"
-        },
-        "results": {
-          "1": {
-            "s": 1
-          },
-          "2": {
-            "a": 1
-          },
-          "3": {
-            "s": 1,
-            "a": 1
-          },
-          "4": {
-            "s": 2
-          },
-          "5": {
-            "a": 1
-          },
-          "6": {
-            "s": 1
-          },
-          "7": {
-            "a": 2
-          }
-        },
-        "translations": {
-          "1": {
-            "imgs": [
-              "/content/dice/success.png"
-            ]
-          },
-          "2": {
-            "imgs": [
-              "/content/dice/advantage.png"
-            ]
-          },
-          "3": {
-            "imgs": [
-              "/content/dice/success.png",
-              "/content/dice/advantage.png"
-            ]
-          },
-          "4": {
-            "imgs": [
-              "/content/dice/success.png",
-              "/content/dice/success.png"
-            ]
-          },
-          "5": {
-            "imgs": [
-              "/content/dice/advantage.png"
-            ]
-          },
-          "6": {
-            "imgs": [
-              "/content/dice/success.png"
-            ]
-          },
-          "7": {
-            "imgs": [
-              "/content/dice/advantage.png",
-              "/content/dice/advantage.png"
-            ]
-          },
-          "8": {}
-        }
-      },
-      "boost": {
-        "static": true,
-        "value": "d6",
-        "display": {
-          "background-color": "rgb(135,215,245)",
-          "border": "1px solid black"
-        },
-        "results": {
-          "1": {
-            "s": 1,
-            "a": 1
-          },
-          "2": {
-            "a": 1
-          },
-          "3": {
-            "a": 2
-          },
-          "4": {
-            "s": 1
-          }
-        },
-        "translations": {
-          "1": {
-            "imgs": [
-              "/content/dice/success.png",
-              "/content/dice/advantage.png"
-            ]
-          },
-          "2": {
-            "imgs": [
-              "/content/dice/advantage.png"
-            ]
-          },
-          "3": {
-            "imgs": [
-              "/content/dice/advantage.png",
-              "/content/dice/advantage.png"
-            ]
-          },
-          "4": {
-            "imgs": [
-              "/content/dice/success.png"
-            ]
-          },
-          "5": {},
-          "6": {}
-        }
-      },
-      "challenge": {
-        "static": true,
-        "value": "d12",
-        "display": {
-          "background-color": "rgb(230,25,55)",
-          "border": "1px solid black"
-        },
-        "results": {
-          "1": {
-            "t": 2
-          },
-          "2": {
-            "t": 1
-          },
-          "3": {
-            "t": 2
-          },
-          "4": {
-            "t": 1
-          },
-          "5": {
-            "f": 1,
-            "t": 1
-          },
-          "6": {
-            "f": 1
-          },
-          "7": {
-            "f": 1,
-            "t": 1
-          },
-          "8": {
-            "f": 1
-          },
-          "9": {
-            "des": 1,
-            "f": 1
-          },
-          "10": {
-            "f": 2
-          },
-          "11": {
-            "f": 2
-          }
-        },
-        "translations": {
-          "1": {
-            "imgs": [
-              "/content/dice/threat.png",
-              "/content/dice/threat.png"
-            ]
-          },
-          "2": {
-            "imgs": [
-              "/content/dice/threat.png"
-            ]
-          },
-          "3": {
-            "imgs": [
-              "/content/dice/threat.png",
-              "/content/dice/threat.png"
-            ]
-          },
-          "4": {
-            "imgs": [
-              "/content/dice/threat.png"
-            ]
-          },
-          "5": {
-            "imgs": [
-              "/content/dice/failure.png",
-              "/content/dice/threat.png"
-            ]
-          },
-          "6": {
-            "imgs": [
-              "/content/dice/failure.png"
-            ]
-          },
-          "7": {
-            "imgs": [
-              "/content/dice/failure.png",
-              "/content/dice/threat.png"
-            ]
-          },
-          "8": {
-            "imgs": [
-              "/content/dice/failure.png"
-            ]
-          },
-          "9": {
-            "imgs": [
-              "/content/dice/despair.png"
-            ]
-          },
-          "10": {
-            "imgs": [
-              "/content/dice/failure.png",
-              "/content/dice/failure.png"
-            ]
-          },
-          "11": {
-            "imgs": [
-              "/content/dice/failure.png",
-              "/content/dice/failure.png"
-            ]
-          },
-          "12": {
-            "imgs": []
-          }
-        }
-      },
-      "difficulty": {
-        "static": true,
-        "value": "d8",
-        "display": {
-          "background-color": "rgb(85,35,130)",
-          "border": "1px solid black"
-        },
-        "results": {
-          "1": {
-            "t": 1
-          },
-          "2": {
-            "f": 1
-          },
-          "3": {
-            "f": 1,
-            "t": 1
-          },
-          "4": {
-            "t": 1
-          },
-          "6": {
-            "t": 2
-          },
-          "7": {
-            "f": 2
-          },
-          "8": {
-            "t": 1
-          }
-        },
-        "translations": {
-          "1": {
-            "imgs": [
-              "/content/dice/threat.png"
-            ]
-          },
-          "2": {
-            "imgs": [
-              "/content/dice/failure.png"
-            ]
-          },
-          "3": {
-            "imgs": [
-              "/content/dice/failure.png",
-              "/content/dice/threat.png"
-            ]
-          },
-          "4": {
-            "imgs": [
-              "/content/dice/threat.png"
-            ]
-          },
-          "5": {
-            "imgs": []
-          },
-          "6": {
-            "imgs": [
-              "/content/dice/threat.png",
-              "/content/dice/threat.png"
-            ]
-          },
-          "7": {
-            "imgs": [
-              "/content/dice/failure.png",
-              "/content/dice/failure.png"
-            ]
-          },
-          "8": {
-            "imgs": [
-              "/content/dice/threat.png"
-            ]
-          }
-        }
-      },
-      "setback": {
-        "static": true,
-        "value": "d6",
-        "display": {
-          "background-color": "black",
-          "border": "1px solid black"
-        },
-        "results": {
-          "1": {
-            "f": 1
-          },
-          "2": {
-            "f": 1
-          },
-          "3": {
-            "t": 1
-          },
-          "4": {
-            "t": 1
-          }
-        },
-        "translations": {
-          "1": {
-            "imgs": [
-              "/content/dice/failure.png"
-            ],
-            "f": 1
-          },
-          "2": {
-            "imgs": [
-              "/content/dice/failure.png"
-            ],
-            "f": 1
-          },
-          "3": {
-            "imgs": [
-              "/content/dice/threat.png"
-            ],
-            "t": 1
-          },
-          "4": {
-            "imgs": [
-              "/content/dice/threat.png"
-            ],
-            "t": 1
-          },
-          "5": {},
-          "6": {}
-        }
-      },
-      "force": {
-        "static": true,
-        "value": "d12",
-        "display": {
-          "background-color": "white",
-          "border": "1px solid black",
-          "color": "black"
-        },
-        "results": {
-          "1": {
-            "dark": 1
-          },
-          "2": {
-            "light": 2
-          },
-          "3": {
-            "dark": 1
-          },
-          "4": {
-            "light": 2
-          },
-          "5": {
-            "dark": 1
-          },
-          "6": {
-            "light": 2
-          },
-          "7": {
-            "dark": 1
-          },
-          "8": {
-            "light": 1
-          },
-          "9": {
-            "dark": 1
-          },
-          "10": {
-            "light": 1
-          },
-          "11": {
-            "dark": 1
-          },
-          "12": {
-            "dark": 2
-          }
-        },
-        "translations": {
-          "1": {
-            "imgs": [
-              "/content/dice/darkside.png"
-            ]
-          },
-          "2": {
-            "imgs": [
-              "/content/dice/lightside.png",
-              "/content/dice/lightside.png"
-            ]
-          },
-          "3": {
-            "imgs": [
-              "/content/dice/darkside.png"
-            ]
-          },
-          "4": {
-            "imgs": [
-              "/content/dice/lightside.png",
-              "/content/dice/lightside.png"
-            ]
-          },
-          "5": {
-            "imgs": [
-              "/content/dice/darkside.png"
-            ]
-          },
-          "6": {
-            "imgs": [
-              "/content/dice/lightside.png",
-              "/content/dice/lightside.png"
-            ]
-          },
-          "7": {
-            "imgs": [
-              "/content/dice/darkside.png"
-            ]
-          },
-          "8": {
-            "imgs": [
-              "/content/dice/lightside.png"
-            ]
-          },
-          "9": {
-            "imgs": [
-              "/content/dice/darkside.png"
-            ]
-          },
-          "10": {
-            "imgs": [
-              "/content/dice/lightside.png"
-            ]
-          },
-          "11": {
-            "imgs": [
-              "/content/dice/darkside.png"
-            ]
-          },
-          "12": {
-            "imgs": [
-              "/content/dice/darkside.png",
-              "/content/dice/darkside.png"
-            ]
-          }
-        }
-      },
-      "fate": {
-        "value": "(d3-2)",
-        "results": {
-          "0": {},
-          "1": {
-            "plus": 1
-          },
-          "-1": {
-            "minus": 1
-          }
-        },
-        "translations": {
-          "0": {},
-          "1": {
-            "imgs": [
-              "/content/dice/plus.png"
-            ],
-            "plus": 1
-          },
-          "-1": {
-            "imgs": [
-              "/content/dice/minus.png"
-            ],
-            "minus": 1
-          }
-        }
       }
-    }
-  },
-  "adventure": {
-    "_t": "a",
-    "info": {
-      "name": {
-        "name": "Name",
-        "current": "Default Adventure"
-      },
-      "img": {
-        "name": "Art"
-      },
-      "notes": {
-        "name": "Summary"
-      }
-    },
-    "entities": [],
-    "story": []
-  },
-  "initiative": {
-    "query": "d20 + @c.stats.Dex.modifiers.mod + @c.counters.initiative.current + (@c.stats.Dex.current / 100)",
-    "compare": "(@i1.total>@i2.total)?(1):(@i1.total==@i2.total?(0):(-1))"
-  },
-  "character": {
-    "_t": "c",
-    "info": {
-      "name": {
-        "name": "Name"
-      },
-      "img": {
-        "name": "Character Art",
-        "current": "/content/icons/blankchar.png",
-        "min": "/content/icons/blankchar.png"
-      },
-      "notes": {
-        "name": "Notes"
-      },
-      "race": {
-        "name": "Race"
-      },
-      "class": {
-        "name": "Class"
-      },
-      "background": {
-        "name": "Background"
-      },
-      "alignment": {
-        "name": "Alignment",
-        "current": "tn"
-      },
-      "di": {
-        "name": "Damage Immunities"
-      },
-      "dr": {
-        "name": "Damage Resistances"
-      },
-      "ci": {
-        "name": "Condition Immunities"
-      },
-      "dv": {
-        "name": "Damage Vulnerabilities"
-      },
-      "senses": {
-        "name": "Senses"
-      },
-      "traits": {
-        "name": "Traits"
-      },
-      "ideals": {
-        "name": "Ideals"
-      },
-      "bonds": {
-        "name": "Bonds"
-      },
-      "flaws": {
-        "name": "Flaws"
-      },
-      "languages": {
-        "name": "Languages"
-      },
-      "offensive": {
-        "name": "Weapon Modifier"
-      },
-      "spellcasting": {
-        "name": "Spellcasting Ability"
-      },
-      "size": {
-        "name": "Size"
-      },
-      "source": {
-        "name": "Source"
-      }
-    },
-    "tabs": {},
-    "tags": {},
-    "stats": {
-      "Str": {
-        "name": "Strength",
-        "current": "4d6k3",
-        "min": 0,
-        "proficient": 0
-      },
-      "Dex": {
-        "name": "Dexterity",
-        "current": "4d6k3",
-        "min": 0,
-        "proficient": 0
-      },
-      "Con": {
-        "name": "Constitution",
-        "current": "4d6k3",
-        "min": 0,
-        "proficient": 0
-      },
-      "Int": {
-        "name": "Intelligence",
-        "current": "4d6k3",
-        "min": 0,
-        "proficient": 0
-      },
-      "Wis": {
-        "name": "Wisdom",
-        "current": "4d6k3",
-        "min": 0,
-        "proficient": 0
-      },
-      "Cha": {
-        "name": "Charisma",
-        "current": "4d6k3",
-        "min": 0,
-        "proficient": 0
-      }
-    },
-    "counters": {
-      "level": {
-        "name": "Level",
-        "current": 1,
-        "min": 0
-      },
-      "cr": {
-        "name": "Challenge Rating",
-        "current": 1,
-        "min": 0
-      },
-      "exp": {
-        "name": "Experience",
-        "current": 0,
-        "min": 0
-      },
-      "hp": {
-        "name": "Hit Points",
-        "current": 10,
-        "min": 0,
-        "max": 10,
-        "formula": ""
-      },
-      "hd": {
-        "name": "Hit Dice",
-        "current": 1,
-        "max": 1
-      },
-      "proficiency": {
-        "name": "Proficiency",
-        "current": 0,
-        "min": 0
-      },
-      "ac": {
-        "name": "Armor Class",
-        "current": 10
-      },
-      "speed": {
-        "name": "Speed",
-        "current": 30,
-        "extra": ""
-      },
-      "initiative": {
-        "name": "Global Initiative Modifier",
-        "current": 0
-      },
-      "inspiration": {
-        "name": "Inspiration",
-        "current": 0,
-        "min": 0
-      },
-      "deathSave": {
-        "name": "Death Successes",
-        "current": 0,
-        "min": 0,
-        "max": 3
-      },
-      "deathFail": {
-        "name": "Death Failures",
-        "current": 0,
-        "min": 0,
-        "max": 3
-      },
-      "cp": {
-        "name": "CP",
-        "current": 0,
-        "min": 0
-      },
-      "sp": {
-        "name": "SP",
-        "current": 0,
-        "min": 0
-      },
-      "gp": {
-        "name": "GP",
-        "current": 0,
-        "min": 0
-      },
-      "spell0": {
-        "name": "Cantrip"
-      },
-      "spell1": {
-        "name": "1st Level",
-        "current": 0,
-        "max": 0
-      },
-      "spell2": {
-        "name": "2nd Level",
-        "current": 0,
-        "max": 0
-      },
-      "spell3": {
-        "name": "3rd Level",
-        "current": 0,
-        "max": 0
-      },
-      "spell4": {
-        "name": "4th Level",
-        "current": 0,
-        "max": 0
-      },
-      "spell5": {
-        "name": "5th Level",
-        "current": 0,
-        "max": 0
-      },
-      "spell6": {
-        "name": "6th Level",
-        "current": 0,
-        "max": 0
-      },
-      "spell7": {
-        "name": "7th Level",
-        "current": 0,
-        "max": 0
-      },
-      "spell8": {
-        "name": "8th Level",
-        "current": 0,
-        "max": 0
-      },
-      "spell9": {
-        "name": "9th Level",
-        "current": 0,
-        "max": 0
-      },
-      "legendary": {
-        "name": "Legendary Actions",
-        "current": 0,
-        "max": 0
-      },
-      "class1": {
-        "name": "Primary Resource",
-        "label": "",
-        "current": 0,
-        "max": 0
-      },
-      "class2": {
-        "name": "Secondary Resource",
-        "label": "",
-        "current": 0,
-        "max": 0
-      }
-    },
-    "skills": {
-      "acr": {
-        "name": "Acrobatics",
-        "stat": "Dex",
-        "proficient": 0
-      },
-      "ani": {
-        "name": "Animal Handling",
-        "stat": "Wis",
-        "proficient": 0
-      },
-      "arc": {
-        "name": "Arcana",
-        "stat": "Int",
-        "proficient": 0
-      },
-      "ath": {
-        "name": "Athletics",
-        "stat": "Str",
-        "proficient": 0
-      },
-      "dec": {
-        "name": "Deception",
-        "stat": "Cha",
-        "proficient": 0
-      },
-      "his": {
-        "name": "History",
-        "stat": "Int",
-        "proficient": 0
-      },
-      "ins": {
-        "name": "Insight",
-        "stat": "Wis",
-        "proficient": 0
-      },
-      "int": {
-        "name": "Intimidation",
-        "stat": "Cha",
-        "proficient": 0
-      },
-      "inv": {
-        "name": "Investigation",
-        "stat": "Int",
-        "proficient": 0
-      },
-      "med": {
-        "name": "Medicine",
-        "stat": "Wis",
-        "proficient": 0
-      },
-      "nat": {
-        "name": "Nature",
-        "stat": "Int",
-        "proficient": 0
-      },
-      "per": {
-        "name": "Perception",
-        "stat": "Wis",
-        "proficient": 0
-      },
-      "pfm": {
-        "name": "Performance",
-        "stat": "Cha",
-        "proficient": 0
-      },
-      "prs": {
-        "name": "Persuasion",
-        "stat": "Cha",
-        "proficient": 0
-      },
-      "rel": {
-        "name": "Religion",
-        "stat": "Int",
-        "proficient": 0
-      },
-      "sle": {
-        "name": "Sleight of Hand",
-        "stat": "Dex",
-        "proficient": 0
-      },
-      "ste": {
-        "name": "Stealth",
-        "stat": "Dex",
-        "proficient": 0
-      },
-      "sur": {
-        "name": "Survival",
-        "stat": "Wis",
-        "proficient": 0
-      }
-    },
-    "inventory": [],
-    "spellbook": [],
-    "abilities": []
-  },
-  "item": {
-    "_t": "i",
-    "tabs": {},
-    "tags": {},
-    "info": {
-      "name": {
-        "name": "Name"
-      },
-      "img": {
-        "name": "Image"
-      },
-      "notes": {
-        "name": "Notes"
-      },
-      "type": {
-        "name": "Entry Type"
-      },
-      "variety": {
-        "name": "Item Variety"
-      },
-      "requirements": {
-        "name": "Requirements"
-      },
-      "quantity": {
-        "name": "Quantity",
-        "min": 0,
-        "current" : 1
-      },
-      "weight": {
-        "name": "Weight",
-        "min": 0
-      },
-      "price": {
-        "name": "Price"
-      },
-      "source": {
-        "name": "Source"
-      }
-    },
-    "armor": {
-      "ac": {
-        "name": "Armor Class"
-      },
-      "str": {
-        "name": "Required Strength"
-      },
-      "ste": {
-        "name": "Stealth Disadvantage"
-      },
-      "equipped": {
-        "name": "Equipped"
-      }
-    },
-    "weapon": {
-      "hit": {
-        "name": "Attack Bonus"
-      },
-      "damage": {
-        "name": "Damage"
-      },
-      "damage2": {
-        "name": "Secondary Damage"
-      },
-      "range": {
-        "name": "Range"
-      },
-      "properties": {
-        "name": "Properties"
-      },
-      "proficient": {
-        "name": "Proficient"
-      }
-    },
-    "spell": {
-      "level": {
-        "name": "Level"
-      },
-      "school": {
-        "name": "School"
-      },
-      "duration": {
-        "name": "Duration"
-      },
-      "time": {
-        "name": "Casting Time"
-      },
-      "components": {
-        "name": "Casting Components"
-      },
-      "materials": {
-        "name": "Material Components"
-      },
-      "ritual": {
-        "name": "Ritual Spell"
-      },
-      "concentration": {
-        "name": "Requires Concentration"
-      },
-      "classes": {
-        "name": "Classes"
-      }
-    }
-  },
-  "page": {
-    "_t": "p",
-    "info": {
-      "name": {
-        "name": "Name",
-        "current": "Default Page"
-      },
-      "img": {
-        "name": "Art"
-      },
-      "notes": {
-        "name": "Notes",
-        "modifiers": {
-          "HR": "rgba(190,4,15,1.0)",
-          "style": {
-            "background-image": "url('/content/sheet2.png')",
-            "background-size": "100% auto",
-            "font-family": "Bookinsanity",
-            "font-size": "1.1em"
-          },
-          "H1F": "Nodesto Caps Condensed",
-          "H2F": "Nodesto Caps Condensed",
-          "H2FS": 2.1,
-          "H1FS": 2.7
-        }
-      },
-      "mode": {
-        "name": "Mode"
-      }
-    }
-  },
-  "security": {
-    "player": {
-      "Game Master": 1,
-      "Assistant Master": 2,
-      "Trusted Player": 3,
-      "Player": 4,
-      "Spectator": 5
-    },
-    "object": {
-      "Default Access": 0,
-      "Owner": 1,
-      "Rights": 2,
-      "Visible": 3,
-      "Deny": 4
-    }
-  },
-  "constants": {
-    "ac": "@c.counters.ac",
-    "str": "M@Str",
-    "dex": "M@Dex",
-    "con": "M@Con",
-    "int": "M@Int",
-    "wis": "M@Wis",
-    "cha": "M@Cha",
-    "prof": "@c.counters.proficiency"
-  },
-  "tables": {},
-  "tags": {},
-  "actions": {
-    "c": {},
-    "i": {}
-  },
-  "effects": {
-    "dmg": {
-      "name": "Take Damage",
-      "submenu": {
-        "x1": {
-          "name": "Normal",
-          "msg": "@pName : Applied @total damage",
-          "calc": [
-            {
-              "eq": "@hp-(@total)_0",
-              "target": "counters.hp"
-            }
-          ]
-        },
-        "x2": {
-          "name": "x2",
-          "msg": "@pName : Applied (@total x2) damage",
-          "calc": [
-            {
-              "eq": "@hp-(@total * 2)_0",
-              "target": "counters.hp"
-            }
-          ]
-        },
-        "half": {
-          "name": "Half",
-          "msg": "@pName : Applied (@total /2) damage",
-          "calc": [
-            {
-              "eq": "@hp-@:int((@total/2)_0)",
-              "target": "counters.hp"
-            }
-          ]
-        }
-      }
-    },
-    "heal": {
-      "name": "Heal",
-      "msg": "@pName : Applied @total healing",
-      "calc": [
-        {
-          "eq": "@hp+(@total)_0",
-          "target": "counters.hp"
-        }
-      ]
     }
   },
   "display": {
+    "actors": {
+      "Character": {
+        "content": "<div>Hello World</div>"
+      }
+    },
+    "elements": {
+      "Armor": {
+        "content": "<ui name='FTC_RENDER_ELEMENT'/>"
+      },
+      "Consumable": {
+        "content": "<ui name='FTC_RENDER_ELEMENT'/>"
+      },
+      "Item": {
+        "content": "<ui name='FTC_RENDER_ELEMENT'/>"
+      },
+      "Spell": {
+        "content": "<ui name='FTC_RENDER_ELEMENT'/>"
+      },
+      "Tool": {
+        "content": "<ui name='FTC_RENDER_ELEMENT'/>"
+      },
+      "Weapon": {
+        "content": "<ui name='FTC_RENDER_ELEMENT'/>"
+      }
+    },
     "ui": {
       "ui_poolResults": {
         "classes": "flexrow flexaround",
@@ -1451,135 +351,56 @@
         "display": {
           "classes": "outline lrpadding flexrow flexmiddle flexwrap flex"
         }
-      },
-      "ui_statTest": {
-        "classes": "flexcolumn flexaround",
-        "style": {},
-        "dice": {
-          "results": [
+      }
+    }
+  },
+  "effects": {
+    "dmg": {
+      "name": "Take Damage",
+      "submenu": {
+        "x1": {
+          "name": "Normal",
+          "msg": "@pName : Applied @total damage",
+          "calc": [
             {
-              "classes": "focus outline",
-              "cond": "@roll==1",
-              "bottom": "'Crit Fail'"
-            },
-            {
-              "classes": "highlight outline",
-              "cond": "@threshold!=0&&@threshold<=@total",
-              "bottom": "'Success'"
-            },
-            {
-              "classes": "highlight outline",
-              "cond": "@roll==20",
-              "bottom": "'Crit Success'"
+              "eq": "@hp-(@total)_0",
+              "target": "counters.hp"
             }
           ]
         },
-        "results" : {
-          "display" : {
-            "cond" :"@:valid(@rollTitle)==1||@:valid(@rollText)==1",
-            "classes" : "flexcolumn",
-            "ui" : "ui_rollText",
-            "passContext" : true
-          }
+        "x2": {
+          "name": "x2",
+          "msg": "@pName : Applied (@total x2) damage",
+          "calc": [
+            {
+              "eq": "@hp-(@total * 2)_0",
+              "target": "counters.hp"
+            }
+          ]
+        },
+        "half": {
+          "name": "Half",
+          "msg": "@pName : Applied (@total /2) damage",
+          "calc": [
+            {
+              "eq": "@hp-@:int((@total/2)_0)",
+              "target": "counters.hp"
+            }
+          ]
         }
       }
     },
-    "item": {
-      "params": {},
-      "summary": {
-        "display": [
-          {
-            "classes": "fit-x flexbetween",
-            "display": [
-              {
-                "target": "info.img",
-                "ui": "ui_icon"
-              },
-              {
-                "target": "info.name",
-                "classes": "flex flexcolumn flexmiddle",
-                "name": ""
-              },
-              {
-                "target": "info.quantity",
-                "classes": "flexmiddle",
-                "style": {
-                  "font-size": "0.8em"
-                },
-                "name": "x",
-                "cond": "@i.info.quantity>1"
-              }
-            ]
-          },
-          {
-            "classes": "fit-x flexbetween",
-            "style": {
-              "font-size": "0.8em"
-            },
-            "display": [
-              {
-                "classes": "lrpadding",
-                "target": "weapon.damage",
-                "cond": "('@i.weapon.damage'!=0)&&('@i.weapon.damage'!='')",
-                "name": "Damage: "
-              },
-              {
-                "classes": "lrpadding",
-                "target": "weapon.range",
-                "cond": "('@i.weapon.range'!=0)&&('@i.weapon.range'!='')",
-                "name": "Range: "
-              }
-            ]
-          },
-          {
-            "classes": "fit-x flexrow",
-            "style": {
-              "font-size": "0.8em"
-            },
-            "name": "",
-            "target": "info.special",
-            "cond": "('@i.info.special'!=0)&&('@i.info.special'!='')"
-          }
-        ]
-      }
-    },
-    "sheet": {
-      "health": "counters.hp",
-      "style": {},
-      "content": {
-        "classes": "ftc-wrapper",
-        "ui": "FTC_CHARSHEET"
-      },
+    "heal": {
+      "name": "Heal",
+      "msg": "@pName : Applied @total healing",
       "calc": [
         {
-          "name": "Stat-Bonuses",
-          "target": "stats.Str.modifiers.mod",
-          "eq": "((R@c.stats.Str-10)/2)f"
-        },
-        {
-          "target": "stats.Dex.modifiers.mod",
-          "eq": "((R@c.stats.Dex-10)/2)f"
-        },
-        {
-          "target": "stats.Con.modifiers.mod",
-          "eq": "((R@c.stats.Con-10)/2)f"
-        },
-        {
-          "target": "stats.Int.modifiers.mod",
-          "eq": "((R@c.stats.Int-10)/2)f"
-        },
-        {
-          "target": "stats.Wis.modifiers.mod",
-          "eq": "((R@c.stats.Wis-10)/2)f"
-        },
-        {
-          "target": "stats.Cha.modifiers.mod",
-          "eq": "((R@c.stats.Cha-10)/2)f"
+          "eq": "@hp+(@total)_0",
+          "target": "counters.hp"
         }
       ]
     }
   },
-  "version": 1,
   "grid": {
     "unitScale": 5,
     "unit": "ft"

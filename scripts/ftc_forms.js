@@ -163,7 +163,8 @@ FTC.forms.edit_mce_fields = function(html, entity, app) {
     html.find('.ftc-textfield-edit').click(function(){
         const div = $(this).siblings('.ftc-textfield'),
             target = div.attr('data-edit'),
-            selector = app.attr("id") + "-" + div.attr("id");
+            selector = app.attr("id") + "-" + div.attr("id"),
+            height = div.attr("data-mce-height") || "350";
 
         // Give the edit div a unique ID
         div.attr("id", selector);
@@ -179,10 +180,11 @@ FTC.forms.edit_mce_fields = function(html, entity, app) {
             menubar: false,
             statusbar: false,
             resize: false,
-            height: "350",
+            height: height,
             auto_focus: selector,
             plugins: 'lists save code',
             toolbar: 'bold italic underline bullist numlist styleselect removeformat code save',
+            content_css: "css/ftc_mce.css",
             setup: function(ed) {  app._mce = ed; },
             save_enablewhendirty: false,
             save_onsavecallback: function(ed) {

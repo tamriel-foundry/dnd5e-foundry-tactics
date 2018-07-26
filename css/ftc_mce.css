@@ -1,0 +1,7 @@
+@import url("ftc_core.css");
+
+body {
+    background: transparent;
+    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+}

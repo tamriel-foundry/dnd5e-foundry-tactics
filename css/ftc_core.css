@@ -1,0 +1,88 @@
+@font-face {
+  font-family: "Bookinsanity";
+  src: url('/content/fonts/Bookinsanity.otf');
+}
+
+@font-face {
+  font-family: "Nodesto Caps Condensed";
+  src: url('/fonts/Nodesto_Caps_Condensed.otf');
+}
+
+@font-face {
+  font-family: "Scaly Sans";
+  src: url('/content/fonts/Scaly Sans.otf');
+}
+
+
+/* Headers */
+h1, h2, h3, h4 {
+    font-family: "Nodesto Caps Condensed";
+    font-weight: normal !important;
+    color: #332920;
+    margin: 0;
+}
+h1 {
+    font-size: 48px;
+    margin: 0 0 12px;
+}
+h2 {
+    font-size: 32px;
+    margin: 0 0 12px;
+}
+h3 {
+    font-size: 24px;
+    margin: 0 0 10px;
+}
+h4 {
+    font-size: 20px;
+    margin: 0 0 8px;
+}
+
+hr {
+    margin: 0.5em 0;
+    border: 2px solid #792a19;
+}
+
+
+/* Paragraphs */
+p {
+    font-size: 16px;
+    margin: 0 0 8px;
+}
+
+
+/* Quotes */
+blockquote {
+    margin: 0 0 10px;
+    padding: 5px 0px 5px 20px;
+    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 1em;
+    font-style: italic;
+    border-left: 5px solid #61584e;
+}
+
+blockquote em {
+    font-weight: bold;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+    box-shadow: 0 0 1px #999 inset;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+    outline: 1px solid #222;
+    border-radius: 3px;
+}
+
+
+/* Form Elements */
+label {
+    margin: 0;
+    font-weight: normal;
+}

@@ -1,0 +1,32 @@
+<div class="ftc-sheet-profile">
+    <img class="profile-image ftc-image" data-edit="info.img.current" src="{info.img.current}"/>
+</div>
+
+<ol class="item-summary">
+    <li>
+        <label>Quantity</label>
+        <input class="ftc-edit" type="text" tabindex="0" data-edit="quantity.current" data-dtype="posint"
+               value="{quantity.current}" placeholder="1"/>
+    </li>
+    <li>
+        <label>Price</label>
+        <input class="ftc-edit" type="text" tabindex="0" data-edit="price.current" data-dtype="posfloat"
+               value="{price.current}" placeholder="0.0"/>
+    </li>
+    <li>
+        <label>Weight</label>
+        <input class="ftc-edit" type="text" tabindex="0" data-edit="weight.current" data-dtype="posfloat"
+               value="{weight.current}" placeholder="0.0"/>
+    </li>
+    <li>
+        <label>Source</label>
+        <input class="item-source ftc-edit" type="text" tabindex="0" data-edit="source.current" data-dtype="str"
+               value="{source.current}" placeholder="Book/Page"/>
+    </li>
+</ol>
+
+<div class="item-tags">
+    <label>Item Tags</label>
+    <input class="ftc-edit" type="text" tabindex="0" data-edit="tags" data-dtype="tags"
+           value="{tagStr}" placeholder="Tags"/>
+</div>

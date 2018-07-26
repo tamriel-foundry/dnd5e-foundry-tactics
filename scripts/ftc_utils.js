@@ -94,20 +94,22 @@ function ftc_merge(original, other, insert=false, overwrite=true, inplace=false)
 
     // Return the object for use
     return original;
-};
+}
+
+mergeObject = ftc_merge;
 
 
 /* -------------------------------------------- */
 
 
-function ftc_clean(original, template, inplace=false) {
+function cleanObject(original, template, inplace=false, allowPrivate=true) {
     // Purge objects from the original which do not begin with "_" and do not exist in the template
 
     let cleaned = (inplace) ? original : duplicate(original);
     for (let k in cleaned) {
-        if ( k.startsWith("_") ) continue;
+        if ( allowPrivate && k.startsWith("_") ) continue;
         if ( cleaned[k] instanceof Object ) {
-            if ( template.hasOwnProperty(k) ) ftc_clean(cleaned[k], template[k]);
+            if ( template.hasOwnProperty(k) ) cleanObject(cleaned[k], template[k], true);
             else delete cleaned[k];
         }
     }
@@ -153,3 +155,27 @@ ftc_update_template = function() {
 };
 
 /* -------------------------------------------- */
+
+
+
+
+ftc_updateCompendium = function(filename) {
+    if ( !game.locals.workshop ) {
+        console.log("Failure: You must first open the Compendium tab");
+        return;
+    }
+
+    // Iterate over pack sections
+    const pack = game.locals.workshop.data[filename];
+    $.each(pack.data.content, function(name, section) {
+        let type = section._t;
+        $.each(section.data, function(i, data) {
+            console.log("Updating compendium entry: " + data.info.name.current);
+            if ( type === "i" ) section.data[i] = ftc_migrateElement(data);
+        });
+    });
+
+    // Export the data to JSON and save
+    runCommand("savePack", {key : filename, data : JSON.stringify(pack.data, 2, 2)});
+    console.log("Successfully migrated compendium: " + filename)
+};
