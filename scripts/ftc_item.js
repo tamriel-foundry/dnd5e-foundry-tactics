@@ -88,6 +88,7 @@ class FTCElement extends FTCEntity {
             "ELEMENT_NOTES": td + "notes.html",
             "ELEMENT_ARMOR": td + "armor.html",
             "ELEMENT_CONSUMABLE": td + "item.html",
+            "ELEMENT_FEAT": td + "feat.html",
             "ELEMENT_SPELL": td + "spell.html",
             "ELEMENT_TOOL": td + "item.html",
             "ELEMENT_WEAPON": td + "weapon.html"

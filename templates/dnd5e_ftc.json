@@ -189,6 +189,9 @@
       "Consumable": {
         "content": "<ui name='FTC_RENDER_ELEMENT'/>"
       },
+      "Feat": {
+        "content": "<ui name='FTC_RENDER_ELEMENT'/>"
+      },
       "Item": {
         "content": "<ui name='FTC_RENDER_ELEMENT'/>"
       },
