@@ -340,7 +340,8 @@ a[title="Close Window"] {
 
 
 /* Hack hide the control bar on V2 item sheets */
-div[ui-name="ui_renderItemv2"] > .flexcolumn .flexrow.background.outline {
+div[ui-name="ui_renderItemv2"] > .flexcolumn .flexrow.background.outline,
+div[ui-name="ui_characterSheetv2"] > .flexcolumn .flexwrap.background.alttext {
     display: none;
 }
 

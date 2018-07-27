@@ -1,0 +1,204 @@
+<section class="ftc-sheet ftc-character flexrow">
+
+    <main class="ftc-sheet-main flexcolumn">
+        <header class="ftc-sheet-header flexrow flexwrap">
+            <h1 class="charname">
+                <input class="ftc-edit" type="text" tabindex="0" data-edit="info.name.current"
+                       value="{info.name.current}" placeholder="Name"/>
+            </h1>
+
+            <div class="charlevel">
+                <h2 class="level">
+                    <label>Level</label>
+                    <input class="ftc-edit" type="text" tabindex="0" data-autosize="12" data-edit="counters.level.current"
+                           value="{experience.lvl}" placeholder="1"/>
+                </h2>
+               <div class="xpbar">
+                    <span class="bar {exp.cls}" style="width: {exp.pct}%"></span>
+                </div>
+                <div class="experience">
+                    <label>XP</label>
+                    <input class="ftc-edit" type="text" tabindex="0" data-autosize="6" data-edit="counters.exp.current"
+                           value="{exp.current}" placeholder="0"/>
+                    <label class="exp-next"> / {exp.next}</label>
+                </div>
+
+            </div>
+
+            <ul class="ftc-sheet-subtitle flexrow">
+                <li>
+                    <input class="ftc-edit charrace" type="text" tabindex="0" data-edit="info.race.current"
+                           value="{info.race.current}" placeholder="Race"/>
+                </li>
+                <li>
+                    <input class="ftc-edit charclass" type="text" tabindex="0" data-edit="info.class.current"
+                           value="{info.class.current}" placeholder="Class"/>
+                </li>
+                <li>
+                    <input class="ftc-edit charback" type="text" tabindex="0" data-edit="info.background.current"
+                           value="{info.background.current}" placeholder="Background"/>
+                </li>
+                <li>
+                    <select class="ftc-select alignment" data-edit="info.alignment.current"
+                            data-selected="{info.alignment.current}">
+                        <option value="lg">Lawful Good</option>
+                        <option value="ng">Neutral Good</option>
+                        <option value="cg">Chaotic Good</option>
+                        <option value="ln">Lawful Neutral</option>
+                        <option value="tn">True Neutral</option>
+                        <option value="cn">Chaotic Neutral</option>
+                        <option value="le">Lawful Evil</option>
+                        <option value="ne">Neutral Evil</option>
+                        <option value="ce">Chaotic Evil</option>
+                    </select>
+                </li>
+            </ul>
+        </header>
+
+        <!-- PRIMARY ATTRIBUTES -->
+        <div class="ftc-sheet-primary">
+            <!-- CHARACTER_PRIMARY_STATS -->
+        </div>
+
+        <!-- SECONDARY TABBED CONTAINER -->
+        <div class="ftc-sheet-secondary flexcolumn">
+            <ul class="sheet-tabs" id="content-tabs">
+                <li id="tab-inventory" class="sheet-tab">Inventory</li>
+                <li id="tab-spells" class="sheet-tab">Spells</li>
+                <li id="tab-traits" class="sheet-tab">Traits</li>
+                <li id="tab-biography" class="sheet-tab tab-active">Biography</li>
+            </ul>
+
+            <!-- Character Inventory -->
+            <div id="content-inventory" class="inventory content-tab">
+                <header role="group" class="modifier-select form-group flexrow">
+                    <label>Weapon Attack Modifier</label>
+                    <select class="ftc-select" data-edit="info.offensive.current"
+                            data-selected="{info.offensive.current}">
+                        <option value="">None</option>
+                        <option value="Str">Strength</option>
+                        <option value="Dex">Dexterity</option>
+                        <option value="Con">Constitution</option>
+                        <option value="Int">Intelligence</option>
+                        <option value="Wis">Wisdom</option>
+                        <option value="Cha">Charisma</option>
+                    </select>
+                </header>
+
+                <section class="inventory-items">
+                    <!-- INVENTORY_CURRENCY -->
+                    <!-- INVENTORY_ITEMS -->
+                </section>
+
+                <footer class="inventory-weight {weight.cls}">
+                    <span class="inventory-weight-bar" style="width: {weight.pct}%"></span>
+                    <label class="inventory-weight-label">{weight.wt} / {weight.enc}</label>
+                </footer>
+            </div>
+
+            <!-- Spellbook -->
+            <div id="content-spells" class="spellbook content-tab">
+                <header role="group" class="modifier-select form-group flexrow">
+                    <label>Spellcasting Attribute</label>
+                    <select class="ftc-select" data-edit="info.spellcasting.current"
+                            data-selected="{info.spellcasting.current}">
+                        <option value="">None</option>
+                        <option value="Str">Strength</option>
+                        <option value="Dex">Dexterity</option>
+                        <option value="Con">Constitution</option>
+                        <option value="Int">Intelligence</option>
+                        <option value="Wis">Wisdom</option>
+                        <option value="Cha">Charisma</option>
+                    </select>
+                </header>
+
+                <section class="spellbook-spells">
+                    <!-- SPELLBOOK_SPELLS -->
+
+                    <footer class="ability-controls item-header">
+                        <div class="ftc-item-add">
+                            <span class="glyphicon glyphicon-plus"></span> Add Spell
+                        </div>
+                    </footer>
+                </section>
+            </div>
+
+            <div id="content-traits" class="content-tab">
+                <!-- CHARACTER_TAB_TRAITS -->
+            </div>
+
+            <div id="content-biography" class="content-tab tab-active">
+                <span class="glyphicon glyphicon-edit ftc-textfield-edit"></span>
+                <div class="biography ftc-textfield" data-edit="info.notes.current">
+                    {info.notes.current}
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <aside class="ftc-sheet-sidebar flexcolumn">
+        <div class="ftc-sheet-profile">
+            <img class="profile-image ftc-image" data-edit="info.img.current" src="{info.img.current}"/>
+            <img class="profile-image token-image ftc-image" data-edit="info.img.min" src="{info.img.min}"/>
+        </div>
+
+        <!-- SIDEBAR TABS -->
+        <ul class="sheet-tabs" id="sidebar-tabs">
+            <li id="tab-abilities" class="sheet-tab tab-active">Abilities</li>
+            <li id="tab-skills" class="sheet-tab">Skills</li>
+            <li id="tab-feats" class="sheet-tab">Feats</li>
+        </ul>
+
+        <div id="content-abilities" class="content-tab tab-active">
+            <ol class="abilities-list">
+                <!-- ABILITIES_LIST -->
+            </ol>
+
+            <div class="abilities-primary-stats">
+                <div class="primary-stat initiative">
+                    <header>Initiative</header>
+                    <div class="primary-stat-value">
+                        <span>{initiative}</span>
+                    </div>
+                    <footer class="initiative-bonus">
+                        <label>Bonus:</label>
+                        <input class="ftc-edit" type="text" tabindex="0"
+                               data-edit="counters.initiative.current" data-dtype="str" data-autosize="10"
+                               value="{counters.initiative.current}"/>
+                    </footer>
+                </div>
+
+                <div class="primary-stat speed">
+                    <header>Movement Speed</header>
+                    <div class="primary-stat-value">
+                        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.speed.current"
+                               value="{counters.speed.current}" placeholder="10"/>
+                        <span> Ft.</span>
+                    </div>
+                    <footer>
+                        <input class="ftc-edit" type="text" tabindex="0" data-edit="counters.speed.extra" data-dtype="str"
+                               value="{counters.speed.extra}" placeholder="Climb / Swim"/>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-skills" class="content-tab">
+            <ol class="skills-list">
+                <!-- FTC_SKILL_HTML -->
+            </ol>
+        </div>
+
+        <div id="content-feats" class="content-tab">
+            <ol class="feats item-list" data-item-type="feat" data-item-container="feats">
+                <!-- FEATS_LIST -->
+            </ol>
+            <footer class="feat-controls item-header">
+                <div class="ftc-item-add">
+                    <span class="glyphicon glyphicon-plus"></span> Add Feat
+                </div>
+            </footer>
+        </div>
+    </aside>
+</section>

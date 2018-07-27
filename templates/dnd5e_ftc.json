@@ -11,26 +11,12 @@
   "build": "v2",
   "version": 1,
   "initiative": {
-    "query": "d20 + @c.stats.Dex.modifiers.mod + @c.counters.initiative.current + (@c.stats.Dex.current / 100)",
+    "query": "d20 + M@dex + R@initiative + (R@dex / 100)",
     "compare": "(@i1.total>@i2.total)?(1):(@i1.total==@i2.total?(0):(-1))"
   },
   "actors": {
-    "Character": {
-      "_t": "c",
-      "_type": "Character",
-      "info": {
-        "name": {
-          "name": "Name",
-          "current": "Default Character"
-        },
-        "img": {
-          "name": "Artwork"
-        },
-        "notes": {
-          "name": "Notes"
-        }
-      }
-    }
+    "Character": {},
+    "NPC": {}
   },
   "elements": {
     "Item": {},
@@ -75,16 +61,7 @@
       "Deny": 4
     }
   },
-  "constants": {
-    "ac": "@c.counters.ac",
-    "str": "M@Str",
-    "dex": "M@Dex",
-    "con": "M@Con",
-    "int": "M@Int",
-    "wis": "M@Wis",
-    "cha": "M@Cha",
-    "prof": "@c.counters.proficiency"
-  },
+  "constants": {},
   "tables": {},
   "tags": {},
   "dice": {
@@ -179,7 +156,10 @@
   "display": {
     "actors": {
       "Character": {
-        "content": "<div>Hello World</div>"
+        "content": "<ui name='FTC_RENDER_ACTOR'/>"
+      },
+      "NPC": {
+        "content": "<ui name='FTC_RENDER_ACTOR'/>"
       }
     },
     "elements": {
@@ -407,5 +387,6 @@
   "grid": {
     "unitScale": 5,
     "unit": "ft"
-  }
+  },
+  "actions": {}
 }

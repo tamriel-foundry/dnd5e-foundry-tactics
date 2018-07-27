@@ -3,44 +3,44 @@
     <main class="ftc-sheet-main flexcolumn">
         <header class="ftc-sheet-header flexrow flexwrap">
             <h1 class="charname">
-                <input class="ftc-edit" type="text" tabindex="0" data-edit="info.name.current"
+                <input class="ftc-edit" type="text" data-edit="info.name.current"
                        value="{info.name.current}" placeholder="Name"/>
             </h1>
 
             <div class="charlevel">
                 <h2 class="level">
                     <label>Level</label>
-                    <input class="ftc-edit" type="text" tabindex="0" data-autosize="12" data-edit="counters.level.current"
-                           value="{exp.lvl}" placeholder="1"/>
+                    <input class="ftc-edit" type="text" data-autosize="12" data-dtype="posint"
+                           data-edit="experience.level.current" value="{exp.level.current}" placeholder="1"/>
                 </h2>
                <div class="xpbar">
-                    <span class="bar {exp.cls}" style="width: {exp.pct}%"></span>
+                    <span class="bar {experience.css}" style="width: {experience.pct}%"></span>
                 </div>
                 <div class="experience">
                     <label>XP</label>
-                    <input class="ftc-edit" type="text" tabindex="0" data-autosize="6" data-edit="counters.exp.current"
-                           value="{exp.current}" placeholder="0"/>
-                    <label class="exp-next"> / {exp.next}</label>
+                    <input class="ftc-edit" type="text" data-autosize="6" data-dtype="posint"
+                           data-edit="experience.exp.current" value="{experience.exp.current}" placeholder="0"/>
+                    <label class="exp-next"> / {experience.next}</label>
                 </div>
 
             </div>
 
             <ul class="ftc-sheet-subtitle flexrow">
                 <li>
-                    <input class="ftc-edit charrace" type="text" tabindex="0" data-edit="info.race.current"
+                    <input class="ftc-edit charrace" type="text" data-dtype="str" data-edit="info.race.current"
                            value="{info.race.current}" placeholder="Race"/>
                 </li>
                 <li>
-                    <input class="ftc-edit charclass" type="text" tabindex="0" data-edit="info.class.current"
+                    <input class="ftc-edit charclass" type="text" data-dtype="str" data-edit="info.class.current"
                            value="{info.class.current}" placeholder="Class"/>
                 </li>
                 <li>
-                    <input class="ftc-edit charback" type="text" tabindex="0" data-edit="info.background.current"
+                    <input class="ftc-edit charback" type="text" data-dtype="str" data-edit="info.background.current"
                            value="{info.background.current}" placeholder="Background"/>
                 </li>
                 <li>
-                    <select class="ftc-select alignment" data-edit="info.alignment.current"
-                            data-selected="{info.alignment.current}">
+                    <select class="ftc-select alignment" data-dtype="str" data-edit="info.alignment.current"
+                            data-selected="{info.alignment.current}" >
                         <option value="lg">Lawful Good</option>
                         <option value="ng">Neutral Good</option>
                         <option value="cg">Chaotic Good</option>
@@ -159,26 +159,25 @@
                 <div class="primary-stat initiative">
                     <header>Initiative</header>
                     <div class="primary-stat-value">
-                        <span>{initiative}</span>
+                        <span>{attributes.initiative.str}</span>
                     </div>
                     <footer class="initiative-bonus">
                         <label>Bonus:</label>
-                        <input class="ftc-edit" type="text" tabindex="0"
-                               data-edit="counters.initiative.current" data-dtype="str" data-autosize="10"
-                               value="{counters.initiative.current}"/>
+                        <input class="ftc-edit" type="text" data-dtype="int" data-autosize="10"
+                               data-edit="attributes.initiative.current" value="{attributes.initiative.current}"/>
                     </footer>
                 </div>
 
                 <div class="primary-stat speed">
                     <header>Movement Speed</header>
                     <div class="primary-stat-value">
-                        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.speed.current"
-                               value="{counters.speed.current}" placeholder="10"/>
+                        <input class="ftc-edit" type="text" data-autosize="11"  data-dtype="int" placeholder="30"
+                               data-edit="attributes.speed.current" value="{attributes.speed.current}" />
                         <span> Ft.</span>
                     </div>
                     <footer>
-                        <input class="ftc-edit" type="text" tabindex="0" data-edit="counters.speed.extra" data-dtype="str"
-                               value="{counters.speed.extra}" placeholder="Climb / Swim"/>
+                        <input class="ftc-edit" type="text" data-edit="attributes.speed.extra" data-dtype="str"
+                               value="{attributes.speed.extra}" placeholder="Climb / Swim"/>
                     </footer>
                 </div>
             </div>

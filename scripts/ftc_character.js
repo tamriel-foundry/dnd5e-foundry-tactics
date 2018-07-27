@@ -1,90 +1,178 @@
 
 /* ------------------------------------------- */
+/*  Actor Data Model                           */
+/* ------------------------------------------- */
+
+FTC.actors = {
+    "_t": "c",
+    "info": {
+        "name": { "name": "Name" },
+        "img": { "name": "Artwork" },
+        "notes": { "name": "Description" },
+        "race": { "name": "Race" },
+        "class": { "name": "Class" },
+        "background": { "name": "Background" },
+        "alignment": { "name": "Alignment" },
+    },
+
+    "experience": {
+        "level": { "name": "Level" },
+        "cr": { "name": "Challenge Rating" },
+        "exp": { "name": "Experience" }
+    },
+
+    "attributes": {
+        "hp": { "name": "Hit Points" },
+        "hd": { "name": "Hit Dice" },
+        "proficiency": { "name": "Proficiency Bonus" },
+        "ac": { "name": "Armor Class" },
+        "speed": { "name": "Movement Speed" },
+        "initiative": { "name": "Initiative Modifier" },
+        "offensive": { "name": "Weapon Modifier" },
+        "spellcasting": { "name": "Spellcasting Ability" },
+        "inspiration": { "name": "Inspiration" },
+        "death": { "name": "Death Saves" }
+    },
+
+    "traits": {
+        "size": { "name": "Size" },
+        "di": { "name": "Damage Immunities" },
+        "dr": { "name": "Damage Resistances" },
+        "ci": { "name": "Condition Immunities" },
+        "dv": { "name": "Damage Vulnerabilities" },
+        "senses": { "name": "Senses" },
+        "languages": { "name": "Languages" },
+    },
+
+    "personality": {
+        "traits": { "name": "Traits" },
+        "ideals": { "name": "Ideals" },
+        "bonds": { "name": "Bonds" },
+        "flaws": { "name": "Flaws" },
+    },
+
+    "abilities": {
+        "str": { "name": "Strength" },
+        "dex": { "name": "Dexterity" },
+        "con": { "name": "Constitution" },
+        "int": { "name": "Intelligence" },
+        "wis": { "name": "Wisdom" },
+        "cha": { "name": "Charisma" }
+    },
+
+    "skills": {
+        "acr": { "name": "Acrobatics", "ability": "dex" },
+        "ani": { "name": "Animal Handling", "ability": "wis" },
+        "arc": { "name": "Arcana", "ability": "int" },
+        "ath": { "name": "Athletics", "ability": "str" },
+        "dec": { "name": "Deception", "ability": "cha" },
+        "his": { "name": "History", "ability": "int" },
+        "ins": { "name": "Insight", "ability": "wis" },
+        "int": { "name": "Intimidation", "ability": "cha" },
+        "inv": { "name": "Investigation", "ability": "int" },
+        "med": { "name": "Medicine", "ability": "wis" },
+        "nat": { "name": "Nature", "ability": "int" },
+        "per": { "name": "Perception", "ability": "wis" },
+        "pfm": { "name": "Performance", "ability": "cha" },
+        "prs": { "name": "Persuasion", "ability": "cha" },
+        "rel": { "name": "Religion", "ability": "int" },
+        "sle": { "name": "Sleight of Hand", "ability": "dex" },
+        "ste": { "name": "Stealth", "ability": "dex" },
+        "sur": { "name": "Survival", "ability": "wis" }
+    },
+
+    "currency": {
+        "gp": { "name": "Gold" },
+        "sp": { "name": "Silver" },
+        "ep": { "name": "Electrum" },
+        "cp": { "name": "Copper" }
+    },
+
+    "spells": {
+        "spell0": { "name": "Cantrip" },
+        "spell1": { "name": "1st Level" },
+        "spell2": { "name": "2nd Level" },
+        "spell3": { "name": "3rd Level" },
+        "spell4": { "name": "4th Level" },
+        "spell5": { "name": "5th Level" },
+        "spell6": { "name": "6th Level" },
+        "spell7": { "name": "7th Level" },
+        "spell8": { "name": "8th Level" },
+        "spell9": { "name": "9th Level" }
+    },
+
+    "resources": {
+        "legendary": { "name": "Legendary Actions" },
+        "primary": { "name": "Primary Resource" },
+        "secondary": { "name": "Secondary Resource" },
+    },
+
+    "source": { "name": "Source" },
+    "tags": {},
+
+    "inventory": [],
+    "spellbook": [],
+    "feats": []
+};
+
+
+/* ------------------------------------------- */
 /* Character Object Type                       */
 /* ------------------------------------------- */
 
-class FTCCharacter extends FTCEntity {
+class FTCActor extends FTCEntity {
 
-    constructor(obj, context) {
-        super(obj, context);
-
-        // Primary Templates
-        this.parts = {
-            CHARACTER_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'character/primary-stats.html',
-            CHARACTER_TAB_TRAITS: FTC.TEMPLATE_DIR + 'character/tab-traits.html',
-            INVENTORY_CURRENCY: FTC.TEMPLATE_DIR + 'character/items/inventory-currency.html',
-            NPC_PRIMARY_STATS: FTC.TEMPLATE_DIR + 'npc/primary-stats.html',
-            NPC_TAB_TRAITS: FTC.TEMPLATE_DIR + 'npc/tab-traits.html'
-        };
-
-        // Register local for debugging
-        FTC.character = this;
+    constructor(object, context) {
+        super(object, context);
 
         // Store container sorting order
         this._sorting = {
             "inventory": [],
             "spellbook": [],
-            "feats": [],
-        };
+            "feats": []
+        }
     }
 
     /* ------------------------------------------- */
 
-    get isNPC() {
-        return (this.data.tags.npc === 1)
+    /* Templates */
+    get templates() {
+        const td = FTC.TEMPLATE_DIR + "actors/";
+        return {
+            "BODY": td + "body.html"
+        }
     }
 
     /* ------------------------------------------- */
 
-    get spellDC() {
-        let attr = this.data.info.spellcasting.current,
-            mod = this.data.stats[attr].modifiers.mod;
-        return 8 + mod + this.data.counters.proficiency.current;
-    }
+    static applyDataModel() {
 
-    /* ------------------------------------------- */
-
-    save() {
-        if (!this.obj || !this._changed) return;
-        const self = this;
-        console.log("Saving object " + this.name);
-
-        // Update item sorting order
-        $.each(this._sorting, function(container, order) {
-            if ( !order.length ) return;
-            let items = [];
-            $.each(order, function(n, o) {
-                items[n] = self.data[container][o];
-            });
-            self.obj.data[container] = items;
+        // Update Actor Templates
+        $.each(game.templates.actors, function(type, definition) {
+            ftc_merge(definition, FTC.actors, true, true, true);
+            definition["_type"] = type;
         });
-
-        // Save the object
-        this.obj.sync("updateAsset");
-    }
-
-    /* ------------------------------------------- */
-    /* HTML Rendering                              */
-    /* ------------------------------------------- */
-
-    refineScope(scope) {
-        scope.isPrivate = (scope.viewOnly && (!this.obj || !this.obj.id()));
-        return scope;
+        console.log("Foundry Tactics - Actor Templates Updated");
     }
 
     /* ------------------------------------------- */
 
     convertData(data) {
 
-        // Proficiency Bonus
-        let lvl = ( this.isNPC ) ? data.counters.cr.current : data.counters.level.current;
-        data.counters.proficiency.current = Math.floor((lvl + 7) / 4);
+        // Level
+        data.experience.level.current = Math.min(Math.max(data.experience.level.current, 1), 20);
 
-        // Abilities -> Feats
-        if ( data.abilities && !data.feats ) {
-            data.feats = data.abilities;
-            delete data.abilities;
-        }
+        // Ability Scores and Modifiers
+        $.each(data.abilities, function(_, a) {
+            a.current = a.current || sync.eval("4d6k3");
+            a.modifiers = { "mod": Math.floor(( a.current - 10 ) / 2) };
+        });
+
+        // Update Proficiency Bonus
+        let lvl = Math.max(data.experience.level.current, data.experience.cr.current);
+        data.attributes.proficiency.current = Math.floor((lvl + 7) / 4);
+
+        // Return converted data
         return data;
     }
 
@@ -95,85 +183,63 @@ class FTCCharacter extends FTCEntity {
         // Populate core character data
         this.getCoreData(data);
 
-        // Set up owned items
-        this.setupInventory(data);
-        this.setupSpellbook(data);
-        this.setupFeats(data);
+        // // Set up owned items
+        // this.setupInventory(data);
+        // this.setupSpellbook(data);
+        // this.setupFeats(data);
 
         // Return the enriched data
         return data;
     }
 
-    /* -------------------------------------------- */
+    /* ------------------------------------------- */
 
     getCoreData(data) {
         /* This function exists to prepare all the standard rules data that would be used by dice rolling in D&D5e.
         */
 
-        // Provided data, or create a duplicate
-        data = data || duplicate(this.data);
+        // Experience, level, hit dice
+        let xp = data.experience;
+        xp["lvl"] = xp.level.current,
+        xp["start"] = this.getLevelExp(xp.lvl - 1);
+        xp["cur"] = Math.max(xp.exp.current, xp.start);
+        xp["next"] = this.getLevelExp(xp.lvl);
+        xp["pct"] = Math.min(((xp.cur - xp.start) * 100 / (xp.next - xp.start)), 99.5);
+        xp["css"] = (xp.cur > xp.next) ? "leveled" : "";
+        xp["kill"] = this.getKillExp(xp.cr.current);
+        data.attributes.hd.max = xp.lvl;
 
-        // Experience and level
-        let lvl = Math.min(Math.max(data.counters.level.current, 1), 20),
-            start = this.getLevelExp(lvl - 1),
-            cur = Math.max(data.counters.exp.current, start),
-            next = this.getLevelExp(lvl),
-            pct = ((cur - start) * 100) / (next - start);
-        data['exp'] = {
-            "lvl": lvl,
-            "current": cur.toLocaleString(),
-            "next": next.toLocaleString(),
-            "pct": Math.min(pct, 99.5),
-            "cls": (pct >= 100) ? "leveled": "",
-            "kill": this.getKillExp(data.counters.cr.current)
-        };
-
-        // Maximum hit dice
-        data.counters.hd.max = lvl;
-
-        // Reference actor data
-        data["proficiency"] = data.counters.proficiency.current;
-        data["spellcasting"] = data.info.spellcasting.current || "Int";
-        data["offensive"] = data.info.offensive.current || "Str";
-
-        // Ability modifiers
-        $.each(data.stats, function(a, s) {
-            data[a] = {
-                "name": s.name,
-                "prof": (s.proficient || 0) * data.proficiency,
-                "value": s.current,
-                "mod": s.modifiers.mod,
-                "modstr": (s.modifiers.mod < 0 ? "" : "+" ) + s.modifiers.mod,
-                "valstr": FTC.ui.padNumber(s.current, 2)
-            }
+        // Abilities
+        $.each(data.abilities, function(attr, a) {
+            a.prof = parseInt(a.proficient || 0) * data.attributes.proficiency.current;
+            a.mod = a.modifiers.mod;
+            a.modstr = a.mod.signedString();
+            a.valstr = a.current.paddedString(2);
         });
 
-        // Skill modifiers
-        $.each(data.skills, function(n, s) {
-            let mod = data[s.stat].mod;
-            data[n] = {
-                "name": s.name,
-                "prof": (s.current || 0) * data.proficiency,
-                "stat": s.stat,
-                "mod": mod,
-                "modstr": (mod < 0 ? "" : "+") + mod
-            }
+        // Skills
+        $.each(data.skills, function(skl, s) {
+           s.mod = data.abilities[s.ability].mod;
+           s.prof = parseInt(s.current || 0) * data.attributes.proficiency.current;
+           s.modstr = s.mod.signedString();
         });
 
-        // Initiative modifier
-        let initMod = parseInt(data.stats["Dex"].modifiers.mod) + parseInt(data.counters.initiative.current);
-        data["initiative"] = (initMod < 0 ? initMod : "+"+initMod) + "." + data["Dex"].valstr;
+        // Initiative
+        data.attributes.initiative.mod = data.abilities.dex.mod + parseInt(data.attributes.initiative.current || 0);
+        data.attributes.initiative.str = data.attributes.initiative.mod.signedString() + '.' + data.abilities.dex.valstr;
 
-        // Weapon and Spell modifiers
-        data["spellMod"] = data[data.spellcasting].mod;
-        data["spellDC"] = 8 + data.proficiency + data[data.spellcasting].mod;
-        data["spellDCstr"] = data[data.spellcasting].mod ? "Spell DC " + data["spellDC"] : "";
-        data["weaponMod"] = data[data.offensive].mod;
+        // Modifiers
+        data.attributes.offensive.current = data.attributes.offensive.current || "str";
+        data.attributes.offensive.mod = data.abilities[data.attributes.offensive.current].mod;
+
+        data.attributes.spellcasting.current = data.attributes.spellcasting.current || "int";
+        data.attributes.spellcasting.mod = data.abilities[data.attributes.spellcasting.current].mod;
+        data.attributes.spellcasting.dc = 8 + data.attributes.proficiency.current + data.attributes.spellcasting.mod;
+        data.attributes.spellcasting.dcstr = "Spell DC " + data.attributes.spellcasting.dc;
 
         // Armor Class
-        data["baseAC"] = 10 + data["Dex"].mod;
-        return data;
-    };
+        data.attributes.ac.base = 10 + data.abilities.dex.mod;
+    }
 
     /* ------------------------------------------- */
 
@@ -194,243 +260,11 @@ class FTCCharacter extends FTCEntity {
 
     /* ------------------------------------------- */
 
-    setupInventory(data) {
-        // Set up inventory items by converting them to FTCItem objects
-
-        const owner = this,
-            weight = [],
-            inventory = {
-            "weapons": {
-                "name": "Weapons",
-                "items": [],
-                "type": "weapon",
-            },
-            "equipment": {
-                "name": "Equipment",
-                "items": [],
-                "type": "armor"
-            },
-            "tools": {
-                "name": "Tools",
-                "items": [],
-                "type": "item",
-                "variety": "tool"
-            },
-            "consumables": {
-                "name": "Consumables",
-                "items": [],
-                "type": "item",
-                "variety": "consumable"
-            },
-            "pack": {
-                "name": "Backpack",
-                "items": [],
-                "type": "item"
-            }
-        };
-
-        // Iterate over inventory items
-        $.each(data.inventory, function(itemId, itemData) {
-            let item = new FTCItem(itemData, {"owner": owner, "container": "inventory"});
-
-            // Set id and class
-            item.data.itemId = itemId;
-            item.data.itemCls = ( item.type === "weapon" && item.weapon.damage.current ) ? "ftc-rollable" : "";
-
-            // Push into type
-            if ( item.type === "weapon" ) {
-                inventory.weapons.items.push(item);
-            } else if ( item.type === "armor" && item.armor.equipped.current === 1 ) {
-                inventory.equipment.items.push(item);
-            } else if ( item.type === "item" && item.info.variety.current === "tool" ) {
-                inventory.tools.items.push(item);
-            } else if ( item.type === "item" && item.info.variety.current === "consumable" ) {
-                inventory.consumables.items.push(item);
-            } else {
-                inventory.pack.items.push(item);
-            }
-
-            // Record total entry weight
-            weight.push(parseFloat(item.info.weight.current || 0) * parseFloat(item.info.quantity.current));
-        });
-        data.inventory = inventory;
-
-        // Compute weight and encumbrance
-        let wt = (weight.length > 0) ? weight.reduce(function(total, num) { return total + (num || 0); }) : 0,
-           enc = data.stats.Str.current * 15,
-           pct = Math.min(wt * 100 / enc, 99.5),
-           cls = (pct > 90 ) ? "heavy" : "";
-        data["weight"] = {"wt": wt.toFixed(2), "enc": enc, "pct": pct.toFixed(2), "cls": cls};
-        return data;
-    }
-
-    /* ------------------------------------------- */
-
-    setupSpellbook(data) {
-        /* Set up spellbook items by converting them to FTCItem objects
-         */
-        const owner = this,
-            sls = {};
-
-        // Iterate over spellbook spells
-        $.each(data.spellbook, function(spellId, itemData) {
-
-            // Construct the item object
-            let item = new FTCItem(itemData, {"owner": owner, "container": "spellbook"}),
-                spell = item.spell;
-
-            // Construct spell data
-            let lvl = (spell.level.current === "Cantrip") ? 0 : parseInt(spell.level.current || 0);
-            item.data.spellid = spellId;
-
-            // Record spell-level
-            sls[lvl] = sls[lvl] || {
-                "level": lvl,
-                "name": (lvl === 0) ? "Cantrip" : FTC.ui.getOrdinalNumber(lvl) + " Level",
-                "current": FTC.getProperty(data, 'counters.spell'+lvl+'.current') || 0,
-                "max": FTC.getProperty(data, 'counters.spell'+lvl+'.max') || 0,
-                "spells": [],
-            };
-            sls[lvl].current = (lvl === 0) ? "&infin;" : sls[lvl].current;
-            sls[lvl].max = (lvl === 0) ? "&infin;" : sls[lvl].max;
-            sls[lvl].spells.push(item);
-        });
-        data['spellbook'] = sls;
-        return data;
-    }
-
-    /* ------------------------------------------- */
-
-    setupFeats(data) {
-        /* Set up feat items by converting them to FTCItem objects
-         */
-        const owner = this,
-            feats = [];
-
-        // Iterate over feats
-        $.each(data.feats, function(itemId, itemData) {
-            let item = new FTCItem(itemData, {"owner": owner, "container": "feats"});
-            feats.push(item);
-        });
-        data.feats = feats;
-        return data;
-    }
-
-    /* ------------------------------------------- */
-    /* Templates and Rendering                     */
-    /* ------------------------------------------- */
-
-    getTemplate(data, scope) {
-        /* Determine the base HTML template that should be used for the entity
-         */
-
-        // Private Preview Template
-        if ( scope.isPrivate ) return FTC.TEMPLATE_DIR + 'character/preview-character.html';
-
-        // NPC Template
-        else if ( this.isNPC ) return FTC.TEMPLATE_DIR + "npc/npc-sheet.html";
-
-        // Character Sheet
-        return FTC.TEMPLATE_DIR + 'character/charsheet.html';
-    }
-
-    /* ------------------------------------------- */
-
     buildHTML(data, scope) {
 
         // Determine and load primary template
-        const template = this.getTemplate(data, scope);
-        let main = FTC.loadTemplate(template);
-
-        // Augment sub-components
-        if (!scope.isPrivate) {
-
-            // Inject Primary Template Parts
-            $.each(this.parts, function(tag, path) {
-                main = FTC.injectTemplate(main, tag, path);
-            });
-
-            // Abilities and Skills
-            main = this._buildAbilities(main, data);
-            main = this._buildSkills(main, data);
-
-            // Owned Items - Inventory, Spells, and Feats
-            main = this._buildInventory(main, data);
-            main = this._buildSpellbook(main, data);
-            main = this._buildFeats(main, data);
-        }
-        return main;
-    }
-
-    /* ------------------------------------------- */
-
-    _buildAbilities(html, data) {
-        let abilities = "",
-            template = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/ability.html');
-        for ( var s in data.stats ) {
-            abilities += template.replace(/\{stat\}/g, s);
-        }
-        return html.replace("<!-- ABILITIES_LIST -->", abilities);
-    }
-
-    /* ------------------------------------------- */
-
-    _buildSkills(html, data) {
-        let skills = "",
-            template = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/skill.html');
-        for (var s in data.skills) {
-            skills += template.replace(/\{skl\}/g, s);
-        }
-        return html.replace("<!-- FTC_SKILL_HTML -->", skills);
-    }
-
-    /* ------------------------------------------- */
-
-    _buildInventory(html, data) {
-        let inventory = "",
-            itemHeader = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/inventory-header.html'),
-            itemTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/item.html');
-        $.each(data.inventory, function(_, type) {
-            let collection = FTC.populateTemplate(itemHeader, type),
-                items = "";
-            $.each(type.items, function(_, item) {
-                items += FTC.populateTemplate(itemTemplate, item.data);
-            });
-            inventory += collection.replace("<!-- ITEMS -->", items);
-        });
-        inventory = inventory || '<blockquote class="compendium">Add items from the compendium.</blockquote>';
-        return html.replace("<!-- INVENTORY_ITEMS -->", inventory);
-    }
-
-    /* ------------------------------------------- */
-
-    _buildSpellbook(html, data) {
-        let spellbook = "",
-            spellHeader = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/spell-header.html'),
-            spellTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/spell.html');
-        $.each(data.spellbook, function(l, level){
-            let page = FTC.populateTemplate(spellHeader, level),
-                spells = "";
-            $.each(level.spells, function(_, spell){
-                spells += FTC.populateTemplate(spellTemplate, spell.data);
-            });
-            spellbook += page.replace("<!-- SPELLS -->", spells);
-        });
-        spellbook = spellbook || '<blockquote class="compendium">Add spells from the compendium.</blockquote>';
-        return html.replace("<!-- SPELLBOOK_SPELLS -->", spellbook);
-    }
-
-    /* ------------------------------------------- */
-
-    _buildFeats(html, data) {
-        let feats = "",
-            featTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'character/items/feat.html');
-        $.each(data.feats, function(i, item) {
-            item.data.itemid = i;
-            feats += FTC.populateTemplate(featTemplate, item.data);
-        });
-        feats = feats || '<blockquote class="compendium">Add feats from the compendium.</blockquote>';
-        return html.replace("<!-- FEATS_LIST -->", feats);
+        let html = FTC.loadTemplate(this.templates["BODY"]);
+        return html;
     }
 
     /* ------------------------------------------- */
@@ -441,536 +275,106 @@ class FTCCharacter extends FTCEntity {
         // Activate Tabs and Editable Fields
         FTC.ui.activateTabs(html, this, app);
         FTC.forms.activateFields(html, this, app);
-
-        // Activate rollable actions on a timeout to prevent accidentally clicking immediately when the sheet opens
-        setTimeout(function() {
-
-            // Attribute rolls
-            html.find('.ability .ftc-rollable').click(function() {
-                let attr = $(this).parent().attr("data-ability");
-                self.rollAbility(attr);
-            });
-
-            // Skill rolls
-            html.find('.skill .ftc-rollable').click(function() {
-                let skl = $(this).parent().attr("data-skill");
-                self.rollSkillCheck(skl);
-            });
-
-            // Weapon actions
-            html.find(".weapon .ftc-rollable").click(function() {
-                const itemId = $(this).closest("li.weapon").attr("data-item-id"),
-                    itemData = self.data.inventory[itemId];
-                FTCItemAction.toChat(self, itemData);
-            });
-
-            // Spell actions
-            html.find(".spell .ftc-rollable").click(function() {
-                const itemId = $(this).closest("li.spell").attr("data-item-id"),
-                    itemData = self.data.spellbook[itemId];
-                FTCItemAction.toChat(self, itemData);
-            });
-
-            // Feat actions
-            html.find(".feat .ftc-rollable").click(function() {
-                const itemId = $(this).closest("li.feat").attr("data-item-id"),
-                    itemData = self.data.feats[itemId];
-                FTCItemAction.toChat(self, itemData);
-            });
-
-            // Dragable items
-            html.find(".item-list").sortable({
-                "items": " > li",
-                "cancel": ".inventory-header",
-                "containment": "parent",
-                "axis": "y",
-                "opacity": 0.75,
-                "delay": 200,
-                "scope": $(this).attr("data-item-container"),
-                "update": function( event, ui ) {
-                    let container = ui.item.parent().attr("data-item-container");
-                    self.getSortOrder(container, ui.item);
-                }
-            });
-        }, 500);
     }
 
     /* ------------------------------------------- */
-
-    getSortOrder(container, li) {
-        let parent = undefined;
-        if ( li ) {
-            parent = li.parents("." + container);
-        } else if ( this.app ) {
-            parent = this.app.find("." + container);
-        }
-
-        // Check the current sort order
-        let sorted = [];
-        parent.find("li.item").each(function() {
-            sorted.push($(this).attr("data-item-id"));
-        });
-
-        // Update sorting
-        this._sorting[container] = sorted;
-        this._changed = true;
-        return sorted;
-    }
-
-    /* ------------------------------------------- */
-    /* Owned Items                                 */
-    /* ------------------------------------------- */
-
-    addItem(item, container) {
-        const type = item.type;
-        if ( !container ) {
-            if (["weapon", "armor", "item"].includes(type)) container = "inventory";
-            else if ("spell" === type) container = "spellbook";
-            else if ("feat" === type) container = "feats";
-        }
-        if ( !container ) return;
-
-        // If we are dropping a spell on the inventory tab, it's a "Scroll of ___"
-        if ( type === "spell" && FTC.character.data.tabs["content-tabs"] === "tab-inventory" ) {
-            item.data.info.name.current = "Scroll of " + item.data.info.name.current;
-            item.data.info.type.current = item.types.ITEM_TYPE_DEFAULT;
-            item.data.info.variety.current = "consumable";
-            container = "inventory";
-        }
-
-        // Push the item in
-        let newId = this.data[container].length;
-        this.data[container].push(item.data);
-
-        // Add the item to pending sort
-        if ( this._sorting[container].length ) this._sorting[container].push(newId);
-        this._changed = true;
-        this.save();
-    }
-
-    /* ------------------------------------------- */
-
-    updateItem(container, itemId, itemData) {
-        this.data[container][itemId] = itemData;
-        this._changed = true;
-        this.save();
-    }
-
-    /* ------------------------------------------- */
-
-    deleteItem(container, itemId) {
-        this.data[container].splice(itemId, 1);
-        let sortIndex = this.data[container].indexOf(itemId + "");
-        this._sorting[container].splice(sortIndex, 1);
-        this._changed = true;
-    }
-
-    /* ------------------------------------------- */
-    /* Character Actions                           */
-    /* ------------------------------------------- */
-
-    rollAbility(attr) {
-        /* Initial dialog to prompt between rolling an Ability Test or Saving Throw
-        */
-
-        const actor = this;
-        const html = $('<div id="ftc-dialog"><p>What type of roll?</p></div>');
-
-        // Create a dialogue
-        FTC.ui.createDialogue(html, {
-            title: actor.data.stats[attr].name + " Roll",
-            buttons: {
-                "Ability Test": function () {
-                    $(this).dialog("close");
-                    $(this).dialog("destroy");
-                    actor.rollAbilityTest(attr);
-                },
-                "Saving Throw": function () {
-                    $(this).dialog("close");
-                    $(this).dialog("destroy");
-                    actor.rollAbilitySave(attr);
-                }
-            }
-        });
-    }
-
-    /* -------------------------------------------- */
-
-    rollAbilityTest(attr) {
-        /* Roll an Attribute Test
-        */
-
-        // Prepare core data
-        let actor = this,
-            data = this.getCoreData(),
-            name = data[attr].name,
-            flavor = name + " Test",
-            rolled = false,
-            adv = undefined,
-            bonus = undefined;
-
-        // Prepare HTML form
-        const html = $('<div id="ftc-dialog" class="ability-roll"></div>');
-        html.append($('<label>Situational Modifier?</label>'));
-        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
-        html.append($('<label>Roll With advantage?</label>'));
-
-        // Create a dialogue
-        FTC.ui.createDialogue(html, {
-            title: flavor,
-            buttons: {
-                "Advantage": function () {
-                    rolled = true;
-                    adv = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Normal": function () {
-                    rolled = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Disadvantage": function () {
-                    rolled = true;
-                    adv = false;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                }
-            },
-            close: function () {
-                html.dialog("destroy");
-                if ( !rolled ) return;
-                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", bonus);
-                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-                FTC.Dice.roll(actor, flavor, formula, {"mod": data[attr].mod});
-            }
-        });
-    }
-
-    /* -------------------------------------------- */
-
-    rollAbilitySave(attr) {
-        /* Roll a Saving Throw
-        */
-
-        // Prepare core data
-        let actor = this,
-            data = this.getCoreData(),
-            name = data[attr].name,
-            flavor = name + " Save",
-            rolled = false,
-            adv = undefined,
-            bonus = undefined;
-
-        // Prepare HTML form
-        const html = $('<div id="ftc-dialog" class="ability-roll"></div>');
-        html.append($('<label>Situational Modifier?</label>'));
-        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
-        html.append($('<label>Roll With advantage?</label>'));
-
-        // Create a dialogue
-        FTC.ui.createDialogue(html, {
-            title: flavor,
-            buttons: {
-                "Advantage": function () {
-                    rolled = true;
-                    adv = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Normal": function () {
-                    rolled = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Disadvantage": function () {
-                    rolled = true;
-                    adv = false;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                }
-            },
-            close: function () {
-                html.dialog("destroy");
-                if ( !rolled ) return;
-                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
-                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-                FTC.Dice.roll(actor, flavor, formula, {"mod": data[attr].mod, "prof": data[attr].prof});
-            }
-        });
-    }
-
-    /* -------------------------------------------- */
-
-    rollSkillCheck(skl) {
-        /* Roll a skill check, prompting for advantage/disadvantage as well as situational modifiers
-        */
-
-        // Prepare core data
-        let actor = this,
-            data = this.getCoreData(),
-            name = data[skl].name,
-            flavor = name + " Check",
-            rolled = false,
-            adv = undefined,
-            bonus = undefined;
-
-        // Prepare HTML form
-        const html = $('<div id="ftc-dialog" class="skill-roll"></div>');
-        html.append($('<label>Situational Modifier?</label>'));
-        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
-        html.append($('<label>Roll With advantage?</label>'));
-
-        // Create a dialogue
-        FTC.ui.createDialogue(html, {
-            title: flavor,
-            buttons: {
-                "Advantage": function () {
-                    rolled = true;
-                    adv = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Normal": function () {
-                    rolled = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Disadvantage": function () {
-                    rolled = true;
-                    adv = false;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                }
-            },
-            close: function () {
-                html.dialog("destroy");
-                if ( !rolled ) return;
-                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
-                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-                FTC.Dice.roll(actor, flavor, formula, {"mod": data[skl].mod, "prof": data[skl].prof});
-            }
-        });
-    }
-
-    /* -------------------------------------------- */
-
-    rollWeaponAttack(flavor, hit) {
-        /* Roll a weapon attack, prompting for advantage/disadvantage as well as situational bonuses
-        */
-
-        // Prepare core data
-        let actor = this,
-            data = this.getCoreData(),
-            rolled = false,
-            adv = undefined,
-            bonus = undefined;
-
-        // Prepare HTML form
-        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
-        html.append($('<label>Situational Modifier?</label>'));
-        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
-        html.append($('<label>Attack With advantage?</label>'));
-
-        // Create a dialogue
-        FTC.ui.createDialogue(html, {
-            title: flavor,
-            buttons: {
-                "Advantage": function () {
-                    rolled = true;
-                    adv = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Normal": function () {
-                    rolled = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Disadvantage": function () {
-                    rolled = true;
-                    adv = false;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                }
-            },
-            close: function () {
-                html.dialog("destroy");
-                if ( !rolled ) return;
-                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), hit, "@mod", "@prof", bonus);
-                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-                FTC.Dice.roll(actor, flavor, formula, {"mod": data.weaponMod, "prof": data.proficiency});
-            }
-        });
-    }
-
-    /* -------------------------------------------- */
-
-    rollWeaponDamage(flavor, damage) {
-
-        // Prepare core data
-        let actor = this,
-            data = this.getCoreData(),
-            rolled = false,
-            crit = false,
-            bonus = undefined;
-
-        // Prepare HTML form
-        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
-        html.append($('<label>Situational Modifier?</label>'));
-        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
-        html.append($('<label>Was your attack a critical hit?</label>'));
-
-        // Create a dialogue
-        FTC.ui.createDialogue(html, {
-            title: flavor,
-            buttons: {
-                "Normal": function () {
-                    rolled = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Critical Hit!": function () {
-                    rolled = true;
-                    crit = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                }
-            },
-            close: function () {
-                html.dialog("destroy");
-                if ( !rolled ) return;
-                damage = crit ? FTC.Dice.crit(damage) : damage;
-                bonus = crit ? FTC.Dice.crit(bonus) : bonus;
-                let formula = FTC.Dice.formula(damage, "@mod", bonus);
-                flavor += crit ? " (Critical Hit)" : "";
-                FTC.Dice.roll(actor, flavor, formula, {"mod": data.weaponMod});
-            }
-        });
-    }
-
-    /* -------------------------------------------- */
-
-    rollSpellAttack(flavor) {
-        /*
-        Roll a spell attack, prompting for advantage/disadvantage as well as situational bonuses
-        */
-
-        // Prepare core data
-        let actor = this,
-            data = this.getCoreData(),
-            rolled = false,
-            adv = undefined,
-            bonus = undefined;
-
-        // Prepare HTML form
-        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
-        html.append($('<label>Situational Modifier?</label>'));
-        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
-        html.append($('<label>Attack With advantage?</label>'));
-
-        // Create a dialogue
-        FTC.ui.createDialogue(html, {
-            title: flavor,
-            buttons: {
-                "Advantage": function () {
-                    rolled = true;
-                    adv = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Normal": function () {
-                    rolled = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Disadvantage": function () {
-                    rolled = true;
-                    adv = false;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                }
-            },
-            close: function () {
-                html.dialog("destroy");
-                if ( !rolled ) return;
-                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
-                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-                FTC.Dice.roll(actor, flavor, formula, {"mod": data.spellMod, "prof": data.proficiency});
-            }
-        });
-    }
-
-    /* -------------------------------------------- */
-
-    rollSpellDamage(flavor, damage, canCrit) {
-
-        // Prepare core data
-        let actor = this,
-            data = this.getCoreData(),
-            buttons = {},
-            rolled = false,
-            crit = false,
-            bonus = undefined;
-
-        // Prepare HTML form
-        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
-        html.append($('<label>Situational Modifier?</label>'));
-        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
-
-        // Some spells cannot critically hit, so they should just roll directly
-        if ( canCrit ) {
-            buttons = {
-                "Normal": function () {
-                    rolled = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                },
-                "Critical Hit!": function () {
-                    rolled = true;
-                    crit = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                }
-            };
-            html.append($('<label>Was your attack a critical hit?</label>'));
-        } else {
-            buttons = {
-                "Roll Damage": function () {
-                    rolled = true;
-                    bonus = $(this).find('#roll-bonus').val();
-                    $(this).dialog("close");
-                }
-            };
-        }
-
-        // Create a dialogue
-        FTC.ui.createDialogue(html, {
-            title: flavor,
-            buttons: buttons,
-            close: function () {
-                html.dialog("destroy");
-                if ( !rolled ) return;
-                damage = crit ? FTC.Dice.crit(damage) : damage;
-                bonus = crit ? FTC.Dice.crit(bonus) : bonus;
-                let formula = FTC.Dice.formula(damage, bonus);
-                flavor += crit ? " (Critical Hit)" : "";
-                FTC.Dice.roll(actor, flavor, formula, {"mod": data.spellMod});
-            }
-        });
-    }
 }
 
 
-/* -------------------------------------------- */
-/* Character Sheet Sync Render                  */
-/* -------------------------------------------- */
 
-sync.render("FTC_CHARSHEET", function (obj, app, scope) {
-    if ( game.templates.identifier !== FTC_SYSTEM_IDENTIFIER ) {
-        return $("<div>Sorry, no preview available at the moment.</div>");
-    }
-    const char = new FTCCharacter(obj);
-    return char.renderHTML(app, scope);
+/* ------------------------------------------- */
+/*  Actors Initialization Hook                 */
+/* ------------------------------------------- */
+
+
+hook.add("FTCInit", "Actors", function() {
+
+    // Apply the Item Data Model
+    FTCActor.applyDataModel();
+
+    // Render Item Sheets
+    sync.render("FTC_RENDER_ACTOR", function(obj, app, scope) {
+        const actor = new FTCActor(obj);
+        return actor.render(app, scope);
+    });
 });
 
+
+/* ------------------------------------------- */
+/*  V2 Converter                               */
+/* ------------------------------------------- */
+
+function ftc_migrateActor(d) {
+
+    // Assign type
+    d._type = ( d.tags.npc === 1 ) ? "NPC": "Character";
+
+    // Rename feats
+    if ( d.abilities && ! d.feats ) d.feats = d.abilities;
+    d.abilities = {};
+
+    // Experience
+    let exp = ["level", "cr", "exp"];
+    d.experience = {};
+    $.each(exp, function(_, t) { d.experience[t] = d.counters[t]; });
+
+    // Attributes
+    let off = d.info.offensive.current,
+        spell = d.info.spellcasting.current;
+    d.attributes = {
+        "offensive": { "current": ( off === undefined ) ? off : off.toLowerCase() },
+        "spellcasting": { "current": ( spell === undefined ) ? spell : spell.toLowerCase() }
+    };
+    let attrs = ["hp", "hd", "proficiency", "ac", "speed", "initiative", "inspiration"];
+    $.each(attrs, function(_, a) { d.attributes[a] = d.counters[a]; });
+
+    // Traits
+    d.traits = {};
+    let traits = ["size", "di", "dr", "ci", "dv", "senses", "languages"];
+    $.each(traits, function(_, t) { d.traits[t] = d.info[t]; });
+
+    // Personality
+    d.personality = {};
+    let personality = ["traits", "ideals", "bonds", "flaws"];
+    $.each(personality, function(_, t) { d.personality[t] = d.info[t]; });
+
+    // Stats
+    $.each(d.stats, function(n, s) { d.abilities[n.toLowerCase()] = s; });
+
+    // Currency
+    d.currency = {};
+    let currency = ["gp", "sp", "cp"];
+    $.each(currency, function(_, c) { d.currency[c] = d.counters[c]; });
+
+    // Spells
+    d.spells = {};
+    let spells = ["spell0", "spell1", "spell2", "spell3", "spell4", "spell5", "spell6", "spell7", "spell8", "spell9"];
+    $.each(spells, function(_, s) { d.spells[s] = d.counters[s]; });
+
+    // Resources
+    d.resources = {
+        "legendary": d.counters["legendary"],
+        "primary": d.counters["class1"],
+        "secondary": d.counters["class2"]
+    };
+
+    // Owned Elements
+    let containers = ["inventory", "spellbook", "feats"];
+    $.each(containers, function(_, c) {
+        let container = d[c];
+        $.each(container, function(i, item) {
+            container[i] = ftc_migrateElement(item);
+        });
+    });
+
+    // Start by merging against the new data template
+    let template = game.templates.actors[d._type],
+        data = mergeObject(template, d, true, false, false);
+
+    // Clean any residual data
+    cleanObject(data, template, true, true);
+    $.each(data, function(name, _) {
+        if ( name.startsWith("_") && !["_t", "_type"].includes(name)) delete data[name];
+    });
+    return data
+}

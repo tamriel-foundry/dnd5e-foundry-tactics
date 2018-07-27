@@ -32,6 +32,10 @@ Number.prototype.paddedString = function(digits) {
     return s.substr(s.length-digits);
 };
 
+Number.prototype.signedString = function() {
+    return (( this < 0 ) ? "" : "+") + this;
+};
+
 
 /* -------------------------------------------- */
 /* Object Manipulations                         */
@@ -108,6 +112,7 @@ function cleanObject(original, template, inplace=false, allowPrivate=true) {
     let cleaned = (inplace) ? original : duplicate(original);
     for (let k in cleaned) {
         if ( allowPrivate && k.startsWith("_") ) continue;
+        if ( cleaned[k] instanceof Array ) continue;
         if ( cleaned[k] instanceof Object ) {
             if ( template.hasOwnProperty(k) ) cleanObject(cleaned[k], template[k], true);
             else delete cleaned[k];
@@ -157,8 +162,6 @@ ftc_update_template = function() {
 /* -------------------------------------------- */
 
 
-
-
 ftc_updateCompendium = function(filename) {
     if ( !game.locals.workshop ) {
         console.log("Failure: You must first open the Compendium tab");
@@ -172,6 +175,7 @@ ftc_updateCompendium = function(filename) {
         $.each(section.data, function(i, data) {
             console.log("Updating compendium entry: " + data.info.name.current);
             if ( type === "i" ) section.data[i] = ftc_migrateElement(data);
+            else if ( type === "c" ) section.data[i] = ftc_migrateActor(data);
         });
     });
 

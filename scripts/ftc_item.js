@@ -88,6 +88,7 @@ class FTCElement extends FTCEntity {
             "ELEMENT_NOTES": td + "notes.html",
             "ELEMENT_ARMOR": td + "armor.html",
             "ELEMENT_CONSUMABLE": td + "item.html",
+            "ELEMENT_ITEM": td + "item.html",
             "ELEMENT_FEAT": td + "feat.html",
             "ELEMENT_SPELL": td + "spell.html",
             "ELEMENT_TOOL": td + "item.html",
@@ -155,6 +156,37 @@ class FTCElement extends FTCEntity {
     activateListeners(html, app, scope) {
         FTC.ui.activateTabs(html, this, app);
         FTC.forms.activateFields(html, this, app);
+    }
+
+    /* ------------------------------------------- */
+
+    get ownedItemID() {
+        return this.context.owner.id() + "." + this.context.container + this.context.itemId;
+    }
+
+    editOwnedItem(itemId) {
+        // TODO!
+
+        // Get the owner, container, and item position
+        const item = this,
+            owner = this.context.owner,
+            container = this.context.container;
+
+        // Update the itemId
+        itemId = itemId || owner.data[container].length;
+        this.context.itemId = itemId;
+
+        // Flag the ID of the item being actively edited
+        FTC._edit_item_id = itemId;
+
+        // Create an object
+        const obj = sync.obj();
+            obj.data = this.data;
+
+        // Render an app
+        const app = sync.newApp("FTC_RENDER_ELEMENT", obj);
+        console.log(app);
+
     }
 }
 
