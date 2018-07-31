@@ -15,6 +15,19 @@
     </div>
 
     <div role="group" class="form-group flexrow">
+        <label>Offensive Ability</label>
+        <select class="ftc-select" data-edit="modifier.current" data-selected="{modifier.current}">
+            <option value=""></option>
+            <option value="str">Strength</option>
+            <option value="dex">Dexterity</option>
+            <option value="con">Constitution</option>
+            <option value="int">Intelligence</option>
+            <option value="wis">Wisdom</option>
+            <option value="cha">Charisma</option>
+        </select>
+    </div>
+
+    <div role="group" class="form-group flexrow">
         <label>{hit.name}</label>
         <input type="text" class="ftc-edit weapon-hit" tabindex="0" data-edit="hit.current"
                value="{hit.current}" placeholder="+0"/>

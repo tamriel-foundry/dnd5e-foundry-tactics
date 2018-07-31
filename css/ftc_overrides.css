@@ -1,17 +1,4 @@
 
-/* TOP MENU */
-#top-navigation {
-    height: 40px;
-    padding: 3px;
-    background: rgba(0,0,0,0.6);
-    border-bottom: 1px solid #222;
-    box-shadow: 0 0 30px #444;
-    color: #DDD;
-}
-
-#top-navigation div[ui-name="ui_displayTabs"] {
-    overflow: hidden;
-}
 
 #top-navigation div[ui-name="ui_displayTabs"] div.tab {
     margin: 0 2px;
@@ -65,58 +52,11 @@ div.tab span.glyphicon-remove {
     color: #EEE;
 }
 
-/* Weather Menu */
-div[ui-name="ui_setting"] {
-
-}
-div[ui-name="ui_setting"] div.white {
-    margin: 2px !important;
-    background: rgba(104,104,104, 0.5);
-    border: 1px solid #555;
-    box-sizing: content-box;
-}
-
-/* Pin Menu */
-#top-navigation > div > a.spadding {
-    background: transparent;
-    width: 30px;
-    border: 1px solid transparent;
-    text-align: center;
-    line-height: 26px;
-}
-#top-navigation > div > a.spadding.highlight {
-    background: #3f474c;
-    border: 1px solid #666;
-}
 
 
-/* Special Effects Menu */
-div#special-effects {
-    top: 50px !important;
-    left: 10px !important;
-    width: 120px;
-    background: rgba(0,0,0,0.75);
-    border: 1px solid #000;
-    border-radius: 3px;
-    box-shadow: 0 0 20px #000;
-}
-#special-effects .sfx-effects {
-    width: 100%;
-}
-#special-effects .sfx-effect {
-    padding: 2px 0;
-    font-weight: normal;
-    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
-}
-#special-effects .background,
-#special-effects .white {
-    background: inherit;
-}
 
 
-.sheet1 {
-    background-image: url("/content/sheet2.png");
-}
+
 
 
 

@@ -1,0 +1,24 @@
+<form class="item-form armor">
+
+    <div role="group" class="form-group flexrow">
+        <label>Consumable Type</label>
+        <select class="ftc-select" data-edit="type.current" data-selected="{type.current}">
+            <option value=""></option>
+            <option value="potion">Potion</option>
+            <option value="rod">Rod</option>
+            <option value="scroll">Scroll</option>
+            <option value="wand">Wand</option>
+        </select>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>Uses Available</label>
+        <input type="input" class="ftc-edit" data-edit="charges.current" placeholder="1" value="{charges.current}" />
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>Maximum Uses</label>
+        <input type="input" class="ftc-edit" data-edit="charges.max" placeholder="1" value="{charges.max}" />
+    </div>
+</form>
+

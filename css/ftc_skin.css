@@ -1,0 +1,228 @@
+/* -------------------------------------------
+     UI POPOUTS
+------------------------------------------- */
+
+/* UI Popout Hacks */
+div.ui-popout {
+    border: 1px solid #000;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.25) !important;
+    transition: none !important;
+}
+
+/* Collapsed UI Element */
+.ui-popout.inactives {
+    min-height: 30px;
+}
+
+/* Top Drag Menu */
+.ui-popout .dragcontrol:first-of-type {
+    background: transparent;
+    height: 30px;
+    line-height: 28px;
+}
+
+.ui-popout text.flexrow.alttext {
+    background: transparent;
+    font-size: 1em !important;
+    line-height: 30px;
+    padding: 0 10px;
+}
+.ui-popout text.flexrow.alttext:hover {
+    background: rgba(0, 0, 51, 0.25);
+    border: none;
+    color: #FFF;
+}
+.ui-popout text.flexrow.alttext > b {
+    font-family: "Scaly Sans";
+    font-weight: normal !important;
+    text-shadow: 1px 1px #000 !important;
+    font-size: 16px;
+}
+a[title="minimize"], a[title="maximize"] {
+    display: none !important;
+}
+a[title="Close Window"] {
+    text-shadow: 1px 1px #000 !important;
+}
+
+a[title="Lock this menu down"] {
+    background: transparent;
+    line-height: 30px;
+    padding: 0 0.5em;
+}
+
+/* Popout Notifications */
+.ui-popout.padding.bounce {
+    color: #DDD;
+    padding: 0 1em;
+}
+.ui-popout.bounce div.outlinebottom {
+    line-height: 30px;
+    padding: 0 1em;
+    border: none;
+}
+.ui-popout.bounce > a {
+    line-height: 32px;
+    padding-right: 3px;
+}
+
+/* -------------------------------------------
+     ITEM AND CHARACTER SHEETS
+------------------------------------------- */
+
+/* Hack hide the control bar on V2 item sheets */
+div[ui-name="ui_renderItemv2"] > .flexcolumn .flexrow.background.outline,
+div[ui-name="ui_characterSheetv2"] > .flexcolumn .flexwrap.background.alttext {
+    display: none;
+}
+
+div[ui-name="ui_textBox"] .hover2:hover {
+    color: inherit;
+    border-radius: inherit;
+    background-color: inherit;
+    outline-color: inherit;
+    box-shadow: inherit;
+}
+
+
+/* -------------------------------------------
+     ASSET MENU
+------------------------------------------- */
+
+div[ui-name="ui_assetManager"] div.ui-sortable {
+    line-height: 24px;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+
+div[ui-name="ui_assetManager"] div.ent {
+    background: #EEE;
+    font-family: "Scaly Sans";
+    line-height: 24px;
+}
+
+div.ent { height: 32px; }
+div.ent > div.lrpadding { padding-left: 0; }
+div.ent div[ui-name="ui_image"] {
+    box-shadow: 0 0 4px #000;
+    border: 1px solid #444;
+    box-sizing: content-box;
+}
+div.ent div.application { outline: none; }
+
+div.ent button.subtitle {
+    margin: 4px 6px;
+    font-size: 12px;
+    box-shadow: 0 0 1px #666;
+    line-height: 22px;
+}
+
+
+/* -------------------------------------------
+     MAP NAVIGATION
+------------------------------------------- */
+
+/* Map Container */
+.ui-popout.boxshadow.main-dock[docked="top"] {
+    height: 40px;
+    padding: 2px 0;
+    border-radius: 0 0 5px 5px;
+}
+
+div[ui-name="ui_displayTabs"] {
+    overflow: hidden;
+}
+
+div[ui-name="ui_displayTabs"] div.tab {
+    margin: 0 2px;
+    background: #39454c;
+    box-shadow: 0 0 5px #333 inset;
+    border: 1px solid #4c6579;
+    border-radius: 5px !important;
+    box-sizing: content-box;
+    padding: 0 0.5em;
+    font-size: 16px;
+    color: #DDD !important;
+    text-shadow: 1px 1px 3px #000 !important;
+    line-height: 36px
+}
+
+div[ui-name="ui_displayTabs"] > .ui-sortable > div:last-child {
+    padding: 0 5px 0 0;
+}
+
+/* Currently Active Tab */
+div[ui-name="ui_displayTabs"] div.tab.alttext {
+    background: #657582;
+    color: #EEE !important;
+    border: 1px solid #000;
+    box-shadow: 0 0 5px #29637f inset;
+}
+
+/* Player Visible Tab */
+div[ui-name="ui_displayTabs"] div.tab.button {
+    color: #DDD !important;
+}
+
+/* GM Only Tab */
+div[ui-name="ui_displayTabs"] div.tab.dull {
+    background: #1f2529;
+    border: 1px solid #3a454e;
+    color: #AAA !important;
+}
+
+/* Remove Map Tab */
+div[ui-name="ui_displayTabs"] div.tab span.glyphicon-remove {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* Add Map Tab */
+div[ui-name="ui_displayTabs"] span.glyphicon-plus {
+    font-size: 14px;
+    margin-left: 5px;
+    color: #CCC;
+}
+div[ui-name="ui_displayTabs"] span.glyphicon-plus:hover {
+    color: #EEE;
+}
+
+/* Weather Menu */
+div[ui-name="ui_setting"] div.white {
+    background: rgba(255,255,255, 0.25);
+    border: 1px solid #111;
+    box-sizing: content-box;
+}
+
+/* Pin Menu */
+#top-navigation > div > a.spadding {
+    background: transparent;
+    width: 30px;
+    border: 1px solid transparent;
+    text-align: center;
+    line-height: 26px;
+}
+#top-navigation > div > a.spadding.highlight {
+    background: #3f474c;
+    border: 1px solid #666;
+}
+
+/* Special Effects Menu */
+#navbuttons {
+    background: none !important;
+}
+#special-effects {
+    top: 45px !important;
+    left: 10px !important;
+}
+#special-effects .background,
+#special-effects .white {
+    background: inherit;
+    border-bottom: 1px solid #444;
+}
+#special-effects .background:last-child {
+    border-bottom: none;
+}
+
+

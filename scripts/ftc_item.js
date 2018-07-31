@@ -39,7 +39,6 @@ FTC.elements = {
         "damage": { "name": "Spell Damage" },
         "components": { "name": "Spell Components" },
         "materials": { "name": "Material Components" },
-        "ritual": { "name": "Ritual Spell" },
         "concentration": { "name": "Requires Concentration" },
         "modifier": { "name": "Spellcasting Ability" }
     },
@@ -80,20 +79,21 @@ class FTCElement extends FTCEntity {
     }
 
     /* Templates */
-    get templates() {
+    get mainTemplate() {
         const td = FTC.TEMPLATE_DIR + "elements/";
-        return {
-            "BODY": td + "body.html",
+        let template =  this.type === "Item" ? "simple.html" : "body.html";
+        return td + template;
+    }
+
+    get templateParts() {
+        const td = FTC.TEMPLATE_DIR + "elements/";
+        let templates = {
             "ELEMENT_SIDEBAR": td + "sidebar.html",
             "ELEMENT_NOTES": td + "notes.html",
-            "ELEMENT_ARMOR": td + "armor.html",
-            "ELEMENT_CONSUMABLE": td + "item.html",
-            "ELEMENT_ITEM": td + "item.html",
-            "ELEMENT_FEAT": td + "feat.html",
-            "ELEMENT_SPELL": td + "spell.html",
-            "ELEMENT_TOOL": td + "item.html",
-            "ELEMENT_WEAPON": td + "weapon.html"
-        }
+            "ELEMENT_INVENTORY": ( this.type === "Feat" ) ? undefined : td + "inventory.html"
+        };
+        templates["ELEMENT_DETAILS"] = td + this.type.toLowerCase() + '.html';
+        return templates;
     }
 
     /* ------------------------------------------- */
@@ -140,12 +140,8 @@ class FTCElement extends FTCEntity {
     /* ------------------------------------------- */
 
     buildHTML(data, scope) {
-        const templates = this.templates;
-        let html = FTC.loadTemplate(templates['BODY']);
-
-        // Inject template parts
-        templates["ELEMENT_DETAILS"] = templates["ELEMENT_" + this.type.toUpperCase()];
-        $.each(templates, function(name, path) {
+        let html = FTC.loadTemplate(this.mainTemplate);
+        $.each(this.templateParts, function(name, path) {
             html = FTC.injectTemplate(html, name, path);
         });
         return html;

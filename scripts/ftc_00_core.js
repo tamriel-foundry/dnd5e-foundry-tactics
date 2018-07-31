@@ -42,9 +42,12 @@ const FTC = {
             target: The constant name to replace, in this case TEMPLATE_NAME
             template: The path to the HTML template file to
         */
-        var target = "<!-- "+target+" -->";
+
+        if ( !target || !template ) return html;
+        target = "<!-- "+target+" -->";
         if (html.includes(target) === false) return html;
-        var content = this.loadTemplate(template);
+
+        const content = this.loadTemplate(template);
         html = html.replace(target, content)
         return html;
     },

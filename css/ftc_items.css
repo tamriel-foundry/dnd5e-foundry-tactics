@@ -15,7 +15,7 @@ h1.itemname > .ftc-edit {
 
 
 /* -------------------------------------------
- 	ITEM SIDEBAR
+ 	ELEMENT SIDEBAR
 ------------------------------------------- */
 
 .ftc-item .ftc-sheet-sidebar {
@@ -25,7 +25,7 @@ h1.itemname > .ftc-edit {
 
 .ftc-item .ftc-sheet-profile {
     flex: 0 0 150px;
-    margin-bottom: 10px;
+    margin: 0;
 }
 
 .ftc-item .profile-image {
@@ -41,8 +41,9 @@ h1.itemname > .ftc-edit {
 .item-summary {
     flex: 0;
     list-style: none;
-    margin: 0.25em 0;
-    padding: 0;
+    margin: 10px 0 0;
+    padding: 0 0 5px;
+    border-bottom: 1px solid #999;
 }
 
 .item-summary li label {
@@ -63,8 +64,7 @@ h1.itemname > .ftc-edit {
 
 .item-tags {
     flex: 0;
-    padding: 0.5em 0;
-    border-top: 1px solid #999;
+    margin: 10px 0 0;
 }
 .item-tags > label {
     display: block;
@@ -79,13 +79,16 @@ h1.itemname > .ftc-edit {
     font-size: 18px;
     color: #444;
     line-height: 34px;
+    margin-bottom: 5px;
 }
 
 
 /* -------------------------------------------
- 	ARMOR AND WEAPONS
+ 	ELEMENT DETAIL FORM
 ------------------------------------------- */
 
-.item-form {
+.ftc-element .item-form {
+    overflow-y: scroll;
+    padding: 0 5px 0 0;
     margin: 5px 0;
 }

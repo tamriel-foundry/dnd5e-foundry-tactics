@@ -116,8 +116,9 @@ FTC.forms.edit_select_fields = function(html, entity) {
     // Set data and update immediately on change
     selects.change(function() {
         let select = $(this),
-            value = select.find(":selected").val();
-        entity.setData(select.attr('data-edit'), value, "str");
+            value = select.find(":selected").val(),
+            dtype = select.attr("data-dtype") || "str";
+        entity.setData(select.attr('data-edit'), value, dtype);
         entity.save();
     });
 };

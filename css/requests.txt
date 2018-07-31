@@ -1,0 +1,6 @@
+
+
+Pushpins:
+core.js 9471 and 12778
+ctrl+f: "Lock this menu down"
+Please add class "menu-pin"

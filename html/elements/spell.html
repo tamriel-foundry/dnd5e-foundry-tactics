@@ -1,8 +1,18 @@
 <form class="item-form spell">
     <div role="group" class="form-group flexrow">
         <label>{level.name}</label>
-        <input type="text" class="ftc-edit spell-level" tabindex="0" data-edit="level.current"
-               value="{level.current}" placeholder="Cantrip"/>
+        <select class="ftc-select" data-edit="level.current" data-selected="{level.current}" data-dtype="int">
+            <option value="0">Cantrip</option>
+            <option value="1">1st</option>
+            <option value="2">2nd</option>
+            <option value="3">3rd</option>
+            <option value="4">4th</option>
+            <option value="5">5th</option>
+            <option value="6">6th</option>
+            <option value="7">7th</option>
+            <option value="8">8th</option>
+            <option value="9">9th</option>
+        </select>
     </div>
 
     <div role="group" class="form-group flexrow">
@@ -17,6 +27,19 @@
             <option value="illusion">Illusion</option>
             <option value="necromancy">Necromancy</option>
             <option value="transmutation">Transmutation</option>
+        </select>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>Spellcasting Ability</label>
+        <select class="ftc-select" data-edit="modifier.current" data-selected="{modifier.current}">
+            <option value=""></option>
+            <option value="str">Strength</option>
+            <option value="dex">Dexterity</option>
+            <option value="con">Constitution</option>
+            <option value="int">Intelligence</option>
+            <option value="wis">Wisdom</option>
+            <option value="cha">Charisma</option>
         </select>
     </div>
 
@@ -51,7 +74,7 @@
 
     <div role="group" class="form-group flexrow">
         <label>Damage Type</label>
-        <select class="ftc-select weapon-d1type" data-edit="damage.type" data-selected="{damage.type}">
+        <select class="ftc-select" data-edit="damage.type" data-selected="{damage.type}">
             <option value=""></option>
             <option value="acid">Acid</option>
             <option value="bludgeoning">Bludgeoning</option>
@@ -72,19 +95,31 @@
 
     <div role="group" class="form-group flexrow">
         <label>{duration.name}</label>
-        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="duration.current"
+        <input type="text" class="ftc-edit" tabindex="0" data-edit="duration.current"
                value="{duration.current}" placeholder="Instantaneous"/>
     </div>
 
     <div role="group" class="form-group flexrow">
         <label>{components.name}</label>
-        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="components.current"
+        <input type="text" class="ftc-edit" tabindex="0" data-edit="components.current"
                value="{components.current}" placeholder="V,S,M"/>
     </div>
 
     <div role="group" class="form-group flexrow">
         <label>{materials.name}</label>
-        <input type="text" class="ftc-edit armor-str" tabindex="0" data-edit="materials.current"
+        <input type="text" class="ftc-edit" tabindex="0" data-edit="materials.current"
                value="{materials.current}" placeholder="None"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{materials.name}</label>
+        <input type="text" class="ftc-edit" tabindex="0" data-edit="materials.current"
+               value="{materials.current}" placeholder="None"/>
+    </div>
+
+    <div role="group" class="form-group flexrow">
+        <label>{concentration.name}</label>
+        <input type="checkbox" class="ftc-checkbox" data-edit="concentration.current"
+               value="{proficient.current}" />
     </div>
 </form>
