@@ -73,10 +73,34 @@ FTC.elements = {
 
 class FTCElement extends FTCEntity {
 
+    static fromData(data, context) {
+        /* A factory method which returns a specialized class for elements of a certain type */
+        const types = {
+            "Weapon": FTCWeapon,
+            "Armor": FTCElement,
+            "Spell": FTCSpell,
+            "Feat": FTCFeat,
+            "Tool": FTCElement,
+            "Consumable": FTCElement,
+            "Item": FTCElement
+        };
+        const cls = data._type ? types[data._type] : FTCElement;
+        return new cls(data, context);
+    }
+
+    /* ------------------------------------------- */
+
     /* Ownership */
     get owner() {
         return this.context.owner;
     }
+
+    /* Container */
+    get container() {
+        return "inventory";
+    }
+
+    /* ------------------------------------------- */
 
     /* Templates */
     get mainTemplate() {
@@ -193,6 +217,10 @@ class FTCElement extends FTCEntity {
 
 class FTCWeapon extends FTCElement {
 
+    get container() {
+        return "inventory";
+    }
+
     getWeaponTypeStr(v) {
         let types = {
             "simplem": "Simple Martial",
@@ -210,8 +238,31 @@ class FTCWeapon extends FTCElement {
 
 
 /* ------------------------------------------- */
-/*  Base Element Entity Type                   */
+/*  Spells                                     */
 /* ------------------------------------------- */
+
+class FTCSpell extends FTCElement {
+
+    get container() {
+        return "spellbook";
+    }
+}
+
+
+
+
+
+/* ------------------------------------------- */
+/*  Feats                                      */
+/* ------------------------------------------- */
+
+class FTCFeat extends FTCElement {
+
+    get container() {
+        return "feats";
+    }
+}
+
 
 
 
@@ -225,7 +276,7 @@ class FTCWeapon extends FTCElement {
 hook.add("FTCInit", "Elements", function() {
 
     // Apply the Item Data Model
-    FTCElement.applyDataModel()
+    FTCElement.applyDataModel();
 
     // Override Item Asset Type Dimensions
     assetTypes['i'].width = "650px";
@@ -245,11 +296,9 @@ hook.add("FTCInit", "Elements", function() {
         let itemData = JSON.parse(dt.getData("OBJ")) || {};
         if (itemData._t !== "i") return;
 
-        // Construct the character
-        const owner = new FTCCharacter(obj);
-        const item = new FTCElement(itemData);
-
-        // Add the item to the character
+        // Construct and add the item to the character
+        const owner = new FTCActor(obj);
+        const item = FTCElement.fromData(itemData, {"owner": owner});
         owner.addItem(item);
         return false;
     });

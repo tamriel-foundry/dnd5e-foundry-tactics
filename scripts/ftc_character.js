@@ -143,11 +143,19 @@ class FTCActor extends FTCEntity {
         }
     }
 
+    get templateParts() {
+        const td = FTC.TEMPLATE_DIR + "actors/";
+        let templates = {
+            "ATTRIBUTES": td + "attributes.html",
+            "CURRENCY": td + "currency.html"
+        };
+        return templates;
+    }
+
     /* ------------------------------------------- */
 
     static applyDataModel() {
-
-        // Update Actor Templates
+        /* Update actor templates with the latest definitions */
         $.each(game.templates.actors, function(type, definition) {
             ftc_merge(definition, FTC.actors, true, true, true);
             definition["_type"] = type;
@@ -160,7 +168,9 @@ class FTCActor extends FTCEntity {
     convertData(data) {
 
         // Level
-        data.experience.level.current = Math.min(Math.max(data.experience.level.current, 1), 20);
+        let lvl = Math.min(Math.max(data.experience.level.current || 1, 1), 20);
+        data.experience.level.current = lvl;
+        let cr = data.experience.cr.current || 0;
 
         // Ability Scores and Modifiers
         $.each(data.abilities, function(_, a) {
@@ -169,8 +179,7 @@ class FTCActor extends FTCEntity {
         });
 
         // Update Proficiency Bonus
-        let lvl = Math.max(data.experience.level.current, data.experience.cr.current);
-        data.attributes.proficiency.current = Math.floor((lvl + 7) / 4);
+        data.attributes.proficiency.current = Math.floor((Math.max(lvl, cr) + 7) / 4);
 
         // Return converted data
         return data;
@@ -183,10 +192,10 @@ class FTCActor extends FTCEntity {
         // Populate core character data
         this.getCoreData(data);
 
-        // // Set up owned items
-        // this.setupInventory(data);
-        // this.setupSpellbook(data);
-        // this.setupFeats(data);
+        // Get data for owned elements
+        this.setupInventory(data);
+        this.setupSpellbook(data);
+        this.setupFeats(data);
 
         // Return the enriched data
         return data;
@@ -200,12 +209,12 @@ class FTCActor extends FTCEntity {
 
         // Experience, level, hit dice
         let xp = data.experience;
-        xp["lvl"] = xp.level.current,
+        xp["lvl"] = xp.level.current;
         xp["start"] = this.getLevelExp(xp.lvl - 1);
-        xp["cur"] = Math.max(xp.exp.current, xp.start);
+        xp["current"] = Math.max(xp.exp.current || 0, xp.start);
         xp["next"] = this.getLevelExp(xp.lvl);
-        xp["pct"] = Math.min(((xp.cur - xp.start) * 100 / (xp.next - xp.start)), 99.5);
-        xp["css"] = (xp.cur > xp.next) ? "leveled" : "";
+        xp["pct"] = Math.min(((xp.current - xp.start) * 100 / (xp.next - xp.start)), 99.5);
+        xp["css"] = (xp.current > xp.next) ? "leveled" : "";
         xp["kill"] = this.getKillExp(xp.cr.current);
         data.attributes.hd.max = xp.lvl;
 
@@ -213,15 +222,17 @@ class FTCActor extends FTCEntity {
         $.each(data.abilities, function(attr, a) {
             a.prof = parseInt(a.proficient || 0) * data.attributes.proficiency.current;
             a.mod = a.modifiers.mod;
+            a.save = a.mod + a.prof;
             a.modstr = a.mod.signedString();
             a.valstr = a.current.paddedString(2);
         });
 
         // Skills
         $.each(data.skills, function(skl, s) {
-           s.mod = data.abilities[s.ability].mod;
-           s.prof = parseInt(s.current || 0) * data.attributes.proficiency.current;
-           s.modstr = s.mod.signedString();
+            s.current = parseInt(s.current || 0);
+            s.prof = s.current * data.attributes.proficiency.current;
+            s.mod = data.abilities[s.ability].mod + s.prof;
+            s.modstr = s.mod.signedString();
         });
 
         // Initiative
@@ -260,11 +271,200 @@ class FTCActor extends FTCEntity {
 
     /* ------------------------------------------- */
 
+    setupInventory(data) {
+        // Set up inventory items by converting them to FTCItem objects
+
+        const owner = this;
+        const weight = [];
+        const inventory = {
+            "Weapon": {
+                "name": "Weapons",
+                "items": []
+            },
+            "Armor": {
+                "name": "Equipment",
+                "items": []
+            },
+            "Tool": {
+                "name": "Tools",
+                "items": []
+            },
+            "Consumable": {
+                "name": "Consumables",
+                "items": []
+            },
+            "Item": {
+                "name": "Backpack",
+                "items": []
+            }
+        };
+
+        // Iterate over inventory items
+        $.each(data.inventory, function(itemId, itemData) {
+            let item = FTCElement.fromData(itemData, {"owner": owner});
+
+            // Set id and class
+            item.data.itemId = itemId;
+            item.data.css = item.type.toLowerCase();
+
+            // Push to type
+            inventory[item.type].items.push(item);
+
+            // Record total entry weight
+            weight.push(parseFloat(item.data.weight.current * item.data.quantity.current));
+        });
+        data.inventory = inventory;
+
+        // Compute weight and encumbrance
+        let wt = (weight.length > 0) ? weight.reduce(function(total, num) { return total + (num || 0); }) : 0,
+           enc = data.abilities.str.current * 15,
+           pct = Math.min(wt * 100 / enc, 99.5),
+           cls = (pct > 90 ) ? "heavy" : "";
+        data["weight"] = {"wt": wt.toFixed(2), "enc": enc, "pct": pct.toFixed(2), "cls": cls};
+        return data;
+    }
+
+    /* ------------------------------------------- */
+
+    setupSpellbook(data) {
+        /* Set up spellbook items by converting them to FTCItem objects */
+        const owner = this;
+        const sls = {};
+
+        // Iterate over spellbook spells
+        $.each(data.spellbook, function(spellId, itemData) {
+
+            // Construct the item object
+            let item = new FTCSpell(itemData, {"owner": owner});
+            item.data.spellId = spellId;
+
+            // Construct spell data
+            let lvl = parseInt(item.data.level.current || 0);
+
+            // Record spell-level
+            sls[lvl] = sls[lvl] || {
+                "level": lvl,
+                "name": (lvl === 0) ? "Cantrip" : FTC.ui.getOrdinalNumber(lvl) + " Level",
+                "current": FTC.getProperty(data, 'spells.spell'+lvl+'.current') || 0,
+                "max": FTC.getProperty(data, 'spells.spell'+lvl+'.max') || 0,
+                "spells": [],
+            };
+            sls[lvl].current = (lvl === 0) ? "&infin;" : sls[lvl].current;
+            sls[lvl].max = (lvl === 0) ? "&infin;" : sls[lvl].max;
+            sls[lvl].spells.push(item);
+        });
+        data['spellbook'] = sls;
+        return data;
+    }
+
+    /* ------------------------------------------- */
+
+    setupFeats(data) {
+        /* Set up feat items by converting them to FTCItem objects
+         */
+        const owner = this;
+        const feats = [];
+        $.each(data.feats, function(itemId, itemData) {
+            let item = FTCElement.fromData(itemData, {"owner": owner});
+            item.data.itemId = itemId;
+            feats.push(item);
+        });
+        data.feats = feats;
+        return data;
+    }
+
+    /* ------------------------------------------- */
+
     buildHTML(data, scope) {
 
-        // Determine and load primary template
+        // Populate primary templates
         let html = FTC.loadTemplate(this.templates["BODY"]);
+        $.each(this.templateParts, function(name, path) {
+            html = FTC.injectTemplate(html, name, path);
+        });
+
+        // Abilities and Skills
+        html = this._buildAbilities(html, data);
+        html = this._buildSkills(html, data);
+
+        // Owned Elements
+        html = this._buildInventory(html, data);
+        html = this._buildSpellbook(html, data);
+        html = this._buildFeats(html, data);
         return html;
+    }
+
+    /* ------------------------------------------- */
+
+    _buildAbilities(html, data) {
+        let abilities = "",
+            template = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'actors/ability.html');
+        $.each( data.abilities, function(a, ability) {
+            ability.ability = a;
+            abilities += FTC.populateTemplate(template, ability);
+        });
+        return html.replace("<!-- ABILITIES -->", abilities);
+    }
+
+    /* ------------------------------------------- */
+
+    _buildSkills(html, data) {
+        let skills = "",
+            template = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'actors/skill.html');
+        $.each( data.skills, function(s, skill) {
+            skill.skill = s;
+            skills += FTC.populateTemplate(template, skill);
+        });
+        return html.replace("<!-- SKILLS -->", skills);
+    }
+
+    /* ------------------------------------------- */
+
+    _buildInventory(html, data) {
+        let inventory = "",
+            itemHeader = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'actors/elements/item-header.html'),
+            itemTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'actors/elements/item.html');
+        $.each(data.inventory, function(t, type) {
+            type.type = t;
+            let collection = FTC.populateTemplate(itemHeader, type),
+                items = "";
+            $.each(type.items, function(_, item) {
+                items += FTC.populateTemplate(itemTemplate, item.data);
+            });
+            inventory += collection.replace("<!-- ITEMS -->", items);
+        });
+        inventory = inventory || '<blockquote class="compendium">Add items from the compendium.</blockquote>';
+        return html.replace("<!-- INVENTORY -->", inventory);
+    }
+
+    /* ------------------------------------------- */
+
+    _buildSpellbook(html, data) {
+        let spellbook = "",
+            spellHeader = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'actors/elements/spell-header.html'),
+            spellTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'actors/elements/spell.html');
+        $.each(data.spellbook, function(l, level){
+            let page = FTC.populateTemplate(spellHeader, level),
+                spells = "";
+            $.each(level.spells, function(_, spell){
+                spells += FTC.populateTemplate(spellTemplate, spell.data);
+            });
+            spellbook += page.replace("<!-- SPELLS -->", spells);
+        });
+        spellbook = spellbook || '<blockquote class="compendium">Add spells from the compendium.</blockquote>';
+        return html.replace("<!-- SPELLBOOK -->", spellbook);
+    }
+
+    /* ------------------------------------------- */
+
+    _buildFeats(html, data) {
+        let feats = "",
+            featTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'actors/elements/feat.html');
+        $.each(data.feats, function(i, item) {
+            feats += FTC.populateTemplate(featTemplate, item.data);
+        });
+        feats = feats || '<blockquote class="compendium">Add feats from the compendium.</blockquote>';
+        return html.replace("<!-- FEATS -->", feats);
     }
 
     /* ------------------------------------------- */
@@ -278,6 +478,46 @@ class FTCActor extends FTCEntity {
     }
 
     /* ------------------------------------------- */
+    /*  Owned Element Management                   */
+    /* ------------------------------------------- */
+
+    addItem(item) {
+
+        // Process any pending sort
+        this.updateSort();
+
+        // Push the new item into the container
+        const container = this.data[item.container];
+        container.push(item.data);
+
+        // Save
+        this._changed = true;
+        this.save();
+    }
+
+    /* ------------------------------------------- */
+
+    updateSort() {
+        /* Process pending element sorting order, reordering container data */
+        const self = this;
+        $.each(this._sorting, function (container, order) {
+            if (!order.length) return;
+            let items = [];
+            $.each(order, function (n, o) {
+                items[n] = self.data[container][o];
+            });
+            self.data[container] = items;
+        });
+    }
+
+    /* ------------------------------------------- */
+
+    deleteItem(container, itemId) {
+        this.data[container].splice(itemId, 1);
+        let sortIndex = this.data[container].indexOf(itemId + "");
+        this._sorting[container].splice(sortIndex, 1);
+        this._changed = true;
+    }
 }
 
 

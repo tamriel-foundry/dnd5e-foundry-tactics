@@ -10,19 +10,18 @@
             <div class="charlevel">
                 <h2 class="level">
                     <label>Level</label>
-                    <input class="ftc-edit" type="text" tabindex="0" data-autosize="12" data-edit="counters.level.current"
-                           value="{experience.lvl}" placeholder="1"/>
+                    <input class="ftc-edit" type="text" tabindex="0" data-autosize="12" placeholder="1"
+                           data-edit="experience.level.current" value="{experience.level.current}" />
                 </h2>
                <div class="xpbar">
-                    <span class="bar {exp.cls}" style="width: {exp.pct}%"></span>
+                    <span class="bar {experience.cls}" style="width: {experience.pct}%"></span>
                 </div>
                 <div class="experience">
                     <label>XP</label>
-                    <input class="ftc-edit" type="text" tabindex="0" data-autosize="6" data-edit="counters.exp.current"
-                           value="{exp.current}" placeholder="0"/>
-                    <label class="exp-next"> / {exp.next}</label>
+                    <input class="ftc-edit" type="text" tabindex="0" data-autosize="6" placeholder="0"
+                           data-edit="experience.current" value="{experience.current}" />
+                    <label class="exp-next"> / {experience.next}</label>
                 </div>
-
             </div>
 
             <ul class="ftc-sheet-subtitle flexrow">
@@ -55,9 +54,8 @@
             </ul>
         </header>
 
-        <!-- PRIMARY ATTRIBUTES -->
         <div class="ftc-sheet-primary">
-            <!-- CHARACTER_PRIMARY_STATS -->
+            <!-- ATTRIBUTES -->
         </div>
 
         <!-- SECONDARY TABBED CONTAINER -->
@@ -72,22 +70,22 @@
             <!-- Character Inventory -->
             <div id="content-inventory" class="inventory content-tab">
                 <header role="group" class="modifier-select form-group flexrow">
-                    <label>Weapon Attack Modifier</label>
-                    <select class="ftc-select" data-edit="info.offensive.current"
-                            data-selected="{info.offensive.current}">
+                    <label>Weapon Attack Ability</label>
+                    <select class="ftc-select" data-edit="attributes.offensive.current"
+                            data-selected="{attributes.offensive.current}">
                         <option value="">None</option>
-                        <option value="Str">Strength</option>
-                        <option value="Dex">Dexterity</option>
-                        <option value="Con">Constitution</option>
-                        <option value="Int">Intelligence</option>
-                        <option value="Wis">Wisdom</option>
-                        <option value="Cha">Charisma</option>
+                        <option value="str">Strength</option>
+                        <option value="dex">Dexterity</option>
+                        <option value="con">Constitution</option>
+                        <option value="int">Intelligence</option>
+                        <option value="wis">Wisdom</option>
+                        <option value="cha">Charisma</option>
                     </select>
                 </header>
 
                 <section class="inventory-items">
-                    <!-- INVENTORY_CURRENCY -->
-                    <!-- INVENTORY_ITEMS -->
+                    <!-- CURRENCY -->
+                    <!-- INVENTORY -->
                 </section>
 
                 <footer class="inventory-weight {weight.cls}">
@@ -99,21 +97,21 @@
             <!-- Spellbook -->
             <div id="content-spells" class="spellbook content-tab">
                 <header role="group" class="modifier-select form-group flexrow">
-                    <label>Spellcasting Attribute</label>
-                    <select class="ftc-select" data-edit="info.spellcasting.current"
-                            data-selected="{info.spellcasting.current}">
+                    <label>Spellcasting Ability</label>
+                    <select class="ftc-select" data-edit="attributes.spellcasting.current"
+                            data-selected="{attributes.spellcasting.current}">
                         <option value="">None</option>
-                        <option value="Str">Strength</option>
-                        <option value="Dex">Dexterity</option>
-                        <option value="Con">Constitution</option>
-                        <option value="Int">Intelligence</option>
-                        <option value="Wis">Wisdom</option>
-                        <option value="Cha">Charisma</option>
+                        <option value="str">Strength</option>
+                        <option value="dex">Dexterity</option>
+                        <option value="con">Constitution</option>
+                        <option value="int">Intelligence</option>
+                        <option value="wis">Wisdom</option>
+                        <option value="cha">Charisma</option>
                     </select>
                 </header>
 
                 <section class="spellbook-spells">
-                    <!-- SPELLBOOK_SPELLS -->
+                    <!-- SPELLBOOK -->
 
                     <footer class="ability-controls item-header">
                         <div class="ftc-item-add">
@@ -152,33 +150,33 @@
 
         <div id="content-abilities" class="content-tab tab-active">
             <ol class="abilities-list">
-                <!-- ABILITIES_LIST -->
+                <!-- ABILITIES -->
             </ol>
 
             <div class="abilities-primary-stats">
                 <div class="primary-stat initiative">
                     <header>Initiative</header>
                     <div class="primary-stat-value">
-                        <span>{initiative}</span>
+                        <span>{attributes.initiative.str}</span>
                     </div>
                     <footer class="initiative-bonus">
                         <label>Bonus:</label>
-                        <input class="ftc-edit" type="text" tabindex="0"
-                               data-edit="counters.initiative.current" data-dtype="str" data-autosize="10"
-                               value="{counters.initiative.current}"/>
+                        <input class="ftc-edit" type="text" tabindex="0" value="{attributes.initiative.current}"
+                               data-edit="attributes.initiative.current" data-dtype="str" data-autosize="10"
+                               placeholder="0"/>
                     </footer>
                 </div>
 
                 <div class="primary-stat speed">
                     <header>Movement Speed</header>
                     <div class="primary-stat-value">
-                        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="counters.speed.current"
-                               value="{counters.speed.current}" placeholder="10"/>
+                        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" placeholder="30"
+                               data-edit="attributes.speed.current" value="{attributes.speed.current}" />
                         <span> Ft.</span>
                     </div>
                     <footer>
-                        <input class="ftc-edit" type="text" tabindex="0" data-edit="counters.speed.extra" data-dtype="str"
-                               value="{counters.speed.extra}" placeholder="Climb / Swim"/>
+                        <input class="ftc-edit" type="text" tabindex="0" data-edit="attributes.speed.extra" data-dtype="str"
+                               value="{attributes.speed.extra}" placeholder="Climb / Swim"/>
                     </footer>
                 </div>
             </div>
@@ -186,13 +184,13 @@
 
         <div id="content-skills" class="content-tab">
             <ol class="skills-list">
-                <!-- FTC_SKILL_HTML -->
+                <!-- SKILLS -->
             </ol>
         </div>
 
         <div id="content-feats" class="content-tab">
             <ol class="feats item-list" data-item-type="feat" data-item-container="feats">
-                <!-- FEATS_LIST -->
+                <!-- FEATS -->
             </ol>
             <footer class="feat-controls item-header">
                 <div class="ftc-item-add">

@@ -249,12 +249,12 @@ ol.abilities-list {
 	background-position: 0 50%;
 }
 
-.ability-Str > label {background-image: url("../content/icons/strength.png");}
-.ability-Dex > label {background-image: url("../content/icons/dexterity.png");}
-.ability-Con > label {background-image: url("../content/icons/constitution.png");}
-.ability-Int > label {background-image: url("../content/icons/intelligence.png");}
-.ability-Wis > label {background-image: url("../content/icons/wisdom.png");}
-.ability-Cha > label {background-image: url("../content/icons/charisma.png");}
+.ability-str > label {background-image: url("../content/icons/strength.png");}
+.ability-dex > label {background-image: url("../content/icons/dexterity.png");}
+.ability-con > label {background-image: url("../content/icons/constitution.png");}
+.ability-int > label {background-image: url("../content/icons/intelligence.png");}
+.ability-wis > label {background-image: url("../content/icons/wisdom.png");}
+.ability-cha > label {background-image: url("../content/icons/charisma.png");}
 
 .ability .ftc-rollable:hover {
     background-image: url("../content/icons/d20.png") !important;
@@ -290,24 +290,36 @@ ol.abilities-list {
 .skills-list > li.skill {
 	display: flex;
 	flex-direction: row;
-	line-height: 22px;
+	line-height: 20px;
+    padding: 1px 0;
+    border-bottom: 1px solid #DDD;
 }
 
 .skill label {
-	flex: 3 0 70%;
+	flex: 3 0 60%;
 }
 
 .skill span {
-	flex: 1 0 15%;
+	flex: 1;
 	text-align: right;
 }
 
 .skill input[type="checkbox"] {
-    width: 20px;
-    margin-right: 4px;
+    flex: 0 0 30px;
+    margin: 4px 0;
 }
 
-.skill .skill-mod {	color: #888; }
+.skill .skill-ability {
+    color: #888;
+    margin-right: 5px;
+}
+
+span.skill-mod {
+    font-size: 16px;
+    color: #888;
+    position: relative;
+    top: 2px;
+}
 
 /* Rollable Skills */
 .skill .ftc-rollable {	position: relative; }
@@ -384,7 +396,10 @@ section.inventory-items {
 }
 
 /* Offensive Modifier Select */
-.modifier-select { height: auto; }
+.modifier-select {
+    height: auto;
+    margin: 5px 0;
+}
 .modifier-select > * {
     line-height: 24px;
     height: 24px;
