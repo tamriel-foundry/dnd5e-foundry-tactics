@@ -41,7 +41,7 @@ Number.prototype.signedString = function() {
 /* Object Manipulations                         */
 /* -------------------------------------------- */
 
-function ftc_merge(original, other, insert=false, overwrite=true, inplace=false) {
+function mergeObject(original, other, insert=false, overwrite=true, inplace=false) {
     /*
     Update a source object by replacing its keys and values with those from a target object.
 
@@ -72,7 +72,7 @@ function ftc_merge(original, other, insert=false, overwrite=true, inplace=false)
 
             // Object exists in both original and other - handle recursively
             if ( original.hasOwnProperty(k) && ( original[k] instanceof Object) ) {
-                ftc_merge(original[k], other[k], insert, overwrite, inplace=true);
+                mergeObject(original[k], other[k], insert, overwrite, inplace=true);
             }
 
             // Object exists only in other - only merge if insert is true
@@ -99,8 +99,6 @@ function ftc_merge(original, other, insert=false, overwrite=true, inplace=false)
     // Return the object for use
     return original;
 }
-
-mergeObject = ftc_merge;
 
 
 /* -------------------------------------------- */
@@ -144,10 +142,10 @@ ftc_update_entities = function() {
 ftc_update_entity = function(data, template) {
 
     // Step 1 - merge any new template changes into the object data model
-    data = ftc_merge(data, template, true, false, false);
+    data = mergeObject(data, template, true, false, false);
 
     // Step 2 - delete data from the object which is no longer required by the data model
-    data = ftc_clean(data, template, true);
+    data = cleanObject(data, template, true);
     return data
 };
 

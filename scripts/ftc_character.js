@@ -135,26 +135,6 @@ class FTCActor extends FTCEntity {
 
     /* ------------------------------------------- */
 
-    /* Templates */
-    get templates() {
-        const td = FTC.TEMPLATE_DIR + "actors/";
-        return {
-            "BODY": td + "body.html"
-        }
-    }
-
-    get templateParts() {
-        const td = FTC.TEMPLATE_DIR + "actors/";
-        let templates = {
-            "ATTRIBUTES": td + "attributes.html",
-            "CURRENCY": td + "currency.html",
-            "TRAITS": td + "traits.html"
-        };
-        return templates;
-    }
-
-    /* ------------------------------------------- */
-
     static applyDataModel() {
         /* Update actor templates with the latest definitions */
         $.each(game.templates.actors, function(type, definition) {
@@ -186,6 +166,8 @@ class FTCActor extends FTCEntity {
         return data;
     }
 
+    /* ------------------------------------------- */
+    /*  Data Pre-processing                        */
     /* ------------------------------------------- */
 
     enrichData(data, scope) {
@@ -375,11 +357,29 @@ class FTCActor extends FTCEntity {
     }
 
     /* ------------------------------------------- */
+    /*  HTML Rendering                             */
+    /* ------------------------------------------- */
+
+    get template() {
+        const td = FTC.TEMPLATE_DIR + "actors/";
+        return td + "body.html";
+    }
+
+    get templateParts() {
+        const td = FTC.TEMPLATE_DIR + "actors/";
+        return {
+            "ATTRIBUTES": td + "attributes.html",
+            "CURRENCY": td + "currency.html",
+            "TRAITS": td + "traits.html"
+        };
+    }
+
+    /* ------------------------------------------- */
 
     buildHTML(data, scope) {
 
         // Populate primary templates
-        let html = FTC.loadTemplate(this.templates["BODY"]);
+        let html = FTC.loadTemplate(this.template);
         $.each(this.templateParts, function(name, path) {
             html = FTC.injectTemplate(html, name, path);
         });
@@ -470,6 +470,8 @@ class FTCActor extends FTCEntity {
     }
 
     /* ------------------------------------------- */
+    /*  Event Handlers                             */
+    /* ------------------------------------------- */
 
     activateListeners(html, app, scope) {
         const self = this;
@@ -477,6 +479,46 @@ class FTCActor extends FTCEntity {
         // Activate Tabs and Editable Fields
         FTC.ui.activateTabs(html, this, app);
         FTC.forms.activateFields(html, this, app);
+
+        // Activate rollable actions on a timeout to prevent accidentally clicking immediately when the sheet opens
+        setTimeout(function() {
+
+            // Attribute rolls
+            html.find('.ability .ftc-rollable').click(function () {
+                let attr = $(this).parent().attr("data-ability");
+                self.rollAbility(attr);
+            });
+
+            // Skill rolls
+            html.find('.skill .ftc-rollable').click(function () {
+                let skl = $(this).parent().attr("data-skill");
+                self.rollSkillCheck(skl);
+            });
+
+            // Weapon actions
+            html.find(".weapon .ftc-rollable").click(function () {
+                const itemId = $(this).closest("li.weapon").attr("data-item-id"),
+                    itemData = self.data.inventory[itemId];
+                FTCItemAction.toChat(self, itemData);
+            });
+
+            // Spell actions
+            html.find(".spell .ftc-rollable").click(function () {
+                const itemId = $(this).closest("li.spell").attr("data-item-id"),
+                    itemData = self.data.spellbook[itemId];
+                FTCItemAction.toChat(self, itemData);
+            });
+
+            // Feat actions
+            html.find(".feat .ftc-rollable").click(function () {
+                const itemId = $(this).closest("li.feat").attr("data-item-id"),
+                    itemData = self.data.feats[itemId];
+                FTCItemAction.toChat(self, itemData);
+            });
+        });
+
+        // Enable Element Sorting
+        this.enableSorting(html);
     }
 
     /* ------------------------------------------- */
@@ -488,11 +530,13 @@ class FTCActor extends FTCEntity {
         // Process any pending sort
         this.updateSort();
 
-        // Push the new item into the container
-        const container = this.data[item.container];
-        container.push(item.data);
+        // If we are dropping a spell on the inventory tab, it becomes a "Scroll of ___"
+        if ( item instanceof FTCSpell && this.data.tabs["content-tabs"] === "tab-inventory" ) {
+            item = item.toScroll();
+        }
 
-        // Save
+        // Push the new item into the container and save
+        this.data[item.container].push(item.data);
         this._changed = true;
         this.save();
     }
@@ -503,6 +547,58 @@ class FTCActor extends FTCEntity {
         this.data[container][itemId] = itemData;
         this._changed = true;
         this.save();
+    }
+
+    /* ------------------------------------------- */
+
+    deleteItem(container, itemId) {
+        this.data[container].splice(itemId, 1);
+        let sortIndex = this.data[container].indexOf(itemId + "");
+        this._sorting[container].splice(sortIndex, 1);
+        this._changed = true;
+    }
+
+    /* ------------------------------------------- */
+    /*  Element Sorting                            */
+    /* ------------------------------------------- */
+
+    enableSorting(html) {
+        const self = this;
+        html.find(".item-list").sortable({
+            "items": " > li",
+            "cancel": ".inventory-header",
+            "containment": "parent",
+            "axis": "y",
+            "opacity": 0.75,
+            "delay": 200,
+            "scope": $(this).attr("data-item-container"),
+            "update": function (event, ui) {
+                let container = ui.item.parent().attr("data-item-container");
+                self.getSort(container, ui.item);
+            }
+        });
+    }
+
+    /* ------------------------------------------- */
+
+    getSort(container, li) {
+        let parent = undefined;
+        if ( li ) {
+            parent = li.parents("." + container);
+        } else if ( this.app ) {
+            parent = this.app.find("." + container);
+        }
+
+        // Check the current sort order
+        let sorted = [];
+        parent.find("li.item").each(function() {
+            sorted.push($(this).attr("data-item-id"));
+        });
+
+        // Update sorting
+        this._sorting[container] = sorted;
+        this._changed = true;
+        return sorted;
     }
 
     /* ------------------------------------------- */
@@ -521,15 +617,20 @@ class FTCActor extends FTCEntity {
     }
 
     /* ------------------------------------------- */
+    /*  Save Actor Data                            */
+    /* ------------------------------------------- */
 
-    deleteItem(container, itemId) {
-        this.data[container].splice(itemId, 1);
-        let sortIndex = this.data[container].indexOf(itemId + "");
-        this._sorting[container].splice(sortIndex, 1);
-        this._changed = true;
+    save() {
+        if (!this.obj || !this._changed) return;
+
+        // Update item sorting order
+        this.updateSort();
+
+        // Save the object
+        console.log("Saving object " + this.name);
+        this.obj.sync("updateAsset");
     }
 }
-
 
 
 /* ------------------------------------------- */

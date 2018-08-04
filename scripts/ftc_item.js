@@ -73,9 +73,11 @@ FTC.elements = {
 
 class FTCElement extends FTCEntity {
 
-    static fromData(data, context) {
+    static fromData(obj, context) {
         /* A factory method which returns a specialized class for elements of a certain type */
-        const types = {
+
+        const type = obj._type || obj.data._type;
+        const classes = {
             "Weapon": FTCWeapon,
             "Armor": FTCElement,
             "Spell": FTCSpell,
@@ -84,8 +86,8 @@ class FTCElement extends FTCEntity {
             "Consumable": FTCElement,
             "Item": FTCElement
         };
-        const cls = data._type ? types[data._type] : FTCElement;
-        return new cls(data, context);
+        const cls = type ? classes[type] : FTCElement;
+        return new cls(obj, context);
     }
 
     /* ------------------------------------------- */
@@ -287,10 +289,19 @@ class FTCSpell extends FTCElement {
     get container() {
         return "spellbook";
     }
+
+    /* ------------------------------------------- */
+
+    toScroll() {
+        let i = duplicate(this.data);
+        i._type = "Consumable";
+        i.info.name.current = "Scroll of " + i.info.name.current;
+        i = ftc_update_entity(i, game.templates.elements.Consumable);
+        i.type.current = "scroll";
+        i.charges.current = i.charges.max = 1;
+        return FTCElement.fromData(i);
+    }
 }
-
-
-
 
 
 /* ------------------------------------------- */
@@ -303,10 +314,6 @@ class FTCFeat extends FTCElement {
         return "feats";
     }
 }
-
-
-
-
 
 
 /* ------------------------------------------- */
@@ -325,7 +332,7 @@ hook.add("FTCInit", "Elements", function() {
 
     // Render Item Sheets
     sync.render("FTC_RENDER_ELEMENT", function(obj, app, scope) {
-        const element = new FTCElement(obj);
+        const element = FTCElement.fromData(obj);
         return element.render(app, scope);
     });
 
