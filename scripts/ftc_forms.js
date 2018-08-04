@@ -214,15 +214,11 @@ FTC.forms.edit_item_fields = function(html, character) {
     html.find('.ftc-item-add').click(function() {
         let controls = $(this).closest(".item-header"),
             list = controls.next(".item-list").length ? controls.next(".item-list") : controls.prev(".item-list"),
-            container = list.attr("data-item-container"),
-            data = duplicate(game.templates.item);
+            type = list.attr("data-item-type");
 
-        // Initial data
-        data.info.type.current = list.attr("data-item-type");
-        data.info.variety.current = list.attr("data-item-variety");
-
-        // Create owned item
-        let item = new FTCItem(data, {"owner": character, "container": container});
+        // Create a new owned item using the default template
+        let data = duplicate(game.templates.elements[type]);
+        let item = FTCElement.fromData(data, {"owner": character});
         item.editOwnedItem();
     });
 
@@ -230,8 +226,9 @@ FTC.forms.edit_item_fields = function(html, character) {
     html.find('.item-list .item-edit').click(function() {
         const li = $(this).closest("li"),
             itemId = li.attr("data-item-id"),
+            type = li.parent().attr("data-item-type"),
             container = li.parent().attr("data-item-container"),
-            item = new FTCItem(character.data[container][itemId], {"owner": character, "container": container});
+            item = FTCElement.fromData(character.data[container][itemId], {"owner": character});
         item.editOwnedItem(itemId);
     });
 

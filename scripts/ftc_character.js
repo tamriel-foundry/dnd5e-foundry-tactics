@@ -147,7 +147,8 @@ class FTCActor extends FTCEntity {
         const td = FTC.TEMPLATE_DIR + "actors/";
         let templates = {
             "ATTRIBUTES": td + "attributes.html",
-            "CURRENCY": td + "currency.html"
+            "CURRENCY": td + "currency.html",
+            "TRAITS": td + "traits.html"
         };
         return templates;
     }
@@ -426,6 +427,7 @@ class FTCActor extends FTCEntity {
             itemTemplate = FTC.loadTemplate(FTC.TEMPLATE_DIR + 'actors/elements/item.html');
         $.each(data.inventory, function(t, type) {
             type.type = t;
+            type.css = t.toLowerCase();
             let collection = FTC.populateTemplate(itemHeader, type),
                 items = "";
             $.each(type.items, function(_, item) {
@@ -491,6 +493,14 @@ class FTCActor extends FTCEntity {
         container.push(item.data);
 
         // Save
+        this._changed = true;
+        this.save();
+    }
+
+    /* ------------------------------------------- */
+
+    updateItem(container, itemId, itemData) {
+        this.data[container][itemId] = itemData;
         this._changed = true;
         this.save();
     }

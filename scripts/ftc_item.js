@@ -181,32 +181,73 @@ class FTCElement extends FTCEntity {
     /* ------------------------------------------- */
 
     get ownedItemID() {
-        return this.context.owner.id() + "." + this.context.container + this.context.itemId;
+        return this.context.owner.id + "." + this.container + '.' + this.context.itemId;
     }
 
     editOwnedItem(itemId) {
-        // TODO!
+        /* Render an editable sheet for an owned item */
 
-        // Get the owner, container, and item position
+        // Store references to the item and owner
         const item = this,
-            owner = this.context.owner,
-            container = this.context.container;
+            owner = this.owner,
+            container = this.container;
 
         // Update the itemId
         itemId = itemId || owner.data[container].length;
         this.context.itemId = itemId;
 
-        // Flag the ID of the item being actively edited
-        FTC._edit_item_id = itemId;
+        // Save a local reference to the UID of the item being edited
+        FTC._edit_item_id = this.ownedItemID;
 
-        // Create an object
+        // Create an object and render an app
         const obj = sync.obj();
-            obj.data = this.data;
-
-        // Render an app
+        obj.data = this.data;
         const app = sync.newApp("FTC_RENDER_ELEMENT", obj);
-        console.log(app);
 
+        // Attach a full-width confirmation button listen for submission
+        const confirm = $('<button class="fit-x">Update ' + item.type + '</button>');
+        confirm.click(function () {
+
+            // Maybe close any open MCE editors
+            if ( tinymce.activeEditor && app._mce && !app._mce.isHidden() ) {
+                item.data.info.notes.current = app._mce.save();
+                app._mce.destroy();
+            }
+
+            // Unset the active editing item
+            FTC._edit_item_id = undefined;
+            layout.coverlay("edit-item");
+            owner.updateItem(container, itemId, item.data);
+        });
+        app.append(confirm);
+
+        // Create the UI element
+        ui_popOut({
+            target: $("body"),
+            title: owner.name + ": " + item.name + " [Edit]",
+            id: "edit-item",
+            maximize: false,
+            minimize: false,
+            style: {"width": assetTypes["i"].width, "height": assetTypes["i"].height}
+        }, app).resizable();
+    }
+
+    /* ------------------------------------------- */
+
+    save() {
+
+        // If the item was not changed, bail out
+        if ( !this._changed ) return;
+
+        // Saving an owned item
+        if ( this.owner ) {
+            if ( this.ownedItemID === FTC._edit_item_id ) this.editOwnedItem(this.context.itemId);
+            return;
+        }
+
+        // Saving an unowned item
+        console.log("Saving item " + this.name);
+        this.obj.sync("updateAsset");
     }
 }
 

@@ -20,15 +20,25 @@ const FTC = {
 
     /* ------------------------------------------- */
 
+    TEMPLATE_CACHE: {},
+
     loadTemplate: function(path) {
         /*
         Load a template from the provided path, returning the HTML as a string.
         */
-        return $.get({
+
+        // Cached template
+        if ( path in this.TEMPLATE_CACHE ) return this.TEMPLATE_CACHE[path];
+
+        // Load and cache
+        const html = $.get({
           url: path,
           dataType: 'html',
           async: false
         }).responseText;
+        this.TEMPLATE_CACHE[path] = html;
+        console.log(`Stored template ${path} to template cache.`);
+        return html;
     },
 
     /* ------------------------------------------- */
@@ -142,11 +152,6 @@ const FTC = {
 
     setProperty: function(data, name, value, dtype) {
 
-        // TODO: Temporary dtype assignment
-        if ( name === "tags" ) dtype = dtype || "tags";
-        if ( name.startsWith("stats.") ) dtype = dtype || "posint";
-        if ( name.startsWith("counter") ) dtype = dtype || "posint";
-
         // Sanitize target value
         value = FTC.cleanValue(value, dtype);
 
@@ -244,9 +249,10 @@ class FTCEntity {
     /* ------------------------------------------- */
 
     render(app, scope) {
+        /* Standard entity rendering logic */
+
         let self = this;
-        this.app = app;
-        this.scope = scope;
+        let timer = performance.now();
 
         // Step 1: Handle the provided scope
         scope = this.refineScope(scope);
@@ -271,6 +277,8 @@ class FTCEntity {
         app.on("remove", function() { self.cleanup(scope); });
 
         // Return the final HTML
+        let time = Math.round((performance.now() - timer) * 100) / 100;
+        console.log('Rendered HTML for ' + this.name + ' in ' + time + 'ms.');
         return html;
     }
 
@@ -283,7 +291,6 @@ class FTCEntity {
     /* ------------------------------------------- */
 
     enrichData(data, scope) {
-        // Enrich a safe copy of object data for rendering by augmenting it with additional metadata and attributes
         return data;
     }
 

@@ -92,3 +92,20 @@ h1.itemname > .ftc-edit {
     padding: 0 5px 0 0;
     margin: 5px 0;
 }
+
+
+/* -------------------------------------------
+ 	EDIT ITEM FORM
+------------------------------------------- */
+
+#edit-item button.fit-x {
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-top: 1px solid #666;
+    border-radius: 0;
+    box-shadow: 0 0 4px #000;
+    font-weight: normal;
+    font-family: "Nodesto Caps Condensed";
+    font-size: 20px;
+    line-height: 24px;
+}
