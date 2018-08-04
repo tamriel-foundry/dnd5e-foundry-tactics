@@ -130,15 +130,15 @@ class FTCElement extends FTCEntity {
         $.each(game.templates.elements, function(type, definition) {
 
             // Add core attributes to all elements
-            ftc_merge(definition, FTC.elements.core, true, true, true);
+            mergeObject(definition, FTC.elements.core, true, true, true);
             definition["_type"] = type;
 
             // Add inventory attributes to items, weapons, armor, tools, and consumables
             const isInventory = ["Item", "Weapon", "Armor", "Tool", "Consumable", "Spell"];
-            if ( isInventory.includes(type) ) ftc_merge(definition, FTC.elements.inventory, true, false, true);
+            if ( isInventory.includes(type) ) mergeObject(definition, FTC.elements.inventory, true, false, true);
 
             // Add type-specific data
-            ftc_merge(definition, FTC.elements[type], true, false, true);
+            mergeObject(definition, FTC.elements[type], true, false, true);
         });
         console.log("Foundry Tactics - Element Templates Updated");
     }

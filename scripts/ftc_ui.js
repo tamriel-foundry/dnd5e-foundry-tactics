@@ -13,7 +13,7 @@ FTC.ui = {
 				html.dialog("destroy");
 			}
 		};
-		options = ftc_merge(defaults, options, true, true);
+		options = mergeObject(defaults, options, true, true);
 		html.dialog(options);
 		return html;
 	},

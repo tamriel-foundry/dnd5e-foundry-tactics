@@ -138,7 +138,7 @@ class FTCActor extends FTCEntity {
     static applyDataModel() {
         /* Update actor templates with the latest definitions */
         $.each(game.templates.actors, function(type, definition) {
-            ftc_merge(definition, FTC.actors, true, true, true);
+            mergeObject(definition, FTC.actors, true, true, true);
             definition["_type"] = type;
         });
         console.log("Foundry Tactics - Actor Templates Updated");
@@ -205,7 +205,6 @@ class FTCActor extends FTCEntity {
         $.each(data.abilities, function(attr, a) {
             a.prof = parseInt(a.proficient || 0) * data.attributes.proficiency.current;
             a.mod = a.modifiers.mod;
-            a.save = a.mod + a.prof;
             a.modstr = a.mod.signedString();
             a.valstr = a.current.paddedString(2);
         });
@@ -214,8 +213,8 @@ class FTCActor extends FTCEntity {
         $.each(data.skills, function(skl, s) {
             s.current = parseInt(s.current || 0);
             s.prof = s.current * data.attributes.proficiency.current;
-            s.mod = data.abilities[s.ability].mod + s.prof;
-            s.modstr = s.mod.signedString();
+            s.mod = data.abilities[s.ability].mod;
+            s.modstr = (s.mod + s.prof).signedString();
         });
 
         // Initiative
@@ -233,6 +232,7 @@ class FTCActor extends FTCEntity {
 
         // Armor Class
         data.attributes.ac.base = 10 + data.abilities.dex.mod;
+        return data;
     }
 
     /* ------------------------------------------- */
@@ -492,29 +492,29 @@ class FTCActor extends FTCEntity {
             // Skill rolls
             html.find('.skill .ftc-rollable').click(function () {
                 let skl = $(this).parent().attr("data-skill");
-                self.rollSkillCheck(skl);
+                self.rollSkill(skl);
             });
 
-            // Weapon actions
-            html.find(".weapon .ftc-rollable").click(function () {
-                const itemId = $(this).closest("li.weapon").attr("data-item-id"),
-                    itemData = self.data.inventory[itemId];
-                FTCItemAction.toChat(self, itemData);
-            });
-
-            // Spell actions
-            html.find(".spell .ftc-rollable").click(function () {
-                const itemId = $(this).closest("li.spell").attr("data-item-id"),
-                    itemData = self.data.spellbook[itemId];
-                FTCItemAction.toChat(self, itemData);
-            });
-
-            // Feat actions
-            html.find(".feat .ftc-rollable").click(function () {
-                const itemId = $(this).closest("li.feat").attr("data-item-id"),
-                    itemData = self.data.feats[itemId];
-                FTCItemAction.toChat(self, itemData);
-            });
+            // // Weapon actions
+            // html.find(".weapon .ftc-rollable").click(function () {
+            //     const itemId = $(this).closest("li.weapon").attr("data-item-id"),
+            //         itemData = self.data.inventory[itemId];
+            //     FTCItemAction.toChat(self, itemData);
+            // });
+            //
+            // // Spell actions
+            // html.find(".spell .ftc-rollable").click(function () {
+            //     const itemId = $(this).closest("li.spell").attr("data-item-id"),
+            //         itemData = self.data.spellbook[itemId];
+            //     FTCItemAction.toChat(self, itemData);
+            // });
+            //
+            // // Feat actions
+            // html.find(".feat .ftc-rollable").click(function () {
+            //     const itemId = $(this).closest("li.feat").attr("data-item-id"),
+            //         itemData = self.data.feats[itemId];
+            //     FTCItemAction.toChat(self, itemData);
+            // });
         });
 
         // Enable Element Sorting
