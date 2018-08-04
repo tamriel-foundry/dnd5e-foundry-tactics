@@ -140,7 +140,7 @@ class FTCElement extends FTCEntity {
             // Add type-specific data
             mergeObject(definition, FTC.elements[type], true, false, true);
         });
-        console.log("Foundry Tactics - Element Templates Updated");
+        console.log("Foundry Tactics | Element Templates Updated");
     }
 
     /* ------------------------------------------- */
@@ -182,74 +182,47 @@ class FTCElement extends FTCEntity {
 
     /* ------------------------------------------- */
 
-    get ownedItemID() {
-        return this.context.owner.id + "." + this.container + '.' + this.context.itemId;
-    }
-
-    editOwnedItem(itemId) {
+    static editOwnedItem(owner, container, data, itemId) {
         /* Render an editable sheet for an owned item */
 
-        // Store references to the item and owner
-        const item = this,
-            owner = this.owner,
-            container = this.container;
-
-        // Update the itemId
+        // Get a new itemId and store a local reference
         itemId = itemId || owner.data[container].length;
-        this.context.itemId = itemId;
 
-        // Save a local reference to the UID of the item being edited
-        FTC._edit_item_id = this.ownedItemID;
-
-        // Create an object and render an app
+        // Create a sync object for the item data
         const obj = sync.obj();
-        obj.data = this.data;
-        const app = sync.newApp("FTC_RENDER_ELEMENT", obj);
+        obj.data = data;
 
-        // Attach a full-width confirmation button listen for submission
-        const confirm = $('<button class="fit-x">Update ' + item.type + '</button>');
-        confirm.click(function () {
+        // Trigger a render for the app
+        const scope = {"owner": owner, "container": container, "itemID": itemId};
+        const app = sync.newApp("FTC_RENDER_ELEMENT", obj, scope);
 
-            // Maybe close any open MCE editors
-            if ( tinymce.activeEditor && app._mce && !app._mce.isHidden() ) {
-                item.data.info.notes.current = app._mce.save();
-                app._mce.destroy();
-            }
-
-            // Unset the active editing item
-            FTC._edit_item_id = undefined;
-            layout.coverlay("edit-item");
-            owner.updateItem(container, itemId, item.data);
-        });
-        app.append(confirm);
-
-        // Create the UI element
+        // Pop out the UI element
         ui_popOut({
             target: $("body"),
-            title: owner.name + ": " + item.name + " [Edit]",
+            title: owner.name + ": " + data.info.name.current + " [Edit]",
             id: "edit-item",
             maximize: false,
             minimize: false,
             style: {"width": assetTypes["i"].width, "height": assetTypes["i"].height}
-        }, app).resizable();
+        }, app);
+    }
+
+    /* ------------------------------------------- */
+
+    cleanup() {
+        /* Save the item's owner if an edit panel is closed */
+        if ( this.owner ) {
+            if ( this._changed ) this.owner.updateItem(this.context.container, this.context.itemId, this.data);
+        }
+        else super.cleanup();
     }
 
     /* ------------------------------------------- */
 
     save() {
-
-        // If the item was not changed, bail out
-        if ( !this._changed ) return;
-
-        // Saving an owned item
-        if ( this.owner ) {
-            if ( this.ownedItemID === FTC._edit_item_id ) this.editOwnedItem(this.context.itemId);
-            return;
-        }
-
-        // Saving an unowned item
-        console.log("Saving item " + this.name);
-        this.obj.sync("updateAsset");
+        /* Don't save owned items, instead handle that in cleanup */
+        if ( this.owner ) return;
+        super.save();
     }
 }
 
@@ -332,7 +305,7 @@ hook.add("FTCInit", "Elements", function() {
 
     // Render Item Sheets
     sync.render("FTC_RENDER_ELEMENT", function(obj, app, scope) {
-        const element = FTCElement.fromData(obj);
+        const element = FTCElement.fromData(obj, scope);
         return element.render(app, scope);
     });
 
@@ -344,9 +317,16 @@ hook.add("FTCInit", "Elements", function() {
         let itemData = JSON.parse(dt.getData("OBJ")) || {};
         if (itemData._t !== "i") return;
 
-        // Construct and add the item to the character
+        // Construct an owned item object
         const owner = new FTCActor(obj);
-        const item = FTCElement.fromData(itemData, {"owner": owner});
+        let item = FTCElement.fromData(itemData, {"owner": owner});
+
+        // If we are dropping a spell on the inventory tab, it becomes a "Scroll of ___"
+        if ( item instanceof FTCSpell && owner.data.tabs["content-tabs"] === "tab-inventory" ) {
+            item = item.toScroll();
+        }
+
+        // Add the item to the owner
         owner.addItem(item);
         return false;
     });

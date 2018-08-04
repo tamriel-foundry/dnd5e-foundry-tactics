@@ -15,7 +15,7 @@ const FTC = {
     init: function() {
         hook.call("FTCInit");
         $('body').append('<link rel="stylesheet" href="'+ FTC.CSS_DIR + 'FTC.css" type="text/css" />');
-        console.log("D&D5e Foundry Tactics Loaded");
+        console.log("Foundry Tactics | Mod enabled and loaded!");
     },
 
     /* ------------------------------------------- */
@@ -37,7 +37,7 @@ const FTC = {
           async: false
         }).responseText;
         this.TEMPLATE_CACHE[path] = html;
-        console.log(`Stored template ${path} to template cache.`);
+        console.log(`Foundry Tactics | Stored template ${path} to cache.`);
         return html;
     },
 
@@ -240,7 +240,8 @@ class FTCEntity {
 
     save() {
         if (!this.obj || !this._changed) return;
-        console.log("Saving object " + this.name);
+        console.log(this.name + " | Saving entity");
+        this._changed = false;
         this.obj.sync("updateAsset");
     }
 
@@ -278,7 +279,7 @@ class FTCEntity {
 
         // Return the final HTML
         let time = Math.round((performance.now() - timer) * 100) / 100;
-        console.log('Rendered HTML for ' + this.name + ' in ' + time + 'ms.');
+        console.log(this.name + ' | Rendered HTML in ' + time + 'ms.');
         return html;
     }
 
@@ -297,7 +298,7 @@ class FTCEntity {
     /* ------------------------------------------- */
 
     buildHTML(data, scope) {
-        console.log("A FTCObject subclass must implement the buildHTML method.");
+        throw "Foundry Tactics | A FTCEntity subclass must implement the buildHTML method.";
     }
 
     /* ------------------------------------------- */
@@ -328,6 +329,6 @@ hook.add("Initialize", "FTCSetup", function(...args) {
 
     // Only initialize FTC if we are using the correct system OR no system at all
     if ( gameid === FTC_SYSTEM_IDENTIFIER ) FTC.init();
-    else console.log("Foundry Tactics is enabled but not active for system: " + gameid);
+    else console.log("Foundry Tactics | Mod enabled but not active for system " + gameid);
 });
 

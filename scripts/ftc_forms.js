@@ -212,24 +212,20 @@ FTC.forms.edit_item_fields = function(html, character) {
 
     // Add Item
     html.find('.ftc-item-add').click(function() {
-        let controls = $(this).closest(".item-header"),
+        const controls = $(this).closest(".item-header"),
             list = controls.next(".item-list").length ? controls.next(".item-list") : controls.prev(".item-list"),
-            type = list.attr("data-item-type");
-
-        // Create a new owned item using the default template
-        let data = duplicate(game.templates.elements[type]);
-        let item = FTCElement.fromData(data, {"owner": character});
-        item.editOwnedItem();
+            type = list.attr("data-item-type"),
+            container = list.attr("data-item-container"),
+            data = duplicate(game.templates.elements[type]);
+        character.createItem(data, container);
     });
 
     // Edit Item
     html.find('.item-list .item-edit').click(function() {
         const li = $(this).closest("li"),
             itemId = li.attr("data-item-id"),
-            type = li.parent().attr("data-item-type"),
-            container = li.parent().attr("data-item-container"),
-            item = FTCElement.fromData(character.data[container][itemId], {"owner": character});
-        item.editOwnedItem(itemId);
+            container = li.parent().attr("data-item-container");
+        character.editItem(container, itemId);
     });
 
     // Delete Item

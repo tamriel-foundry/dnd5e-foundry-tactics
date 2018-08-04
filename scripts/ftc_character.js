@@ -141,7 +141,7 @@ class FTCActor extends FTCEntity {
             mergeObject(definition, FTC.actors, true, true, true);
             definition["_type"] = type;
         });
-        console.log("Foundry Tactics - Actor Templates Updated");
+        console.log("Foundry Tactics | Actor Templates Updated");
     }
 
     /* ------------------------------------------- */
@@ -525,25 +525,21 @@ class FTCActor extends FTCEntity {
     /*  Owned Element Management                   */
     /* ------------------------------------------- */
 
-    addItem(item) {
+    createItem(container, data) {
+        FTCElement.editOwnedItem(this, container, data);
+    }
 
-        // Process any pending sort
-        this.updateSort();
+    /* ------------------------------------------- */
 
-        // If we are dropping a spell on the inventory tab, it becomes a "Scroll of ___"
-        if ( item instanceof FTCSpell && this.data.tabs["content-tabs"] === "tab-inventory" ) {
-            item = item.toScroll();
-        }
-
-        // Push the new item into the container and save
-        this.data[item.container].push(item.data);
-        this._changed = true;
-        this.save();
+    editItem(container, itemId) {
+        const data = this.data[container][itemId];
+        FTCElement.editOwnedItem(this, container, data, itemId);
     }
 
     /* ------------------------------------------- */
 
     updateItem(container, itemId, itemData) {
+        this.updateSort();
         this.data[container][itemId] = itemData;
         this._changed = true;
         this.save();
@@ -614,21 +610,6 @@ class FTCActor extends FTCEntity {
             });
             self.data[container] = items;
         });
-    }
-
-    /* ------------------------------------------- */
-    /*  Save Actor Data                            */
-    /* ------------------------------------------- */
-
-    save() {
-        if (!this.obj || !this._changed) return;
-
-        // Update item sorting order
-        this.updateSort();
-
-        // Save the object
-        console.log("Saving object " + this.name);
-        this.obj.sync("updateAsset");
     }
 }
 
