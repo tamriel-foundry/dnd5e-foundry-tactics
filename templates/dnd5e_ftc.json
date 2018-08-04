@@ -81,57 +81,10 @@
       9,
       10
     ],
-    "keys": {
-      "a": {
-        "name": "Advantage",
-        "img": "/content/dice/advantage.png"
-      },
-      "f": {
-        "name": "Failure",
-        "img": "/content/dice/failure.png"
-      },
-      "s": {
-        "name": "Success",
-        "img": "/content/dice/success.png"
-      },
-      "t": {
-        "name": "Threat",
-        "img": "/content/dice/threat.png"
-      },
-      "tri": {
-        "name": "Triumph",
-        "img": "/content/dice/triumph.png"
-      },
-      "des": {
-        "name": "Despair",
-        "img": "/content/dice/despair.png"
-      },
-      "light": {
-        "name": "Light",
-        "img": "/content/dice/lightside.png"
-      },
-      "dark": {
-        "name": "Dark",
-        "img": "/content/dice/darkside.png"
-      },
-      "minus": {
-        "name": "Minus",
-        "img": "/content/dice/minus.png"
-      },
-      "plus": {
-        "name": "Plus",
-        "img": "/content/dice/plus.png"
-      }
-    },
+    "keys": {},
     "pool": {
-      "d2": {
-        "value": "d2"
-      },
       "d4": {
         "value": "d4"
-      },
-      "d5": {
-        "value": "d5"
       },
       "d6": {
         "value": "d6"

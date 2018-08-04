@@ -126,10 +126,10 @@ class FTCActor extends FTCEntity {
         super(object, context);
 
         // Store container sorting order
-        this._sorting = {
-            "inventory": [],
-            "spellbook": [],
-            "feats": []
+        this._sorted = {
+            "inventory": false,
+            "spellbook": false,
+            "feats": false
         }
     }
 
@@ -526,7 +526,9 @@ class FTCActor extends FTCEntity {
     /* ------------------------------------------- */
 
     createItem(container, data) {
-        FTCElement.editOwnedItem(this, container, data);
+        this.save();
+        this.data[container].push(data);
+        FTCElement.editOwnedItem(this, container, data, this.data[container].length - 1);
     }
 
     /* ------------------------------------------- */
@@ -539,7 +541,6 @@ class FTCActor extends FTCEntity {
     /* ------------------------------------------- */
 
     updateItem(container, itemId, itemData) {
-        this.updateSort();
         this.data[container][itemId] = itemData;
         this._changed = true;
         this.save();
@@ -548,10 +549,7 @@ class FTCActor extends FTCEntity {
     /* ------------------------------------------- */
 
     deleteItem(container, itemId) {
-        this.data[container].splice(itemId, 1);
-        let sortIndex = this.data[container].indexOf(itemId + "");
-        this._sorting[container].splice(sortIndex, 1);
-        this._changed = true;
+        this._sorted[container] = true;
     }
 
     /* ------------------------------------------- */
@@ -570,31 +568,9 @@ class FTCActor extends FTCEntity {
             "scope": $(this).attr("data-item-container"),
             "update": function (event, ui) {
                 let container = ui.item.parent().attr("data-item-container");
-                self.getSort(container, ui.item);
+                self._sorted[container] = true;
             }
         });
-    }
-
-    /* ------------------------------------------- */
-
-    getSort(container, li) {
-        let parent = undefined;
-        if ( li ) {
-            parent = li.parents("." + container);
-        } else if ( this.app ) {
-            parent = this.app.find("." + container);
-        }
-
-        // Check the current sort order
-        let sorted = [];
-        parent.find("li.item").each(function() {
-            sorted.push($(this).attr("data-item-id"));
-        });
-
-        // Update sorting
-        this._sorting[container] = sorted;
-        this._changed = true;
-        return sorted;
     }
 
     /* ------------------------------------------- */
@@ -602,15 +578,41 @@ class FTCActor extends FTCEntity {
     updateSort() {
         /* Process pending element sorting order, reordering container data */
         const self = this;
-        $.each(this._sorting, function (container, order) {
-            if (!order.length) return;
-            let items = [];
-            $.each(order, function (n, o) {
-                items[n] = self.data[container][o];
+
+        // Iterate over each sorted container
+        $.each(this._sorted, function(container, isSorted) {
+           if ( !isSorted ) return;
+
+            // Get the current sorting of the container
+            const list = self.app.find("."+container);
+            let sorted = [];
+            list.find("li.item").each(function() {
+                let itemId = $(this).attr("data-item-id");
+                sorted.push(self.data[container][itemId]);
             });
-            self.data[container] = items;
+
+            // Update sorting
+            self.data[container] = sorted;
+            self._sorted[container] = false;
+            self._changed = true;
+            console.log(self.name + " | Updated " + container + " sort order.")
         });
     }
+
+    /* ------------------------------------------- */
+    /*  Saving and Cleanup                         */
+    /* ------------------------------------------- */
+
+    cleanup() {
+        this.updateSort();
+        super.cleanup();
+    }
+
+    save() {
+        this.updateSort();
+        super.save();
+    }
+
 }
 
 

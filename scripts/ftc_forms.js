@@ -217,7 +217,7 @@ FTC.forms.edit_item_fields = function(html, character) {
             type = list.attr("data-item-type"),
             container = list.attr("data-item-container"),
             data = duplicate(game.templates.elements[type]);
-        character.createItem(data, container);
+        character.createItem(container, data);
     });
 
     // Edit Item

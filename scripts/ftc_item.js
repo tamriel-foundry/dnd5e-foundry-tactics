@@ -197,9 +197,10 @@ class FTCElement extends FTCEntity {
         const app = sync.newApp("FTC_RENDER_ELEMENT", obj, scope);
 
         // Pop out the UI element
+        let name = data.info.name.current || "New " + data._type;
         ui_popOut({
             target: $("body"),
-            title: owner.name + ": " + data.info.name.current + " [Edit]",
+            title: owner.name + ": " + name + " [Edit]",
             id: "edit-item",
             maximize: false,
             minimize: false,

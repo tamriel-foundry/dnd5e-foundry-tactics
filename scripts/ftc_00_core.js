@@ -182,9 +182,8 @@ class FTCEntity {
         // Record context
         this.context = context || {};
 
-        // Record app and scope (once rendered)
+        // Store a reference to the app once rendered
         this.app = undefined;
-        this.scope = undefined;
 
         // Case 1: Sync Object provided
         if ( object.sync ) {
@@ -240,7 +239,7 @@ class FTCEntity {
 
     save() {
         if (!this.obj || !this._changed) return;
-        console.log(this.name + " | Saving entity");
+        console.log(this.name + " | Saved entity to world file.");
         this._changed = false;
         this.obj.sync("updateAsset");
     }
@@ -254,6 +253,7 @@ class FTCEntity {
 
         let self = this;
         let timer = performance.now();
+        this.app = app;
 
         // Step 1: Handle the provided scope
         scope = this.refineScope(scope);
