@@ -226,3 +226,69 @@ div[ui-name="ui_setting"] div.white {
 }
 
 
+/* -------------------------------------------
+     CHAT LOG
+------------------------------------------- */
+
+div[ui-name="_logs"] {
+    outline: none;
+}
+
+/* Chat Control Bar */
+div[ui-name="_logs"] .flexbetween.foreground {
+    background: transparent;
+    color: #444;
+    text-shadow: none;
+    margin: 3px 0;
+}
+
+/* Chat Entry */
+div[ui-name="_logs"] .white {
+    font-family: "Scaly Sans";
+    background: transparent;
+    padding: 0 4px;
+    border-bottom: none;
+}
+
+
+/* Undo a bunch of stupid chat styles */
+div[ui-name="_logs"] .bold {
+    font-weight: normal;
+}
+div[ui-name="_logs"] .outline {
+    border: none;
+    outline: none;
+}
+div[ui-name="_logs"] .subtitle {
+    font-size: 14px;
+}
+div[ui-name="_logs"] text.flexrow.subtitle {
+    font-weight: bold;
+    text-align: center !important;
+    padding-top: 5px;
+}
+
+
+/* Chat Message */
+div[ui-name="_logs"] div.bold.spadding {
+    background: rgba(255,255,255,0.25);
+    margin: 3px 5px;
+    border: 1px solid #CCC;
+}
+
+/* Chat Input Form */
+div[ui-name="ui_textBox"] .sheet1 > .flexcolumn:last-child {
+    background: transparent !important;
+    margin: 5px 3px;
+}
+
+div[ui-name="ui_textBox"] textarea.smooth {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid #666;
+    padding: 3px;
+    margin: 3px;
+}
+
+div[ui-name="ui_textBox"] input.ui-autocomplete-input {
+    background: transparent;
+}

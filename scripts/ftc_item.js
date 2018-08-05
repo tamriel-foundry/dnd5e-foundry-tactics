@@ -73,10 +73,8 @@ FTC.elements = {
 
 class FTCElement extends FTCEntity {
 
-    static fromData(obj, context) {
-        /* A factory method which returns a specialized class for elements of a certain type */
-
-        const type = obj._type || obj.data._type;
+    static getElement(type) {
+        /* Get the specialized Element class definition for a certain type */
         const classes = {
             "Weapon": FTCWeapon,
             "Armor": FTCElement,
@@ -86,7 +84,12 @@ class FTCElement extends FTCEntity {
             "Consumable": FTCElement,
             "Item": FTCElement
         };
-        const cls = type ? classes[type] : FTCElement;
+        return classes[type] || FTCElement;
+    }
+
+    static fromData(obj, context) {
+        /* A factory method which returns a specialized class for elements of a certain type */
+        const cls = this.getElement(obj._type || obj.data._type);
         return new cls(obj, context);
     }
 
@@ -125,6 +128,10 @@ class FTCElement extends FTCEntity {
     /* ------------------------------------------- */
 
     static applyDataModel() {
+
+        // Override Item Asset Type Dimensions
+        assetTypes['i'].width = "650px";
+        assetTypes['i'].height = "500px";
 
         // Update Element Templates
         $.each(game.templates.elements, function(type, definition) {
@@ -209,6 +216,42 @@ class FTCElement extends FTCEntity {
     }
 
     /* ------------------------------------------- */
+    /*  Chat Actions                               */
+    /* ------------------------------------------- */
+
+    chatAction() {
+        /* Wrapper method for element chat actions. Each element type must define the getChatData method. */
+
+        // Disallow chat actions for unowned items
+        if ( !this.owner ) {
+            throw "Chat actions are not supported for unowned elements.";
+        }
+
+        // Submit chat event
+        const chatData = {
+            "person": this.owner.name,
+            "eid": this.owner.id,
+            "icon": this.owner.data.info.img.current,
+            "ui": "FTC_ITEM_ACTION",
+            "audio": "sounds/spell_cast.mp3",
+            "chatData": this.getChatData()
+        };
+        runCommand("chatEvent", chatData);
+    };
+
+    /* ------------------------------------------- */
+
+    getChatData() {
+        throw "FTCElement subclasses must implement the getChatData method if they wish to define chat actions."
+    };
+
+    activateChatListeners(html) {
+        return html;
+    }
+
+    /* ------------------------------------------- */
+    /*  Saving and Cleanup                         */
+    /* ------------------------------------------- */
 
     cleanup() {
         /* Save the item's owner if an edit panel is closed */
@@ -238,9 +281,11 @@ class FTCWeapon extends FTCElement {
         return "inventory";
     }
 
-    getWeaponTypeStr(v) {
+    /* ------------------------------------------- */
+
+    getWeaponTypeStr() {
         let types = {
-            "simplem": "Simple Martial",
+            "simplem": "Simple Melee",
             "simpler": "Simple Ranged",
             "martialm": "Martial Melee",
             "martialr": "Martial Ranged",
@@ -248,7 +293,60 @@ class FTCWeapon extends FTCElement {
             "improv": "Improvised",
             "ammo": "Ammunition"
         };
-        return types[v];
+        return types[this.data.type.current];
+    }
+
+    /* ------------------------------------------- */
+
+    getChatData() {
+        const owner = this.owner.getCoreData();
+        const data = cleanObject(this.data, game.templates.elements[this.type], false, false);
+
+        // Flag rollable permission
+        const isOwner = this.owner.isOwner;
+        data.entID = this.owner.id;
+        data.rollable = {
+            "hit": isOwner ? "rollable" : "hidden",
+            "damage": ( isOwner && data.damage.current ) ? "rollable" : "hidden",
+            "damage2": ( isOwner && data.damage2.current ) ? "rollable": "hidden"
+        };
+
+        // Add character data
+        data.modifier.current = data.modifier.current || owner.attributes.offensive.current;
+        data.modifier.mod = owner.abilities[data.modifier.current].mod;
+        data.proficiency = owner.proficiency;
+
+        // Update item data
+        data.hit.current = parseInt(data.hit.current || 0);
+        const props = [
+            this.getWeaponTypeStr(),
+            owner.abilities[data.modifier.current].name,
+            data.proficient ? "Proficient" : "Not Proficient",
+            data.range.current,
+            data.properties.current
+        ];
+        data.props = FTC.ui.chatProperties(props);
+        return data;
+    }
+
+    /* ------------------------------------------- */
+
+    static renderChatHTML(chatData) {
+
+        // Load and populate the chat template
+        let html = FTC.loadTemplate("html/actions/weapon.html");
+        html = $(FTC.populateTemplate(html, chatData));
+
+        // Weapon Attack
+        html.find("h3.action-roll.weapon-hit").click(function() {
+            FTCItemActions.weaponAttack($(this));
+        });
+
+        // Weapon Damage
+        html.find("h3.action-roll.weapon-damage").click(function() {
+            FTCItemActions.weaponDamage($(this));
+        });
+        return html;
     }
 }
 
@@ -300,10 +398,6 @@ hook.add("FTCInit", "Elements", function() {
     // Apply the Item Data Model
     FTCElement.applyDataModel();
 
-    // Override Item Asset Type Dimensions
-    assetTypes['i'].width = "650px";
-    assetTypes['i'].height = "500px";
-
     // Render Item Sheets
     sync.render("FTC_RENDER_ELEMENT", function(obj, app, scope) {
         const element = FTCElement.fromData(obj, scope);
@@ -335,35 +429,3 @@ hook.add("FTCInit", "Elements", function() {
 
 
 /* ------------------------------------------- */
-/*  V2 Converter                               */
-/* ------------------------------------------- */
-
-function ftc_migrateElement(i) {
-
-    // Assign type
-    i._type = i.info.type.current.capitalize();
-    i._type = (i._type === "Ability") ? "Feat": i._type;
-
-    // Move attributes to root
-    let sections = ["info", "armor", "weapon", "spell"];
-    $.each(sections, function(_, section) {
-        mergeObject(i, i[section], true, false, true);
-    });
-
-    // Rename attributes
-    i.type = i.variety;
-    i.strength = i.str;
-    i.stealth = i.ste;
-    if (i._type === "Feat") i.cost = i.materials;
-
-    // Start by merging against the new data template
-    let template = game.templates.elements[i._type],
-        data = mergeObject(template, i, true, false, false);
-
-    // Clean any residual data
-    cleanObject(data, template, true, true);
-    $.each(data, function(name, _) {
-        if ( name.startsWith("_") && !["_t", "_type"].includes(name)) delete data[name];
-    });
-    return data
-}

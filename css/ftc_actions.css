@@ -2,18 +2,21 @@ section.ftc-chat {
     font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
     font-weight: normal;
-    margin: 0.5em 0;
+    margin: 3px;
     padding: 0.5em;
-    border: 1px solid #AAA;
-    border-radius: 3px;
-    background: rgba(0,0,0,0.05);
+    border: 1px solid #CCC;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.2);
 }
 
 /* Spell Action Header */
 .action-header {
-    padding-bottom: 3px;
+    padding-bottom: 5px;
     margin-bottom: 6px;
-    border-bottom: 2px solid #710916;
+    border-bottom: 2px groove #FFF;
+}
+.action-header > h2 {
+    margin-bottom: 0;
 }
 .action-header > img {
     flex: 0 0 32px;
@@ -31,7 +34,8 @@ section.ftc-chat {
 .action-footer {
     margin-top: 5px;
     padding-top: 5px;
-    border-top: 1px solid #444;
+    border-top: 2px groove #FFF;
+    font-size: 12px;
 }
 .action-footer > .action-prop {
     padding: 0 5px;
@@ -47,10 +51,9 @@ section.ftc-chat {
 .action-roll, .spell-dc {
     text-align: center;
     padding: 5px;
-    border: 1px solid #111;
+    border: 2px groove #EEE;
     border-radius: 5px;
-    box-shadow: 0 0 4px #999;
-    margin: 0.5em 0;
+    margin: 0 0 0.5em 0;
 }
 .action-roll {
     padding: 5px 5px 5px 35px;

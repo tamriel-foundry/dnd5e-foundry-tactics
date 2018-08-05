@@ -108,14 +108,15 @@ function cleanObject(original, template, inplace=false, allowPrivate=true) {
     // Purge objects from the original which do not begin with "_" and do not exist in the template
 
     let cleaned = (inplace) ? original : duplicate(original);
-    for (let k in cleaned) {
-        if ( allowPrivate && k.startsWith("_") ) continue;
-        if ( cleaned[k] instanceof Array ) continue;
-        if ( cleaned[k] instanceof Object ) {
-            if ( template.hasOwnProperty(k) ) cleanObject(cleaned[k], template[k], true);
+    $.each(cleaned, function(k, v) {
+        if (allowPrivate && k.startsWith("_")) return;
+        if (k instanceof Array) return;
+        if (k instanceof Object) {
+            if (template.hasOwnProperty(k)) cleanObject(k, template[k], true, allowPrivate);
             else delete cleaned[k];
         }
-    }
+        else if ( !template.hasOwnProperty(k) ) delete cleaned[k];
+    });
     return cleaned;
 }
 
@@ -180,4 +181,24 @@ ftc_updateCompendium = function(filename) {
     // Export the data to JSON and save
     runCommand("savePack", {key : filename, data : JSON.stringify(pack.data, 2, 2)});
     console.log("Successfully migrated compendium: " + filename)
+};
+
+
+
+ftc_simulate_formula = function(formula, number) {
+    number = number || 1000;
+    let results = [];
+    for (let i = 0; i < number; i++) {
+        results.push(sync.eval(formula));
+    }
+
+    // Summarize Results
+    console.log(`Simulated result for ${formula} | ${number} iterations`);
+    let sum = results.reduce(function(a, b) { return a + b; });
+    let mean = sum / results.length;
+    let min = Math.min(...results);
+    let max = Math.max(...results);
+    console.log("Mean: " + mean);
+    console.log("Min: " + min);
+    console.log("Max: " + max);
 };

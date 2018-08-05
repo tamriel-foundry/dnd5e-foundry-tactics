@@ -222,8 +222,22 @@ class FTCEntity {
         return this.data.info.name.current;
     }
 
+    get img() {
+        return this.data.info.img.current;
+    }
+
     get type() {
         return this.data._type;
+    }
+
+    /* ------------------------------------------- */
+
+    get canView() {
+        return hasSecurity(getCookie("UserID"), "Visible", this.data);
+    }
+
+    get isOwner() {
+        return hasSecurity(getCookie("UserID"), "Owner", this.data);
     }
 
     /* ------------------------------------------- */

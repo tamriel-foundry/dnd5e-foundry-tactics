@@ -14,33 +14,7 @@ class FTCItemAction {
         return FTC.TEMPLATE_DIR + `actions/action-${type}.html`;
     }
 
-    /* -------------------------------------------- */
 
-    static toChat(actor, itemData) {
-        /*
-        Submit a dice check to chat using this static method. The eventData from this submission is cached and picked
-        up later by the sibling fromChat method.
-
-        Arguments:
-            actor (FTCCharacter): The actor who is performing the item action
-            itemData (Object): Data for the item being acted upon
-            ui (str): The UI name to render
-        */
-
-        // Generate event data
-        let chatData = {
-            "person": actor.data.info.name.current,
-            "eID": actor.obj.id(),
-            "icon": actor.data.info.img.current,
-            "ui": FTCItemAction.ui,
-            "audio": "sounds/spell_cast.mp3",
-            "actorData": actor.data,
-            "itemData": itemData
-        };
-
-        // Submit the chat event
-        runCommand("chatEvent", chatData);
-    }
 
     /* -------------------------------------------- */
 
@@ -213,20 +187,6 @@ class FTCItemAction {
         const character = this.actor,
             name = this.item.name;
 
-        // Weapon Attack
-        html.find("h3.action-roll.weapon-hit").click(function() {
-            let flavor = name+" "+$(this).attr("title"),
-                hit = $(this).attr("data-bonus");
-            character.rollWeaponAttack(flavor, hit);
-        });
-
-        // Weapon Damage
-        html.find("h3.action-roll.weapon-damage").click(function() {
-            let flavor = name+" "+$(this).attr("title"),
-                damage = $(this).attr("data-damage");
-            character.rollWeaponDamage(flavor, damage);
-        });
-
         // Spell Attack
         html.find("h3.action-roll.spell-hit").click(function() {
             let flavor = name+" "+$(this).attr("title");
@@ -244,13 +204,4 @@ class FTCItemAction {
     }
 }
 
-/* -------------------------------------------- */
 
-hook.add("FTCInit", "ItemActions", function() {
-    sync.render(FTCItemAction.ui, function(obj, app, scope) {
-        const action = FTCItemAction.fromChat(obj);
-        return action.renderHTML();
-    });
-});
-
-/* -------------------------------------------- */

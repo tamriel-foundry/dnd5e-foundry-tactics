@@ -190,6 +190,9 @@ class FTCActor extends FTCEntity {
         /* This function exists to prepare all the standard rules data that would be used by dice rolling in D&D5e.
         */
 
+        // If no data was provided, make a copy
+        data = data || duplicate(this.data);
+
         // Experience, level, hit dice
         let xp = data.experience;
         xp["lvl"] = xp.level.current;
@@ -289,6 +292,9 @@ class FTCActor extends FTCEntity {
             // Set id and class
             item.data.itemId = itemId;
             item.data.css = item.type.toLowerCase();
+
+            // Flag whether the item is rollable
+            item.data.rollable = owner.isOwner ? "ftc-rollable" : "";
 
             // Push to type
             inventory[item.type].items.push(item);
@@ -495,12 +501,14 @@ class FTCActor extends FTCEntity {
                 self.rollSkill(skl);
             });
 
-            // // Weapon actions
-            // html.find(".weapon .ftc-rollable").click(function () {
-            //     const itemId = $(this).closest("li.weapon").attr("data-item-id"),
-            //         itemData = self.data.inventory[itemId];
-            //     FTCItemAction.toChat(self, itemData);
-            // });
+            // Weapon actions
+            html.find(".weapon .ftc-rollable").click(function () {
+                const itemId = $(this).closest("li.weapon").attr("data-item-id"),
+                    itemData = self.data.inventory[itemId];
+                const item = FTCElement.fromData(itemData, {"owner": self, "itemId": itemId});
+                item.chatAction();
+            });
+
             //
             // // Spell actions
             // html.find(".spell .ftc-rollable").click(function () {
@@ -635,80 +643,3 @@ hook.add("FTCInit", "Actors", function() {
 
 
 /* ------------------------------------------- */
-/*  V2 Converter                               */
-/* ------------------------------------------- */
-
-function ftc_migrateActor(d) {
-
-    // Assign type
-    d._type = ( d.tags.npc === 1 ) ? "NPC": "Character";
-
-    // Rename feats
-    if ( d.abilities && ! d.feats ) d.feats = d.abilities;
-    d.abilities = {};
-
-    // Experience
-    let exp = ["level", "cr", "exp"];
-    d.experience = {};
-    $.each(exp, function(_, t) { d.experience[t] = d.counters[t]; });
-
-    // Attributes
-    let off = d.info.offensive.current,
-        spell = d.info.spellcasting.current;
-    d.attributes = {
-        "offensive": { "current": ( off === undefined ) ? off : off.toLowerCase() },
-        "spellcasting": { "current": ( spell === undefined ) ? spell : spell.toLowerCase() }
-    };
-    let attrs = ["hp", "hd", "proficiency", "ac", "speed", "initiative", "inspiration"];
-    $.each(attrs, function(_, a) { d.attributes[a] = d.counters[a]; });
-
-    // Traits
-    d.traits = {};
-    let traits = ["size", "di", "dr", "ci", "dv", "senses", "languages"];
-    $.each(traits, function(_, t) { d.traits[t] = d.info[t]; });
-
-    // Personality
-    d.personality = {};
-    let personality = ["traits", "ideals", "bonds", "flaws"];
-    $.each(personality, function(_, t) { d.personality[t] = d.info[t]; });
-
-    // Stats
-    $.each(d.stats, function(n, s) { d.abilities[n.toLowerCase()] = s; });
-
-    // Currency
-    d.currency = {};
-    let currency = ["gp", "sp", "cp"];
-    $.each(currency, function(_, c) { d.currency[c] = d.counters[c]; });
-
-    // Spells
-    d.spells = {};
-    let spells = ["spell0", "spell1", "spell2", "spell3", "spell4", "spell5", "spell6", "spell7", "spell8", "spell9"];
-    $.each(spells, function(_, s) { d.spells[s] = d.counters[s]; });
-
-    // Resources
-    d.resources = {
-        "legendary": d.counters["legendary"],
-        "primary": d.counters["class1"],
-        "secondary": d.counters["class2"]
-    };
-
-    // Owned Elements
-    let containers = ["inventory", "spellbook", "feats"];
-    $.each(containers, function(_, c) {
-        let container = d[c];
-        $.each(container, function(i, item) {
-            container[i] = ftc_migrateElement(item);
-        });
-    });
-
-    // Start by merging against the new data template
-    let template = game.templates.actors[d._type],
-        data = mergeObject(template, d, true, false, false);
-
-    // Clean any residual data
-    cleanObject(data, template, true, true);
-    $.each(data, function(name, _) {
-        if ( name.startsWith("_") && !["_t", "_type"].includes(name)) delete data[name];
-    });
-    return data
-}

@@ -1,0 +1,22 @@
+<section class="ftc-chat weapon-action" data-ent="{entID}">
+    <header class="action-header flexrow">
+        <img class="ftc-image" src="{info.img.current}" title="{info.name.current}" width="32" height="32"/>
+        <h2>{info.name.current}</h2>
+    </header>
+    <div class="action-notes">
+        {info.notes.current}
+    </div>
+    <div class="action-rolls">
+        <h3 class="action-roll weapon-hit {rollable.hit}" title="{info.name.current} Attack" data-mod="{modifier.mod}"
+            data-hit="{hit.current}" data-prof="{proficiency.current}">Weapon Attack</h3>
+
+        <h3 class="action-roll weapon-damage {rollable.damage}" title="{info.name.current} Damage"
+            data-dam="{damage.current}" data-mod="{modifier.mod}">Weapon Damage</h3>
+
+        <h3 class="action-roll weapon-damage {rollable.damage2}" title="{info.name.current} Damage"
+            data-dam="{damage2.current}" data-mod="{modifier.mod}">Secondary Damage</h3>
+    </div>
+    <footer class="action-footer flexrow flexwrap">
+        {props}
+    </footer>
+</section>

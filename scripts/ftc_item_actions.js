@@ -1,82 +1,143 @@
 
+FTCItemActions = {
 
+    /* -------------------------------------------- */
+    /*  WEAPON ACTIONS                              */
+    /* -------------------------------------------- */
 
+    weaponAttack: function(button) {
 
-FTCWeapon.prototype.chatAction = function() {
-    /*
-    Generic wrapper for element chat actions. Relies on each element to define a chatUI attribute.
-    */
+        // Get data
+        let rolled = false,
+            adv = undefined,
+            bonus = undefined,
+            flavor = button.attr("title");
 
-    // Disallow chat actions for unowned items
-    if ( !this.owner ) return;
-
-    // Prepare core data
-    const owner = this.owner;
-    const self = this;
-    const ownerData = owner.getCoreData(owner.data);
-
-    // Combine data object
-    console.log(ownerData);
-};
-
-
-
-
-FTCWeapon.prototype.attackRoll = function() {
-    /*
-    Roll a weapon attack, prompting for advantage/disadvantage for a weapon owned by a character.
-    */
-
-    if ( !this.owner ) return;
-
-    // Prepare core data
-    const owner = this.owner,
-        ownerData = owner.getCoreData(owner.data),
-        weapon = this;
-
-    // Placeholder flags
-    let rolled = false,
-        adv = undefined,
-        bonus = undefined;
-
-    // Prepare HTML form
-    const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
-    html.append($('<label>Situational Modifier?</label>'));
-    html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
-    html.append($('<label>Attack With advantage?</label>'));
-
-    // Create a dialogue
-    FTC.ui.createDialogue(html, {
-        title: flavor,
-        buttons: {
-            "Advantage": function () {
-                rolled = true;
-                adv = true;
-                bonus = $(this).find('#roll-bonus').val();
-                $(this).dialog("close");
-            },
-            "Normal": function () {
-                rolled = true;
-                bonus = $(this).find('#roll-bonus').val();
-                $(this).dialog("close");
-            },
-            "Disadvantage": function () {
-                rolled = true;
-                adv = false;
-                bonus = $(this).find('#roll-bonus').val();
-                $(this).dialog("close");
-            }
-        },
-        close: function () {
-            html.dialog("destroy");
-            if ( !rolled ) return;
-            let formula = FTC.Dice.formula(FTC.Dice.d20(adv), hit, "@mod", "@prof", bonus);
-            if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
-            FTC.Dice.roll(actor, flavor, formula, {"mod": data.weaponMod, "prof": data.proficiency});
+        // Get the actor
+        let entID = button.parents(".ftc-chat").attr("data-ent");
+        if ( !entID ) {
+            button.removeClass("rollable");
+            return;
         }
-    });
+        let actor = new FTCActor(getEnt(entID));
+
+        // Roll data
+        let rollData = {
+            "hit": button.attr("data-hit"),
+            "mod": button.attr("data-mod"),
+            "prof": button.attr("data-prof")
+        };
+
+        // Prepare HTML form
+        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
+        html.append($('<label>Situational Modifier?</label>'));
+        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
+        html.append($('<label>Attack With advantage?</label>'));
+
+        // Create a dialogue
+        FTC.ui.createDialogue(html, {
+            title: flavor,
+            buttons: {
+                "Advantage": function () {
+                    rolled = true;
+                    adv = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Normal": function () {
+                    rolled = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Disadvantage": function () {
+                    rolled = true;
+                    adv = false;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                html.dialog("destroy");
+                if (!rolled) return;
+                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@hit", "@mod", "@prof", bonus);
+                if (adv !== undefined) flavor += ( adv ) ? " (Advantage)" : " (Disadvantage)";
+                FTC.Dice.roll(actor, flavor, formula, rollData);
+            }
+        });
+    },
+
+    /* -------------------------------------------- */
+
+   weaponDamage: function(button) {
+
+        // Get data
+        let rolled = false,
+            flavor = button.attr("title"),
+            crit = false,
+            bonus = undefined;
+
+        // Get the actor
+        let entID = button.parents(".ftc-chat").attr("data-ent");
+        if ( !entID ) {
+            button.removeClass("rollable");
+            return;
+        }
+        let actor = new FTCActor(getEnt(entID));
+
+        // Roll data
+        let mod = button.attr("data-mod");
+        let dam = button.attr("data-dam");
+
+        // Prepare HTML form
+        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
+        html.append($('<label>Situational Modifier?</label>'));
+        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
+        html.append($('<label>Was your attack a critical hit?</label>'));
+
+        // Create a dialogue
+        FTC.ui.createDialogue(html, {
+            title: flavor,
+            buttons: {
+                "Normal": function () {
+                    rolled = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Critical Hit!": function () {
+                    rolled = true;
+                    crit = true;
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                html.dialog("destroy");
+                if ( !rolled ) return;
+                dam = crit ? FTC.Dice.crit(dam) : dam;
+                bonus = crit ? FTC.Dice.crit(bonus) : bonus;
+                let formula = FTC.Dice.formula(dam, "@mod", bonus);
+                flavor += crit ? " (Critical Hit)" : "";
+                FTC.Dice.roll(actor, flavor, formula, {"mod": mod});
+            }
+        });
+    }
+
+
 };
 
+/* -------------------------------------------- */
+
+
+hook.add("FTCInit", "ItemActions", function() {
+    sync.render("FTC_ITEM_ACTION", function(obj, app, scope) {
+        const chatData = obj.chatData;
+        const cls = FTCElement.getElement(chatData._type);
+        return cls.renderChatHTML(chatData);
+    });
+});
+
+
+/* -------------------------------------------- */
 
 
 

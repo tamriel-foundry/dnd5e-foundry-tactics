@@ -1,5 +1,5 @@
 hook.add("FTCInit", "Forms", function() {
-FTC.forms = {}
+FTC.forms = {};
 
 /* -------------------------------------------- */
 /* Delayed Input Updating                       */
