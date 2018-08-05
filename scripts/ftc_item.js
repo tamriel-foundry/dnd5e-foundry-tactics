@@ -456,10 +456,10 @@ class FTCFeat extends FTCElement {
     getChatData() {
         const data = cleanObject(this.data, game.templates.elements[this.type], false, false);
         const props = [
-            data.type.current.titleCase(),
+            data.type.current ? data.type.current.titleCase() : undefined,
             data.requirements.current,
             data.source.current,
-            data.time.current.titleCase(),
+            data.time.current ? data.time.current.titleCase() : undefined,
             data.cost.current
         ];
         data.props = FTC.ui.chatProperties(props);
