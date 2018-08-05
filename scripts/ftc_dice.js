@@ -62,9 +62,31 @@ class FTCDice {
         });
         return formula.join(" + ");
     }
+
+
+    /* -------------------------------------------- */
+
+    static simulate(formula, number) {
+        number = number || 1000;
+        let results = [];
+        for (let i = 0; i < number; i++) {
+            results.push(sync.eval(formula));
+        }
+
+        // Summarize Results
+        console.log(`Simulated result for ${formula} | ${number} iterations`);
+        let sum = results.reduce(function(a, b) { return a + b; });
+        let mean = sum / results.length;
+        let min = Math.min(...results);
+        let max = Math.max(...results);
+        console.log("Mean: " + mean);
+        console.log("Min: " + min);
+        console.log("Max: " + max);
+    };
 }
 
 
 hook.add("FTCInit", "Dice", function() {
     FTC.Dice = new FTCDice();
 });
+

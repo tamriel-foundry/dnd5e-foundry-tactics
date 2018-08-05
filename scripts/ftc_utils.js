@@ -173,8 +173,8 @@ ftc_updateCompendium = function(filename) {
         let type = section._t;
         $.each(section.data, function(i, data) {
             console.log("Updating compendium entry: " + data.info.name.current);
-            if ( type === "i" ) section.data[i] = ftc_migrateElement(data);
-            else if ( type === "c" ) section.data[i] = ftc_migrateActor(data);
+            if ( type === "i" ) section.data[i] = ftc_migrateElement(data, true);
+            else if ( type === "c" ) section.data[i] = ftc_migrateActor(data, true);
         });
     });
 
@@ -184,21 +184,30 @@ ftc_updateCompendium = function(filename) {
 };
 
 
+ftc_updateWorld = function() {
 
-ftc_simulate_formula = function(formula, number) {
-    number = number || 1000;
-    let results = [];
-    for (let i = 0; i < number; i++) {
-        results.push(sync.eval(formula));
-    }
+    // Update game templates and apply new data models
+    const template = duplicate(game.locals.gameList[FTC_SYSTEM_IDENTIFIER]);
+    game.templates = template;
+    FTCActor.applyDataModel();
+    FTCElement.applyDataModel();
 
-    // Summarize Results
-    console.log(`Simulated result for ${formula} | ${number} iterations`);
-    let sum = results.reduce(function(a, b) { return a + b; });
-    let mean = sum / results.length;
-    let min = Math.min(...results);
-    let max = Math.max(...results);
-    console.log("Mean: " + mean);
-    console.log("Min: " + min);
-    console.log("Max: " + max);
+    // Iterate over game entities
+    $.each(game.entities.data, function(_, obj) {
+        let type = obj.data._t;
+        if ( type === "i" ) {
+            obj.data = ftc_migrateElement(obj.data, false);
+            obj.sync("updateAsset");
+            console.log("Updating element: " + obj.data.info.name.current);
+        }
+        else if ( type === "c" ) {
+            obj.data = ftc_migrateActor(obj.data, false);
+            obj.sync("updateAsset");
+            console.log("Updating actor: " + obj.data.info.name.current);
+        }
+    });
+
+    // Apply the game template update
+    console.log("Successfully migrated world file to V2 template!");
+    runCommand("updateTemplate", template);
 };

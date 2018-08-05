@@ -4,7 +4,10 @@
 /* ------------------------------------------- */
 
 
-function ftc_migrateActor(d) {
+function ftc_migrateActor(d, compendium=false) {
+
+    // Don't migrate anything that already has a _type
+    if ( d._type ) return d;
 
     // Assign type
     d._type = ( d.tags.npc === 1 ) ? "NPC": "Character";
@@ -63,7 +66,7 @@ function ftc_migrateActor(d) {
     $.each(containers, function(_, c) {
         let container = d[c];
         $.each(container, function(i, item) {
-            container[i] = ftc_migrateElement(item);
+            container[i] = ftc_migrateElement(item, compendium);
         });
     });
 
@@ -73,9 +76,11 @@ function ftc_migrateActor(d) {
 
     // Clean any residual data
     cleanObject(data, template, true, true);
-    $.each(data, function(name, _) {
-        if ( name.startsWith("_") && !["_t", "_type"].includes(name)) delete data[name];
-    });
+    if ( compendium ) {
+        $.each(data, function (name, _) {
+            if (name.startsWith("_") && !["_t", "_type"].includes(name)) delete data[name];
+        });
+    };
     return data
 }
 
@@ -85,11 +90,15 @@ function ftc_migrateActor(d) {
 /* ------------------------------------------- */
 
 
-function ftc_migrateElement(i) {
+function ftc_migrateElement(i, compendium=false) {
+
+    // Don't migrate anything that already has a _type
+    if ( i._type ) return i;
 
     // Assign type
-    i._type = i.info.type.current.capitalize();
+    if ( i.info.type ) i._type = i.info.type.current.capitalize();
     i._type = (i._type === "Ability") ? "Feat": i._type;
+    i._type = (i._type === "Note") ? "Item": i._type;
 
     // Move attributes to root
     let sections = ["info", "armor", "weapon", "spell"];
@@ -104,14 +113,18 @@ function ftc_migrateElement(i) {
     if (i._type === "Feat") i.cost = i.materials;
 
     // Start by merging against the new data template
-    let template = game.templates.elements[i._type],
-        data = mergeObject(template, i, true, false, false);
+    let template = game.templates.elements[i._type];
+    console.log(template);
+    console.log(i);
+    let data = mergeObject(template, i, true, false, false);
 
     // Clean any residual data
     cleanObject(data, template, true, true);
-    $.each(data, function(name, _) {
-        if ( name.startsWith("_") && !["_t", "_type"].includes(name)) delete data[name];
-    });
+    if ( compendium ) {
+        $.each(data, function (name, _) {
+            if (name.startsWith("_") && !["_t", "_type"].includes(name)) delete data[name];
+        });
+    }
     return data
 }
 
