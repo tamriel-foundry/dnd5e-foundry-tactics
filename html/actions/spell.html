@@ -1,0 +1,21 @@
+<section class="ftc-chat spell-action" data-ent="{entID}">
+    <header class="action-header flexrow">
+        <img class="ftc-image" src="{info.img.current}" title="{info.name.current}" width="32" height="32"/>
+        <h2>{info.name.current}</h2>
+    </header>
+    <div class="action-notes">
+        {info.notes.current}
+    </div>
+    <div class="action-rolls">
+        <h3 class="spell-dc {rollable.dc}" title="Spell DC">{spellDC}</h3>
+
+        <h3 class="action-roll spell-hit {rollable.hit}" title="{info.name.current} Attack" data-mod="{modifier.mod}"
+            data-prof="{proficiency.current}">Spell Attack</h3>
+
+        <h3 class="action-roll spell-damage {rollable.damage}" title="{info.name.current} Damage"
+            data-dam="{damage.current}" data-mod="{modifier.mod}" data-crit="{canCrit}">Spell Damage</h3>
+    </div>
+    <footer class="action-footer flexrow flexwrap">
+        {props}
+    </footer>
+</section>

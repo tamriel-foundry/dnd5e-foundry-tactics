@@ -242,10 +242,16 @@ class FTCElement extends FTCEntity {
     /* ------------------------------------------- */
 
     getChatData() {
-        throw "FTCElement subclasses must implement the getChatData method if they wish to define chat actions."
+        return cleanObject(this.data, game.templates.elements[this.type], false, false);
     };
 
-    activateChatListeners(html) {
+    /* ------------------------------------------- */
+
+    static renderChatHTML(chatData) {
+
+        // Load and populate the chat template
+        let html = FTC.loadTemplate("html/actions/item.html");
+        html = $(FTC.populateTemplate(html, chatData));
         return html;
     }
 
@@ -274,6 +280,7 @@ class FTCElement extends FTCEntity {
 /* ------------------------------------------- */
 /*  Weapons                                    */
 /* ------------------------------------------- */
+
 
 class FTCWeapon extends FTCElement {
 
@@ -373,6 +380,64 @@ class FTCSpell extends FTCElement {
         i.charges.current = i.charges.max = 1;
         return FTCElement.fromData(i);
     }
+
+    /* ------------------------------------------- */
+
+    getChatData() {
+        const owner = this.owner.getCoreData();
+        const data = cleanObject(this.data, game.templates.elements[this.type], false, false);
+
+        // Flag rollable permission
+        const isOwner = this.owner.isOwner;
+        data.entID = this.owner.id;
+        data.rollable = {
+            "dc": ( data.type.current === "save" ) ? "" : "hidden",
+            "hit": ( isOwner && (data.type.current === "attack") ) ? "rollable" : "hidden",
+            "damage": ( isOwner && data.damage.current ) ? "rollable" : "hidden"
+        };
+
+        // Add character data
+        data.modifier.current = data.modifier.current || owner.attributes.spellcasting.current;
+        data.modifier.mod = owner.abilities[data.modifier.current].mod;
+        data.proficiency = owner.proficiency;
+        data.spellDC = owner.attributes.spellcasting.dcstr;
+        data.canCrit = data.type.current === "attack";
+
+        // Update item data
+        const props = [
+            (data.level.current === 0) ? "Cantrip" : data.level.current.ordinalString() + " Level",
+            data.school.current.capitalize(),
+            data.time.current.titleCase(),
+            data.range.current,
+            data.duration.current,
+            data.components.current,
+            data.materials.current,
+            data.concentration.current ? "Concentration" : undefined,
+            data.source.current
+        ];
+        data.props = FTC.ui.chatProperties(props);
+        return data;
+    }
+
+    /* ------------------------------------------- */
+
+    static renderChatHTML(chatData) {
+
+        // Load and populate the chat template
+        let html = FTC.loadTemplate("html/actions/spell.html");
+        html = $(FTC.populateTemplate(html, chatData));
+
+        // Weapon Attack
+        html.find("h3.action-roll.spell-hit").click(function() {
+            FTCItemActions.spellAttack($(this));
+        });
+
+        // Weapon Damage
+        html.find("h3.action-roll.spell-damage").click(function() {
+            FTCItemActions.spellDamage($(this));
+        });
+        return html;
+    }
 }
 
 
@@ -384,6 +449,21 @@ class FTCFeat extends FTCElement {
 
     get container() {
         return "feats";
+    }
+
+    /* ------------------------------------------- */
+
+    getChatData() {
+        const data = cleanObject(this.data, game.templates.elements[this.type], false, false);
+        const props = [
+            data.type.current.titleCase(),
+            data.requirements.current,
+            data.source.current,
+            data.time.current.titleCase(),
+            data.cost.current
+        ];
+        data.props = FTC.ui.chatProperties(props);
+        return data;
     }
 }
 
@@ -422,7 +502,7 @@ hook.add("FTCInit", "Elements", function() {
         }
 
         // Add the item to the owner
-        owner.addItem(item);
+        owner.dropItem(item);
         return false;
     });
 });

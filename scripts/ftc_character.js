@@ -333,7 +333,7 @@ class FTCActor extends FTCEntity {
             // Record spell-level
             sls[lvl] = sls[lvl] || {
                 "level": lvl,
-                "name": (lvl === 0) ? "Cantrip" : FTC.ui.getOrdinalNumber(lvl) + " Level",
+                "name": (lvl === 0) ? "Cantrip" : lvl.ordinalString() + " Level",
                 "current": FTC.getProperty(data, 'spells.spell'+lvl+'.current') || 0,
                 "max": FTC.getProperty(data, 'spells.spell'+lvl+'.max') || 0,
                 "spells": [],
@@ -502,27 +502,28 @@ class FTCActor extends FTCEntity {
             });
 
             // Weapon actions
-            html.find(".weapon .ftc-rollable").click(function () {
-                const itemId = $(this).closest("li.weapon").attr("data-item-id"),
+            html.find(".item .ftc-rollable").click(function () {
+                const itemId = $(this).closest("li.item").attr("data-item-id"),
                     itemData = self.data.inventory[itemId];
                 const item = FTCElement.fromData(itemData, {"owner": self, "itemId": itemId});
                 item.chatAction();
             });
 
-            //
-            // // Spell actions
-            // html.find(".spell .ftc-rollable").click(function () {
-            //     const itemId = $(this).closest("li.spell").attr("data-item-id"),
-            //         itemData = self.data.spellbook[itemId];
-            //     FTCItemAction.toChat(self, itemData);
-            // });
-            //
-            // // Feat actions
-            // html.find(".feat .ftc-rollable").click(function () {
-            //     const itemId = $(this).closest("li.feat").attr("data-item-id"),
-            //         itemData = self.data.feats[itemId];
-            //     FTCItemAction.toChat(self, itemData);
-            // });
+            // Spell actions
+            html.find(".spell .ftc-rollable").click(function () {
+                const itemId = $(this).closest("li.spell").attr("data-item-id"),
+                    itemData = self.data.spellbook[itemId];
+                const spell = new FTCSpell(itemData, {"owner": self, "itemId": itemId});
+                spell.chatAction();
+            });
+
+            // Feat actions
+            html.find(".feat .ftc-rollable").click(function () {
+                const itemId = $(this).closest("li.feat").attr("data-item-id"),
+                    itemData = self.data.feats[itemId];
+                const feat = new FTCFeat(itemData, {"owner": self, "itemId": itemId});
+                feat.chatAction();
+            });
         });
 
         // Enable Element Sorting
@@ -537,6 +538,14 @@ class FTCActor extends FTCEntity {
         this.save();
         this.data[container].push(data);
         FTCElement.editOwnedItem(this, container, data, this.data[container].length - 1);
+    }
+
+    /* ------------------------------------------- */
+
+    dropItem(item) {
+        this.data[item.container].push(item.data);
+        this._changed = true;
+        this.save();
     }
 
     /* ------------------------------------------- */

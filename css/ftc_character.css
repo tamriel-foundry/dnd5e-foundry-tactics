@@ -413,13 +413,13 @@ ol.item-list {
 	margin: 0;
 	padding: 0;
 }
-.item {
+.element {
     margin: 0;
     padding: 3px 0;
     border-bottom: 1px solid #DDD;
     line-height: 24px;
 }
-.item > * {
+.element > * {
     margin: 0 3px;
 }
 .item-name { flex: 1; }
@@ -433,11 +433,11 @@ ol.item-list {
     text-align: center;
     border-left: 1px solid #DDD;
 }
-.item .glyphicon {
+.element .glyphicon {
     font-size: 12px;
     margin: 3px;
 }
-.item .glyphicon:hover,
+.element .glyphicon:hover,
 .ftc-item-add:hover {
     cursor: pointer;
 	text-shadow: 0 0 4px #ff3838;

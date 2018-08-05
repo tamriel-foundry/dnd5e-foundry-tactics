@@ -1,4 +1,4 @@
-<section class="ftc-chat spell-action">
+<section class="ftc-chat weapon-action" data-ent="{entID}">
     <header class="action-header flexrow">
         <img class="ftc-image" src="{info.img.current}" title="{info.name.current}" width="32" height="32"/>
         <h2>{info.name.current}</h2>
@@ -6,12 +6,7 @@
     <div class="action-notes">
         {info.notes.current}
     </div>
-    <div class="action-rolls">
-        {spellDC}
-        {attack}
-        {damage}
-    </div>
     <footer class="action-footer flexrow flexwrap">
-        {actionProps}
+        {props}
     </footer>
 </section>
