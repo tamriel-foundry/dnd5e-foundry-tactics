@@ -368,13 +368,15 @@ class FTCActor extends FTCEntity {
 
     get template() {
         const td = FTC.TEMPLATE_DIR + "actors/";
-        return td + "body.html";
+        const temp = (this.type === "Character") ? "body.html" : "npc.html";
+        return td + temp;
     }
 
     get templateParts() {
         const td = FTC.TEMPLATE_DIR + "actors/";
         return {
             "ATTRIBUTES": td + "attributes.html",
+            "NPC_ATTRIBUTES": td + "npc-attributes.html",
             "CURRENCY": td + "currency.html",
             "TRAITS": td + "traits.html"
         };
