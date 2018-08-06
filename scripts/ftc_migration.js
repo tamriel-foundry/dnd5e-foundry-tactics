@@ -96,7 +96,7 @@ function ftc_migrateElement(i, compendium=false) {
     if ( i._type ) return i;
 
     // Assign type
-    if ( i.info.type ) i._type = i.info.type.current.capitalize();
+    if ( i.info.type && i.info.type.current ) i._type = i.info.type.current.capitalize() || "Item";
     i._type = (i._type === "Ability") ? "Feat": i._type;
     i._type = (i._type === "Note") ? "Item": i._type;
 
