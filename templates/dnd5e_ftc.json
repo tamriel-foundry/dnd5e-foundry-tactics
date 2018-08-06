@@ -107,10 +107,12 @@
   "display": {
     "actors": {
       "Character": {
-        "content": "<ui name='FTC_RENDER_ACTOR'/>"
+        "content": "<ui name='FTC_RENDER_ACTOR'/>",
+        "health": "attributes.hp"
       },
       "NPC": {
-        "content": "<ui name='FTC_RENDER_ACTOR'/>"
+        "content": "<ui name='FTC_RENDER_ACTOR'/>",
+        "health": "attributes.hp"
       }
     },
     "elements": {
@@ -297,8 +299,8 @@
           "msg": "@pName : Applied @total damage",
           "calc": [
             {
-              "eq": "@hp-(@total)_0",
-              "target": "counters.hp"
+              "eq": "@c.attributes.hp.current-(@total)_0",
+              "target": "attributes.hp"
             }
           ]
         },
@@ -307,8 +309,8 @@
           "msg": "@pName : Applied (@total x2) damage",
           "calc": [
             {
-              "eq": "@hp-(@total * 2)_0",
-              "target": "counters.hp"
+              "eq": "@c.attributes.hp.current - (@total * 2)_0",
+              "target": "attributes.hp"
             }
           ]
         },
@@ -317,8 +319,8 @@
           "msg": "@pName : Applied (@total /2) damage",
           "calc": [
             {
-              "eq": "@hp-@:int((@total/2)_0)",
-              "target": "counters.hp"
+              "eq": "@c.attributes.hp.current - @:int((@total/2)_0)",
+              "target": "attributes.hp"
             }
           ]
         }
@@ -329,8 +331,8 @@
       "msg": "@pName : Applied @total healing",
       "calc": [
         {
-          "eq": "@hp+(@total)_0",
-          "target": "counters.hp"
+          "eq": "@c.attributes.hp.current + (@total)_0",
+          "target": "attributes.hp"
         }
       ]
     }

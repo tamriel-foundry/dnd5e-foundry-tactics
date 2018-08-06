@@ -321,7 +321,7 @@ class FTCWeapon extends FTCElement {
         // Add character data
         data.modifier.current = data.modifier.current || owner.attributes.offensive.current;
         data.modifier.mod = owner.abilities[data.modifier.current].mod;
-        data.proficiency = owner.proficiency;
+        data.proficiency = owner.attributes.proficiency;
 
         // Update item data
         data.hit.current = parseInt(data.hit.current || 0);
@@ -399,7 +399,7 @@ class FTCSpell extends FTCElement {
         // Add character data
         data.modifier.current = data.modifier.current || owner.attributes.spellcasting.current;
         data.modifier.mod = owner.abilities[data.modifier.current].mod;
-        data.proficiency = owner.proficiency;
+        data.proficiency = owner.attributes.proficiency;
         data.spellDC = owner.attributes.spellcasting.dcstr;
         data.canCrit = data.type.current === "attack";
 
@@ -411,7 +411,6 @@ class FTCSpell extends FTCElement {
             data.range.current,
             data.duration.current,
             data.components.current,
-            data.materials.current,
             data.concentration.current ? "Concentration" : undefined,
             data.source.current
         ];
