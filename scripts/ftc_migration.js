@@ -134,7 +134,6 @@ function ftc_migrateElement(i, compendium=false) {
 function ftc_promptUpdate() {
 
     // Is it a v1 build?
-    console.log(game.templates.build);
     if ( game.templates.build === "v2" ) return;
 
     // Prompt for world update
