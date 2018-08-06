@@ -393,6 +393,7 @@ blockquote.compendium {
 section.inventory-items {
     height: calc(100% - 45px);
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 /* Offensive Modifier Select */

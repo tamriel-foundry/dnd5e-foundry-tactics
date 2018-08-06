@@ -129,3 +129,36 @@ function ftc_migrateElement(i, compendium=false) {
 }
 
 /* ------------------------------------------- */
+
+
+function ftc_promptUpdate() {
+
+    // Is it a v1 build?
+    console.log(game.templates.build);
+    if ( game.templates.build === "v2" ) return;
+
+    // Prompt for world update
+    const html = $('<section id="ftc-update"><h1>Update Required</h1><hr/></section>');
+    html.append("<p>The D&D5e Foundry Tactics mod has been updated to use the new GM Forge v2 template and HTML " +
+        "structure. In order to continue using the mod, you MUST update your world file to the new version.</p>");
+    html.append("<p><strong>Important: </strong> Before proceeding, please backup your world file. While the update process " +
+        "is expected to proceed, in case anything goes wrong be sure to backup your data before continuing.</p>");
+    html.append("<p>Once you are ready to proceed, push the button below.</p>");
+
+    // Create a dialog
+    FTC.ui.createDialogue(html, {
+        "title": "D&D5e Foundry Tactics",
+        "buttons": {
+            "Proceed with Update": function() {
+                ftc_updateWorld();
+            }
+        },
+        "modal": true,
+        "width": 600
+    });
+}
+
+
+hook.add("FTCInit", "Migration", function() {
+    ftc_promptUpdate();
+});

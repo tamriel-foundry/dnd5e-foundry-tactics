@@ -1,4 +1,3 @@
-hook.add("FTCInit", "UI", function() {
 FTC.ui = {
 
 	/* Create a dialogue window */
@@ -60,7 +59,3 @@ FTC.ui = {
         return propStr;
     }
 };
-
-
-// End FTCInit
-});
