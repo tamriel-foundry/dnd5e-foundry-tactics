@@ -96,7 +96,8 @@ function ftc_migrateElement(i, compendium=false) {
     if ( i._type ) return i;
 
     // Assign type
-    if ( i.info.type && i.info.type.current ) i._type = i.info.type.current.capitalize() || "Item";
+    i._type = ( i.info.type ) ? i.info.type.current || "Item" : "Item";
+    i._type = i._type.capitalize();
     i._type = (i._type === "Ability") ? "Feat": i._type;
     i._type = (i._type === "Note") ? "Item": i._type;
 
@@ -114,8 +115,6 @@ function ftc_migrateElement(i, compendium=false) {
 
     // Start by merging against the new data template
     let template = game.templates.elements[i._type];
-    console.log(template);
-    console.log(i);
     let data = mergeObject(template, i, true, false, false);
 
     // Clean any residual data
@@ -142,6 +141,8 @@ function ftc_promptUpdate() {
         "structure. In order to continue using the mod, you MUST update your world file to the new version.</p>");
     html.append("<p><strong>Important: </strong> Before proceeding, please backup your world file. While the update process " +
         "is expected to proceed, in case anything goes wrong be sure to backup your data before continuing.</p>");
+    html.append("<p>Your chat log will be cleared as a result of this action. If there are any conversations" +
+        "or dice roll results in your log which you need to record, please do so before updating.</p>");
     html.append("<p>Once you are ready to proceed, push the button below.</p>");
 
     // Create a dialog
@@ -150,8 +151,21 @@ function ftc_promptUpdate() {
         "buttons": {
             "Proceed with Update": function() {
                 ftc_updateWorld();
+                $(this).dialog("close");
+                $(this).dialog("destroy");
+                ftc_promptSuccess();
             }
         },
+        "modal": true,
+        "width": 600
+    });
+}
+
+function ftc_promptSuccess() {
+    const html = $('<section id="ftc-update"><h1>Update Successful</h1><hr/></section>');
+    html.append("<p>Update successful, please press F5 to reload your game.</p>");
+    FTC.ui.createDialogue(html, {
+        "title": "D&D5e Foundry Tactics",
         "modal": true,
         "width": 600
     });

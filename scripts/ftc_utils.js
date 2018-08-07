@@ -186,6 +186,9 @@ ftc_updateCompendium = function(filename) {
 
 ftc_updateWorld = function() {
 
+    // Clear chat log
+    runCommand("emptyEventLog");
+
     // Update game templates and apply new data models
     const template = duplicate(game.locals.gameList[FTC_SYSTEM_IDENTIFIER]);
     game.templates = template;
