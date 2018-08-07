@@ -1,0 +1,41 @@
+<div class="attributes">
+    <div class="attribute resource1">
+        <header>
+           <input id="r1label" class="ftc-edit" type="text" tabindex="0" data-edit="resources.primary.label"
+                  data-dtype="str" value="{resources.primary.label}" placeholder="{resources.primary.name}"/>
+        </header>
+        <div class="attribute-value">
+            <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="resources.primary.current"
+                   value="{resources.primary.current}" placeholder="0"/>
+            <span> / </span>
+            <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="resources.primary.max"
+                   value="{resources.primary.max}" placeholder="0"/>
+        </div>
+    </div>
+     <div class="attribute resource2">
+        <header>
+           <input id="r2label" class="ftc-edit" type="text" tabindex="0" data-edit="resources.secondary.label"
+                  data-dtype="str" value="{resources.secondary.label}" placeholder="{resources.secondary.name}"/>
+        </header>
+        <div class="attribute-value">
+            <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="resources.secondary.current"
+                   value="{resources.secondary.current}" placeholder="0"/>
+            <span> / </span>
+            <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="resources.secondary.max"
+                   value="{resources.secondary.max}" placeholder="0"/>
+        </div>
+    </div>
+     <div class="attribute death">
+        <header>Death Saves</header>
+        <ul class="death-saves attribute-value">
+            <li>
+                <span>Saved</span>
+                <input type="checkbox"/><input type="checkbox"/><input type="checkbox"/>
+            </li>
+            <li>
+                <span>Failed</span>
+                <input type="checkbox"/><input type="checkbox"/><input type="checkbox"/>
+            </li>
+        </ul>
+    </div>
+</div>

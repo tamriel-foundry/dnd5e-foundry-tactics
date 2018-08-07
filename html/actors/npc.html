@@ -45,9 +45,7 @@
             </ul>
         </header>
 
-        <div class="ftc-sheet-primary">
-            <!-- NPC_ATTRIBUTES -->
-        </div>
+        <!-- NPC_ATTRIBUTES -->
 
         <!-- SECONDARY TABBED CONTAINER -->
         <div class="ftc-sheet-secondary flexcolumn">
@@ -143,34 +141,8 @@
             <ol class="abilities-list">
                 <!-- ABILITIES -->
             </ol>
-
-            <div class="abilities-primary-stats">
-                <div class="primary-stat initiative">
-                    <header>Initiative</header>
-                    <div class="primary-stat-value">
-                        <span>{attributes.initiative.str}</span>
-                    </div>
-                    <footer class="initiative-bonus">
-                        <label>Bonus:</label>
-                        <input class="ftc-edit" type="text" tabindex="0" value="{attributes.initiative.current}"
-                               data-edit="attributes.initiative.current" data-dtype="str" data-autosize="10"
-                               placeholder="0"/>
-                    </footer>
-                </div>
-
-                <div class="primary-stat speed">
-                    <header>Movement Speed</header>
-                    <div class="primary-stat-value">
-                        <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" placeholder="30"
-                               data-edit="attributes.speed.current" value="{attributes.speed.current}" />
-                        <span> Ft.</span>
-                    </div>
-                    <footer>
-                        <input class="ftc-edit" type="text" tabindex="0" data-edit="attributes.speed.extra" data-dtype="str"
-                               value="{attributes.speed.extra}" placeholder="Climb / Swim"/>
-                    </footer>
-                </div>
-            </div>
+            <!-- SIDEBAR_ATTRIBUTES -->
+            <!-- SIDEBAR_OPTIONS -->
         </div>
 
         <div id="content-skills" class="content-tab">

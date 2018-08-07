@@ -9,13 +9,12 @@
                    value="{attributes.hp.max}" placeholder="10"/>
         </div>
         <footer>
-            <label>Hit Dice</label>
-            <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="attributes.hd.current"
-                   data-dtype="int" value="{attributes.hd.current}" placeholder="0"/>
-            <span> / {attributes.hd.max}</span>
+            <input class="ftc-edit" type="text" tabindex="0" data-edit="attributes.hp.formula" data-dtype="str"
+                   value="{attributes.hp.formula}" placeholder="Formula"/>
         </footer>
     </div>
-     <div class="attribute armor">
+
+    <div class="attribute armor">
         <header>{attributes.ac.name}</header>
         <div class="attribute-value">
             <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" data-edit="attributes.ac.current"
@@ -23,7 +22,8 @@
         </div>
         <footer>Base AC {attributes.ac.base}</footer>
     </div>
-     <div class="attribute proficiency">
+
+    <div class="attribute proficiency">
         <header>{attributes.proficiency.name}</header>
         <div class="attribute-value">
             <span>+{attributes.proficiency.current}</span>

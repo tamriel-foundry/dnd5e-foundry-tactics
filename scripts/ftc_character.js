@@ -117,10 +117,27 @@ FTC.actors = {
 
 
 /* ------------------------------------------- */
-/* Character Object Type                       */
+/* Actor Object Type                       */
 /* ------------------------------------------- */
 
 class FTCActor extends FTCEntity {
+
+    static getElement(type) {
+        /* Get the specialized Element class definition for a certain type */
+        const classes = {
+            "Character": FTCActor,
+            "NPC": FTCNPC
+        };
+        return classes[type] || FTCElement;
+    }
+
+    static fromData(obj, context) {
+        /* A factory method which returns a specialized class for elements of a certain type */
+        const cls = this.getElement(obj._type || obj.data._type);
+        return new cls(obj, context);
+    }
+
+    /* ------------------------------------------- */
 
     constructor(object, context) {
         super(object, context);
@@ -161,8 +178,6 @@ class FTCActor extends FTCEntity {
 
         // Update Proficiency Bonus
         data.attributes.proficiency.current = Math.floor((Math.max(lvl, cr) + 7) / 4);
-
-        // Return converted data
         return data;
     }
 
@@ -367,19 +382,21 @@ class FTCActor extends FTCEntity {
     /* ------------------------------------------- */
 
     get template() {
-        const td = FTC.TEMPLATE_DIR + "actors/";
-        const temp = (this.type === "Character") ? "body.html" : "npc.html";
-        return td + temp;
+        return FTC.TEMPLATE_DIR + "actors/character.html";
     }
 
     get templateParts() {
         const td = FTC.TEMPLATE_DIR + "actors/";
-        return {
-            "ATTRIBUTES": td + "attributes.html",
-            "NPC_ATTRIBUTES": td + "npc-attributes.html",
+        let parts = {
+            "PRIMARY_ATTRIBUTES": td + "attributes.html",
+            "SECONDARY_ATTRIBUTES": td + "attributes2.html",
+            "SIDEBAR_ATTRIBUTES": td + "attributes3.html",
+            "NPC_ATTRIBUTES": td + "attributes-npc.html",
             "CURRENCY": td + "currency.html",
             "TRAITS": td + "traits.html"
         };
+        if ( hasSecurity(getCookie("UserID"), "Assistant Master") ) parts["SIDEBAR_OPTIONS"] = td + "options.html";
+        return parts;
     }
 
     /* ------------------------------------------- */
@@ -484,10 +501,6 @@ class FTCActor extends FTCEntity {
     activateListeners(html, app, scope) {
         const self = this;
 
-        // Activate Tabs and Editable Fields
-        FTC.ui.activateTabs(html, this, app);
-        FTC.forms.activateFields(html, this, app);
-
         // Activate rollable actions on a timeout to prevent accidentally clicking immediately when the sheet opens
         setTimeout(function() {
 
@@ -528,8 +541,18 @@ class FTCActor extends FTCEntity {
             });
         });
 
+        // NPC Toggle
+        html.find(".ftc-checkbox.npc-toggle").change(function() {
+            let isNPC = $(this).prop("checked") + 0 || 0;
+            self.data._type = isNPC ? "NPC" : "Character";
+        });
+
         // Enable Element Sorting
         this.enableSorting(html);
+
+        // Activate Tabs and Editable Fields
+        FTC.ui.activateTabs(html, this, app);
+        FTC.forms.activateFields(html, this, app);
     }
 
     /* ------------------------------------------- */
@@ -631,9 +654,40 @@ class FTCActor extends FTCEntity {
         this.updateSort();
         super.save();
     }
-
 }
 
+
+/* ------------------------------------------- */
+/*  NPC CLASS                                  */
+/* ------------------------------------------- */
+
+
+class FTCNPC extends FTCActor {
+
+    convertData(data) {
+        data = super.convertData(data);
+        data._flags["npc"] = 1;
+        return data;
+    }
+
+    /* ------------------------------------------- */
+
+    get template() {
+        return FTC.TEMPLATE_DIR + "actors/npc.html";
+    }
+
+    get templateParts() {
+        const td = FTC.TEMPLATE_DIR + "actors/";
+        let parts = {
+            "NPC_ATTRIBUTES": td + "attributes-npc.html",
+            "SIDEBAR_ATTRIBUTES": td + "attributes3.html",
+            "CURRENCY": td + "currency.html",
+            "TRAITS": td + "traits.html"
+        };
+        if ( hasSecurity(getCookie("UserID"), "Assistant Master") ) parts["SIDEBAR_OPTIONS"] = td + "options.html";
+        return parts;
+    }
+}
 
 /* ------------------------------------------- */
 /*  Actors Initialization Hook                 */
@@ -647,7 +701,7 @@ hook.add("FTCInit", "Actors", function() {
 
     // Render Item Sheets
     sync.render("FTC_RENDER_ACTOR", function(obj, app, scope) {
-        const actor = new FTCActor(obj);
+        const actor = FTCActor.fromData(obj, scope);
         return actor.render(app, scope);
     });
 });

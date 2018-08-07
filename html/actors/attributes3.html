@@ -1,0 +1,27 @@
+<div class="attributes">
+    <div class="attribute initiative">
+        <header>Initiative</header>
+        <div class="attribute-value">
+            <span>{attributes.initiative.str}</span>
+        </div>
+        <footer class="initiative-bonus">
+            <label>Bonus:</label>
+            <input class="ftc-edit" type="text" tabindex="0" value="{attributes.initiative.current}"
+                   data-edit="attributes.initiative.current" data-dtype="str" data-autosize="10"
+                   placeholder="0"/>
+        </footer>
+    </div>
+
+    <div class="attribute speed">
+        <header>Movement Speed</header>
+        <div class="attribute-value">
+            <input class="ftc-edit" type="text" tabindex="0" data-autosize="11" placeholder="30"
+                   data-edit="attributes.speed.current" value="{attributes.speed.current}" />
+            <span> Ft.</span>
+        </div>
+        <footer>
+            <input class="ftc-edit" type="text" tabindex="0" data-edit="attributes.speed.extra" data-dtype="str"
+                   value="{attributes.speed.extra}" placeholder="Climb / Swim"/>
+        </footer>
+    </div>
+</div>
