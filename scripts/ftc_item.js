@@ -80,7 +80,7 @@ class FTCElement extends FTCEntity {
             "Armor": FTCElement,
             "Spell": FTCSpell,
             "Feat": FTCFeat,
-            "Tool": FTCElement,
+            "Tool": FTCTool,
             "Consumable": FTCElement,
             "Item": FTCElement
         };
@@ -465,6 +465,118 @@ class FTCFeat extends FTCElement {
         return data;
     }
 }
+
+
+
+/* ------------------------------------------- */
+/*  Tools                                      */
+/* ------------------------------------------- */
+
+class FTCTool extends FTCElement {
+
+    get container() {
+        return "inventory";
+    }
+
+    /* ------------------------------------------- */
+    /*  Chat Actions                               */
+    /* ------------------------------------------- */
+
+    chatAction() {
+        /* Wrapper method for element chat actions. Each element type must define the getChatData method. */
+
+        // Disallow chat actions for unowned items
+        if ( !this.owner ) {
+            throw "Chat actions are not supported for unowned elements.";
+        }
+
+        // Get core data
+        let tool = this,
+            actor = this.owner,
+            flavor = this.name + " Check",
+            rolled = false,
+            adv = undefined,
+            bonus = undefined;
+
+        // HTML dialog
+        const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
+        html.append($('<label>Tool Check Ability?</label>'));
+        const select = $('<select class="tool-ability"></select>');
+        $.each(this.owner.data.abilities, function(a, d) {
+            select.append(`<option value="${a}">${d.name}</option>`);
+        });
+        html.append(select);
+        html.append($('<label>Situational Modifier?</label>'));
+        html.append($('<input type="text" id="roll-bonus" placeholder="Formula"/>'));
+
+        // Create a dialogue
+        let ability = undefined;
+        FTC.ui.createDialogue(html, {
+            title: flavor,
+            buttons: {
+                "Advantage": function () {
+                    rolled = true;
+                    adv = true;
+                    ability = $(this).find(".tool-ability :selected").val();
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Normal": function () {
+                    rolled = true;
+                    ability = $(this).find(".tool-ability :selected").val();
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                },
+                "Disadvantage": function () {
+                    rolled = true;
+                    adv = false;
+                    ability = $(this).find(".tool-ability :selected").val();
+                    bonus = $(this).find('#roll-bonus').val();
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                html.dialog("destroy");
+                if ( !rolled ) return;
+
+                // Temporarily store ability to context
+                tool.context["ability"] = ability;
+
+                // Submit chat event
+                const chatData = {
+                    "person": actor.name,
+                    "eid": actor.id,
+                    "icon": actor.img,
+                    "ui": "FTC_ITEM_ACTION",
+                    "audio": "sounds/spell_cast.mp3",
+                    "chatData": tool.getChatData()
+                };
+                runCommand("chatEvent", chatData);
+
+                // Roll tool check
+                let mod = actor.data.abilities[ability].modifiers.mod,
+                    prof = actor.data.attributes.proficiency.current * parseInt(tool.data.proficient.current || 0);
+                let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
+                if ( adv !== undefined ) flavor += ( adv ) ? " (Advantage)": " (Disadvantage)";
+                FTC.Dice.roll(actor, flavor, formula, {"mod": mod, "prof": prof});
+            }
+        });
+    };
+
+    /* ------------------------------------------- */
+
+    getChatData() {
+        const data = cleanObject(this.data, game.templates.elements[this.type], false, false);
+        const props = [
+            this.owner.data.abilities[this.context.ability].name,
+            data.proficient.current ? "Proficient" : "Not Proficient"
+        ];
+        data.props = FTC.ui.chatProperties(props);
+        return data;
+    }
+}
+
+
 
 
 /* ------------------------------------------- */
