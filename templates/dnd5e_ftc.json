@@ -9,7 +9,7 @@
   },
   "identifier": "dnd5e_ftc",
   "build": "v2",
-  "version": 1,
+  "version": 2,
   "initiative": {
     "query": "d20 + M@dex + R@initiative + (R@dex / 100)",
     "compare": "(@i1.total>@i2.total)?(1):(@i1.total==@i2.total?(0):(-1))"
