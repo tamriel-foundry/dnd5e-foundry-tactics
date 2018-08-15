@@ -7,7 +7,7 @@
 function ftc_migrateActor(d, compendium=false) {
 
   // V1 -> V2 Migration if the actor does not yet have a _type
-  if ( !i._type ) {
+  if ( !d._type ) {
 
     // Assign type
     d._type = ( d.tags.npc === 1 ) ? "NPC" : "Character";
@@ -74,23 +74,25 @@ function ftc_migrateActor(d, compendium=false) {
       "primary": d.counters["class1"],
       "secondary": d.counters["class2"]
     };
-
-    // Owned Elements
-    let containers = ["inventory", "spellbook", "feats"];
-    $.each(containers, function (_, c) {
-      let container = d[c];
-      $.each(container, function (i, item) {
-        container[i] = ftc_migrateElement(item, compendium);
-      });
-    });
   }
 
   // Merge the element against the latest data template
   let template = game.templates.actors[d._type],
-    data = mergeObject(template, i, true, false, false);
+    data = mergeObject(template, d, true, false, false);
 
   // Clean any residual data
   cleanObject(data, template, true, !compendium);
+
+  // Update Owned Elements
+  let containers = ["inventory", "spellbook", "feats"];
+  $.each(containers, function (_, c) {
+    let container = data[c];
+    $.each(container, function (i, item) {
+      container[i] = ftc_migrateElement(item, compendium);
+    });
+  });
+
+  // Return cleaned actor data
   return data;
 }
 
