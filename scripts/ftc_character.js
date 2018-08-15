@@ -628,7 +628,7 @@ class FTCActor extends FTCEntity {
             // Get the current sorting of the container
             const list = self.app.find("."+container);
             let sorted = [];
-            list.find("li.item").each(function() {
+            list.find("li.element").each(function() {
                 let itemId = $(this).attr("data-item-id");
                 sorted.push(self.data[container][itemId]);
             });
