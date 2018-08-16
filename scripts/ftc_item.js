@@ -369,6 +369,30 @@ class FTCSpell extends FTCElement {
 
   /* ------------------------------------------- */
 
+  enrichData(data) {
+    data = super.enrichData(data);
+
+    // Cantrip damage scaling
+    if ( this.context.owner && data.level.current === 0 ) {
+      const xp = this.context.owner.data.experience;
+      let lvl = parseInt(xp.level.current || xp.cr.current);
+      data.damage.current = this._scaleCantripDamage(data.damage.current, lvl);
+    }
+    return data;
+  }
+
+  /* ------------------------------------------- */
+
+  _scaleCantripDamage(formula, level) {
+    let multi = 1;
+    if ( level >= 17 ) multi = 4;
+    else if ( level >= 11 ) multi = 3;
+    else if ( level >= 5 ) multi = 2;
+    return FTC.Dice.alter(formula, 1, undefined, multi);
+  }
+
+  /* ------------------------------------------- */
+
   toScroll() {
     let i = duplicate(this.data);
     i._type = "Consumable";
@@ -378,6 +402,92 @@ class FTCSpell extends FTCElement {
     i.charges.current = i.charges.max = 1;
     return FTCElement.fromData(i);
   }
+
+
+  /* ------------------------------------------- */
+
+  chatAction() {
+    /* Wrapper method for element chat actions. Each element type must define the getChatData method. */
+
+    // Disallow chat actions for unowned items
+    if (!this.owner) {
+      throw "Chat actions are not supported for unowned elements.";
+    }
+
+    // Get core data
+    let spell = this,
+      actor = this.owner,
+      flavor = this.name,
+      rolled = false,
+      lvl = undefined;
+
+    // Get the current and maximum spell levels
+    let sl = spell.data.level.current;
+    let maxsl = sl;
+
+    // Can the spell be cast at higher levels?
+    let higherLevels = spell.data.info.notes.current.includes("Higher Levels");
+    if ( higherLevels ) {
+
+      // Get the maximum spell level
+      let lvls = [];
+      for (let l = 0; l <= 9; l++) {
+        if (actor.data.spells["spell" + l].max) lvls.push(l);
+      }
+      maxsl = Math.max(...lvls);
+    }
+
+    // HTML dialog
+    const html = $('<div id="ftc-dialog" class="attack-roll"></div>');
+    html.append($('<label>Cast at Level</label>'));
+    const select = $('<select class="spell-level"></select>');
+    for (let l = sl; l <= maxsl; l++) {
+      let slvl = actor.data.spells["spell" + l];
+      select.append(`<option value="${l}">${slvl.name}</option>`);
+    }
+    html.append(select);
+
+    // Create a dialogue
+    FTC.ui.createDialogue(html, {
+      title: flavor,
+      buttons: {
+        "Cast Spell": function () {
+          rolled = true;
+          lvl = $(this).find('.spell-level :selected').val();
+          $(this).dialog("close");
+        },
+      },
+      close: function () {
+        html.dialog("destroy");
+        if (!rolled) return;
+
+        // Prevent casting if spell slots are exhausted
+        if ( lvl > 0 && (actor.data.spells["spell"+lvl].current || 0) === 0 ) {
+          sendAlert({"text": `You have no available level ${lvl} spell casts remaining!`});
+          return;
+        }
+
+        // Store data to context
+        spell.context["chatData"] = {
+          "level": lvl
+        };
+
+        // Submit chat event
+        const chatData = {
+          "person": actor.name,
+          "eid": actor.id,
+          "icon": actor.img,
+          "ui": "FTC_ITEM_ACTION",
+          "audio": "sounds/spell_cast.mp3",
+          "chatData": spell.getChatData()
+        };
+        runCommand("chatEvent", chatData);
+
+        // Cast a spell
+        actor.castSpell(lvl);
+      }
+    });
+  };
 
   /* ------------------------------------------- */
 
@@ -394,6 +504,15 @@ class FTCSpell extends FTCElement {
       "damage": ( isOwner && data.damage.current ) ? "rollable" : "hidden"
     };
 
+    // Get spell data
+    let slvl = parseInt(this.context.chatData["level"] || data.level.current);
+
+    // Cantrip damage scaling
+    let lvl = owner.experience.level.current || owner.experience.cr.current;
+    if ( slvl === 0 ) {
+      data.damage.current = this._scaleCantripDamage(data.damage.current, lvl);
+    }
+
     // Add character data
     data.modifier.current = data.modifier.current || owner.attributes.spellcasting.current;
     data.modifier.mod = owner.abilities[data.modifier.current].mod;
@@ -403,7 +522,7 @@ class FTCSpell extends FTCElement {
 
     // Update item data
     const props = [
-      (data.level.current === 0) ? "Cantrip" : data.level.current.ordinalString() + " Level",
+      (slvl === 0) ? "Cantrip" : slvl.ordinalString() + " Level",
       data.school.current.capitalize(),
       data.time.current.titleCase(),
       data.range.current,
@@ -425,12 +544,12 @@ class FTCSpell extends FTCElement {
     let html = FTC.loadTemplate("html/actions/spell.html");
     html = $(FTC.populateTemplate(html, chatData));
 
-    // Weapon Attack
+    // Spell Attack
     html.find("h3.action-roll.spell-hit").click(function () {
       FTCItemActions.spellAttack($(this));
     });
 
-    // Weapon Damage
+    // Spell Damage
     html.find("h3.action-roll.spell-damage").click(function () {
       FTCItemActions.spellDamage($(this));
     });

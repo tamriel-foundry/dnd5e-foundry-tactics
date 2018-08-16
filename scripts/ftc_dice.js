@@ -37,11 +37,17 @@ class FTCDice {
 
     /* -------------------------------------------- */
 
-    crit(damage) {
-        return damage.replace(/([0-9]+)d([0-9]+)/g, function(match, nd, d) {
-            nd = parseInt(nd) * 2;
-            return nd + "d" + d;
-        });
+    alter(formula, base, add, multi) {
+      return formula.replace(/([0-9]+)d([0-9]+)/g, function(match, nd, d) {
+        nd = (parseInt(base || nd) + parseInt(add || 0)) * parseInt(multi || 1);
+        return nd + "d" + d;
+      });
+    }
+
+    /* -------------------------------------------- */
+
+    crit(damage, multiplier=2) {
+      return this.alter(damage, undefined, undefined, multiplier);
     }
 
     /* -------------------------------------------- */
