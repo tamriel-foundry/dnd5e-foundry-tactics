@@ -373,7 +373,7 @@ class FTCSpell extends FTCElement {
     data = super.enrichData(data);
 
     // Cantrip damage scaling
-    if ( this.context.owner && data.level.current === 0 ) {
+    if ( this.context.owner && data.level.current === 0 && data.damage.current ) {
       const xp = this.context.owner.data.experience;
       let lvl = parseInt(xp.level.current || xp.cr.current);
       data.damage.current = this._scaleCantripDamage(data.damage.current, lvl);
@@ -509,7 +509,7 @@ class FTCSpell extends FTCElement {
 
     // Cantrip damage scaling
     let lvl = owner.experience.level.current || owner.experience.cr.current;
-    if ( slvl === 0 ) {
+    if ( slvl === 0 && data.damage.current ) {
       data.damage.current = this._scaleCantripDamage(data.damage.current, lvl);
     }
 

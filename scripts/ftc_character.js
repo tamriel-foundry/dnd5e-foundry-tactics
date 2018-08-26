@@ -168,7 +168,6 @@ class FTCActor extends FTCEntity {
     // Level
     let lvl = Math.min(Math.max(data.experience.level.current || 1, 1), 20);
     data.experience.level.current = lvl;
-    let cr = data.experience.cr.current || 0;
 
     // Ability Scores and Modifiers
     $.each(data.abilities, function (_, a) {
@@ -177,7 +176,7 @@ class FTCActor extends FTCEntity {
     });
 
     // Update Proficiency Bonus
-    data.attributes.proficiency.current = Math.floor((Math.max(lvl, cr) + 7) / 4);
+    data.attributes.proficiency.current = Math.floor((lvl + 7) / 4);
     return data;
   }
 
@@ -264,9 +263,8 @@ class FTCActor extends FTCEntity {
   getKillExp(cr) {
     cr = eval(cr);
     if (cr < 1.0) return Math.max(200 * cr, 10);
-    let _ = undefined;
-    const xps = [10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 18000, 20000, 22000,
-      25000, 27500, 30000, 32500, 36500, _, _, _, _, _, 155000];
+    const xps = [10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000,
+      18000, 20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000];
     return xps[cr];
   }
 
@@ -680,6 +678,13 @@ class FTCNPC extends FTCActor {
   convertData(data) {
     data = super.convertData(data);
     data._flags["npc"] = 1;
+
+    // CR
+    let cr = eval(data.experience.cr.current || 0);
+    data.experience.cr.current = cr;
+
+    // Update Proficiency Bonus
+    data.attributes.proficiency.current = Math.max(Math.floor((cr + 7) / 4), 2);
     return data;
   }
 
