@@ -14,8 +14,8 @@ const FTC = {
 
     init: function() {
         hook.call("FTCInit");
-        $('body').append('<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.7.1/less.min.js"></script>');
-        $('body').append('<link rel="stylesheet/less" href="'+ FTC.CSS_DIR + 'FTC.less" type="text/css" />');
+        //$('body').append('<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.7.1/less.min.js"></script>');
+        $('body').append('<link rel="stylesheet" href="'+ FTC.CSS_DIR + 'ftc.css" type="text/css" />');
         console.log("Foundry Tactics | Mod enabled and loaded!");
     },
 

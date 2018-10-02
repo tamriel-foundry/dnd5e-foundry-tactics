@@ -397,7 +397,7 @@ class FTCSpell extends FTCElement {
     let i = duplicate(this.data);
     i._type = "Consumable";
     i.info.name.current = "Scroll of " + i.info.name.current;
-    i = ftc_update_entity(i, game.templates.elements.Consumable);
+    i = ftc_migrateElement(i);
     i.type.current = "scroll";
     i.charges.current = i.charges.max = 1;
     return FTCElement.fromData(i);

@@ -1,0 +1,548 @@
+@import url("ftc_core.css");
+@import url("ftc_ui.css");
+/* -------------------------------------------
+ 	CHARACTER SHEET HEADER
+------------------------------------------- */
+@import url("ftc_items.css");
+@import url("ftc_resources.css");
+@import url("ftc_actions.css");
+.ftc-sheet-header {
+  position: relative;
+}
+/* Character Name */
+h1.charname {
+  flex: 0 0 70%;
+  height: 50px;
+  margin: 0;
+  padding-right: 5px;
+  font-size: 40px;
+  line-height: 50px;
+}
+h1.charname > input.ftc-edit {
+  width: 100%;
+  height: 40px;
+  margin: 5px 0;
+  text-align: left;
+}
+/* Character Level and XP Bar */
+div.charlevel {
+  flex: 0 0 30%;
+  height: 50px;
+  text-align: right;
+}
+div.charlevel h2.level {
+  width: 100%;
+  font-size: 28px;
+  height: 26px;
+  margin: 0;
+}
+div.charlevel .xpbar {
+  width: 100%;
+  height: 4px;
+  background: #556575;
+  border: 1px solid #222;
+  border-radius: 3px;
+}
+div.charlevel .xpbar > .bar {
+  display: block;
+  height: 2px;
+  background: #bfcee4;
+}
+div.charlevel .xpbar > .bar.leveled {
+  background: #00cf36;
+}
+div.charlevel .experience {
+  width: 100%;
+  height: 20px;
+}
+div.charlevel .experience.exp-next {
+  color: #999;
+  margin: 0;
+}
+/* Class, Race, Background, Alignment */
+ul.ftc-sheet-subtitle {
+  width: 100%;
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 5px 0;
+  line-height: 28px;
+  font-size: 1.5em;
+  border-bottom: 1px solid #BBB;
+  border-top: 1px solid #BBB;
+}
+ul.ftc-sheet-subtitle li {
+  flex: 1;
+  padding: 0 0.25em;
+  border-right: 1px solid #999;
+}
+ul.ftc-sheet-subtitle li span {
+  display: block;
+  width: 100%;
+}
+ul.ftc-sheet-subtitle li select.alignment {
+  font-size: 22px;
+  border: none;
+}
+ul.ftc-sheet-subtitle li:first-child {
+  padding: 0;
+}
+ul.ftc-sheet-subtitle .ftc-edit {
+  width: 100%;
+  text-align: left;
+}
+ul.ftc-sheet-subtitle li:last-child {
+  padding: 0;
+  text-align: right;
+  border-right: none;
+}
+ul.ftc-sheet-subtitle li:last-child .ftc-edit {
+  text-align: right;
+}
+/* -------------------------------------------
+ 	CHARACTER SHEET HEADER
+------------------------------------------- */
+.attributes {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5em 0;
+}
+.attributes + .attributes {
+  margin-top: 0;
+}
+.attribute {
+  width: 32%;
+  height: 74px;
+  float: left;
+  display: flex;
+  flex-flow: column;
+  border: 1px solid #BBB;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  text-align: center;
+}
+/* Sidebar Attribute Stats */
+#content-abilities .attribute {
+  width: 48%;
+}
+div.health {
+  background-image: url("../content/icons/health.png");
+}
+div.armor {
+  background-image: url("../content/icons/armor.png");
+}
+div.proficiency {
+  background-image: url("../content/icons/proficiency.png");
+}
+div.speed {
+  background-image: url("../content/icons/speed.png");
+}
+div.initiative {
+  background-image: url("../content/icons/initiative.png");
+}
+div.resource1 {
+  background-image: url("../content/icons/gears.png");
+}
+div.resource2 {
+  background-image: url("../content/icons/shield.png");
+}
+div.death {
+  background-image: url("../content/icons/death.png");
+}
+.attribute header {
+  /* Height 24px */
+  flex: 0 0 18px;
+  margin: 3px 5px 0;
+  font-size: 18px;
+  line-height: 18px;
+  border-bottom: 1px solid #AAA;
+}
+.attribute-value {
+  flex: 1;
+  font-size: 24px;
+  max-height: 30px;
+}
+.attribute footer {
+  flex: 0 0 16px;
+  line-height: 16px;
+  font-size: 16px;
+  margin-bottom: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#r1label,
+#r2label {
+  width: 100%;
+  font-size: inherit;
+  line-height: inherit;
+}
+ul.death-saves {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 10px;
+}
+ul.death-saves > li span {
+  font-size: 16px;
+  margin: 0 0.5em 0 0;
+}
+footer.initiative-bonus label {
+  padding: 0 0.25em;
+  color: #666;
+}
+/* -------------------------------------------
+ 	Sidebar and Profile
+------------------------------------------- */
+.ftc-sheet-profile {
+  flex: 0 0 250px;
+  position: relative;
+  margin-bottom: 10px;
+}
+ul#sidebar-tabs {
+  flex: 0 0 40px;
+  font-size: 24px;
+}
+/* -------------------------------------------
+ 	Sidebar Options
+------------------------------------------- */
+.sheet-options .option {
+  margin-right: 10px;
+}
+/* -------------------------------------------
+ 	Abilities
+------------------------------------------- */
+ol.abilities-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+}
+ol.abilities-list > li.ability {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  line-height: 50px;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #CCC;
+  background-repeat: no-repeat;
+  background-position: 5px 2px;
+}
+ol.abilities-list > li.ability > label {
+  flex: 1;
+  padding-left: 36px;
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+}
+ol.abilities-list > li.ability > label.ftc-rollable:hover {
+  background-image: url("../content/icons/d20.png");
+}
+ol.abilities-list > li.ability .ftc-edit {
+  width: 28px;
+}
+ol.abilities-list > li.ability .ability-mod {
+  width: 28px;
+  margin-left: 2px;
+  font-size: 20px;
+  color: #888;
+}
+ol.abilities-list > li.ability input.ftc-checkbox {
+  margin: 2px;
+}
+.ability-str > label {
+  background-image: url("../content/icons/strength.png");
+}
+.ability-dex > label {
+  background-image: url("../content/icons/dexterity.png");
+}
+.ability-con > label {
+  background-image: url("../content/icons/constitution.png");
+}
+.ability-int > label {
+  background-image: url("../content/icons/intelligence.png");
+}
+.ability-wis > label {
+  background-image: url("../content/icons/wisdom.png");
+}
+.ability-cha > label {
+  background-image: url("../content/icons/charisma.png");
+}
+/* -------------------------------------------
+ 	Skills
+------------------------------------------- */
+.skills-list {
+  list-style: none;
+  margin: 5px 0;
+  padding: 0;
+  font-size: 1.25em;
+}
+.skills-list > li.skill {
+  display: flex;
+  flex-direction: row;
+  line-height: 20px;
+  padding: 1px 0;
+  border-bottom: 1px solid #DDD;
+}
+.skills-list > li.skill label {
+  flex: 3 0 60%;
+}
+.skills-list > li.skill span {
+  flex: 1;
+  text-align: right;
+}
+.skills-list > li.skill input[type="checkbox"] {
+  flex: 0 0 30px;
+  margin: 4px 0;
+}
+.skills-list > li.skill .skill-ability {
+  color: #888;
+  margin-right: 5px;
+}
+.skills-list > li.skill .skill-mod {
+  font-size: 16px;
+  color: #888;
+  position: relative;
+  top: 2px;
+}
+.skills-list > li.skill .ftc-rollable {
+  position: relative;
+}
+.skills-list > li.skill .ftc-rollable:hover:before {
+  display: block;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: -28px;
+  top: -2px;
+  content: "";
+  background-image: url('../content/icons/d20.png') !important;
+  background-size: contain;
+  pointer-events: none;
+}
+/* -------------------------------------------
+ 	Traits
+------------------------------------------- */
+blockquote.compendium {
+  padding: 5px 5px 5px 10px;
+  font-size: 14px;
+  color: #999;
+}
+#content-traits {
+  font-size: 20px;
+  overflow-y: scroll;
+  padding-right: 0.5em;
+}
+/* -------------------------------------------
+ 	Biography
+------------------------------------------- */
+#content-biography {
+  height: 100%;
+}
+.biography {
+  height: 100%;
+  padding: 10px 5px 10px 0;
+  font-size: 1em;
+  font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+  color: #222;
+  overflow-y: scroll;
+}
+.content-tab .ftc-textfield-edit {
+  height: 20px;
+  position: absolute;
+  top: inherit;
+  bottom: 0px;
+  left: 0px;
+  color: #999;
+}
+.content-tab .ftc-textfield-edit:hover {
+  color: #222;
+  text-shadow: 0 0 4px #ff3838;
+}
+/* -------------------------------------------
+ 	Inventory
+------------------------------------------- */
+/* Inventory Scrolling Container */
+section.inventory-items {
+  height: calc(100% - 45px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+/* Offensive Modifier Select */
+.modifier-select {
+  height: auto;
+  margin: 5px 0;
+}
+.modifier-select > * {
+  line-height: 24px;
+  height: 24px;
+}
+.modifier-select > label {
+  flex: 1;
+}
+.modifier-select > .ftc-select {
+  flex: 0 0 50%;
+}
+/* Inventory Items */
+ol.item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.element {
+  margin: 0;
+  padding: 3px 0;
+  border-bottom: 1px solid #DDD;
+  line-height: 24px;
+}
+.element > * {
+  margin: 0 3px;
+}
+.item-name {
+  flex: 1;
+}
+.item-quantity,
+.item-weight {
+  flex: 0 0 32px;
+  text-align: center;
+}
+.item-controls {
+  flex: 0 0 60px;
+  font-size: 14px;
+  text-align: center;
+  border-left: 1px solid #DDD;
+}
+.element .glyphicon {
+  font-size: 12px;
+  margin: 3px;
+}
+.element .glyphicon:hover,
+.ftc-item-add:hover {
+  cursor: pointer;
+  text-shadow: 0 0 4px #ff3838;
+}
+/* Item Header */
+.item-header {
+  padding: 0;
+  background: #DEDEDE;
+  border-bottom: 1px solid #CCC;
+}
+/* Inventory Currency */
+.currency > .currency-label {
+  flex: 0;
+  font-weight: bold;
+}
+.currency > .currency-bags {
+  flex: 1;
+  justify-content: flex-end;
+}
+.currency-bags > label {
+  flex: 0;
+  padding-left: 4px;
+}
+/* Inventory Weight and Encumbrance */
+.inventory-weight {
+  position: relative;
+  height: 12px;
+  background: #556575;
+  border: 1px solid #222;
+  border-radius: 3px;
+}
+.inventory-weight-bar {
+  display: block;
+  height: 8px;
+  background: #bfcee4;
+  margin: 1px;
+  border: 1px solid #f6faff;
+  border-radius: 2px;
+}
+label.inventory-weight-label {
+  position: absolute;
+  top: 0px;
+  right: 4px;
+  color: #FFF;
+  font-size: 14px;
+  line-height: 12px;
+  text-shadow: 1px 1px #000;
+}
+.heavy .inventory-weight-bar {
+  background: #c73411;
+  border: 1px solid #ff1919;
+}
+/* -------------------------------------------
+ 	Spellbook
+------------------------------------------- */
+/* Inventory Scrolling Container */
+section.spellbook-spells {
+  height: calc(100% - 30px);
+  overflow-y: scroll;
+}
+.spell-header {
+  flex: 2;
+}
+.spell-school,
+.spell-action {
+  flex: 1;
+}
+.spell-action {
+  border-right: 1px solid #DDD;
+}
+.spell-uses {
+  width: 50px;
+  margin: 0;
+  text-align: center;
+}
+.spell-uses > .ftc-edit {
+  width: 20px;
+  margin: -1px;
+}
+.spell-image {
+  margin-top: -2px;
+}
+.inventory-header .spell-action {
+  border-right: 1px solid #CCC;
+}
+.spellbook .ftc-item-add {
+  font-size: 14px;
+  text-align: center;
+}
+/* -------------------------------------------
+ 	Feats
+------------------------------------------- */
+ol.feats {
+  height: calc(100%);
+  overflow-y: scroll;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ol.feats li.feat {
+  font-size: 16px;
+}
+ol.feats .feat-image {
+  flex: 0 0 36px;
+  margin-right: 5px;
+}
+ol.feats .feat-image > .ftc-image {
+  margin: 6px 0;
+}
+ol.feats .feat-body {
+  flex: 1;
+}
+ol.feats .feat-name,
+ol.feats .feat-source {
+  flex: 1 0 80%;
+}
+ol.feats .feat-footer > .feat-source {
+  color: #999;
+}
+ol.feats .feat .glyphicon {
+  flex: 0 0 16px;
+  top: 1px;
+}
+.feat-controls {
+  background: none;
+  text-align: center;
+  border: none;
+}

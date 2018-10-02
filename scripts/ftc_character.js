@@ -82,9 +82,9 @@ FTC.actors = {
     },
 
     "currency": {
+        "pp": { "name": "Platinum" },
         "gp": { "name": "Gold" },
         "sp": { "name": "Silver" },
-        "ep": { "name": "Electrum" },
         "cp": { "name": "Copper" }
     },
 
