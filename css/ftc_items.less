@@ -1,36 +1,35 @@
-.ftc-item header {
-    flex: 0 0 50px;
+h1 {
+    &.itemname {
+        width: 100%;
+        line-height: 50px;
+        margin: 0;
+    }
+    &.itemname>.ftc-edit {
+        width: 100%;
+        text-align: left;
+    }
 }
-
-h1.itemname {
-    width: 100%;
-    line-height: 50px;
-    margin: 0;
-}
-
-h1.itemname > .ftc-edit {
-    width: 100%;
-    text-align: left;
-}
-
 
 /* -------------------------------------------
  	ELEMENT SIDEBAR
 ------------------------------------------- */
 
-.ftc-item .ftc-sheet-sidebar {
-    flex: 0 0 150px;
-    font-size: 1.5em;
-}
-
-.ftc-item .ftc-sheet-profile {
-    flex: 0 0 150px;
-    margin: 0;
-}
-
-.ftc-item .profile-image {
-    width: 150px;
-    height: 150px;
+.ftc-item {
+    header {
+        flex: 0 0 50px;
+    }
+    .ftc-sheet-sidebar {
+        flex: 0 0 150px;
+        font-size: 1.5em;
+    }
+    .ftc-sheet-profile {
+        flex: 0 0 150px;
+        margin: 0;
+    }
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
 }
 
 .item-type {
@@ -44,16 +43,18 @@ h1.itemname > .ftc-edit {
     margin: 10px 0 0;
     padding: 0 0 5px;
     border-bottom: 1px solid #999;
-}
+    li{
+        label {
+            width: 50%;
+            float: left;
+        }
+        .ftc-edit {
+            width: 50%;
+            float: right;
+            text-align: right;
+        }
+    } 
 
-.item-summary li label {
-    width: 50%;
-    float: left;
-}
-.item-summary li .ftc-edit {
-    width: 50%;
-    float: right;
-    text-align: right;
 }
 
 .item-source.ftc-edit {
@@ -65,21 +66,20 @@ h1.itemname > .ftc-edit {
 .item-tags {
     flex: 0;
     margin: 10px 0 0;
-}
-.item-tags > label {
-    display: block;
-    line-height: 24px;
-    border-bottom: 1px solid #ccc;
-    text-align: center;
-    margin: 0 1em;
-}
-
-.item-tags > .ftc-edit {
-    width: 100%;
-    font-size: 18px;
-    color: #444;
-    line-height: 34px;
-    margin-bottom: 5px;
+    &>label {
+        display: block;
+        line-height: 24px;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+        margin: 0 1em;
+    }
+    &>.ftc-edit {
+        width: 100%;
+        font-size: 18px;
+        color: #444;
+        line-height: 34px;
+        margin-bottom: 5px;
+    }
 }
 
 
@@ -92,7 +92,6 @@ h1.itemname > .ftc-edit {
     padding: 0 5px 0 0;
     margin: 5px 0;
 }
-
 
 /* -------------------------------------------
  	EDIT ITEM FORM

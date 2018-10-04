@@ -1,11 +1,331 @@
-@import url("ftc_core.css");
-@import url("ftc_ui.css");
+@font-face {
+  font-family: "Bookinsanity";
+  src: url('/content/fonts/Bookinsanity.otf');
+}
+@font-face {
+  font-family: "Nodesto Caps Condensed";
+  src: url('/fonts/Nodesto_Caps_Condensed.otf');
+}
+@font-face {
+  font-family: "Scaly Sans";
+  src: url('/content/fonts/Scaly Sans.otf');
+}
+/* Headers */
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Nodesto Caps Condensed";
+  font-weight: normal !important;
+  color: #332920;
+  margin: 0;
+}
+h1 {
+  font-size: 48px;
+  margin: 0 0 12px;
+}
+h2 {
+  font-size: 32px;
+  margin: 0 0 12px;
+}
+h3 {
+  font-size: 24px;
+  margin: 0 0 10px;
+}
+h4 {
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+hr {
+  margin: 0.5em 0;
+  border: 2px solid #792a19;
+}
+/* Paragraphs */
+p {
+  margin: 0 0 8px;
+}
+/* Quotes */
+blockquote {
+  margin: 0 0 10px;
+  padding: 5px 0px 5px 20px;
+  font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 1em;
+  font-style: italic;
+  border-left: 5px solid #61584e;
+}
+blockquote em {
+  font-weight: bold;
+}
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: 0 0 1px #999 inset;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  outline: 1px solid #222;
+  border-radius: 3px;
+}
+/* Form Elements */
+label {
+  margin: 0;
+  font-weight: normal;
+}
+/* -------------------------------------------
+     MAIN STRUCTURE
+------------------------------------------- */
+.ftc-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+.ftc-sheet {
+  flex: 1;
+  background: #EEE;
+  font-family: "Nodesto Caps Condensed";
+  font-size: 16px;
+}
+.ftc-sheet .ftc-sheet-main {
+  flex: 1;
+  order: 2;
+  margin: 10px;
+  padding: 0;
+}
+.ftc-sheet .ftc-sheet-sidebar {
+  flex: 0 0 250px;
+  order: 1;
+  padding: 10px;
+  border-right: 1px solid #999;
+}
+/* Main Section */
+.ftc-sheet-header {
+  height: 90px;
+}
+.ftc-sheet-secondary {
+  flex: 1;
+}
+h2.section-header {
+  margin: 0.5em 0;
+  border-top: 1px solid #BBB;
+  border-bottom: 1px solid #BBB;
+  text-align: center;
+}
+/* -------------------------------------------
+     ASSET IMAGES
+------------------------------------------- */
+img.ftc-image {
+  box-sizing: content-box;
+  border: 1px solid #000;
+  box-shadow: 0 0 4px #000;
+}
+img.profile-image {
+  height: 250px;
+  width: 250px;
+}
+img.token-image {
+  background: #CCC;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  height: 40px;
+  width: 40px;
+}
+.profile-image:hover,
+.token-image:hover {
+  box-shadow: 0 0 10px #ff3838;
+}
+/* -------------------------------------------
+     FORM FIELDS
+------------------------------------------- */
+.ftc-sheet label {
+  color: #403e3c;
+}
+/* Editable Fields */
+input.ftc-edit {
+  min-width: 24px;
+  background: none;
+  border: 1px solid transparent;
+  padding: 0;
+  margin: -1px;
+  text-align: center;
+}
+input.ftc-edit:hover,
+input.ftc-edit:focus {
+  box-shadow: 0 0 10px #999;
+  border: 1px solid #444;
+  border-radius: 3px;
+}
+input.ftc-edit:focus {
+  box-shadow: 0 0 10px #ff0000;
+}
+input.ftc-edit::placeholder {
+  color: #5f5e5d;
+}
+select.ftc-select {
+  background: transparent;
+}
+select.ftc-select:focus {
+  outline: #444 auto 1px;
+}
+select option {
+  background: #DDD;
+}
+.ftc-textarea {
+  min-height: 30px;
+  height: 30px;
+  overflow: hidden;
+  margin: 2px;
+  padding: 0.25em;
+  font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  resize: vertical;
+}
+.ftc-textarea:focus {
+  border: 1px solid #111;
+  box-shadow: 0 0 5px #ff0000;
+}
+/* Form Groups */
+.form-group {
+  width: 100%;
+  height: 30px;
+  margin: 3px 0;
+  font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
+}
+.form-group > * {
+  height: 30px;
+  line-height: 30px;
+}
+.form-group > label {
+  font-family: "Nodesto Caps Condensed";
+  font-size: 20px;
+  flex: 0 0 35%;
+}
+.form-group > input,
+.form-group > select {
+  flex: 0 0 65%;
+}
+.form-group .form-group .ftc-checkbox {
+  flex: 0 0 24px;
+  height: 16px;
+  margin-top: 8px;
+}
+.form-group .form-group .ftc-edit {
+  padding: 0 5px;
+  text-align: left;
+}
+/* Textarea */
+.textarea-group {
+  flex-wrap: wrap;
+}
+.textarea-group > label {
+  flex: 0 0 100%;
+}
+.textarea-group > textarea {
+  flex: 0 0 100%;
+}
+/* TinyMCE */
+.ftc-sheet .mce-tinymce {
+  border: none !important;
+}
+.ftc-sheet div.mce-edit-area {
+  background: transparent;
+  box-shadow: 0 0 4px #ff3838;
+}
+.ftc-rollable {
+  cursor: pointer;
+}
+/* -------------------------------------------
+     TABBED CONTAINERS
+------------------------------------------- */
+/* Tab Menu */
+ul.sheet-tabs {
+  display: flex;
+  flex: 0 0 40px;
+  flex-direction: row;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+}
+/* Single Tab */
+li.sheet-tab {
+  flex: 1;
+  line-height: 24px;
+  margin: 8px 0;
+  padding: 0 8px;
+  border-right: 1px solid #999;
+  text-align: center;
+  cursor: pointer;
+}
+li.sheet-tab:last-child {
+  border-right: none;
+}
+li.sheet-tab.tab-active {
+  color: #000;
+  text-shadow: 0 0 15px #ff3838;
+}
+/* Tabbed Content */
+div.content-tab {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  position: relative;
+}
+div.content-tab.tab-active {
+  display: flex;
+}
+/* -------------------------------------------
+     jQuery UI Dialog
+------------------------------------------- */
+.ui-dialog {
+  border: 1px solid #222;
+  box-shadow: 0 0 10px #000;
+  border-radius: 5px;
+  z-index: 9999;
+}
+.ui-dialog .ui-widget-header {
+  border: none;
+  background: none;
+  border-bottom: 1px solid #999;
+  border-radius: 0;
+}
+.ui-dialog .ui-widget-content {
+  min-height: 1em !important;
+  border: none;
+  margin: 0.25em;
+  padding: 0.25em;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  float: none;
+  text-align: center;
+}
+#ftc-dialog {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#ftc-dialog > * {
+  flex: 0 0 100%;
+  margin: 4px 0;
+  text-align: left;
+}
+.ftc-rollable:hover {
+  text-shadow: 0 0 4px #ff3838;
+}
 /* -------------------------------------------
  	CHARACTER SHEET HEADER
 ------------------------------------------- */
-@import url("ftc_items.css");
-@import url("ftc_resources.css");
-@import url("ftc_actions.css");
 .ftc-sheet-header {
   position: relative;
 }
@@ -545,4 +865,202 @@ ol.feats .feat .glyphicon {
   background: none;
   text-align: center;
   border: none;
+}
+h1.itemname {
+  width: 100%;
+  line-height: 50px;
+  margin: 0;
+}
+h1.itemname > .ftc-edit {
+  width: 100%;
+  text-align: left;
+}
+/* -------------------------------------------
+ 	ELEMENT SIDEBAR
+------------------------------------------- */
+.ftc-item header {
+  flex: 0 0 50px;
+}
+.ftc-item .ftc-sheet-sidebar {
+  flex: 0 0 150px;
+  font-size: 1.5em;
+}
+.ftc-item .ftc-sheet-profile {
+  flex: 0 0 150px;
+  margin: 0;
+}
+.ftc-item .profile-image {
+  width: 150px;
+  height: 150px;
+}
+.item-type {
+  flex: 0 0 40px;
+  border-bottom: 1px solid #999;
+}
+.item-summary {
+  flex: 0;
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0 0 5px;
+  border-bottom: 1px solid #999;
+}
+.item-summary li label {
+  width: 50%;
+  float: left;
+}
+.item-summary li .ftc-edit {
+  width: 50%;
+  float: right;
+  text-align: right;
+}
+.item-source.ftc-edit {
+  font-size: 18px;
+  color: #999;
+  line-height: 34px;
+}
+.item-tags {
+  flex: 0;
+  margin: 10px 0 0;
+}
+.item-tags > label {
+  display: block;
+  line-height: 24px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  margin: 0 1em;
+}
+.item-tags > .ftc-edit {
+  width: 100%;
+  font-size: 18px;
+  color: #444;
+  line-height: 34px;
+  margin-bottom: 5px;
+}
+/* -------------------------------------------
+ 	ELEMENT DETAIL FORM
+------------------------------------------- */
+.ftc-element .item-form {
+  overflow-y: scroll;
+  padding: 0 5px 0 0;
+  margin: 5px 0;
+}
+/* -------------------------------------------
+ 	EDIT ITEM FORM
+------------------------------------------- */
+#edit-item button.fit-x {
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  border-top: 1px solid #666;
+  border-radius: 0;
+  box-shadow: 0 0 4px #000;
+  font-weight: normal;
+  font-family: "Nodesto Caps Condensed";
+  font-size: 20px;
+  line-height: 24px;
+}
+.ftc-page {
+  flex: 1;
+  overflow-y: scroll;
+  background-image: url('/content/sheet2.png');
+  background-size: 100%;
+  font-family: "Scaly Sans", sans-serif;
+  font-size: 16px;
+  padding: 1em;
+  color: #38322c;
+  box-shadow: 0 0 30px #38322c inset;
+}
+div.conversation {
+  font-family: "Scaly Sans";
+  box-shadow: 0 0 5px #444;
+  border-radius: 5px;
+  padding: 0;
+  overflow: hidden;
+}
+div.chatName {
+  border: none;
+  border-bottom: 1px solid #444;
+  border-radius: 0;
+  font-weight: normal;
+  line-height: 32px;
+  padding: 0 5px;
+}
+div.chatName > img {
+  background: transparent;
+  height: 32px !important;
+  width: auto !important;
+  border: none;
+  border-radius: 0;
+  margin: 0 10px 0 0;
+}
+div.chatName > a {
+  color: #EEE;
+  text-shadow: 1px 1px #000;
+}
+div.chatName .glyphicon {
+  display: none;
+}
+div.chatCmd {
+  background: transparent;
+  border: none;
+  font-weight: normal;
+}
+section.ftc-chat {
+  font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 3px;
+  padding: 0.5em;
+  border: 1px solid #CCC;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+/* Spell Action Header */
+.action-header {
+  padding-bottom: 5px;
+  margin-bottom: 6px;
+  border-bottom: 2px groove #FFF;
+  /* Spell Action Body */
+}
+.action-header > h2 {
+  margin-bottom: 0;
+}
+.action-header > img {
+  flex: 0 0 32px;
+  margin-right: 10px;
+}
+.action-header h3 {
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 3px;
+}
+/* Spell Action Footer */
+.action-footer {
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 2px groove #FFF;
+  font-size: 12px;
+}
+.action-footer > .action-prop {
+  padding: 0 5px;
+  border-right: 1px solid #999;
+  text-align: center;
+}
+.action-footer > .action-prop:last-of-type {
+  border-right: none;
+  margin-right: 0;
+}
+/* Chat Action Follow-Up Rolls */
+.action-roll,
+.spell-dc {
+  text-align: center;
+  padding: 5px;
+  border: 2px groove #EEE;
+  border-radius: 5px;
+  margin: 0 0 0.5em 0;
+}
+.action-roll {
+  padding: 5px 5px 5px 35px;
+  background: url(../content/icons/d20.png) no-repeat 0 50%;
+}
+.action-roll:hover {
+  box-shadow: 0 0 10px #ff3838;
 }
