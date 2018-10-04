@@ -1,0 +1,294 @@
+/* -------------------------------------------
+     MAIN STRUCTURE
+------------------------------------------- */
+
+.ftc-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+.ftc-sheet {
+    flex: 1;
+    background: #EEE;
+    font-family: "Nodesto Caps Condensed";
+    font-size: 16px;
+    .ftc-sheet-main {
+        flex: 1;
+        order: 2;
+        margin: 10px;
+        padding: 0;
+    }
+    .ftc-sheet-sidebar {
+        flex: 0 0 250px;
+        order: 1;
+        padding: 10px;
+        border-right: 1px solid #999;
+    }
+}
+
+/* Main Section */
+
+.ftc-sheet-header {
+    height: 90px;
+}
+
+.ftc-sheet-secondary {
+    flex: 1;
+}
+
+h2.section-header {
+    margin: 0.5em 0;
+    border-top: 1px solid #BBB;
+    border-bottom: 1px solid #BBB;
+    text-align: center;
+}
+
+/* -------------------------------------------
+     ASSET IMAGES
+------------------------------------------- */
+
+img {
+    &.ftc-image {
+        box-sizing: content-box;
+        border: 1px solid #000;
+        box-shadow: 0 0 4px #000;
+    }
+    &.profile-image {
+        height: 250px;
+        width: 250px;
+    }
+    &.token-image {
+        background: #CCC;
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        height: 40px;
+        width: 40px;
+    }
+}
+
+.profile-image:hover,
+.token-image:hover {
+    box-shadow: 0 0 10px #ff3838;
+}
+
+/* -------------------------------------------
+     FORM FIELDS
+------------------------------------------- */
+
+.ftc-sheet label {
+    color: #403e3c;
+}
+
+/* Editable Fields */
+
+input {
+    &.ftc-edit {
+        min-width: 24px;
+        background: none;
+        border: 1px solid transparent;
+        padding: 0;
+        margin: -1px;
+        text-align: center;
+    }
+    &.ftc-edit:hover,
+    &.ftc-edit:focus {
+        box-shadow: 0 0 10px #999;
+        border: 1px solid #444;
+        border-radius: 3px;
+    }
+    &.ftc-edit:focus {
+        box-shadow: 0 0 10px #ff0000;
+    }
+    &.ftc-edit::placeholder {
+        color: #5f5e5d;
+    }
+}
+
+select {
+    &.ftc-select {
+        background: transparent;
+    }
+    &.ftc-select:focus {
+        outline: #444 auto 1px;
+    }
+    option {
+        background: #DDD;
+    }
+}
+
+.ftc-textarea {
+    min-height: 30px;
+    height: 30px;
+    overflow: hidden;
+    margin: 2px;
+    padding: 0.25em;
+    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 14px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    resize: vertical;
+    &:focus {
+        border: 1px solid #111;
+        box-shadow: 0 0 5px #ff0000;
+    }
+}
+
+/* Form Groups */
+
+.form-group {
+    width: 100%;
+    height: 30px;
+    margin: 3px 0;
+    font-family: "Scaly Sans", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+    &>* {
+        height: 30px;
+        line-height: 30px;
+    }
+    &>label {
+        font-family: "Nodesto Caps Condensed";
+        font-size: 20px;
+        flex: 0 0 35%;
+    }
+    &>input,
+    &>select {
+        flex: 0 0 65%;
+    }
+    .form-group .ftc-checkbox {
+        flex: 0 0 24px;
+        height: 16px;
+        margin-top: 8px;
+    }
+    .form-group .ftc-edit {
+        padding: 0 5px;
+        text-align: left;
+    }
+}
+
+/* Textarea */
+
+.textarea-group {
+    flex-wrap: wrap;
+    &>label {
+        flex: 0 0 100%
+    }
+    &>textarea {
+        flex: 0 0 100%;
+    }
+}
+
+/* TinyMCE */
+
+.ftc-sheet {
+    .mce-tinymce {
+        border: none !important;
+    }
+    div.mce-edit-area {
+        background: transparent;
+        box-shadow: 0 0 4px #ff3838;
+    }
+}
+
+.ftc-rollable {
+    cursor: pointer;
+}
+
+/* -------------------------------------------
+     TABBED CONTAINERS
+------------------------------------------- */
+
+/* Tab Menu */
+
+ul.sheet-tabs {
+    display: flex;
+    flex: 0 0 40px;
+    flex-direction: row;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+}
+
+/* Single Tab */
+
+li {
+    &.sheet-tab {
+        flex: 1;
+        line-height: 24px;
+        margin: 8px 0;
+        padding: 0 8px;
+        border-right: 1px solid #999;
+        text-align: center;
+        cursor: pointer;
+        &:last-child {
+            border-right: none;
+        }
+        &.tab-active {
+            color: #000;
+            text-shadow: 0 0 15px #ff3838;
+        }
+    }
+}
+
+/* Tabbed Content */
+
+div {
+    &.content-tab {
+        flex: 1;
+        display: none;
+        flex-direction: column;
+        position: relative;
+        &.tab-active {
+            display: flex;
+        }
+    }
+}
+
+/* -------------------------------------------
+     jQuery UI Dialog
+------------------------------------------- */
+
+.ui-dialog {
+    border: 1px solid #222;
+    box-shadow: 0 0 10px #000;
+    border-radius: 5px;
+    z-index: 9999;
+    .ui-widget-header {
+        border: none;
+        background: none;
+        border-bottom: 1px solid #999;
+        border-radius: 0;
+    }
+    .ui-widget-content {
+        min-height: 1em !important;
+        border: none;
+        margin: 0.25em;
+        padding: 0.25em;
+    }
+    .ui-dialog-buttonpane .ui-dialog-buttonset {
+        float: none;
+        text-align: center;
+    }
+}
+
+#ftc-dialog {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#ftc-dialog>* {
+    flex: 0 0 100%;
+    margin: 4px 0;
+    text-align: left;
+}
+
+.ftc-rollable:hover {
+    text-shadow: 0 0 4px #ff3838;
+}
