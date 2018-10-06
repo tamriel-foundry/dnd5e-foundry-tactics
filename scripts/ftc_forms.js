@@ -238,7 +238,18 @@ FTC.forms.edit_item_fields = function(html, character) {
     });
 };
 
-
+/* -------------------------------------------- */
+/* Buttons                                      */
+/* -------------------------------------------- */
+FTC.forms.use_button_fields = function(html, entity) {
+    html.find(".ftc-hp-formula").click(function () {
+        let formula = entity.data.attributes.hp.formula;
+        let newHp = sync.executeQuery(formula).pool.total;
+        entity.setData("attributes.hp.current", newHp, "int");
+        entity.setData("attributes.hp.max", newHp, "int");
+        entity.save();
+    });
+}
 /* -------------------------------------------- */
 /* Activate All Form Fields                     */
 /* -------------------------------------------- */
@@ -251,6 +262,7 @@ FTC.forms.activateFields = function(html, entity, app) {
     this.edit_checkbox_fields(html, entity, app);
     this.edit_mce_fields(html, entity, app);
     this.edit_item_fields(html, entity, app);
+    this.use_button_fields(html, entity, app);
 };
 
 // End FTCInit
