@@ -309,6 +309,10 @@ class FTCActor extends FTCEntity {
       // Flag whether the item is rollable
       item.data.rollable = owner.isOwner ? "ftc-rollable" : "";
 
+      // Flag whether the item is equipped
+      if(item.data.equipped){
+        item.data.equippedCss =  item.data.equipped.current ? "equipped" : "";
+      }
       // Push to type
       inventory[item.type].items.push(item);
 

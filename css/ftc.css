@@ -807,6 +807,10 @@ label.inventory-weight-label {
   background: #c73411;
   border: 1px solid #ff1919;
 }
+/* Inventory Equipped Status */
+.inventory-items .equipped img.ftc-image {
+  box-shadow: 0 0 4px #ff3838;
+}
 /* -------------------------------------------
  	Spellbook
 ------------------------------------------- */
