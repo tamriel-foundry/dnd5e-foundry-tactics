@@ -518,6 +518,8 @@ footer.initiative-bonus label {
   background-size: 20px;
   width: 21px;
   height: 20px;
+  border-radius: 5px;
+  margin-left: 63px;
 }
 .ftc-roll-hp:hover {
   box-shadow: 0 0 10px #ff3838;
