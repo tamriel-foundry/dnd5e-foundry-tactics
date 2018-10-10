@@ -44,7 +44,8 @@ FTC.elements = {
     "modifier": {"name": "Spellcasting Ability"}
   },
   "Tool": {
-    "proficient": {"name": "Proficient"}
+    "proficient": {"name": "Proficient"},
+    "expertise": {"name": "Expertise"}
   },
   "Armor": {
     "type": {"name": "Armor Type"},
@@ -671,6 +672,7 @@ class FTCTool extends FTCElement {
         // Roll tool check
         let mod = actor.data.abilities[ability].modifiers.mod,
           prof = actor.data.attributes.proficiency.current * parseInt(tool.data.proficient.current || 0);
+          prof = (tool.data.proficient.expertise == 1) ? prof*2 :prof;
         let formula = FTC.Dice.formula(FTC.Dice.d20(adv), "@mod", "@prof", bonus);
         if (adv !== undefined) flavor += ( adv ) ? " (Advantage)" : " (Disadvantage)";
         FTC.Dice.roll(actor, flavor, formula, {"mod": mod, "prof": prof});
