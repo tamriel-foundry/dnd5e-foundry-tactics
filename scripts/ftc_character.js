@@ -547,12 +547,24 @@ class FTCActor extends FTCEntity {
       self.data._type = isNPC ? "NPC" : "Character";
     });
 
+
+    //NPC Roll HP Formula
+    html.find(".ftc-roll-hp").click(function () {
+        let formula = self.data.attributes.hp.formula;
+        let newHp = sync.executeQuery(formula).pool.total;
+        self.setData("attributes.hp.current", newHp, "int");
+        self.setData("attributes.hp.max", newHp, "int");
+        self.save();
+    });
+    
+
     // Enable Element Sorting
     this.enableSorting(html);
 
     // Activate Tabs and Editable Fields
     FTC.ui.activateTabs(html, this, app);
     FTC.forms.activateFields(html, this, app);
+    
   }
 
   /* ------------------------------------------- */
