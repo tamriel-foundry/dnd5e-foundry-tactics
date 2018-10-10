@@ -518,8 +518,6 @@ footer.initiative-bonus label {
   background-size: 20px;
   width: 21px;
   height: 20px;
-  border-radius: 5px;
-  margin-left: 63px;
 }
 .ftc-roll-hp:hover {
   box-shadow: 0 0 10px #ff3838;
@@ -652,6 +650,13 @@ ol.abilities-list > li.ability input.ftc-checkbox {
   background-image: url('../content/icons/d20.png') !important;
   background-size: contain;
   pointer-events: none;
+}
+.skills-list > li.skill .skill-proficiency {
+  padding: 0px;
+  font-size: 16px;
+  line-height: 0.5;
+  margin-right: 6px;
+  width: 18px;
 }
 /* -------------------------------------------
  	Traits
