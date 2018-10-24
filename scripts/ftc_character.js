@@ -228,7 +228,7 @@ class FTCActor extends FTCEntity {
 
     // Skills
     $.each(data.skills, function (skl, s) {
-      s.current = parseInt(s.current || 0);
+      s.current = parseFloat(s.current || 0);
       s.prof = s.current * data.attributes.proficiency.current;
       s.mod = data.abilities[s.ability].mod;
       s.modstr = (s.mod + s.prof).signedString();
@@ -561,6 +561,20 @@ class FTCActor extends FTCEntity {
         self.save();
     });
     
+    //Skill proficiency 
+    html.find('.skill .skill-proficiency').click(function () {
+        let skl = $(this).parent().attr("data-skill");
+        var i = this.value;
+        var states= [0,0.5,1,2];
+        var key = states.findIndex(x => x == i);
+        // Increment the counter, but don't let it exceed the maximum index
+        key = ++key%states.length; 
+        this.value = states[key];
+        self.setData("skills."+skl+".current", states[key], "float");
+        self.save();
+      });
+
+
 
     // Enable Element Sorting
     this.enableSorting(html);
